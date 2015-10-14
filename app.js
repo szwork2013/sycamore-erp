@@ -92,7 +92,9 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 						values[entityName] = entities[value]["values"];
 					});
 					response.locals.entities = values;
+*/
 					next();
+/*
 				}));
 			}));
 */
