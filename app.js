@@ -104,6 +104,23 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 	sycamoreErpApplication.prototype.Router.get("/", function(request, response, next) {
 		response.send("THIS IS A TEST");
 	});
+
+	sycamoreErpApplication.prototype.Router.get("/customers", function(request, response, next) {
+		kashflowCustomer = modelsContainer.getModel("kashflowCustomer");
+
+		kashflowCustomer.find({}).exec(function(error, customers) {
+			response.local.customers = customers;
+
+
+			response.locals.template = "customer/List";
+
+			var React = require("react");
+			var View = React.createFactory(require("../../lib/views/customer/List.js"));
+			var html = React.renderToString(View({ locals: response.locals }));
+
+			response.send(html);
+		});
+	});
 /*
 	var applicationRoutes = require("./app/routes/applicationRoutes")(servicesContainer, modelsContainer);
 	var carRoutes = require("./app/routes/carRoutes")(servicesContainer, modelsContainer);
