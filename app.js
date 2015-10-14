@@ -109,7 +109,7 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 		kashflowCustomer = modelsContainer.getModel("kashflowCustomer");
 
 		kashflowCustomer.find({}).exec(function(error, customers) {
-			response.local.customers = customers;
+			response.locals.customers = customers;
 
 
 			response.locals.template = "customer/List";
