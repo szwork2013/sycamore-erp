@@ -98,6 +98,10 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 */
 		});
 	});
+
+	sycamoreErpApplication.prototype.Router.get("/", function(request, response, next) {
+		response.send("THIS IS A TEST");
+	});
 /*
 	var applicationRoutes = require("./app/routes/applicationRoutes")(servicesContainer, modelsContainer);
 	var carRoutes = require("./app/routes/carRoutes")(servicesContainer, modelsContainer);
