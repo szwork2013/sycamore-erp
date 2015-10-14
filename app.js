@@ -122,6 +122,27 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 			response.send(html);
 		});
 	});
+
+	sycamoreErpApplication.prototype.Router.get("/orders", function(request, response, next) {
+/*
+		kashflowCustomer = modelsContainer.getModel("kashflowCustomer");
+
+		kashflowCustomer.find({}).exec(function(error, customers) {
+			response.locals.customers = customers;
+
+*/
+			response.locals.template = "order/List";
+
+			var React = require("react");
+//			var View = React.createFactory(require("../../lib/views/order/List.js"));
+			var View = React.createFactory(require("./lib/views/order/List.js"));
+			var html = React.renderToString(View({ locals: response.locals }));
+
+			response.send(html);
+/*
+		});
+*/
+	});
 /*
 	var applicationRoutes = require("./app/routes/applicationRoutes")(servicesContainer, modelsContainer);
 	var carRoutes = require("./app/routes/carRoutes")(servicesContainer, modelsContainer);
