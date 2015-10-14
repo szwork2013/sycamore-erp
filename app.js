@@ -134,8 +134,29 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 			response.locals.template = "order/List";
 
 			var React = require("react");
-//			var View = React.createFactory(require("../../lib/views/order/List.js"));
-			var View = React.createFactory(require("./lib/views/order/List.js"));
+//			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
+			var View = React.createFactory(require("./lib/views/" + response.locals.template + ".js"));
+			var html = React.renderToString(View({ locals: response.locals }));
+
+			response.send(html);
+/*
+		});
+*/
+	});
+
+	sycamoreErpApplication.prototype.Router.get("/order/create", function(request, response, next) {
+/*
+		kashflowCustomer = modelsContainer.getModel("kashflowCustomer");
+
+		kashflowCustomer.find({}).exec(function(error, customers) {
+			response.locals.customers = customers;
+
+*/
+			response.locals.template = "order/Create";
+
+			var React = require("react");
+//			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
+			var View = React.createFactory(require("./lib/views/" + response.locals.template + ".js"));
 			var html = React.renderToString(View({ locals: response.locals }));
 
 			response.send(html);

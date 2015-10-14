@@ -22,7 +22,9 @@ module.exports = function(grunt) {
 		"browserify": {
 			dist: {
 				files: {
-					'public/js/views/customer/List.js': ['src/js/views/customer/List.jsx']
+					'public/js/views/customer/List.js': ['src/js/views/customer/List.jsx'],
+					'public/js/views/order/Create.js': ['src/js/views/order/Create.jsx'],
+					'public/js/views/order/List.js': ['src/js/views/order/List.jsx']
 				},
 				options: {
 					browserifyOptions: {
