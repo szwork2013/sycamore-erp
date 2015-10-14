@@ -1,2 +1,2 @@
-# erp
-Enterprise Resource Planning
+# Sycamore ERP
+Enterprise Resource Planning App for Sycamore Platform
