@@ -3,12 +3,18 @@ var NavMenuItem = require("./NavMenuItem");
 
 var NavMenu = React.createClass({
 	getInitialState: function() {
-		return {
+		var state = {
 			navMenuClass: "has-dropdown",
-			menu: this.props.menu,
+			menu: [],
 			name: this.props.name,
 			permission: this.props.permission
 		};
+
+		if(this.props.menu) {
+			state.menu = this.props.menu;
+		}
+
+		return state;
 	},
 	handleOnMouseOver: function() {
 		this.setState({ navMenuClass: "has-dropdown hover" });
