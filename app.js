@@ -115,7 +115,8 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 			response.locals.template = "customer/List";
 
 			var React = require("react");
-			var View = React.createFactory(require("../../lib/views/customer/List.js"));
+//			var View = React.createFactory(require("../../lib/views/customer/List.js"));
+			var View = React.createFactory(require("./lib/views/customer/List.js"));
 			var html = React.renderToString(View({ locals: response.locals }));
 
 			response.send(html);
