@@ -1,6 +1,23 @@
 var React = require("react");
 var Layout = require("../Layout");
 var Header = require("../../components/Header");
+var Select = require("react-select");
+
+var getOptions = function(input, callback) {
+	console.log(input);
+	
+	setTimeout(function() {
+		callback(null, {
+			options: [
+				{ value: 'one', label: 'One' },
+				{ value: 'two', label: 'Two' }
+			],
+			// CAREFUL! Only set this to true when there are no more options,
+			// or more specific queries will not be sent to the server.
+			complete: true
+		});
+	}, 500);
+};
 
 var View = React.createClass({
 	getInitialState: function() {
@@ -52,10 +69,20 @@ var View = React.createClass({
 								<section role="tabpanel" aria-hidden="false" id="general" className="content active">
 									<div className="row">
 										<div className="large-4 columns">
-											<label for="name" className="right inline">Name</label>
+											<label className="right inline">Name</label>
 										</div>
 										<div className="large-8 columns">
 											<input type="text" name="product[name]"/>
+										</div>
+									</div>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">Supplier</label>
+										</div>
+										<div className="large-8 columns">
+											<Select name="product[supplier]"
+													value="one"
+													asyncOptions={getOptions} />
 										</div>
 									</div>
 								</section>
