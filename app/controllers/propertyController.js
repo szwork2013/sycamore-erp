@@ -57,7 +57,7 @@ propertyController.prototype.listPropertiesAction = function(request, response, 
 		.modelsContainer
 		.getModel("Property")
 		.find({})
-		.exec(d.intercept(function(propertys) {
+		.exec(d.intercept(function(properties) {
 			response.locals.properties = properties;
 			response.locals.template = "property/List";
 

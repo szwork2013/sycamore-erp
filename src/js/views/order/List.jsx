@@ -8,6 +8,7 @@ var View = React.createClass({
 
 		var state = {
 			applicationName: "",
+			locals: locals,
 			menus: [],
 			title: "Sycamore ERP - Orders"
 		};
