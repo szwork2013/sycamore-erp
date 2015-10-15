@@ -1,17 +1,17 @@
 var domain = require("domain");
 
-function productController(servicesContainer, modelsContainer) {
-	productController.prototype.servicesContainer = servicesContainer;
-	productController.prototype.modelsContainer = modelsContainer;
+function customerController(servicesContainer, modelsContainer) {
+	customerController.prototype.servicesContainer = servicesContainer;
+	customerController.prototype.modelsContainer = modelsContainer;
 }
 
-productController.prototype.createProductAction = function(request, response, next) {
+customerController.prototype.createCustomerAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
-		response.locals.template = "product/Create";
+		response.locals.template = "customer/Create";
 
 		var React = require("react");
 		var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
@@ -21,21 +21,21 @@ productController.prototype.createProductAction = function(request, response, ne
 	});
 }
 
-productController.prototype.editProductAction = function(request, response, next) {
+customerController.prototype.editCustomerAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
 		var id = request.params.id;
-		productController
+		customerController
 		.prototype
 		.modelsContainer
-		.getModel("Product")
+		.getModel("Customer")
 		.findOne({ _id: id })
-		.exec(d.intercept(function(product) {
-			response.locals.product = product;
-			response.locals.template = "product/Edit";
+		.exec(d.intercept(function(customer) {
+			response.locals.customer = customer;
+			response.locals.template = "customer/Edit";
 
 			var React = require("react");
 			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
@@ -46,20 +46,20 @@ productController.prototype.editProductAction = function(request, response, next
 	});
 }
 
-productController.prototype.listProductsAction = function(request, response, next) {
+customerController.prototype.listCustomersAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
-		productController
+		customerController
 		.prototype
 		.modelsContainer
-		.getModel("Product")
+		.getModel("Customer")
 		.find({})
-		.exec(d.intercept(function(products) {
-			response.locals.products = products;
-			response.locals.template = "product/List";
+		.exec(d.intercept(function(customers) {
+			response.locals.customers = customers;
+			response.locals.template = "customer/List";
 
 			var React = require("react");
 			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
@@ -70,21 +70,21 @@ productController.prototype.listProductsAction = function(request, response, nex
 	});
 }
 
-productController.prototype.viewProductAction = function(request, response, next) {
+customerController.prototype.viewCustomerAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
 		var id = request.params.id;
-		productController
+		customerController
 		.prototype
 		.modelsContainer
-		.getModel("Product")
+		.getModel("Customer")
 		.findOne({ _id: id })
-		.exec(d.intercept(function(product) {
-			response.locals.product = product;
-			response.locals.template = "product/View";
+		.exec(d.intercept(function(customer) {
+			response.locals.customer = customer;
+			response.locals.template = "customer/View";
 
 			var React = require("react");
 			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
@@ -95,60 +95,60 @@ productController.prototype.viewProductAction = function(request, response, next
 	});
 }
 
-productController.prototype.deleteProductAction = function(request, response, next) {
+customerController.prototype.deleteCustomerAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
 		var id = request.params.id;
-		productController
+		customerController
 		.prototype
 		.modelsContainer
-		.getModel("Product")
+		.getModel("Customer")
 		.remove({ _id: id })
 		.exec(d.intercept(function() {
-			response.redirect("/sycamore-erp/products");
+			response.redirect("/sycamore-erp/customers");
 		}));
 	});
 }
 
-productController.prototype.saveProductAction = function(request, response, next) {
+customerController.prototype.saveCustomerAction = function(request, response, next) {
 	var d = domain.create();
 
 	d.on("error", next);
 
 	d.run(function() {
-		var data = request.body.product;
+		var data = request.body.customer;
 
-		var product = productController
+		var customer = customerController
 		.prototype
 		.modelsContainer
-		.getModel("Product")(data);
+		.getModel("Customer")(data);
 
-		product.save(d.intercept(function(createdProduct) {
-			response.redirect("/sycamore-erp/product/" + createdProduct.id);
+		customer.save(d.intercept(function(createdCustomer) {
+			response.redirect("/sycamore-erp/customer/" + createdCustomer.id);
 		}));
 	});
 }
 
-productController.prototype.updateProductAction = function(request, response, next) {
+customerController.prototype.updateCustomerAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
 		var id = request.params.id;
-		var product = request.body.product;
+		var customer = request.body.customer;
 
-		productController
+		customerController
 		.prototype
 		.modelsContainer
-		.getModel("Product")
-		.findByIdAndUpdate(id, { $set: product }, {}, d.intercept(function(updatedProduct) {
-			response.redirect("/sycamore-erp/product/" + updatedProduct.id);
+		.getModel("Customer")
+		.findByIdAndUpdate(id, { $set: customer }, {}, d.intercept(function(updatedCustomer) {
+			response.redirect("/sycamore-erp/customer/" + updatedCustomer.id);
 		}));
 	});
 }
 
-exports = module.exports = productController;
+exports = module.exports = customerController;
