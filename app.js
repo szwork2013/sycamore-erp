@@ -7,10 +7,28 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 	modelsContainer.addModel("Customer",	require("./models/customerSchema").customerSchema());
 	modelsContainer.addModel("Order",		require("./models/orderSchema").orderSchema());
 	modelsContainer.addModel("Product",		require("./models/productSchema").productSchema());
+	modelsContainer.addModel("Property",	require("./models/propertySchema").propertySchema());
 	modelsContainer.addModel("Supplier",	require("./models/supplierSchema").supplierSchema());
 
 	sycamoreErpApplication.prototype.Router	= express.Router();
 	
+	sycamoreErpApplication.prototype.Router.use(function(request, response, next) {
+		var d = domain.create();
+
+		d.on("error", next);
+
+		d.run(function() {
+			if(typeof response.locals == "undefined") {
+				response.locals = {};
+			}
+
+			response.locals.applicationName = "Sycamore ERP";
+			response.locals.applicationUrl = "/sycamore-erp/";
+
+			next();
+		});
+	});
+
 	sycamoreErpApplication.prototype.Router.use(function(request, response, next) {
 		navigationService.clearMenus();
 		navigationService.addMenu(
@@ -21,19 +39,23 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 					{
 						"name": "Customers",
 						"permission": "SYCAMOREERP_CUSTOMER__MODULE",
-						"url": "/sycamore-erp/customers/"
+						"url": response.locals.applicationUrl + "customers/"
 					}, {
 						"name": "Orders",
 						"permission": "SYCAMOREERP_ORDER__MODULE",
-						"url": "/sycamore-erp/orders/"
+						"url": response.locals.applicationUrl + "orders/"
 					}, {
 						"name": "Products",
 						"permission": "SYCAMOREERP_PRODUCT__MODULE",
-						"url": "/sycamore-erp/products/"
+						"url": response.locals.applicationUrl + "products/"
+					}, {
+						"name": "Properties",
+						"permission": "SYCAMOREERP_PROPERTIES__MODULE",
+						"url": response.locals.applicationUrl + "properties/"
 					}, {
 						"name": "Suppliers",
 						"permission": "SYCAMOREERP_SUPPLIER__MODULE",
-						"url": "/sycamore-erp/suppliers/"
+						"url": response.locals.applicationUrl + "suppliers/"
 					}
 				]
 			}
@@ -82,50 +104,6 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 			}
 		);
 		next();
-	});
-
-	sycamoreErpApplication.prototype.Router.use(function(request, response, next) {
-		var d = domain.create();
-
-		d.on("error", next);
-
-		d.run(function() {
-			if(typeof response.locals == "undefined") {
-				response.locals = {};
-			}
-
-			response.locals.applicationName = "Sycamore ERP";
-			response.locals.applicationUrl = "/sycamore-erp/";
-
-/*
-			modelsContainer
-			.getModel("PlatformApplication")
-			.findOne({ name: "Sycamore ERP" })
-			.lean()
-			.exec(d.intercept(function(application) {
-				modelsContainer
-				.getModel("PlatformEntity")
-				.find({ application: application._id })
-				.lean()
-				.exec(d.intercept(function(entities) {
-
-					var values = [];
-					Object.keys(entities).map(function(value, index) {
-						var entityName = entities[value]["name"];
-						values[entityName] = entities[value]["values"];
-					});
-					response.locals.entities = values;
-*/
-					next();
-/*
-				}));
-			}));
-*/
-		});
-	});
-
-	sycamoreErpApplication.prototype.Router.get("/", function(request, response, next) {
-		response.send("THIS IS A TEST");
 	});
 
 	var routes = require("./app/routes")(servicesContainer, modelsContainer);

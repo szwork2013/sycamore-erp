@@ -9,7 +9,7 @@ var View = React.createClass({
 		var state = {
 			applicationName: "",
 			menus: [],
-			title: "Sycamore ERP - Orders"
+			title: "Sycamore ERP - Dashboard"
 		};
 
 		if(typeof(locals) != "undefined") {
@@ -29,41 +29,16 @@ var View = React.createClass({
 				<Header applicationName={this.state.applicationName} applicationUrl={this.state.applicationUrl} menus={this.state.menus} />
 				<div className="row">
 					<ul className="breadcrumbs">
-						<li>Orders</li>
+						<li><a href="/">Return to Sycamore Platform</a></li>
 					</ul>
 				</div>
 				<div className="row">
-					<div className="large-10 columns">
-						<h1>Orders</h1>
-					</div>
-					<div className="large-2 columns">
-						<a href="/sycamore-erp/order" className="right fancy radius button tiny">
-							<i className="in-button-icon fa fa-fw fa-plus"></i> Create
-						</a>
+					<div className="large-12 columns">
+						<h1>ERP Dashboard</h1>
 					</div>
 				</div>
 				<div className="row">
 					<div className="large-12 columns">
-						<div className="table">
-							<div className="table-head">
-								<div className="table-row">
-									<div className="table-cell">Id</div>
-									<div className="table-cell large-1">Actions</div>
-								</div>
-							</div>
-							<div className="table-body">
-							{
-								this.state.locals.orders.map(function(order) {
-									return (
-										<div className="row">
-											<div className="table-cell"></div>
-											<div className="table-cell"></div>
-										</div>
-									);
-								})
-							}
-							</div>
-						</div>
 					</div>
 				</div>
 			</Layout>

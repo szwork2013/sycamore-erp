@@ -26,6 +26,7 @@ module.exports = function(grunt) {
 					'public/js/views/customer/Edit.js': ['src/js/views/customer/Edit.jsx'],
 					'public/js/views/customer/List.js': ['src/js/views/customer/List.jsx'],
 					'public/js/views/customer/View.js': ['src/js/views/customer/View.jsx'],
+					'public/js/views/dashboard/Index.js': ['src/js/views/dashboard/Index.jsx'],
 					'public/js/views/order/Create.js': ['src/js/views/order/Create.jsx'],
 					'public/js/views/order/Edit.js': ['src/js/views/order/Edit.jsx'],
 					'public/js/views/order/List.js': ['src/js/views/order/List.jsx'],
