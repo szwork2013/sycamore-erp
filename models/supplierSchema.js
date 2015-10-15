@@ -1,5 +1,7 @@
 var Mongoose = require("mongoose");
 
-exports.supplierSchema = new Mongoose.Schema({
-	name:				 { type: String }
-});
+exports.supplierSchema =  function() {
+	return new Mongoose.Schema({
+		name:				 { type: String }
+	});
+}
