@@ -172,7 +172,7 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 
 	var routes = require("./app/routes")(servicesContainer, modelsContainer);
 
-	Router.use(routes);
+	sycamoreErpApplication.prototype.Router.use(routes);
 }
 
 sycamoreErpApplication.prototype.getRoutes = function() {
