@@ -3,22 +3,6 @@ var Layout = require("../Layout");
 var Header = require("../../components/Header");
 var Select = require("react-select");
 
-var getOptions = function(input, callback) {
-	console.log(input);
-	
-	setTimeout(function() {
-		callback(null, {
-			options: [
-				{ value: 'one', label: 'One' },
-				{ value: 'two', label: 'Two' }
-			],
-			// CAREFUL! Only set this to true when there are no more options,
-			// or more specific queries will not be sent to the server.
-			complete: true
-		});
-	}, 500);
-};
-
 var View = React.createClass({
 	getInitialState: function() {
 		var locals = this.props.locals;
@@ -26,6 +10,9 @@ var View = React.createClass({
 		var state = {
 			applicationName: "",
 			menus: [],
+			product: {
+				supplier: null
+			},
 			title: "Sycamore ERP - New product"
 		};
 
@@ -39,6 +26,22 @@ var View = React.createClass({
 		}
 
 		return state;
+	},
+	handleSupplierAsyncOptions: function(input, callback) {
+		console.log(input);
+		
+		callback(null, {
+			options: [
+				{ value: 'one', label: 'One' },
+				{ value: 'two', label: 'Two' }
+			],
+			// CAREFUL! Only set this to true when there are no more options,
+			// or more specific queries will not be sent to the server.
+			complete: true
+		});
+	},
+	handleSupplierOnInputChange: function(inputValue) {
+		console.log(inputValue);
 	},
 	render: function() {
 		return (
@@ -81,8 +84,12 @@ var View = React.createClass({
 										</div>
 										<div className="large-8 columns">
 											<Select name="product[supplier]"
-													value="one"
-													asyncOptions={getOptions} />
+													asyncOptions={this.handleSupplierAsyncOptions}
+													isLoading={true}
+													labelKey={"name"}
+													onInputChange={this.handleSupplierOnInputChange}
+													value={this.state.product.supplier}
+													valueKey={"_id"} />
 										</div>
 									</div>
 								</section>
