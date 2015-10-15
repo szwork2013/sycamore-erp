@@ -13,6 +13,12 @@ function supplierRoutes(servicesContainer, modelsContainer) {
 */	
 	var Router = express.Router();
 
+// CREATE / GET
+	Router.get( "/supplier/create",
+		authenticationService.ensureAuthenticated(),
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
+		supplierController.createSupplierAction
+	);
 // CREATE / PUT
 	Router.put(	"/supplier",
 		authenticationService.ensureAuthenticated(),
