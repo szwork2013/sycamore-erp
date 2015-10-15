@@ -9,6 +9,7 @@ var View = React.createClass({
 		var state = {
 			applicationName: "",
 			menus: [],
+			locals: locals,
 			title: "Sycamore ERP - Suppliers"
 		};
 
@@ -53,7 +54,7 @@ var View = React.createClass({
 							</div>
 							<div className="table-body">
 							{
-								this.state.suppliers.map(function(supplier) {
+								this.state.locals.suppliers.map(function(supplier) {
 									return (
 										<div className="table-row">
 											<div className="table-cell">{supplier.name}</div>
