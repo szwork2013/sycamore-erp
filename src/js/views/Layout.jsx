@@ -24,7 +24,7 @@ var Layout = React.createClass({
 				<body>
 					{this.props.children}
 					<script type="text/javascript" dangerouslySetInnerHTML={{__html: js}}></script>
-					<script type="text/javascript" src={"/js/views/" + this.state.locals.template + ".js"}></script>
+					<script type="text/javascript" src={"/node_modules/sycamore-erp/public/js/views/" + this.state.locals.template + ".js"}></script>
 				</body>
 			</html>
 		);
