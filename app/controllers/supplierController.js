@@ -108,7 +108,7 @@ supplierController.prototype.deleteSupplierAction = function(request, response, 
 		.getModel("Supplier")
 		.remove({ _id: id })
 		.exec(d.intercept(function() {
-			response.redirect("/supplier");
+			response.redirect("/sycamore-erp/suppliers");
 		}));
 	});
 }
@@ -127,7 +127,7 @@ supplierController.prototype.saveSupplierAction = function(request, response, ne
 		.getModel("Supplier")(data);
 
 		supplier.save(d.intercept(function(createdSupplier) {
-			response.redirect("/supplier/" + createdSupplier.id);
+			response.redirect("/sycamore-erp/supplier/" + createdSupplier.id);
 		}));
 	});
 }
@@ -146,7 +146,7 @@ supplierController.prototype.updateSupplierAction = function(request, response, 
 		.modelsContainer
 		.getModel("Supplier")
 		.findByIdAndUpdate(id, { $set: supplier }, {}, d.intercept(function(updatedSupplier) {
-			response.redirect("/supplier/" + updatedSupplier.id);
+			response.redirect("/sycamore-erp/supplier/" + updatedSupplier.id);
 		}));
 	});
 }
