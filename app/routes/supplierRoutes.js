@@ -14,15 +14,21 @@ function supplierRoutes(servicesContainer, modelsContainer) {
 	var Router = express.Router();
 
 // CREATE / GET
-	Router.get( "/supplier/create",
+	Router.get( "/supplier",
 		authenticationService.ensureAuthenticated(),
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
 		supplierController.createSupplierAction
 	);
+// CREATE / POST
+	Router.post("/supplier",
+		authenticationService.ensureAuthenticated(),
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_CREATE"),
+		supplierController.saveSupplierAction
+	);
 // CREATE / PUT
 	Router.put(	"/supplier",
 		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_LEAD_CREATE"),
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_CREATE"),
 		supplierController.saveSupplierAction
 	);
 

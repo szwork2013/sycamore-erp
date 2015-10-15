@@ -32,7 +32,7 @@ var View = React.createClass({
 						<li>Suppliers</li>
 					</ul>
 				</div>
-				<form action="/sycamore-erp/supplier" encType="application/x-www-form-urlencoded" method="PUT">
+				<form action="/sycamore-erp/supplier" encType="application/x-www-form-urlencoded" method="POST">
 					<div className="row">
 						<div className="large-10 columns">
 							<h1>New supplier</h1>

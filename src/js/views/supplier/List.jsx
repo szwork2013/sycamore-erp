@@ -37,7 +37,7 @@ var View = React.createClass({
 						<h1>Suppliers</h1>
 					</div>
 					<div className="large-2 columns">
-						<a href="/sycamore-erp/supplier/create" className="right fancy radius button tiny">
+						<a href="/sycamore-erp/supplier" className="right fancy radius button tiny">
 							<i className="in-button-icon fa fa-fw fa-plus"></i> Create
 						</a>
 					</div>
