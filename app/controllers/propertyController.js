@@ -46,7 +46,7 @@ propertyController.prototype.editPropertyAction = function(request, response, ne
 	});
 }
 
-propertyController.prototype.listPropertysAction = function(request, response, next) {
+propertyController.prototype.listPropertiesAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
@@ -58,7 +58,7 @@ propertyController.prototype.listPropertysAction = function(request, response, n
 		.getModel("Property")
 		.find({})
 		.exec(d.intercept(function(propertys) {
-			response.locals.propertys = propertys;
+			response.locals.properties = properties;
 			response.locals.template = "property/List";
 
 			var React = require("react");
