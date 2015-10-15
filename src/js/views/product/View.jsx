@@ -9,7 +9,7 @@ var View = React.createClass({
 		var state = {
 			applicationName: "",
 			menus: [],
-			title: "Sycamore ERP - Suppliers"
+			title: "Sycamore ERP - Products"
 		};
 
 		if(typeof(locals) != "undefined") {
@@ -29,15 +29,15 @@ var View = React.createClass({
 				<Header applicationName={this.state.applicationName} applicationUrl={this.state.applicationUrl} menus={this.state.menus} />
 				<div className="row">
 					<ul className="breadcrumbs">
-						<li>Suppliers</li>
+						<li>Products</li>
 					</ul>
 				</div>
 				<div className="row">
 					<div className="large-10 columns">
-						<h1>Suppliers</h1>
+						<h1>Products</h1>
 					</div>
 					<div className="large-2 columns">
-						<a href="/sycamore-erp/supplier" className="right fancy radius button tiny">
+						<a href="/sycamore-erp/product" className="right fancy radius button tiny">
 							<i className="in-button-icon fa fa-fw fa-plus"></i> Create
 						</a>
 					</div>

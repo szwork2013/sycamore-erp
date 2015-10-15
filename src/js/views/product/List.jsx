@@ -9,6 +9,7 @@ var View = React.createClass({
 		var state = {
 			applicationName: "",
 			menus: [],
+			locals: locals,
 			title: "Sycamore ERP - Products"
 		};
 
@@ -37,7 +38,7 @@ var View = React.createClass({
 						<h1>Products</h1>
 					</div>
 					<div className="large-2 columns">
-						<a href="/product/create" className="right fancy radius button tiny">
+						<a href="/sycamore-erp/product" className="right fancy radius button tiny">
 							<i className="in-button-icon fa fa-fw fa-plus"></i> Create
 						</a>
 					</div>
@@ -52,6 +53,26 @@ var View = React.createClass({
 								</div>
 							</div>
 							<div className="table-body">
+							{
+								this.state.locals.products.map(function(product) {
+									return (
+										<div className="table-row">
+											<div className="table-cell">{product.name}</div>
+											<div className="table-cell">
+												<a href={"/sycamore-erp/product/" + product._id}>
+													<i className="icon-button fa fa-fw fa-pencil"></i>
+												</a>
+												<a href={"/sycamore-erp/product/" + product._id + "/edit.html"}>
+													<i className="icon-button fa fa-fw fa-pencil"></i>
+												</a>
+												<a href={"/sycamore-erp/product/" + product._id + "/delete"}>
+													<i className="icon-button fa fa-fw fa-trash-o"></i>
+												</a>
+											</div>
+										</div>
+									);
+								})
+							}
 							</div>
 						</div>
 					</div>
