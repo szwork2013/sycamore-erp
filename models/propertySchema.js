@@ -1,6 +1,6 @@
 var Mongoose = require("mongoose");
 
-exports.supplierSchema =  function() {
+exports.propertySchema =  function() {
 	return new Mongoose.Schema({
 		name:				 { type: String }
 	});
