@@ -52,6 +52,26 @@ var View = React.createClass({
 								</div>
 							</div>
 							<div className="table-body">
+							{
+								this.state.suppliers.map(function(supplier) {
+									return (
+										<div className="table-row">
+											<div className="table-cell">{supplier.name}</div>
+											<div className="table-cell">
+												<a href={"/sycamore-erp/supplier/" + supplier._id}>
+													<i className="icon-button fa fa-fw fa-pencil"></i>
+												</a>
+												<a href={"/sycamore-erp/supplier/" + supplier._id + "/edit.html"}>
+													<i className="icon-button fa fa-fw fa-pencil"></i>
+												</a>
+												<a href={"/sycamore-erp/supplier/" + supplier._id + "/delete"}>
+													<i className="icon-button fa fa-fw fa-trash-o"></i>
+												</a>
+											</div>
+										</div>
+									);
+								})
+							}
 							</div>
 						</div>
 					</div>

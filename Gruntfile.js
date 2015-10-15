@@ -24,7 +24,11 @@ module.exports = function(grunt) {
 				files: {
 					'public/js/views/customer/List.js': ['src/js/views/customer/List.jsx'],
 					'public/js/views/order/Create.js': ['src/js/views/order/Create.jsx'],
-					'public/js/views/order/List.js': ['src/js/views/order/List.jsx']
+					'public/js/views/order/List.js': ['src/js/views/order/List.jsx'],
+					'public/js/views/supplier/Create.js': ['src/js/views/supplier/Create.jsx'],
+					'public/js/views/supplier/Edit.js': ['src/js/views/supplier/Edit.jsx'],
+					'public/js/views/supplier/List.js': ['src/js/views/supplier/List.jsx'],
+					'public/js/views/supplier/View.js': ['src/js/views/supplier/View.jsx']
 				},
 				options: {
 					browserifyOptions: {
