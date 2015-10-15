@@ -15,9 +15,27 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 		navigationService.clearMenus();
 		navigationService.addMenu(
 			{
-				"name": "Customers",
-				"permission": "SYCAMOREERP_CUSTOMER__MODULE",
-				"url": "/sycamore-erp/customer/"
+				"name": "Ordering",
+				"permission": "SYCAMOREERP_ORDER__MODULE",
+				"menu": [
+					{
+						"name": "Customers",
+						"permission": "SYCAMOREERP_CUSTOMER__MODULE",
+						"url": "/sycamore-erp/customers/"
+					}, {
+						"name": "Orders",
+						"permission": "SYCAMOREERP_ORDER__MODULE",
+						"url": "/sycamore-erp/orders/"
+					}, {
+						"name": "Products",
+						"permission": "SYCAMOREERP_PRODUCT__MODULE",
+						"url": "/sycamore-erp/products/"
+					}, {
+						"name": "Suppliers",
+						"permission": "SYCAMOREERP_SUPPLIER__MODULE",
+						"url": "/sycamore-erp/suppliers/"
+					}
+				]
 			}
 		);
 		navigationService.addMenu(
@@ -108,66 +126,6 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 
 	sycamoreErpApplication.prototype.Router.get("/", function(request, response, next) {
 		response.send("THIS IS A TEST");
-	});
-
-	sycamoreErpApplication.prototype.Router.get("/customers", function(request, response, next) {
-		kashflowCustomer = modelsContainer.getModel("kashflowCustomer");
-
-		kashflowCustomer.find({}).exec(function(error, customers) {
-			response.locals.customers = customers;
-
-
-			response.locals.template = "customer/List";
-
-			var React = require("react");
-//			var View = React.createFactory(require("../../lib/views/customer/List.js"));
-			var View = React.createFactory(require("./lib/views/customer/List.js"));
-			var html = React.renderToString(View({ locals: response.locals }));
-
-			response.send(html);
-		});
-	});
-
-	sycamoreErpApplication.prototype.Router.get("/orders", function(request, response, next) {
-/*
-		kashflowCustomer = modelsContainer.getModel("kashflowCustomer");
-
-		kashflowCustomer.find({}).exec(function(error, customers) {
-			response.locals.customers = customers;
-
-*/
-			response.locals.template = "order/List";
-
-			var React = require("react");
-//			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var View = React.createFactory(require("./lib/views/" + response.locals.template + ".js"));
-			var html = React.renderToString(View({ locals: response.locals }));
-
-			response.send(html);
-/*
-		});
-*/
-	});
-
-	sycamoreErpApplication.prototype.Router.get("/order/create", function(request, response, next) {
-/*
-		kashflowCustomer = modelsContainer.getModel("kashflowCustomer");
-
-		kashflowCustomer.find({}).exec(function(error, customers) {
-			response.locals.customers = customers;
-
-*/
-			response.locals.template = "order/Create";
-
-			var React = require("react");
-//			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var View = React.createFactory(require("./lib/views/" + response.locals.template + ".js"));
-			var html = React.renderToString(View({ locals: response.locals }));
-
-			response.send(html);
-/*
-		});
-*/
 	});
 
 	var routes = require("./app/routes")(servicesContainer, modelsContainer);
