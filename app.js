@@ -4,6 +4,11 @@ var express = require("express");
 function sycamoreErpApplication(servicesContainer, modelsContainer) {
 	var navigationService = servicesContainer.getService("navigationService");
 
+	modelsContainer.addModel("Customer",	require("./models/customerSchema").customerSchema());
+	modelsContainer.addModel("Order",		require("./models/orderSchema").orderSchema());
+	modelsContainer.addModel("Product",		require("./models/productSchema").productSchema());
+	modelsContainer.addModel("Supplier",	require("./models/supplierSchema").supplierSchema());
+
 	sycamoreErpApplication.prototype.Router	= express.Router();
 	
 	sycamoreErpApplication.prototype.Router.use(function(request, response, next) {
@@ -164,35 +169,10 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 		});
 */
 	});
-/*
-	var applicationRoutes = require("./app/routes/applicationRoutes")(servicesContainer, modelsContainer);
-	var carRoutes = require("./app/routes/carRoutes")(servicesContainer, modelsContainer);
-	var dealRoutes = require("./app/routes/dealRoutes")(servicesContainer, modelsContainer);
-	var leadRoutes = require("./app/routes/leadRoutes")(servicesContainer, modelsContainer);
-	var noteRoutes = require("./app/routes/noteRoutes")(servicesContainer, modelsContainer);
-	var notificationRoutes = require("./app/routes/notificationRoutes")(servicesContainer, modelsContainer);
 
-	sycamoreErpApplication.prototype.Router.use("/", applicationRoutes);
-	sycamoreErpApplication.prototype.Router.use("/", carRoutes);
-	sycamoreErpApplication.prototype.Router.use("/deal", dealRoutes);
-	sycamoreErpApplication.prototype.Router.use("/lead", leadRoutes);
-	sycamoreErpApplication.prototype.Router.use("/note", noteRoutes);
-	sycamoreErpApplication.prototype.Router.use("/notification", notificationRoutes);
+	var routes = require("./app/routes")(servicesContainer, modelsContainer);
 
-	sycamoreErpApplication.prototype.Router.get("/packages.js", function(request, response, next) {
-		response.type("text/javascript");
-		response.sendfile("packages.js", {root: "./node_modules/thecarcentre-carsalessuite/build"});
-	});
-
-	sycamoreErpApplication.prototype.Router.get("/carSalesSuite.js", function(request, response, next) {
-		response.type("text/javascript");
-		response.sendfile("carSalesSuite.js", {root: "./node_modules/thecarcentre-carsalessuite/build"});
-	});
-
-	sycamoreErpApplication.prototype.Router.get("/", function(request, response, next) {
-		response.render("../node_modules/thecarcentre-carsalessuite/views/index", {});
-	});
-*/
+	Router.use(routes);
 }
 
 sycamoreErpApplication.prototype.getRoutes = function() {
