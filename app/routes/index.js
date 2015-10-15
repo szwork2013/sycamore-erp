@@ -2,32 +2,15 @@ var express	= require("express");
 
 exports = module.exports = function(servicesContainer, modelsContainer) {
 	var Router							= express.Router();
-/*
-	var authenticationRoutes			= require("./authenticationRoutes")(servicesContainer, modelsContainer);
-	var applicationRoutes				= require("./applicationRoutes")(servicesContainer, modelsContainer);
-	var configurationRoutes				= require("./configurationRoutes")(servicesContainer, modelsContainer);
-	var dashboardRoutes					= require("./dashboardRoutes")(servicesContainer, modelsContainer);
-	var entityRoutes					= require("./entityRoutes")(servicesContainer, modelsContainer);
-	var installationRoutes				= require("./installationRoutes")(servicesContainer, modelsContainer);
-	var integrationRoutes				= require("./integrationRoutes")(servicesContainer, modelsContainer);
-	var permissionRoutes				= require("./permissionRoutes")(servicesContainer, modelsContainer);
-	var roleRoutes						= require("./roleRoutes")(servicesContainer, modelsContainer);
-	var userRoutes						= require("./userRoutes")(servicesContainer, modelsContainer);
 
-	Router.use("/",						dashboardRoutes);
-	Router.use("/configuration",		configurationRoutes);
-	Router.use("/entity",				entityRoutes);
-	Router.use("/installation",			installationRoutes);
-	Router.use("/integration",			integrationRoutes);
-	Router.use("/platform/application",	applicationRoutes);
-	Router.use("/platform/permission",	permissionRoutes);
-	Router.use("/platform/role",		roleRoutes);
-	Router.use("/user",					authenticationRoutes);
-	Router.use("/user",					userRoutes);
-*/
-
+	var customerRoutes					= require("./customerRoutes")(servicesContainer, modelsContainer);
+	var productRoutes					= require("./productRoutes")(servicesContainer, modelsContainer);
+	var orderRoutes						= require("./orderRoutes")(servicesContainer, modelsContainer);
 	var supplierRoutes					= require("./supplierRoutes")(servicesContainer, modelsContainer);
 
+	Router.use("/",						customerRoutes);
+	Router.use("/",						productRoutes);
+	Router.use("/",						orderRoutes);
 	Router.use("/",						supplierRoutes);
 
 	return Router;
