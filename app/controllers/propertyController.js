@@ -1,17 +1,17 @@
 var domain = require("domain");
 
-function supplierController(servicesContainer, modelsContainer) {
-	supplierController.prototype.servicesContainer = servicesContainer;
-	supplierController.prototype.modelsContainer = modelsContainer;
+function propertyController(servicesContainer, modelsContainer) {
+	propertyController.prototype.servicesContainer = servicesContainer;
+	propertyController.prototype.modelsContainer = modelsContainer;
 }
 
-supplierController.prototype.createSupplierAction = function(request, response, next) {
+propertyController.prototype.createPropertyAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
-		response.locals.template = "supplier/Create";
+		response.locals.template = "property/Create";
 
 		var React = require("react");
 		var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
@@ -21,21 +21,21 @@ supplierController.prototype.createSupplierAction = function(request, response, 
 	});
 }
 
-supplierController.prototype.editSupplierAction = function(request, response, next) {
+propertyController.prototype.editPropertyAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
 		var id = request.params.id;
-		supplierController
+		propertyController
 		.prototype
 		.modelsContainer
-		.getModel("Supplier")
+		.getModel("Property")
 		.findOne({ _id: id })
-		.exec(d.intercept(function(supplier) {
-			response.locals.supplier = supplier;
-			response.locals.template = "supplier/Edit";
+		.exec(d.intercept(function(property) {
+			response.locals.property = property;
+			response.locals.template = "property/Edit";
 
 			var React = require("react");
 			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
@@ -46,20 +46,20 @@ supplierController.prototype.editSupplierAction = function(request, response, ne
 	});
 }
 
-supplierController.prototype.listSuppliersAction = function(request, response, next) {
+propertyController.prototype.listPropertysAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
-		supplierController
+		propertyController
 		.prototype
 		.modelsContainer
-		.getModel("Supplier")
+		.getModel("Property")
 		.find({})
-		.exec(d.intercept(function(suppliers) {
-			response.locals.suppliers = suppliers;
-			response.locals.template = "supplier/List";
+		.exec(d.intercept(function(propertys) {
+			response.locals.propertys = propertys;
+			response.locals.template = "property/List";
 
 			var React = require("react");
 			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
@@ -70,21 +70,21 @@ supplierController.prototype.listSuppliersAction = function(request, response, n
 	});
 }
 
-supplierController.prototype.viewSupplierAction = function(request, response, next) {
+propertyController.prototype.viewPropertyAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
 		var id = request.params.id;
-		supplierController
+		propertyController
 		.prototype
 		.modelsContainer
-		.getModel("Supplier")
+		.getModel("Property")
 		.findOne({ _id: id })
-		.exec(d.intercept(function(supplier) {
-			response.locals.supplier = supplier;
-			response.locals.template = "supplier/View";
+		.exec(d.intercept(function(property) {
+			response.locals.property = property;
+			response.locals.template = "property/View";
 
 			var React = require("react");
 			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
@@ -95,60 +95,60 @@ supplierController.prototype.viewSupplierAction = function(request, response, ne
 	});
 }
 
-supplierController.prototype.deleteSupplierAction = function(request, response, next) {
+propertyController.prototype.deletePropertyAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
 		var id = request.params.id;
-		supplierController
+		propertyController
 		.prototype
 		.modelsContainer
-		.getModel("Supplier")
+		.getModel("Property")
 		.remove({ _id: id })
 		.exec(d.intercept(function() {
-			response.redirect("/sycamore-erp/suppliers");
+			response.redirect("/sycamore-erp/propertys");
 		}));
 	});
 }
 
-supplierController.prototype.saveSupplierAction = function(request, response, next) {
+propertyController.prototype.savePropertyAction = function(request, response, next) {
 	var d = domain.create();
 
 	d.on("error", next);
 
 	d.run(function() {
-		var data = request.body.supplier;
+		var data = request.body.property;
 
-		var supplier = supplierController
+		var property = propertyController
 		.prototype
 		.modelsContainer
-		.getModel("Supplier")(data);
+		.getModel("Property")(data);
 
-		supplier.save(d.intercept(function(createdSupplier) {
-			response.redirect("/sycamore-erp/supplier/" + createdSupplier.id);
+		property.save(d.intercept(function(createdProperty) {
+			response.redirect("/sycamore-erp/property/" + createdProperty.id);
 		}));
 	});
 }
 
-supplierController.prototype.updateSupplierAction = function(request, response, next) {
+propertyController.prototype.updatePropertyAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
 		var id = request.params.id;
-		var supplier = request.body.supplier;
+		var property = request.body.property;
 
-		supplierController
+		propertyController
 		.prototype
 		.modelsContainer
-		.getModel("Supplier")
-		.findByIdAndUpdate(id, { $set: supplier }, {}, d.intercept(function(updatedSupplier) {
-			response.redirect("/sycamore-erp/supplier/" + updatedSupplier.id);
+		.getModel("Property")
+		.findByIdAndUpdate(id, { $set: property }, {}, d.intercept(function(updatedProperty) {
+			response.redirect("/sycamore-erp/property/" + updatedProperty.id);
 		}));
 	});
 }
 
-exports = module.exports = supplierController;
+exports = module.exports = propertyController;
