@@ -52,6 +52,12 @@ supplierController.prototype.listSuppliersAction = function(request, response, n
 	d.on("error", next);
 	
 	d.run(function() {
+		var contentType = "html";
+
+		if(request.params.contentType != "undefined") {
+			contentType = request.params.contentType;
+		}
+
 		supplierController
 		.prototype
 		.modelsContainer
@@ -59,13 +65,25 @@ supplierController.prototype.listSuppliersAction = function(request, response, n
 		.find({})
 		.exec(d.intercept(function(suppliers) {
 			response.locals.suppliers = suppliers;
-			response.locals.template = "supplier/List";
 
-			var React = require("react");
-			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = React.renderToString(View({ locals: response.locals }));
 
-			response.send(html);
+			switch(contentType) {
+				case "json":
+					response.json(response.locals);
+					break;
+
+				default:
+				case "html":
+					response.locals.template = "supplier/List";
+
+					var React = require("react");
+					var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
+					var html = React.renderToString(View({ locals: response.locals }));
+
+					response.send(html);
+					
+					break;
+			}
 		}));
 	});
 }

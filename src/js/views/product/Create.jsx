@@ -13,6 +13,7 @@ var View = React.createClass({
 			product: {
 				supplier: null
 			},
+			supplierIsLoading: false,
 			title: "Sycamore ERP - New product"
 		};
 
@@ -28,8 +29,6 @@ var View = React.createClass({
 		return state;
 	},
 	handleSupplierAsyncOptions: function(input, callback) {
-		console.log(input);
-		
 		callback(null, {
 			options: [
 				{ value: 'one', label: 'One' },
@@ -37,11 +36,12 @@ var View = React.createClass({
 			],
 			// CAREFUL! Only set this to true when there are no more options,
 			// or more specific queries will not be sent to the server.
-			complete: true
+			isLoading: false
 		});
 	},
 	handleSupplierOnInputChange: function(inputValue) {
 		console.log(inputValue);
+		this.setState({ supplierIsLoading: true });
 	},
 	render: function() {
 		return (
@@ -85,7 +85,7 @@ var View = React.createClass({
 										<div className="large-8 columns">
 											<Select name="product[supplier]"
 													asyncOptions={this.handleSupplierAsyncOptions}
-													isLoading={true}
+													isLoading={this.state.supplierIsLoading}
 													labelKey={"name"}
 													onInputChange={this.handleSupplierOnInputChange}
 													value={this.state.product.supplier}
