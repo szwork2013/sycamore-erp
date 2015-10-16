@@ -52,6 +52,12 @@ propertyController.prototype.listPropertiesAction = function(request, response, 
 	d.on("error", next);
 	
 	d.run(function() {
+		var contentType = "html";
+
+		if(request.params.contentType != "undefined") {
+			contentType = request.params.contentType;
+		}
+		
 		propertyController
 		.prototype
 		.modelsContainer
