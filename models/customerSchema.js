@@ -75,5 +75,7 @@ exports.customerSchema = function() {
 			"Days":						{ type: Number },
 			"Type":						{ type: String }
 		}
+	},{
+		collection: "customers"
 	});
 }

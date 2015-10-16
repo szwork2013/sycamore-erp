@@ -8,6 +8,7 @@ var View = React.createClass({
 
 		var state = {
 			applicationName: "",
+			locals: locals,
 			menus: [],
 			title: "Sycamore ERP - Products"
 		};
@@ -34,25 +35,56 @@ var View = React.createClass({
 				</div>
 				<div className="row">
 					<div className="large-10 columns">
-						<h1>Products</h1>
+						<h1>View product</h1>
 					</div>
 					<div className="large-2 columns">
-						<a href="/sycamore-erp/product" className="right fancy radius button tiny">
-							<i className="in-button-icon fa fa-fw fa-plus"></i> Create
+						<a className="right fancy radius button tiny" href={"/sycamore-erp/product/" + this.state.locals.product._id}>
+							Edit
 						</a>
 					</div>
 				</div>
 				<div className="row">
-					<div className="large-12 columns">
-						<div className="table">
-							<div className="table-head">
-								<div className="table-row">
-									<div className="table-cell">Name</div>
-									<div className="table-cell large-1">Actions</div>
+					<ul data-tab="data-tab" role="tablist" className="tabs">
+						<li role="presentation" className="tab-title active"><a href="#general" role="tab" tabIndex="0" aria-selected="true" aria-controls="general">General</a></li>
+					</ul>
+				</div>
+				<div className="row">
+					<div className="large-4 columns">
+						<div className="tabs-content">
+							<section role="tabpanel" aria-hidden="false" id="general" className="content active">
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline">Name</label>
+									</div>
+									<div className="large-8 columns">
+										{this.state.locals.product.name}
+									</div>
 								</div>
-							</div>
-							<div className="table-body">
-							</div>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline">Supplier</label>
+									</div>
+									<div className="large-8 columns">
+										{this.state.locals.product.supplier.name}
+									</div>
+								</div>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline">Product Code</label>
+									</div>
+									<div className="large-8 columns">
+										{this.state.locals.product.productCode}
+									</div>
+								</div>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline">Price</label>
+									</div>
+									<div className="large-8 columns">
+										{this.state.locals.product.price}
+									</div>
+								</div>
+							</section>
 						</div>
 					</div>
 				</div>

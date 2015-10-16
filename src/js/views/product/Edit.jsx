@@ -58,7 +58,7 @@ var View = React.createClass({
 											<label className="right inline">Name</label>
 										</div>
 										<div className="large-8 columns">
-											<input type="text" name="product[name]"/>
+											<input type="text" name="product[name]" value={this.state.locals.product.name} />
 										</div>
 									</div>
 									<div className="row">
@@ -66,7 +66,7 @@ var View = React.createClass({
 											<label className="right inline">Supplier</label>
 										</div>
 										<div className="large-8 columns">
-											<SuppliersSelect name={"product[supplier]"} onChange={this.handleSupplierChange} />
+											<SuppliersSelect name={"product[supplier]"} onChange={this.handleSupplierChange} value={this.state.locals.product.supplier._id} />
 										</div>
 									</div>
 									<div className="row">
@@ -74,7 +74,7 @@ var View = React.createClass({
 											<label className="right inline">Product Code</label>
 										</div>
 										<div className="large-8 columns">
-											<input type="text" name="product[productCode]"/>
+											<input type="text" name="product[productCode]" value={this.state.locals.product.productCode} />
 										</div>
 									</div>
 									<div className="row">
@@ -82,7 +82,7 @@ var View = React.createClass({
 											<label className="right inline">Price</label>
 										</div>
 										<div className="large-8 columns">
-											<input type="text" name="product[price]"/>
+											<input type="text" name="product[price]" value={this.state.locals.product.price} />
 										</div>
 									</div>
 								</section>
