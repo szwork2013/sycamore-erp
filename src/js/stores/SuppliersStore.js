@@ -19,6 +19,8 @@ var SuppliersStore = assign({}, EventEmitter.prototype, {
 	},
 
 	updateSuppliers: function(items) {
+		console.log("SuppliersStore.updateSuppliers");
+		console.log(items);
 		_suppliers = items;
 	}
 });
@@ -27,6 +29,7 @@ SuppliersStore.dispatchToken = AppDispatcher.register(function(payload) {
 	var action = payload.action;
 	switch(action.actionType) {
 		case AppConstants.UPDATE_SUPPLIERS:
+			console.log("AppConstants.UPDATE_SUPPLIERS");
 			console.log(action.items);
 			SuppliersStore.updateSuppliers(action.items);
 			SuppliersStore.emitChange();
