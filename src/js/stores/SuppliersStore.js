@@ -27,6 +27,7 @@ SuppliersStore.dispatchToken = AppDispatcher.register(function(payload) {
 	var action = payload.action;
 	switch(action.actionType) {
 		case AppConstants.UPDATE_SUPPLIERS:
+			console.log(action.items);
 			SuppliersStore.updateSuppliers(action.items);
 			SuppliersStore.emitChange();
 			break;
