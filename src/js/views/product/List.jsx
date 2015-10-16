@@ -49,15 +49,22 @@ var View = React.createClass({
 							<div className="table-head">
 								<div className="table-row">
 									<div className="table-cell">Name</div>
+									<div className="table-cell">Supplier</div>
 									<div className="table-cell large-1">Actions</div>
 								</div>
 							</div>
 							<div className="table-body">
 							{
 								this.state.locals.products.map(function(product) {
+									var supplierName = "";
+									if(	(typeof(product.supplier) != "undefined") &&
+										(typeof(product.supplier.name) != "undefined") ) {
+										supplierName = product.supplier.name;
+									}
 									return (
 										<div className="table-row">
 											<div className="table-cell">{product.name}</div>
+											<div className="table-cell">{supplierName}</div>
 											<div className="table-cell">
 												<a href={"/sycamore-erp/product/" + product._id}>
 													<i className="icon-button fa fa-fw fa-pencil"></i>

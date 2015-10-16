@@ -57,6 +57,7 @@ productController.prototype.listProductsAction = function(request, response, nex
 		.modelsContainer
 		.getModel("Product")
 		.find({})
+		.populate("supplier")
 		.exec(d.intercept(function(products) {
 			response.locals.products = products;
 			response.locals.template = "product/List";

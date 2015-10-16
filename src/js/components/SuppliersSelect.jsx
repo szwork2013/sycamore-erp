@@ -12,8 +12,6 @@ function getSuppliersFromStore() {
 
 var SuppliersSelect = React.createClass({
 	_onChange: function() {
-		var state = getSuppliersFromStore();
-		console.log(state);
 		this.setState(getSuppliersFromStore());
 	},
 	componentDidMount: function() {
