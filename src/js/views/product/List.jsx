@@ -48,8 +48,10 @@ var View = React.createClass({
 						<div className="table">
 							<div className="table-head">
 								<div className="table-row">
-									<div className="table-cell">Name</div>
 									<div className="table-cell">Supplier</div>
+									<div className="table-cell">Name</div>
+									<div className="table-cell">Product Code</div>
+									<div className="table-cell">Price</div>
 									<div className="table-cell large-1">Actions</div>
 								</div>
 							</div>
@@ -63,8 +65,9 @@ var View = React.createClass({
 									}
 									return (
 										<div className="table-row">
-											<div className="table-cell">{product.name}</div>
 											<div className="table-cell">{supplierName}</div>
+											<div className="table-cell">{product.name}</div>
+											<div className="table-cell">{product.productCode}</div>
 											<div className="table-cell">{product.price}</div>
 											<div className="table-cell">
 												<a href={"/sycamore-erp/product/" + product._id}>

@@ -74,6 +74,22 @@ var View = React.createClass({
 											<SuppliersSelect name={"product[supplier]"} onChange={this.handleSupplierChange} />
 										</div>
 									</div>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">Product Code</label>
+										</div>
+										<div className="large-8 columns">
+											<input type="text" name="product[productCode]"/>
+										</div>
+									</div>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">Price</label>
+										</div>
+										<div className="large-8 columns">
+											<input type="text" name="product[price]"/>
+										</div>
+									</div>
 								</section>
 							</div>
 						</div>
