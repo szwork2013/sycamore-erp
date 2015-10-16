@@ -96,10 +96,10 @@ var View = React.createClass({
 									<div className="table-cell large-1">
 										Quantity
 									</div>
-									<div className="table-cell">
+									<div className="table-cell large-7">
 										Product
 									</div>
-									<div className="table-cell">
+									<div className="table-cell large-4">
 										Options
 									</div>
 								</div>
