@@ -27,6 +27,11 @@ var View = React.createClass({
 		return state;
 	},
 	render: function() {
+		var supplierValue = null;
+		if(	(typeof(this.state.locals.product.supplier) != "undefined") &&
+			(typeof(this.state.locals.product.supplier._id) != "undefined") ) {
+			supplierValue = this.state.locals.product.supplier._id;
+		}
 		return (
 			<Layout title={this.state.title} locals={this.props.locals}>
 				<Header applicationName={this.state.applicationName} applicationUrl={this.state.applicationUrl} menus={this.state.menus} />
@@ -66,7 +71,7 @@ var View = React.createClass({
 											<label className="right inline">Supplier</label>
 										</div>
 										<div className="large-8 columns">
-											<SuppliersSelect name={"product[supplier]"} onChange={this.handleSupplierChange} value={this.state.locals.product.supplier._id} />
+											<SuppliersSelect name={"product[supplier]"} onChange={this.handleSupplierChange} value={supplierValue} />
 										</div>
 									</div>
 									<div className="row">
