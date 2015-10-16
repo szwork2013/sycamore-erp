@@ -68,7 +68,10 @@ supplierController.prototype.listSuppliersAction = function(request, response, n
 
 			switch(contentType) {
 				case "json":
-					response.json(response.locals);
+					var data = {};
+					data.items = suppliers;
+
+					response.json(data);
 					break;
 
 				default:
