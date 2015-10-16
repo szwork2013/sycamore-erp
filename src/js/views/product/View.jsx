@@ -25,6 +25,11 @@ var View = React.createClass({
 		return state;
 	},
 	render: function() {
+		var supplierName = "";
+		if(	(typeof(this.state.locals.product.supplier) != "undefined") &&
+			(typeof(this.state.locals.product.supplier.name) != "undefined") ) {
+			supplierName = this.state.locals.product.suppler.name;
+		}
 		return (
 			<Layout title={this.state.title} locals={this.props.locals}>
 				<Header applicationName={this.state.applicationName} applicationUrl={this.state.applicationUrl} menus={this.state.menus} />
@@ -65,7 +70,7 @@ var View = React.createClass({
 										<label className="right inline">Supplier</label>
 									</div>
 									<div className="large-8 columns">
-										{this.state.locals.product.supplier.name}
+										{supplierName}
 									</div>
 								</div>
 								<div className="row">
