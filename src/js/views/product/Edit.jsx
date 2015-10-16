@@ -46,7 +46,7 @@ var View = React.createClass({
 							<h1>Edit product</h1>
 						</div>
 						<div className="large-2 columns">
-							<input type="submit" className="right fancy radius button tiny" value="Create" />
+							<input type="submit" className="right fancy radius button tiny" value="Save" />
 						</div>
 					</div>
 					<div className="row">
