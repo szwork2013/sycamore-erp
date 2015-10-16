@@ -68,7 +68,7 @@ var View = React.createClass({
 											<label className="right inline">Customer</label>
 										</div>
 										<div className="large-8 columns">
-											<SuppliersSelect name={"property[customer]"} onChange={this.handleCustomerChange} />
+											<CustomersSelect name={"property[customer]"} onChange={this.handleCustomerChange} />
 										</div>
 									</div>
 								</section>
