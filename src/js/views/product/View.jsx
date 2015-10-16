@@ -28,7 +28,7 @@ var View = React.createClass({
 		var supplierName = "";
 		if(	(typeof(this.state.locals.product.supplier) != "undefined") &&
 			(typeof(this.state.locals.product.supplier.name) != "undefined") ) {
-			supplierName = this.state.locals.product.suppler.name;
+			supplierName = this.state.locals.product.supplier.name;
 		}
 		return (
 			<Layout title={this.state.title} locals={this.props.locals}>
