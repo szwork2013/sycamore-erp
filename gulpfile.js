@@ -4,7 +4,7 @@ var gulp		= require("gulp");
 var source		= require("vinyl-source-stream");
 
 gulp.task("build", function() {
-	return gulp.src(["./src/js/**/*.jsx"])
+	return gulp.src(["./src/js/**/*.jsx","./src/js/**/*.js"])
 	.pipe(babel())
 	.pipe(gulp.dest("./lib/"));
 });
