@@ -6,6 +6,7 @@ var Api = require("../services/Api");
 var ApplicationActions = {
 	getSuppliers: function(queryOptions) {
 		Api.getSuppliers(queryOptions, function(error, response) {
+			console.log(response);
 			console.log("ApplicationActions.getSuppliers");
 			console.log(response.items);
 			AppDispatcher.handleViewAction({
