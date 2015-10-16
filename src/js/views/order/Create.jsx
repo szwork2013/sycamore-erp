@@ -93,28 +93,45 @@ var View = React.createClass({
 						<div className="table">
 							<div className="table-head">
 								<div className="table-row">
+									<div className="table-cell large-10">
+										Product
+									</div>
 									<div className="table-cell large-1">
 										Quantity
 									</div>
-									<div className="table-cell large-7">
-										Product
-									</div>
-									<div className="table-cell large-4">
-										Options
+									<div className="table-cell large-1">
+										Price
 									</div>
 								</div>
 							</div>
 							<div className="table-body">
 								<div className="table-row">
 									<div className="table-cell">
-										<input type="number" />
+										<ProductsSelect name={"order[products][]"} onChange={this.handleProductChange} />
 									</div>
 									<div className="table-cell">
-										<ProductsSelect name={"order[products][]"} onChange={this.handleProductChange} />
+										<input type="number" />
 									</div>
 									<div className="table-cell">
 
 									</div>
+								</div>
+							</div>
+							<div className="table-foot">
+								<div className="table-row">
+									<div className="table-cell">&#160;</div>
+									<div className="table-cell">Sub Total</div>
+									<div className="table-cell"></div>
+								</div>
+								<div className="table-row">
+									<div className="table-cell">&#160;</div>
+									<div className="table-cell">VAT</div>
+									<div className="table-cell"></div>
+								</div>
+								<div className="table-row">
+									<div className="table-cell">&#160;</div>
+									<div className="table-cell"><strong>Total</strong></div>
+									<div className="table-cell"></div>
 								</div>
 							</div>
 						</div>
