@@ -66,7 +66,6 @@ supplierController.prototype.listSuppliersAction = function(request, response, n
 		.exec(d.intercept(function(suppliers) {
 			response.locals.suppliers = suppliers;
 
-
 			switch(contentType) {
 				case "json":
 					response.json(response.locals);
@@ -81,7 +80,6 @@ supplierController.prototype.listSuppliersAction = function(request, response, n
 					var html = React.renderToString(View({ locals: response.locals }));
 
 					response.send(html);
-					
 					break;
 			}
 		}));

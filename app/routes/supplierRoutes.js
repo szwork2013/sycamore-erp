@@ -45,6 +45,7 @@ function supplierRoutes(servicesContainer, modelsContainer) {
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
 		supplierController.editSupplierAction
 	);
+	
 // LIST / GET
 	Router.get(
 		"/suppliers",
@@ -70,6 +71,7 @@ function supplierRoutes(servicesContainer, modelsContainer) {
 //		getQuerySearchQuery,
 		supplierController.listSuppliersAction
 	);
+
 // VIEW / GET
 	Router.get( "/supplier/:id",
 		authenticationService.ensureAuthenticated(),
