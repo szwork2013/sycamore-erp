@@ -33,6 +33,7 @@ productController.prototype.editProductAction = function(request, response, next
 		.modelsContainer
 		.getModel("Product")
 		.findOne({ _id: id })
+		.populate("supplier")
 		.exec(d.intercept(function(product) {
 			response.locals.product = product;
 			response.locals.template = "product/Edit";
@@ -52,6 +53,12 @@ productController.prototype.listProductsAction = function(request, response, nex
 	d.on("error", next);
 	
 	d.run(function() {
+		var contentType = "html";
+
+		if(request.params.contentType != "undefined") {
+			contentType = request.params.contentType;
+		}
+
 		productController
 		.prototype
 		.modelsContainer
@@ -59,14 +66,25 @@ productController.prototype.listProductsAction = function(request, response, nex
 		.find({})
 		.populate("supplier")
 		.exec(d.intercept(function(products) {
-			response.locals.products = products;
-			response.locals.template = "product/List";
+			switch(contentType) {
+				case "json":
+					var data = {};
+					data.items = products;
 
-			var React = require("react");
-			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = React.renderToString(View({ locals: response.locals }));
+					response.json(data);
+					break;
 
-			response.send(html);
+				default:
+				case "html":
+					response.locals.products = products;
+					response.locals.template = "product/List";
+
+					var React = require("react");
+					var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
+					var html = React.renderToString(View({ locals: response.locals }));
+
+					response.send(html);
+			}
 		}));
 	});
 }
@@ -83,6 +101,7 @@ productController.prototype.viewProductAction = function(request, response, next
 		.modelsContainer
 		.getModel("Product")
 		.findOne({ _id: id })
+		.populate("supplier")
 		.exec(d.intercept(function(product) {
 			response.locals.product = product;
 			response.locals.template = "product/View";

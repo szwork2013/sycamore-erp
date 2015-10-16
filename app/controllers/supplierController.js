@@ -64,8 +64,6 @@ supplierController.prototype.listSuppliersAction = function(request, response, n
 		.getModel("Supplier")
 		.find({})
 		.exec(d.intercept(function(suppliers) {
-			response.locals.suppliers = suppliers;
-
 			switch(contentType) {
 				case "json":
 					var data = {};
@@ -76,6 +74,7 @@ supplierController.prototype.listSuppliersAction = function(request, response, n
 
 				default:
 				case "html":
+					response.locals.suppliers = suppliers;
 					response.locals.template = "supplier/List";
 
 					var React = require("react");

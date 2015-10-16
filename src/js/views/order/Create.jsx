@@ -2,6 +2,10 @@ var React = require("react");
 var Layout = require("../Layout");
 var Header = require("../../components/Header");
 
+var CustomersSelect = require("../../components/CustomersSelect");
+var PropertiesSelect = require("../../components/PropertiesSelect");
+var ProductsSelect = require("../../components/ProductsSelect");
+
 var View = React.createClass({
 	getInitialState: function() {
 		var locals = this.props.locals;
@@ -22,6 +26,15 @@ var View = React.createClass({
 		}
 
 		return state;
+	},
+	handleCustomerChange: function(value) {
+
+	},
+	handlePropertyChange: function(value) {
+
+	},
+	handleProductChange: function(value) {
+
 	},
 	render: function() {
 		return (
@@ -50,10 +63,10 @@ var View = React.createClass({
 									<label className="inline">Customer</label>
 								</div>
 								<div className="large-8 columns">
-									<select></select>
+									<CustomersSelect name={"order[customer]"} onChange={this.handleCustomerChange} />
 								</div>
 								<div className="large-2 columns">
-									<input className="button tiny" type="button" value="New" />
+									<input className="right fancy radius button tiny" type="button" value="New" />
 								</div>
 							</div>
 						</fieldset>
@@ -65,10 +78,10 @@ var View = React.createClass({
 									<label className="inline">Property</label>
 								</div>
 								<div className="large-8 columns">
-									<select></select>
+									<PropertiesSelect name={"order[property]"} onChange={this.handlePropertyChange} />
 								</div>
 								<div className="large-2 columns">
-									<input className="button tiny" type="button" value="New" />
+									<input className="right fancy radius button tiny" type="button" value="New" />
 								</div>
 							</div>
 						</fieldset>
@@ -78,9 +91,9 @@ var View = React.createClass({
 				<div className="row">
 					<div className="large-12 columns">
 						<div className="table">
-							<div className="table-header">
+							<div className="table-head">
 								<div className="table-row">
-									<div className="table-cell">
+									<div className="table-cell large-1">
 										Quantity
 									</div>
 									<div className="table-cell">
@@ -97,16 +110,7 @@ var View = React.createClass({
 										<input type="number" />
 									</div>
 									<div className="table-cell">
-										<select>
-											<option>Harrisons 3 Door Wardrobe</option>
-											<option>Harrisons 2 Door Wardrobe</option>
-											<option>Harrisons 3 Door Wardrobe (With Drawers)</option>
-											<option>Harrisons 2 Door Wardrobe (With Drawers)</option>
-											<option>Harrisons 2 Drawer Bedside Cabinet</option>
-											<option>Harrisons 3 Drawer Bedside Cabinet</option>
-											<option>Harrisons 3 Drawer Chest</option>
-											<option>Harrisons 4 Drawer Chest</option>
-										</select>
+										<ProductsSelect name={"order[products][]"} onChange={this.handleProductChange} />
 									</div>
 									<div className="table-cell">
 

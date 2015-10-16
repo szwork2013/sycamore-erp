@@ -2,6 +2,8 @@ var React = require("react");
 var Layout = require("../Layout");
 var Header = require("../../components/Header");
 
+var SuppliersSelect = require("../../components/SuppliersSelect");
+
 var View = React.createClass({
 	getInitialState: function() {
 		var locals = this.props.locals;
@@ -53,10 +55,18 @@ var View = React.createClass({
 								<section role="tabpanel" aria-hidden="false" id="general" className="content active">
 									<div className="row">
 										<div className="large-4 columns">
-											<label for="name" className="right inline">Name</label>
+											<label className="right inline">Name</label>
 										</div>
 										<div className="large-8 columns">
 											<input type="text" name="product[name]"/>
+										</div>
+									</div>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">Supplier</label>
+										</div>
+										<div className="large-8 columns">
+											<SuppliersSelect name={"product[supplier]"} onChange={this.handleSuppliersChange} />
 										</div>
 									</div>
 								</section>

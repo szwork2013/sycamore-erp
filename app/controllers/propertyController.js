@@ -58,14 +58,25 @@ propertyController.prototype.listPropertiesAction = function(request, response, 
 		.getModel("Property")
 		.find({})
 		.exec(d.intercept(function(properties) {
-			response.locals.properties = properties;
-			response.locals.template = "property/List";
+			switch(contentType) {
+				case "json":
+					var data = {};
+					data.items = properties;
 
-			var React = require("react");
-			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = React.renderToString(View({ locals: response.locals }));
+					response.json(data);
+					break;
 
-			response.send(html);
+				default:
+				case "html":
+					response.locals.properties = properties;
+					response.locals.template = "property/List";
+
+					var React = require("react");
+					var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
+					var html = React.renderToString(View({ locals: response.locals }));
+
+					response.send(html);
+			}
 		}));
 	});
 }

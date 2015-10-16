@@ -58,14 +58,25 @@ customerController.prototype.listCustomersAction = function(request, response, n
 		.getModel("Customer")
 		.find({})
 		.exec(d.intercept(function(customers) {
-			response.locals.customers = customers;
-			response.locals.template = "customer/List";
+			switch(contentType) {
+				case "json":
+					var data = {};
+					data.items = customers;
 
-			var React = require("react");
-			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = React.renderToString(View({ locals: response.locals }));
+					response.json(data);
+					break;
 
-			response.send(html);
+				default:
+				case "html":
+					response.locals.customers = customers;
+					response.locals.template = "customer/List";
+
+					var React = require("react");
+					var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
+					var html = React.renderToString(View({ locals: response.locals }));
+
+					response.send(html);
+			}
 		}));
 	});
 }
