@@ -6,7 +6,8 @@ var SuppliersStore = require("../stores/SuppliersStore");
 
 var SuppliersSelect = React.createClass({
 	_onChange: function() {
-		this.setState(SuppliersStore.getSuppliers());
+		var suppliers = SuppliersStore.getSuppliers();
+		this.setState({ suppliers: suppliers });
 	},
 	componentDidMount: function() {
 		SuppliersStore.addChangeListener(this._onChange);
