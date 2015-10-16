@@ -65,6 +65,7 @@ var View = React.createClass({
 										<div className="table-row">
 											<div className="table-cell">{product.name}</div>
 											<div className="table-cell">{supplierName}</div>
+											<div className="table-cell">{product.price}</div>
 											<div className="table-cell">
 												<a href={"/sycamore-erp/product/" + product._id}>
 													<i className="icon-button fa fa-fw fa-pencil"></i>

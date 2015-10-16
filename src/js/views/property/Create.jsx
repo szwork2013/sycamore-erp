@@ -2,6 +2,8 @@ var React = require("react");
 var Layout = require("../Layout");
 var Header = require("../../components/Header");
 
+var CustomersSelect = require("../../components/CustomersSelect");
+
 var View = React.createClass({
 	getInitialState: function() {
 		var locals = this.props.locals;
@@ -22,6 +24,9 @@ var View = React.createClass({
 		}
 
 		return state;
+	},
+	handleCustomerChange: function(value) {
+		console.log(value);
 	},
 	render: function() {
 		return (
@@ -56,6 +61,14 @@ var View = React.createClass({
 										</div>
 										<div className="large-8 columns">
 											<input type="text" name="property[name]"/>
+										</div>
+									</div>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">Customer</label>
+										</div>
+										<div className="large-8 columns">
+											<SuppliersSelect name={"property[customer]"} onChange={this.handleCustomerChange} />
 										</div>
 									</div>
 								</section>
