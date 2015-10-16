@@ -4,30 +4,30 @@ var Select = require("react-select");
 var ApplicationActions = require("../actions/ApplicationActions");
 var SuppliersStore = require("../stores/SuppliersStore");
 
+function getSuppliersFromStore() {
+	return {
+		suppliers: SuppliersStore.getSuppliers()
+	};
+}
+
 var SuppliersSelect = React.createClass({
 	_onChange: function() {
-		var suppliers = SuppliersStore.getSuppliers();
-		this.setState({ suppliers: suppliers });
+		this.setState(getSuppliersFromStore());
 	},
 	componentDidMount: function() {
 		SuppliersStore.addChangeListener(this._onChange);
 	},
 	getInitialState: function() {
-		var state = SuppliersStore.getInitialState();
-		state.name = this.props.name;
-		return state;
+		return getSuppliersFromStore();
 	},
 	handleOnInputChange: function(inputValue) {
 		ApplicationActions.getSuppliers({ searchQuery: inputValue });
 	},
 	render: function () {
 		return (
-			<Select isLoading={this.state.isLoading}
-					labelKey={"name"}
-					name={this.state.name}
+			<Select labelKey={"name"}
 					onInputChange={this.handleOnInputChange}
 					options={this.state.suppliers}
-					value={this.state.value}
 					valueKey={"_id"} />
 		);
 	}

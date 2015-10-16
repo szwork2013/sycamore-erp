@@ -3,11 +3,7 @@ var EventEmitter = require("events").EventEmitter;
 var AppConstants = require("../constants/AppConstants");
 var assign = require("object-assign");
 
-var _suppliersStore = {
-	isLoading: false,
-	suppliers: [],
-	value: null
-};
+var _suppliers = [];
 
 var SuppliersStore = assign({}, EventEmitter.prototype, {
 	emitChange: function() {
@@ -18,16 +14,12 @@ var SuppliersStore = assign({}, EventEmitter.prototype, {
 		this.on(AppConstants.CHANGE_EVENT, callback);
 	},
 
-	getInitialState: function() {
-		return _suppliersStore;
-	},
-
 	getSuppliers: function() {
-		return _suppliersStore.suppliers;
+		return _suppliers;
 	},
 
 	updateSuppliers: function(items) {
-		_suppliersStore.suppliers = items;
+		_suppliers = items;
 	}
 });
 
