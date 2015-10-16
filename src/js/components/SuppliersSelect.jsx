@@ -25,10 +25,15 @@ var SuppliersSelect = React.createClass({
 	handleOnInputChange: function(inputValue) {
 		ApplicationActions.getSuppliers({ searchQuery: inputValue });
 	},
+	handleOnOptionLabelClick: function(value, event) {
+		this.props.onChange(value);
+	},
 	render: function () {
 		return (
 			<Select labelKey={"name"}
+					name={this.props.name}
 					onInputChange={this.handleOnInputChange}
+					onOptionLabelClick={this.handleOnOptionLabelClick}
 					options={this.state.suppliers}
 					valueKey={"_id"} />
 		);

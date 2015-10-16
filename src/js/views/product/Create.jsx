@@ -28,6 +28,9 @@ var View = React.createClass({
 
 		return state;
 	},
+	handleSuppliersChange: function(value) {
+		console.log(value);
+	},
 	render: function() {
 		return (
 			<Layout title={this.state.title} locals={this.props.locals}>
@@ -68,7 +71,7 @@ var View = React.createClass({
 											<label className="right inline">Supplier</label>
 										</div>
 										<div className="large-8 columns">
-											<SuppliersSelect name={"product[supplier]"} />
+											<SuppliersSelect name={"product[supplier]"} onChange={this.handleSuppliersChange} />
 										</div>
 									</div>
 								</section>
