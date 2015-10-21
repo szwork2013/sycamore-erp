@@ -10,6 +10,18 @@ var ApplicationActions = {
 			product: product
 		});
 	},
+	setCustomerOnOrder: function(customer) {
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.SET_CUSTOMER_ON_ORDER,
+			customer: customer
+		});
+	},
+	setPropertyOnOrder: function(property) {
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.SET_PROPERTY_ON_ORDER,
+			property: property
+		});
+	},
 	getCustomers: function(queryOptions) {
 		Api.getCustomers(queryOptions, function(error, response) {
 			AppDispatcher.handleViewAction({

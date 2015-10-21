@@ -10,6 +10,8 @@ var OrderStore = require("../../stores/OrderStore");
 function getOrderFromStore() {
 	return {
 		order: OrderStore.getOrder(),
+		customer: null,
+		property: null,
 		product: null
 	}
 }
@@ -30,13 +32,15 @@ var View = React.createClass({
 		}
 	},
 	handleCustomerChange: function(value) {
-		console.log(value);
+		this.setState({ customer: value });
+		ApplicationActions.setCustomer(this.state.customer);
 	},
 	handlePropertyChange: function(value) {
-		console.log(value);
+		this.setState({ property: value });
+		ApplicationActions.setProperty(this.state.property);
 	},
 	handleProductChange: function(value) {
-		this.setState({ product: value })
+		this.setState({ product: value });
 	},
 	render: function() {
 		var pageTitle = "New order";
