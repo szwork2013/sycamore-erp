@@ -28,7 +28,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		product.subTotal = product.quantity * product.price;
 
 		_order.products.push(product);
-		calculateSubTotal();
+		this.calculateSubTotal();
 	},
 
 	calculateSubTotal: function() {
@@ -40,8 +40,8 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 				callback();
 			},
 			function(error) {
-				calculateVAT();
-				calculateTotal();
+				this.calculateVAT();
+				this.calculateTotal();
 			}
 		);
 	},
