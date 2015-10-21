@@ -1,47 +1,20 @@
 var React = require("react");
 var Layout = require("../Layout");
-var Header = require("../../components/Header");
+var ActionsBar = require("../../components/ActionsBar");
 
 var View = React.createClass({
 	getInitialState: function() {
-		var locals = this.props.locals;
-
-		var state = {
-			applicationName: "",
-			locals: locals,
-			menus: [],
-			title: "Sycamore ERP - Edit supplier"
-		};
-
-		if(typeof(locals) != "undefined") {
-			if(typeof(locals.applicationName) != "undefined") {
-				state.applicationName = locals.applicationName;
-			}
-			if(typeof(locals.menus) != "undefined") {
-				state.menus = locals.menus;
-			}
-		}
-
-		return state;
+		return {};
 	},
 	render: function() {
+		var pageTitle = "Edit supplier";
+
 		return (
-			<Layout title={this.state.title} locals={this.props.locals}>
-				<Header applicationName={this.state.applicationName} applicationUrl={this.state.applicationUrl} menus={this.state.menus} />
-				<div className="row">
-					<ul className="breadcrumbs">
-						<li>Suppliers</li>
-					</ul>
-				</div>
+			<Layout pageTitle={pageTitle} locals={this.props.locals}>
 				<form action={"/sycamore-erp/supplier/" + this.state.locals.supplier._id} encType="application/x-www-form-urlencoded" method="POST">
-					<div className="row">
-						<div className="large-10 columns">
-							<h1>Edit supplier</h1>
-						</div>
-						<div className="large-2 columns">
-							<input type="submit" className="right fancy radius button tiny" value="Create" />
-						</div>
-					</div>
+					<ActionsBar pageTitle={pageTitle}>
+						<input type="submit" className="right fancy radius button tiny" value="Save" />
+					</ActionsBar>
 					<div className="row">
 						<ul data-tab="data-tab" role="tablist" className="tabs">
 							<li role="presentation" className="tab-title active"><a href="#general" role="tab" tabIndex="0" aria-selected="true" aria-controls="general">General</a></li>
