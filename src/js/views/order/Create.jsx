@@ -227,14 +227,14 @@ var View = React.createClass({
 				<div className="row">
 					<div className="large-12 columns">
 						<div className="row">
-							<div className="large-4 columns">
-								<label>Add Product</label>
+							<div className="large-1 columns">
+								<label class="inline">Add Product</label>
 							</div>
 							<div className="large-6 columns">
 								<ProductsSelect name={"order[products][]"} onChange={this.handleProductChange} />
 							</div>
-							<div className="large-2 columns">
-								<a className="button tiny right radius fancy" onClick={this.handleAddProduct}>Add Product</a>
+							<div className="large-2 columns end">
+								<a className="button tiny radius fancy" onClick={this.handleAddProduct}>Add Product</a>
 							</div>
 						</div>
 					</div>
@@ -290,15 +290,21 @@ var View = React.createClass({
 							<div className="table-foot">
 								<div className="table-row">
 									<div className="table-cell">&#160;</div>
+									<div className="table-cell">&#160;</div>
+									<div className="table-cell">&#160;</div>
 									<div className="table-cell">Sub Total</div>
 									<div className="table-cell">{this.state.order.subTotal}</div>
 								</div>
 								<div className="table-row">
 									<div className="table-cell">&#160;</div>
+									<div className="table-cell">&#160;</div>
+									<div className="table-cell">&#160;</div>
 									<div className="table-cell">VAT</div>
 									<div className="table-cell">{this.state.order.VAT}</div>
 								</div>
 								<div className="table-row">
+									<div className="table-cell">&#160;</div>
+									<div className="table-cell">&#160;</div>
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell"><strong>Total</strong></div>
 									<div className="table-cell">{this.state.order.total}</div>
