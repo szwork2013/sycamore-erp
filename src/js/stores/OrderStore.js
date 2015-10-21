@@ -28,11 +28,12 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		product.subTotal = product.quantity * product.price;
 
 		_order.products.push(product);
-		this.calculateSubTotal();
+		this.calculateTotals();
 	},
 
-	calculateSubTotal: function() {
+	calculateTotals: function() {
 		var subTotal = 0;
+// Calculate SubTotal
 		async.eachSeries(
 			_order.products,
 			function(product, callback) {
@@ -40,18 +41,12 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 				callback();
 			},
 			function(error) {
-				this.calculateVAT();
-				this.calculateTotal();
+// Calculate VAT
+				_order.VAT = (_order.subTotal * 1.2) - _order.subTotal;
+// Calculate Total
+				_order.total = _order.subTotal * +_order.VAT;
 			}
 		);
-	},
-
-	calculateVAT: function() {
-		_order.VAT = (_order.subTotal * 1.2) - _order.subTotal;
-	},
-
-	calculateTotal: function() {
-		_order.total = _order.subTotal * +_order.VAT;
 	},
 
 	getOrder: function() {
@@ -75,11 +70,11 @@ OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 			OrderStore.emitChange();
 			break;
 		case AppConstants.SET_CUSTOMER_ON_ORDER:
-			OrderStore.setCustomer(customer);
+			OrderStore.setCustomer(action.customer);
 			OrderStore.emitChange();
 			break;
 		case AppConstants.SET_PROPERTY_ON_ORDER:
-			OrderStore.setProperty(property);
+			OrderStore.setProperty(action.property);
 			OrderStore.emitChange();
 			break;
 		default:
