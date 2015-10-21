@@ -6,8 +6,7 @@ var ProductsStore = require("../stores/ProductsStore");
 
 function getProductsFromStore() {
 	return {
-		products: ProductsStore.getProducts(),
-//		product: 
+		products: ProductsStore.getProducts()
 	};
 }
 
@@ -22,18 +21,12 @@ var ProductsSelect = React.createClass({
 		return getProductsFromStore();
 	},
 	handleOnInputChange: function(inputValue) {
-		console.log("handleOnInputChange");
-		console.log(inputValue);
 		ApplicationActions.getProducts({ searchQuery: inputValue });
 	},
 	handleOnChange: function(value, selectedOptions) {
-		console.log("handleOnChange");
-		console.log(selectedOptions);
-		if((value != null) && (value != "")) {
-			console.log(value);
-			this.props.onChange(value);
+		if(selectedOptions.length == 1) {
+			this.props.onChange(selectedOptions[0]);
 		}
-
 	},
 	render: function () {
 		return (

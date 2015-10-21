@@ -240,17 +240,17 @@ var View = React.createClass({
 								<div className="table-row">
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">Sub Total</div>
-									<div className="table-cell"></div>
+									<div className="table-cell">{this.state.order.subTotal}</div>
 								</div>
 								<div className="table-row">
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">VAT</div>
-									<div className="table-cell"></div>
+									<div className="table-cell">{this.state.order.VAT}</div>
 								</div>
 								<div className="table-row">
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell"><strong>Total</strong></div>
-									<div className="table-cell"></div>
+									<div className="table-cell">{this.state.order.total}</div>
 								</div>
 							</div>
 						</div>

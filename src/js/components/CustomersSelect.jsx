@@ -23,15 +23,17 @@ var CustomersSelect = React.createClass({
 	handleOnInputChange: function(inputValue) {
 		ApplicationActions.getCustomers({ searchQuery: inputValue });
 	},
-	handleOnOptionLabelClick: function(value, event) {
-		this.props.onChange(value);
+	handleOnChange: function(value, selectedOptions) {
+		if(selectedOptions.length == 1) {
+			this.props.onChange(selectedOptions[0]);
+		}
 	},
 	render: function () {
 		return (
 			<Select labelKey={"Name"}
 					name={this.props.name}
 					onInputChange={this.handleOnInputChange}
-					onOptionLabelClick={this.handleOnOptionLabelClick}
+					onChange={this.handleOnChange}
 					options={this.state.customers}
 					valueKey={"_id"} />
 		);
