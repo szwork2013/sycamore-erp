@@ -54,6 +54,81 @@ var View = React.createClass({
 									<input className="right fancy radius button tiny" type="button" value="New" />
 								</div>
 							</div>
+							<div className="row">
+								<div className="large-4 columns">
+									<label className="right inline">Customer Name</label>
+								</div>
+								<div className="large-8 columns">
+									<input type="text" disabled="disabled" value={""} />
+								</div>
+							</div>
+							<div className="row">
+								<div className="large-4 columns">
+									<label className="right inline">Company Name</label>
+								</div>
+								<div className="large-8 columns">
+									<input type="text" disabled="disabled" value={""} />
+								</div>
+							</div>
+							<fieldset>
+								<label>Billing Address</label>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline"></label>
+									</div>
+									<div className="large-8 columns">
+										<input type="text" disabled="disabled" value={""} />
+									</div>
+								</div>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline"></label>
+									</div>
+									<div className="large-8 columns">
+										<input type="text" disabled="disabled" value={""} />
+									</div>
+								</div>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline"></label>
+									</div>
+									<div className="large-8 columns">
+										<input type="text" disabled="disabled" value={""} />
+									</div>
+								</div>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline"></label>
+									</div>
+									<div className="large-8 columns">
+										<input type="text" disabled="disabled" value={""} />
+									</div>
+								</div>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline"></label>
+									</div>
+									<div className="large-8 columns">
+										<input type="text" disabled="disabled" value={""} />
+									</div>
+								</div>
+							</fieldset>
+							<div className="row">
+								<div className="large-4 columns">
+									<label className="right inline">Telephone</label>
+								</div>
+								<div className="large-8 columns">
+									<input type="text" disabled="disabled" value={""} />
+								</div>
+							</div>
+							<div className="row">
+								<div className="large-4 columns">
+									<label className="right inline">Email</label>
+								</div>
+								<div className="large-8 columns">
+									<input type="text" disabled="disabled" value={""} />
+								</div>
+							</div>
 						</fieldset>
 					</div>
 					<div className="large-6 columns">
