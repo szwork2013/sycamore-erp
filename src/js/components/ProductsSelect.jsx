@@ -21,9 +21,13 @@ var ProductsSelect = React.createClass({
 		return getProductsFromStore();
 	},
 	handleOnInputChange: function(inputValue) {
+		console.log("handleOnInputChange");
+		console.log(inputValue);
 		ApplicationActions.getProducts({ searchQuery: inputValue });
 	},
 	handleOnOptionLabelClick: function(value, event) {
+		console.log("handleOnOptionLabelClick");
+		console.log(value);
 		this.props.onChange(value);
 	},
 	render: function () {
