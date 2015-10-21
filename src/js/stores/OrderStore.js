@@ -25,7 +25,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 
 	addProduct: function(product) {
 		product.quantity = 1;
-		product.subTotal = product.quantity * product.price;
+		product.total = product.quantity * product.price;
 
 		_order.products.push(product);
 		this.calculateTotals();

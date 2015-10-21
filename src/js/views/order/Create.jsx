@@ -10,8 +10,6 @@ var OrderStore = require("../../stores/OrderStore");
 function getOrderFromStore() {
 	return {
 		order: OrderStore.getOrder(),
-		customer: null,
-		property: null,
 		product: null
 	}
 }
@@ -32,12 +30,10 @@ var View = React.createClass({
 		}
 	},
 	handleCustomerChange: function(value) {
-		this.setState({ customer: value });
-		ApplicationActions.setCustomer(this.state.customer);
+		ApplicationActions.setCustomer(value);
 	},
 	handlePropertyChange: function(value) {
-		this.setState({ property: value });
-		ApplicationActions.setProperty(this.state.property);
+		ApplicationActions.setProperty(value);
 	},
 	handleProductChange: function(value) {
 		this.setState({ product: value });
@@ -52,7 +48,7 @@ var View = React.createClass({
 		var pageTitle = "New order";
 		var propertyOpts = {};
 
-		if (this.state.customer != null) {
+		if (this.state.order.customer == null) {
 			propertyOpts["disabled"] = "disabled";
 		}
 
@@ -249,14 +245,20 @@ var View = React.createClass({
 						<div className="table">
 							<div className="table-head">
 								<div className="table-row">
-									<div className="table-cell large-10">
+									<div className="table-cell large-6">
 										Product
+									</div>
+									<div className="table-cell large-1">
+										Item Price
 									</div>
 									<div className="table-cell large-1">
 										Quantity
 									</div>
 									<div className="table-cell large-1">
-										Price
+										VAT
+									</div>
+									<div className="table-cell large-1">
+										Total
 									</div>
 								</div>
 							</div>
@@ -269,10 +271,16 @@ var View = React.createClass({
 													{product.name}
 												</div>
 												<div className="table-cell">
+													{product.price}
+												</div>
+												<div className="table-cell">
 													<input type="number" onChange={handleProductQuantityChange} value={product.quantity} />
 												</div>
 												<div className="table-cell">
-													{product.subtotal}
+													{product.VAT}
+												</div>
+												<div className="table-cell">
+													{product.total}
 												</div>
 											</div>
 										);
