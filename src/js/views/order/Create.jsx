@@ -47,6 +47,8 @@ var View = React.createClass({
 		console.log(event);
 	},
 	render: function() {
+		var handleProductQuantityChange = this.handleProductQuantityChange;
+
 		var pageTitle = "New order";
 		var propertyOpts = {};
 
@@ -267,7 +269,7 @@ var View = React.createClass({
 													{product.name}
 												</div>
 												<div className="table-cell">
-													<input type="number" onChange={this.handleProductQuantityChange} value={product.quantity} />
+													<input type="number" onChange={handleProductQuantityChange} value={product.quantity} />
 												</div>
 												<div className="table-cell">
 													{product.subtotal}
