@@ -44,6 +44,11 @@ var View = React.createClass({
 	},
 	render: function() {
 		var pageTitle = "New order";
+		var propertyOpts = {};
+
+		if (this.state.customer != null) {
+			propertyOpts["disabled"] = "disabled";
+		}
 
 		return (
 			<Layout pageTitle={pageTitle} locals={this.props.locals}>
@@ -142,7 +147,7 @@ var View = React.createClass({
 						</fieldset>
 					</div>
 					<div className="large-6 columns">
-						<fieldset>
+						<fieldset {...propertyOpts}>
 							<div className="row">				
 								<div className="large-2 columns">
 									<label className="inline">Property</label>
