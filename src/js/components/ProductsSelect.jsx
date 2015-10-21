@@ -25,8 +25,8 @@ var ProductsSelect = React.createClass({
 		console.log(inputValue);
 		ApplicationActions.getProducts({ searchQuery: inputValue });
 	},
-	handleOnOptionLabelClick: function(value, event) {
-		console.log("handleOnOptionLabelClick");
+	handleOnChange: function(value) {
+		console.log("handleOnChange");
 		console.log(value);
 		this.props.onChange(value);
 	},
@@ -35,7 +35,7 @@ var ProductsSelect = React.createClass({
 			<Select labelKey={"name"}
 					name={this.props.name}
 					onInputChange={this.handleOnInputChange}
-					onOptionLabelClick={this.handleOnOptionLabelClick}
+					onChange={this.handleOnChange}
 					options={this.state.products}
 					valueKey={"_id"} />
 		);
