@@ -2,19 +2,15 @@ var React = require("react");
 var NavMenuItem = require("./NavMenuItem");
 
 var NavMenu = React.createClass({
+	"propTypes": {
+		"label":		React.PropTypes.string.isRequired,
+		"menuItems":	React.PropTypes.array.isRequired,
+		"permission":	React.PropTypes.string.isRequired
+	},
 	getInitialState: function() {
-		var state = {
-			navMenuClass: "has-dropdown",
-			menu: [],
-			name: this.props.name,
-			permission: this.props.permission
-		};
-
-		if(this.props.menu) {
-			state.menu = this.props.menu;
+		return {
+			navMenuClass: "has-dropdown"
 		}
-
-		return state;
 	},
 	handleOnMouseOver: function() {
 		this.setState({ navMenuClass: "has-dropdown hover" });
@@ -23,15 +19,23 @@ var NavMenu = React.createClass({
 		this.setState({ navMenuClass: "has-dropdown" });
 	},
 	render: function() {
+		var label = this.props.label;
+		var menuItems = this.props.menuItems;
 		var navMenuClass = this.state.navMenuClass;
+		var permission = this.props.permission;
 
 		return (
 			<li className={navMenuClass} onMouseOver={this.handleOnMouseOver} onMouseOut={this.handleOnMouseOut}>
-				<a href="#">{this.state.name}</a>
+				<a href="#">{label}</a>
 				<ul className="dropdown">
 					{
-						this.state.menu.map(function(menuItem) {
-							return (<NavMenuItem name={menuItem.name} submenu={menuItem.submenu} url={menuItem.url} />);
+						menuItems.map(function(menuItem) {
+							return (
+								<NavMenuItem key={menuItem.name}
+											 name={menuItem.name}
+											 submenu={menuItem.submenu}
+											 url={menuItem.url} />
+							);
 						})
 					}
 				</ul>

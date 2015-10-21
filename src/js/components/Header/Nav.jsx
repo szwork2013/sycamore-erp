@@ -1,32 +1,53 @@
 var React = require("react");
 var NavMenu = require("./NavMenu");
-var Notifications = require("../Notifications");
+var UserMenu = require("./UserMenu");
 
 var Nav = React.createClass({
-	getInitialState: function() {
-		var state = {
-			applicationName: this.props.applicationName,
-			applicationUrl: "/",
-			menus: [],
-			username: "User"
-		};
-
-		if(typeof(this.props.applicationUrl) != "undefined") {
-			state.applicationUrl = this.props.applicationUrl;
-		}
-
-		if(typeof(this.props.menus) != "undefined") {
-			state.menus = this.props.menus;
-		}
-
-		return state;
+	"propTypes": {
+		"authenticated":	React.PropTypes.bool.isRequired,
+		"applicationName":	React.PropTypes.string.isRequired,
+		"applicationUrl":	React.PropTypes.string.isRequired,
+		"menus":			React.PropTypes.array.isRequired,
+		"notifications":	React.PropTypes.array.isRequired,
+		"user":				React.PropTypes.object.isRequired
 	},
 	render: function() {
+		var authenticated = this.props.authenticated;
+		var applicationName = this.props.applicationName;
+		var applicationUrl = this.props.applicationUrl;
+		var menus = this.props.menus;
+		var notifications = this.props.notifications;
+		var user = this.props.user;
+
+		var topBarSection = <section className="top-bar-section"></section>;
+
+		if(authenticated) {
+			var topBarSection = <section className="top-bar-section">
+									<UserMenu notifications={notifications} user={user} />
+									<ul className="left">
+										{
+											menus.map(function(menu, i) {
+												return (
+													<NavMenu key={menu.name}
+															 label={menu.name}
+															 menuItems={menu.menu}
+															 permission={menu.permission} />
+												);
+											})
+										}
+									</ul>
+								</section>;
+		}
+
 		return (
 			<nav data-topbar="data-topbar" role="navigation" className="top-bar">
 				<ul className="title-area">
 					<li className="name">
-						<h1><a href={this.state.applicationUrl}>{this.state.applicationName}</a></h1>
+						<h1>
+							<a href={applicationUrl}>
+								{applicationName}
+							</a>
+						</h1>
 					</li>
 					<li className="toggle-topbar menu-icon">
 						<a href="#">
@@ -34,26 +55,7 @@ var Nav = React.createClass({
 						</a>
 					</li>
 				</ul>
-				<section className="top-bar-section">
-					<ul className="right">
-						<Notifications />
-						<li className="has-dropdown">
-							<a href="#">{this.state.username}</a>
-							<ul className="dropdown">
-								<li><a href="/user/profile/view">My Account</a></li>
-								<li className="divider"></li>
-								<li><a href="/user/logout">Logout</a></li>
-							</ul>
-						</li>
-					</ul>
-					<ul className="left">
-						{
-							this.state.menus.map(function(menu, i) {
-								return (<NavMenu key={menu.name} menu={menu.menu} name={menu.name} permission={menu.permission} />);
-							})
-						}
-					</ul>
-				</section>
+				{topBarSection}
 			</nav>
 		);
 	}

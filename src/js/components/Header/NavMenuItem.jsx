@@ -49,7 +49,7 @@ var NavMenuItem = React.createClass({
 
 		if(this.state.submenu.length > 0) {
 			menuItemClass = this.state.menuItemClass;
-			menuItem = <ul className="dropdown">{this.state.submenu.map(function(menuItem) { return (<NavMenuItem name={menuItem.name} submenu={menuItem.submenu} url={menuItem.url} />); }) }</ul>;
+			menuItem = <ul className="dropdown">{this.state.submenu.map(function(menuItem) { return (<NavMenuItem key={menuItem.name} name={menuItem.name} submenu={menuItem.submenu} url={menuItem.url} />); }) }</ul>;
 		} else {
 			menuItem = <span></span>;
 		}
