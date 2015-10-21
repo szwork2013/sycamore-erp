@@ -144,6 +144,65 @@ var View = React.createClass({
 									<input className="right fancy radius button tiny" type="button" value="New" />
 								</div>
 							</div>
+							<fieldset>
+								<label>Property Address</label>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline"></label>
+									</div>
+									<div className="large-8 columns">
+										<input type="text" disabled="disabled" value={""} />
+									</div>
+								</div>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline"></label>
+									</div>
+									<div className="large-8 columns">
+										<input type="text" disabled="disabled" value={""} />
+									</div>
+								</div>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline"></label>
+									</div>
+									<div className="large-8 columns">
+										<input type="text" disabled="disabled" value={""} />
+									</div>
+								</div>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline"></label>
+									</div>
+									<div className="large-8 columns">
+										<input type="text" disabled="disabled" value={""} />
+									</div>
+								</div>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline"></label>
+									</div>
+									<div className="large-8 columns">
+										<input type="text" disabled="disabled" value={""} />
+									</div>
+								</div>
+							</fieldset>
+							<div className="row">
+								<div className="large-4 columns">
+									<label className="right inline">Access Arrangements</label>
+								</div>
+								<div className="large-8 columns">
+									<textarea></textarea>
+								</div>
+							</div>
+							<div className="row">
+								<div className="large-4 columns">
+									<label className="right inline">Access Telephone</label>
+								</div>
+								<div className="large-8 columns">
+									<input type="text" disabled="disabled" value={""} />
+								</div>
+							</div>
 						</fieldset>
 					</div>
 				</div>
