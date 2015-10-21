@@ -1,28 +1,10 @@
 var React = require("react");
 var Layout = require("../Layout");
-var Header = require("../../components/Header");
+var ActionsBar = require("../../components/ActionsBar");
 
 var View = React.createClass({
 	getInitialState: function() {
-		var locals = this.props.locals;
-
-		var state = {
-			applicationName: "",
-			locals: locals,
-			menus: [],
-			title: "Sycamore ERP - Products"
-		};
-
-		if(typeof(locals) != "undefined") {
-			if(typeof(locals.applicationName) != "undefined") {
-				state.applicationName = locals.applicationName;
-			}
-			if(typeof(locals.menus) != "undefined") {
-				state.menus = locals.menus;
-			}
-		}
-
-		return state;
+		return {};
 	},
 	render: function() {
 		var supplierName = "";
@@ -30,24 +12,14 @@ var View = React.createClass({
 			(typeof(this.state.locals.product.supplier.name) != "undefined") ) {
 			supplierName = this.state.locals.product.supplier.name;
 		}
+		var pageTitle = "View product";
 		return (
-			<Layout title={this.state.title} locals={this.props.locals}>
-				<Header applicationName={this.state.applicationName} applicationUrl={this.state.applicationUrl} menus={this.state.menus} />
-				<div className="row">
-					<ul className="breadcrumbs">
-						<li>Products</li>
-					</ul>
-				</div>
-				<div className="row">
-					<div className="large-10 columns">
-						<h1>View product</h1>
-					</div>
-					<div className="large-2 columns">
-						<a className="right fancy radius button tiny" href={"/sycamore-erp/product/" + this.state.locals.product._id}>
-							Edit
-						</a>
-					</div>
-				</div>
+			<Layout pageTitle={pageTitle} locals={this.props.locals}>
+				<ActionsBar pageTitle={pageTitle}>
+					<a className="right fancy radius button tiny" href={"/sycamore-erp/product/" + this.state.locals.product._id}>
+						Edit
+					</a>
+				</ActionsBar>
 				<div className="row">
 					<ul data-tab="data-tab" role="tablist" className="tabs">
 						<li role="presentation" className="tab-title active"><a href="#general" role="tab" tabIndex="0" aria-selected="true" aria-controls="general">General</a></li>

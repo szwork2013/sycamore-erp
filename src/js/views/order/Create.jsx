@@ -1,6 +1,6 @@
 var React = require("react");
 var Layout = require("../Layout");
-var Header = require("../../components/Header");
+var ActionsBar = require("../../components/ActionsBar");
 
 var CustomersSelect = require("../../components/CustomersSelect");
 var PropertiesSelect = require("../../components/PropertiesSelect");
@@ -8,24 +8,7 @@ var ProductsSelect = require("../../components/ProductsSelect");
 
 var View = React.createClass({
 	getInitialState: function() {
-		var locals = this.props.locals;
-
-		var state = {
-			applicationName: "",
-			menus: [],
-			title: "Sycamore ERP - New order"
-		};
-
-		if(typeof(locals) != "undefined") {
-			if(typeof(locals.applicationName) != "undefined") {
-				state.applicationName = locals.applicationName;
-			}
-			if(typeof(locals.menus) != "undefined") {
-				state.menus = locals.menus;
-			}
-		}
-
-		return state;
+		return {};
 	},
 	handleCustomerChange: function(value) {
 
@@ -37,24 +20,15 @@ var View = React.createClass({
 
 	},
 	render: function() {
+		var pageTitle = "New order";
+
 		return (
-			<Layout title={this.state.title} locals={this.props.locals}>
-				<Header applicationName={this.state.applicationName} applicationUrl={this.state.applicationUrl} menus={this.state.menus} />
-				<div className="row">
-					<ul className="breadcrumbs">
-						<li>Orders</li>
-					</ul>
-				</div>
-				<div className="row">
-					<div className="large-10 columns">
-						<h1>New order</h1>
-					</div>
-					<div className="large-2 columns">
-						<a href="/order/create" className="right fancy radius button tiny">
-							<i className="in-button-icon fa fa-fw fa-plus"></i> Save
-						</a>
-					</div>
-				</div>
+			<Layout pageTitle={pageTitle} locals={this.props.locals}>
+				<ActionsBar pageTitle={pageTitle}>
+					<a href="/order/create" className="right fancy radius button tiny">
+						<i className="in-button-icon fa fa-fw fa-plus"></i> Save
+					</a>
+				</ActionsBar>
 				<div className="row">
 					<div className="large-6 columns">
 						<fieldset>
