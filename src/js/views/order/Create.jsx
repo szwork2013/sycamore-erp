@@ -1,23 +1,36 @@
 var React = require("react");
 var Layout = require("../Layout");
 var ActionsBar = require("../../components/ActionsBar");
-
 var CustomersSelect = require("../../components/CustomersSelect");
 var PropertiesSelect = require("../../components/PropertiesSelect");
 var ProductsSelect = require("../../components/ProductsSelect");
+var ApplicationActions = require("../../actions/ApplicationActions");
+var OrderStore = require("../../stores/OrderStore");
+
+function getOrderFromStore() {
+	return {
+		order: OrderStore.getOrder()
+	}
+}
 
 var View = React.createClass({
+	_onChange: function() {
+		this.setState(getOrderFromStore());
+	},
+	componentDidMount: function() {
+		OrderStore.addChangeListener(this._onChange);
+	},
 	getInitialState: function() {
-		return {};
+		return getOrderFromStore();
 	},
 	handleCustomerChange: function(value) {
-
+		console.log(value);
 	},
 	handlePropertyChange: function(value) {
-
+		console.log(value);
 	},
 	handleProductChange: function(value) {
-
+		console.log(value);
 	},
 	render: function() {
 		var pageTitle = "New order";
@@ -25,9 +38,7 @@ var View = React.createClass({
 		return (
 			<Layout pageTitle={pageTitle} locals={this.props.locals}>
 				<ActionsBar pageTitle={pageTitle}>
-					<a href="/order/create" className="right fancy radius button tiny">
-						<i className="in-button-icon fa fa-fw fa-plus"></i> Save
-					</a>
+					<input type="submit" className="right fancy radius button tiny" value="Save" />
 				</ActionsBar>
 				<div className="row">
 					<div className="large-6 columns">

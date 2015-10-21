@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/sycamoreconsulting/sycamore-erp",
   "devDependencies": {
+    "async": "^1.4.2",
     "babelify": "^6.3.0",
     "browserify": "^11.2.0",
     "flux": "^2.1.1",
