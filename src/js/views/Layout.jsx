@@ -10,6 +10,7 @@ var Layout = React.createClass({
 		var locals = this.props.locals;
 
 		var applicationName = locals.applicationName;
+		var applicationUrl = locals.applicationUrl;
 		var pageTitle = this.props.pageTitle;
 		var title = applicationName + " - " + pageTitle;
 
@@ -27,6 +28,13 @@ var Layout = React.createClass({
 		];
 /* TESTING */
 
+		var jsTemplate = "";
+		if(applicationUrl == "/") {
+			jsTemplate = "/js/views/" + locals.template + ".js";
+		} else {
+			jsTemplate = "/node_modules" + applicationUrl + "public/js/views/" + locals.template + ".js";
+		}
+
 		return (
 			<html>
 				<head>
@@ -37,14 +45,14 @@ var Layout = React.createClass({
 				<body>
 					<Header authenticated={locals.authenticated}
 							applicationName={applicationName}
-							applicationUrl={locals.applicationUrl}
+							applicationUrl={applicationUrl}
 							menus={locals.menus}
 							notifications={locals.notifications}
 							user={locals.currentUser} />
 					<Breadcrumbs breadcrumbs={breadcrumbs} />
 					{this.props.children}
 					<script type="text/javascript" dangerouslySetInnerHTML={{__html: js}}></script>
-					<script type="text/javascript" src={"/js/views/" + locals.template + ".js"}></script>
+					<script type="text/javascript" src={jsTemplate}></script>
 				</body>
 			</html>
 		);
