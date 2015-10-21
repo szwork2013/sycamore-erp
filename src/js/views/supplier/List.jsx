@@ -7,6 +7,7 @@ var View = React.createClass({
 		return {};
 	},
 	render: function() {
+		var suppliers = this.props.locals.suppliers;
 		var pageTitle = "Suppliers";
 
 		return (
@@ -27,7 +28,7 @@ var View = React.createClass({
 							</div>
 							<div className="table-body">
 							{
-								this.state.locals.suppliers.map(function(supplier) {
+								suppliers.map(function(supplier) {
 									return (
 										<div className="table-row">
 											<div className="table-cell">{supplier.name}</div>

@@ -7,6 +7,7 @@ var View = React.createClass({
 		return {};
 	},
 	render: function() {
+		var products = this.props.locals.products;
 		var pageTitle = "Products";
 
 		return (
@@ -30,7 +31,7 @@ var View = React.createClass({
 							</div>
 							<div className="table-body">
 							{
-								this.state.locals.products.map(function(product) {
+								products.map(function(product) {
 									var supplierName = "";
 									if(	(typeof(product.supplier) != "undefined") &&
 										(typeof(product.supplier.name) != "undefined") ) {

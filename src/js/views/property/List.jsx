@@ -7,6 +7,7 @@ var View = React.createClass({
 		return {};
 	},
 	render: function() {
+		var properties = this.props.locals.properties;
 		var pageTitle = "Properties";
 
 		return (
@@ -27,7 +28,7 @@ var View = React.createClass({
 							</div>
 							<div className="table-body">
 							{
-								this.state.locals.properties.map(function(property) {
+								properties.map(function(property) {
 									return (
 										<div className="table-row">
 											<div className="table-cell">{property.name}</div>

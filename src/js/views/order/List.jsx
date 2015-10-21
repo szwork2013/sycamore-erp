@@ -7,6 +7,7 @@ var View = React.createClass({
 		return {};
 	},
 	render: function() {
+		var orders = this.props.locals.orders;
 		var pageTitle = "Orders";
 
 		return (
@@ -27,7 +28,7 @@ var View = React.createClass({
 							</div>
 							<div className="table-body">
 							{
-								this.state.locals.orders.map(function(order) {
+								orders.map(function(order) {
 									return (
 										<div className="row">
 											<div className="table-cell"></div>
