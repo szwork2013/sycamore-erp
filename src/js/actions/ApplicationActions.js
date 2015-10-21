@@ -4,6 +4,12 @@ var AppConstants = require('../constants/AppConstants');
 var Api = require("../services/Api");
 
 var ApplicationActions = {
+	addProductToOrder: function(product) {
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.ADD_PRODUCT_TO_ORDER,
+			product: product
+		});
+	},
 	getCustomers: function(queryOptions) {
 		Api.getCustomers(queryOptions, function(error, response) {
 			AppDispatcher.handleViewAction({

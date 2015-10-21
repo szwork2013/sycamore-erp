@@ -24,6 +24,9 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	},
 
 	addProduct: function(product) {
+		product.quantity = 1;
+		product.subTotal = product.quantity * product.price;
+
 		_order.products.push(product);
 		calculateSubTotal();
 	},
@@ -67,6 +70,10 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 	var action = payload.action;
 	switch(action.actionType) {
+		case AppConstants.ADD_PRODUCT_TO_ORDER:
+			OrderStore.addProduct(action.product);
+			OrderStore.emitChange();
+			break;
 		default:
 			// do nothing
 	}

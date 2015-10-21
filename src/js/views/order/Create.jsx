@@ -9,7 +9,8 @@ var OrderStore = require("../../stores/OrderStore");
 
 function getOrderFromStore() {
 	return {
-		order: OrderStore.getOrder()
+		order: OrderStore.getOrder(),
+		product: null
 	}
 }
 
@@ -23,6 +24,11 @@ var View = React.createClass({
 	getInitialState: function() {
 		return getOrderFromStore();
 	},
+	handleAddProduct: function() {
+		if(this.state.product) {
+			ApplicationActions.addProductToOrder(this.state.product);
+		}
+	},
 	handleCustomerChange: function(value) {
 		console.log(value);
 	},
@@ -30,7 +36,7 @@ var View = React.createClass({
 		console.log(value);
 	},
 	handleProductChange: function(value) {
-		console.log(value);
+		this.setState({ product: value })
 	},
 	render: function() {
 		var pageTitle = "New order";
@@ -209,6 +215,22 @@ var View = React.createClass({
 
 				<div className="row">
 					<div className="large-12 columns">
+						<div className="row">
+							<div className="large-4 columns">
+								<label>Add Product</label>
+							</div>
+							<div className="large-6 columns">
+								<ProductsSelect name={"order[products][]"} onChange={this.handleProductChange} />
+							</div>
+							<div className="large-2 columns">
+								<a className="button tiny right radius fancy" onClick={this.handleAddProduct}>Add Product</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="large-12 columns">
 						<div className="table">
 							<div className="table-head">
 								<div className="table-row">
@@ -224,17 +246,23 @@ var View = React.createClass({
 								</div>
 							</div>
 							<div className="table-body">
-								<div className="table-row">
-									<div className="table-cell">
-										<ProductsSelect name={"order[products][]"} onChange={this.handleProductChange} />
-									</div>
-									<div className="table-cell">
-										<input type="number" />
-									</div>
-									<div className="table-cell">
-
-									</div>
-								</div>
+								{
+									this.state.order.products.map(function(product) {
+										return (
+											<div className="table-row">
+												<div className="table-cell">
+													{product.name}
+												</div>
+												<div className="table-cell">
+													<input type="number" value={product.quantity} />
+												</div>
+												<div className="table-cell">
+													{product.subtotal}
+												</div>
+											</div>
+										);
+									})
+								}
 							</div>
 							<div className="table-foot">
 								<div className="table-row">
