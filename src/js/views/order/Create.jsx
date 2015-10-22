@@ -44,10 +44,14 @@ var View = React.createClass({
 		ApplicationActions.setProductQuantityOnOrder(productIndex, value);
 	},
 	render: function() {
+		var order = this.state.order;
+
 		var pageTitle = "New order";
 		var propertyOpts = {};
 
-		if (this.state.order.customer == null) {
+		if ((typeof(order.customer) == "undefined") ||
+			(order.customer == "") ||
+			(typeof(order.customer._id) == "undefined")) {
 			propertyOpts["disabled"] = "disabled";
 		}
 
@@ -75,7 +79,7 @@ var View = React.createClass({
 									<label className="right inline">Customer Name</label>
 								</div>
 								<div className="large-8 columns">
-									<input type="text" disabled="disabled" value={this.state.order.customer.Name} />
+									<input type="text" disabled="disabled" value={order.customer.Name} />
 								</div>
 							</div>
 							<div className="row">
@@ -266,7 +270,7 @@ var View = React.createClass({
 							</div>
 							<div className="table-body">
 								{
-									this.state.order.products.map(function(product, productIndex) {
+									order.products.map(function(product, productIndex) {
 										return (
 											<div className="table-row" key={productIndex}>
 												<div className="table-cell">
@@ -299,7 +303,7 @@ var View = React.createClass({
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">Sub Total</div>
-									<div className="table-cell">{this.state.order.subTotal}</div>
+									<div className="table-cell">{order.subTotal}</div>
 								</div>
 								<div className="table-row">
 									<div className="table-cell">&#160;</div>
@@ -307,7 +311,7 @@ var View = React.createClass({
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">VAT</div>
-									<div className="table-cell">{this.state.order.VAT}</div>
+									<div className="table-cell">{order.VAT}</div>
 								</div>
 								<div className="table-row">
 									<div className="table-cell">&#160;</div>
@@ -315,7 +319,23 @@ var View = React.createClass({
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell"><strong>Total</strong></div>
-									<div className="table-cell">{this.state.order.total}</div>
+									<div className="table-cell">{order.total}</div>
+								</div>
+								<div className="table-row">
+									<div className="table-cell">
+										<a className="fancy button tiny radius">Add Discount</a>
+										<a className="fancy button tiny radius">Add Delivery Charge</a>
+									</div>
+									<div className="table-cell">
+									</div>
+									<div className="table-cell">
+									</div>
+									<div className="table-cell">
+									</div>
+									<div className="table-cell">
+									</div>
+									<div className="table-cell">
+									</div>
 								</div>
 							</div>
 						</div>
