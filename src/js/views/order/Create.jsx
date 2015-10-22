@@ -34,10 +34,12 @@ var View = React.createClass({
 		}
 	},
 	handleCreateOrder: function() {
+		var _order = this.state.order;
+
 		var order = {};
 		order.products = [];
 		async.eachSeries(
-			this.state.order.products,
+			_order.products,
 			function(product, callback) {
 				if(typeof(product._id) != "undefined") {
 					var item = {};
@@ -51,17 +53,17 @@ var View = React.createClass({
 				callback();
 			},
 			function() {
-				if(	(typeof(this.state.order.customer) != "undefined") &&
-					(typeof(this.state.order.customer._id) != "undefined")) {
-					order.customer = this.state.order.customer._id;
+				if(	(typeof(_order.customer) != "undefined") &&
+					(typeof(_order.customer._id) != "undefined")) {
+					order.customer = _order.customer._id;
 				}
-				if(	(typeof(this.state.order.property) != "undefined") &&
-					(typeof(this.state.order.property._id) != "undefined")) {
-					order.property = this.state.order.property._id;
+				if(	(typeof(_order.property) != "undefined") &&
+					(typeof(_order.property._id) != "undefined")) {
+					order.property = _order.property._id;
 				}
-				order.subTotal = this.state.order.subTotal;
-				order.VAT = this.state.order.VAT;
-				order.total = this.state.order.total;
+				order.subTotal = _order.subTotal;
+				order.VAT = _order.VAT;
+				order.total = _order.total;
 				ApplicationActions.createOrder(order);
 			}
 		);
