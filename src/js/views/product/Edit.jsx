@@ -9,15 +9,18 @@ var View = React.createClass({
 		return {};
 	},
 	render: function() {
+		var product = this.props.locals.product;
+
 		var supplierValue = null;
-		if(	(typeof(this.state.locals.product.supplier) != "undefined") &&
-			(typeof(this.state.locals.product.supplier._id) != "undefined") ) {
-			supplierValue = this.state.locals.product.supplier._id;
+		if(	(typeof(product.supplier) != "undefined") &&
+			(typeof(product.supplier._id) != "undefined") ) {
+			supplierValue = product.supplier._id;
 		}
-		var pageTitle = "Edit product";
+		var pageTitle = "Edit product - " + product.name;
+
 		return (
 			<Layout pageTitle={pageTitle} locals={this.props.locals}>
-				<form action={"/sycamore-erp/product/" + this.state.locals.product._id} encType="application/x-www-form-urlencoded" method="POST">
+				<form action={"/sycamore-erp/product/" + product._id} encType="application/x-www-form-urlencoded" method="POST">
 					<ActionsBar pageTitle={pageTitle}>
 						<input type="submit" className="right fancy radius button tiny" value="Create" />
 					</ActionsBar>
@@ -35,7 +38,7 @@ var View = React.createClass({
 											<label className="right inline">Name</label>
 										</div>
 										<div className="large-8 columns">
-											<input type="text" name="product[name]" value={this.state.locals.product.name} />
+											<input type="text" name="product[name]" value={product.name} />
 										</div>
 									</div>
 									<div className="row">
@@ -51,7 +54,7 @@ var View = React.createClass({
 											<label className="right inline">Product Code</label>
 										</div>
 										<div className="large-8 columns">
-											<input type="text" name="product[productCode]" value={this.state.locals.product.productCode} />
+											<input type="text" name="product[productCode]" value={product.productCode} />
 										</div>
 									</div>
 									<div className="row">
@@ -59,7 +62,7 @@ var View = React.createClass({
 											<label className="right inline">Price</label>
 										</div>
 										<div className="large-8 columns">
-											<input type="text" name="product[price]" value={this.state.locals.product.price} />
+											<input type="text" name="product[price]" value={product.price} />
 										</div>
 									</div>
 								</section>
