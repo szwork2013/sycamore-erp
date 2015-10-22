@@ -81,7 +81,7 @@ OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 			OrderStore.emitChange();
 			break;
 		case AppConstants.SET_PRODUCT_QUANTITY_ON_ORDER:
-			OrderStore.setProductQuantity(productIndex, value);
+			OrderStore.setProductQuantity(action.productIndex, action.value);
 			OrderStore.emitChange();
 			break;
 		case AppConstants.SET_PROPERTY_ON_ORDER:

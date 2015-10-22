@@ -34,7 +34,7 @@ var CustomersSelect = React.createClass({
 	},
 	render: function () {
 		return (
-			<Select labelKey={"name"}
+			<Select labelKey={"Name"}
 					name={this.props.name}
 					onInputChange={this.handleOnInputChange}
 					onChange={this.handleOnChange}
