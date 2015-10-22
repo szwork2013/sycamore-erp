@@ -6,7 +6,8 @@ var CustomersStore = require("../stores/CustomersStore");
 
 function getCustomersFromStore() {
 	return {
-		customers: CustomersStore.getCustomers()
+		customers: CustomersStore.getCustomers(),
+		customer: null
 	};
 }
 
@@ -24,18 +25,22 @@ var CustomersSelect = React.createClass({
 		ApplicationActions.getCustomers({ searchQuery: inputValue });
 	},
 	handleOnChange: function(value, selectedOptions) {
+		if(value) {
+			this.setState({ product: value });
+		}
 		if(selectedOptions.length == 1) {
 			this.props.onChange(selectedOptions[0]);
 		}
 	},
 	render: function () {
 		return (
-			<Select labelKey={"Name"}
+			<Select labelKey={"name"}
 					name={this.props.name}
 					onInputChange={this.handleOnInputChange}
 					onChange={this.handleOnChange}
 					options={this.state.customers}
-					valueKey={"_id"} />
+					valueKey={"_id"}
+					value={this.state.customer} />
 		);
 	}
 });

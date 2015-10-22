@@ -6,7 +6,8 @@ var SuppliersStore = require("../stores/SuppliersStore");
 
 function getSuppliersFromStore() {
 	return {
-		suppliers: SuppliersStore.getSuppliers()
+		suppliers: SuppliersStore.getSuppliers(),
+		supplier: null
 	};
 }
 
@@ -23,17 +24,23 @@ var SuppliersSelect = React.createClass({
 	handleOnInputChange: function(inputValue) {
 		ApplicationActions.getSuppliers({ searchQuery: inputValue });
 	},
-	handleOnOptionLabelClick: function(value, event) {
-		this.props.onChange(value);
+	handleOnChange: function(value, selectedOptions) {
+		if(value) {
+			this.setState({ product: value });
+		}
+		if(selectedOptions.length == 1) {
+			this.props.onChange(selectedOptions[0]);
+		}
 	},
 	render: function () {
 		return (
 			<Select labelKey={"name"}
 					name={this.props.name}
 					onInputChange={this.handleOnInputChange}
-					onOptionLabelClick={this.handleOnOptionLabelClick}
+					onChange={this.handleOnChange}
 					options={this.state.suppliers}
-					valueKey={"_id"} />
+					valueKey={"_id"}
+					value={this.state.supplier} />
 		);
 	}
 });

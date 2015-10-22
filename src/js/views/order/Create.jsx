@@ -75,7 +75,7 @@ var View = React.createClass({
 									<label className="right inline">Customer Name</label>
 								</div>
 								<div className="large-8 columns">
-									<input type="text" disabled="disabled" value={""} />
+									<input type="text" disabled="disabled" value={this.state.order.customer.Name} />
 								</div>
 							</div>
 							<div className="row">

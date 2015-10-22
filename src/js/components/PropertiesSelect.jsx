@@ -6,7 +6,8 @@ var PropertiesStore = require("../stores/PropertiesStore");
 
 function getPropertiesFromStore() {
 	return {
-		properties: PropertiesStore.getProperties()
+		properties: PropertiesStore.getProperties(),
+		property: null
 	};
 }
 
@@ -24,6 +25,9 @@ var PropertiesSelect = React.createClass({
 		ApplicationActions.getProperties({ searchQuery: inputValue });
 	},
 	handleOnChange: function(value, selectedOptions) {
+		if(value) {
+			this.setState({ product: value });
+		}
 		if(selectedOptions.length == 1) {
 			this.props.onChange(selectedOptions[0]);
 		}
@@ -35,7 +39,8 @@ var PropertiesSelect = React.createClass({
 					onInputChange={this.handleOnInputChange}
 					onChange={this.handleOnChange}
 					options={this.state.properties}
-					valueKey={"_id"} />
+					valueKey={"_id"}
+					value={this.state.property} />
 		);
 	}
 });
