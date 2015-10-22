@@ -31,10 +31,10 @@ var View = React.createClass({
 		}
 	},
 	handleCustomerChange: function(value) {
-		ApplicationActions.setCustomer(value);
+		ApplicationActions.setCustomerOnOrder(value);
 	},
 	handlePropertyChange: function(value) {
-		ApplicationActions.setProperty(value);
+		ApplicationActions.setPropertyOnOrder(value);
 	},
 	handleProductChange: function(value) {
 		this.setState({ product: value });
