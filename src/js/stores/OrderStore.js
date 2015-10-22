@@ -61,6 +61,11 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 
 	setProperty: function(property) {
 		_order.property = property;
+	},
+
+	setProductQuantity: function(productIndex, value) {
+		_order.products[productIndex].quantity = value;
+		this.calculateTotals();
 	}
 });
 
@@ -73,6 +78,10 @@ OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 			break;
 		case AppConstants.SET_CUSTOMER_ON_ORDER:
 			OrderStore.setCustomer(action.customer);
+			OrderStore.emitChange();
+			break;
+		case AppConstants.SET_PRODUCT_QUANTITY_ON_ORDER:
+			OrderStore.setProductQuantity(productIndex, value);
 			OrderStore.emitChange();
 			break;
 		case AppConstants.SET_PROPERTY_ON_ORDER:

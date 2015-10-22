@@ -16,6 +16,13 @@ var ApplicationActions = {
 			customer: customer
 		});
 	},
+	setProductQuantityOnOrder: function(productIndex, value) {
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.SET_PRODUCT_QUANTITY_ON_ORDER,
+			productIndex: productIndex,
+			value: value
+		});
+	},
 	setPropertyOnOrder: function(property) {
 		AppDispatcher.handleViewAction({
 			actionType: AppConstants.SET_PROPERTY_ON_ORDER,

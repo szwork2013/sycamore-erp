@@ -39,9 +39,9 @@ var View = React.createClass({
 	handleProductChange: function(value) {
 		this.setState({ product: value });
 	},
-	handleProductQuantityChange: function(event) {
-		console.log(event.target.value);
-		console.log(event);
+	handleProductQuantityChange: function(productIndex, event) {
+		var value = event.target.value;
+		ApplicationActions.setProductQuantityOnOrder(productIndex, value);
 	},
 	render: function() {
 		var pageTitle = "New order";
