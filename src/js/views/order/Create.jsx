@@ -2,6 +2,7 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 var Layout = require("../Layout");
 var ActionsBar = require("../../components/ActionsBar");
+var ActionButton = require("../../components/ActionsBar/ActionButton");
 var CustomersSelect = require("../../components/CustomersSelect");
 var PropertiesSelect = require("../../components/PropertiesSelect");
 var ProductsSelect = require("../../components/ProductsSelect");
@@ -91,9 +92,7 @@ var View = React.createClass({
 		return (
 			<Layout pageTitle={pageTitle} locals={this.props.locals}>
 				<ActionsBar pageTitle={pageTitle}>
-					<a onClick={this.handleCreateOrder} className="right fancy radius button tiny">
-						Create
-					</a>
+					<ActionButton onClick={this.handleCreateOrder} label={"Create"} />
 				</ActionsBar>
 				<div className="row">
 					<div className="large-6 columns">
