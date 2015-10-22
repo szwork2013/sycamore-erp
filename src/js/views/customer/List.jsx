@@ -23,10 +23,10 @@ var View = React.createClass({
 						<div className="table">
 							<div className="table-head">
 								<div className="table-row">
-									<div className="table-cell">Id</div>
-									<div className="table-cell">Display Name</div>
-									<div className="table-cell">Code</div>
 									<div className="table-cell">Name</div>
+									<div className="table-cell">Telephone</div>
+									<div className="table-cell">Email</div>
+									<div className="table-cell">Billing Address</div>
 									<div className="table-cell large-1">Actions</div>
 								</div>
 							</div>
@@ -35,10 +35,18 @@ var View = React.createClass({
 								customers.map(function(customer) {
 									return (
 										<div className="table-row">
-											<div className="table-cell">{customer.Id}</div>
-											<div className="table-cell">{customer.DisplayName}</div>
-											<div className="table-cell">{customer.Code}</div>
-											<div className="table-cell">{customer.Name}</div>
+											<div className="table-cell">{customer.name}</div>
+											<div className="table-cell">{customer.telephone}</div>
+											<div className="table-cell">{customer.email}</div>
+											<div className="table-cell">
+												<pre>
+													{customer.billingAddress.line1}
+													{customer.billingAddress.line2}
+													{customer.billingAddress.line3}
+													{customer.billingAddress.line4}
+													{customer.billingAddress.postCode}
+												</pre>
+											</div>
 											<div className="table-cell">
 												<a href={"/customer/view/" + customer._id}>
 													<i className="fa fa-fw fa-user icon-button"></i>

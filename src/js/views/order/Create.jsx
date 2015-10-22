@@ -114,60 +114,52 @@ var View = React.createClass({
 							</div>
 							<div className="row">
 								<div className="large-4 columns">
-									<label className="right inline">Customer Name</label>
+									<label className="right inline">Name</label>
 								</div>
 								<div className="large-8 columns">
 									<input type="text" disabled="disabled" value={order.customer.Name} />
-								</div>
-							</div>
-							<div className="row">
-								<div className="large-4 columns">
-									<label className="right inline">Company Name</label>
-								</div>
-								<div className="large-8 columns">
-									<input type="text" disabled="disabled" value={""} />
 								</div>
 							</div>
 							<fieldset>
 								<label>Billing Address</label>
 								<div className="row">
 									<div className="large-4 columns">
-										<label className="right inline"></label>
+										<label className="right inline">Line 1</label>
 									</div>
 									<div className="large-8 columns">
-										<input type="text" disabled="disabled" value={""} />
+										<input type="text" disabled="disabled" value={order.customer.billingAddress.line1} />
 									</div>
 								</div>
 								<div className="row">
 									<div className="large-4 columns">
-										<label className="right inline"></label>
+										<label className="right inline">Line 2</label>
 									</div>
 									<div className="large-8 columns">
-										<input type="text" disabled="disabled" value={""} />
+										<input type="text" disabled="disabled" value={order.customer.billingAddress.line2} />
 									</div>
 								</div>
 								<div className="row">
 									<div className="large-4 columns">
-										<label className="right inline"></label>
+										<label className="right inline">Line 3</label>
 									</div>
 									<div className="large-8 columns">
-										<input type="text" disabled="disabled" value={""} />
+										<input type="text" disabled="disabled" value={order.customer.billingAddress.line3} />
 									</div>
 								</div>
 								<div className="row">
 									<div className="large-4 columns">
-										<label className="right inline"></label>
+										<label className="right inline">Line 4</label>
 									</div>
 									<div className="large-8 columns">
-										<input type="text" disabled="disabled" value={""} />
+										<input type="text" disabled="disabled" value={order.customer.billingAddress.line4} />
 									</div>
 								</div>
 								<div className="row">
 									<div className="large-4 columns">
-										<label className="right inline"></label>
+										<label className="right inline">PostCode</label>
 									</div>
 									<div className="large-8 columns">
-										<input type="text" disabled="disabled" value={""} />
+										<input type="text" disabled="disabled" value={order.customer.billingAddress.postCode} />
 									</div>
 								</div>
 							</fieldset>
@@ -176,7 +168,7 @@ var View = React.createClass({
 									<label className="right inline">Telephone</label>
 								</div>
 								<div className="large-8 columns">
-									<input type="text" disabled="disabled" value={""} />
+									<input type="text" disabled="disabled" value={order.customer.telephone} />
 								</div>
 							</div>
 							<div className="row">
@@ -184,7 +176,7 @@ var View = React.createClass({
 									<label className="right inline">Email</label>
 								</div>
 								<div className="large-8 columns">
-									<input type="text" disabled="disabled" value={""} />
+									<input type="text" disabled="disabled" value={order.customer.email} />
 								</div>
 							</div>
 						</fieldset>

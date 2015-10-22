@@ -7,8 +7,27 @@ var async = require("async");
 var _order = {
 	_id: null,
 	customer: {
+		name: null,
+		billingAddress: {
+			line1: null,
+			line2: null,
+			line3: null,
+			line4: null,
+			postCode: null
+		},
+		telephone: null,
+		email: null
 	},
 	property: {
+		address: {
+			line1: null,
+			line2: null,
+			line3: null,
+			line4: null,
+			postCode: null
+		},
+		telephone: null,
+		accessArrangements: null
 	},
 	products: [],
 	subTotal: 0,
