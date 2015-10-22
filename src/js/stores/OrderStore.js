@@ -29,7 +29,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		product.quantity = 1;
 
 		_order.products.push(product);
-		
+
 		this.calculateTotals();
 	},
 
@@ -49,7 +49,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 // Calculate VAT
 				_order.VAT = (_order.subTotal * 1.2) - _order.subTotal;
 // Calculate Total
-				_order.total = _order.subTotal * +_order.VAT;
+				_order.total = _order.subTotal + _order.VAT;
 			}
 		);
 	},

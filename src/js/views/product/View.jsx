@@ -8,16 +8,18 @@ var View = React.createClass({
 		return {};
 	},
 	render: function() {
+		var product = this.props.locals.product;
+
 		var supplierName = "";
-		if(	(typeof(this.state.locals.product.supplier) != "undefined") &&
-			(typeof(this.state.locals.product.supplier.name) != "undefined") ) {
-			supplierName = this.state.locals.product.supplier.name;
+		if(	(typeof(product.supplier) != "undefined") &&
+			(typeof(product.supplier.name) != "undefined") ) {
+			supplierName = product.supplier.name;
 		}
 		var pageTitle = "View product";
 		return (
 			<Layout pageTitle={pageTitle} locals={this.props.locals}>
 				<ActionsBar pageTitle={pageTitle}>
-					<a className="right fancy radius button tiny" href={"/sycamore-erp/product/" + this.state.locals.product._id}>
+					<a className="right fancy radius button tiny" href={"/sycamore-erp/product/" + product._id}>
 						Edit
 					</a>
 				</ActionsBar>
@@ -35,7 +37,7 @@ var View = React.createClass({
 										<label className="right inline">Name</label>
 									</div>
 									<div className="large-8 columns">
-										{this.state.locals.product.name}
+										{product.name}
 									</div>
 								</div>
 								<div className="row">
@@ -51,7 +53,7 @@ var View = React.createClass({
 										<label className="right inline">Product Code</label>
 									</div>
 									<div className="large-8 columns">
-										{this.state.locals.product.productCode}
+										{product.productCode}
 									</div>
 								</div>
 								<div className="row">
@@ -59,7 +61,7 @@ var View = React.createClass({
 										<label className="right inline">Price</label>
 									</div>
 									<div className="large-8 columns">
-										{this.state.locals.product.price}
+										{product.price}
 									</div>
 								</div>
 							</section>
