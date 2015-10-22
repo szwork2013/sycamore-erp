@@ -27,9 +27,9 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 
 	addProduct: function(product) {
 		product.quantity = 1;
-		product.total = product.quantity * product.price;
 
 		_order.products.push(product);
+		
 		this.calculateTotals();
 	},
 
@@ -39,10 +39,13 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		async.eachSeries(
 			_order.products,
 			function(product, callback) {
-				subTotal = subTotal + product.quantity * product.price;
+				product.total = product.quantity * product.price;
+				subTotal = subTotal + product.total;
 				callback();
 			},
 			function(error) {
+// Set SubTotal
+				_order.subTotal = subTotal;
 // Calculate VAT
 				_order.VAT = (_order.subTotal * 1.2) - _order.subTotal;
 // Calculate Total

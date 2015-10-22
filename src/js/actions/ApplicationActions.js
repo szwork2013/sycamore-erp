@@ -15,6 +15,15 @@ var ApplicationActions = {
 			actionType: AppConstants.SET_CUSTOMER_ON_ORDER,
 			customer: customer
 		});
+		var queryOptions = {
+			customer: customer._id
+		};
+		Api.getProperties(queryOptions, function(error, response) {
+			AppDispatcher.handleViewAction({
+				actionType: AppConstants.UPDATE_PROPERTIES,
+				items: response.body.items
+			});
+		});
 	},
 	setProductQuantityOnOrder: function(productIndex, value) {
 		AppDispatcher.handleViewAction({
