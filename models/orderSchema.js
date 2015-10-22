@@ -4,7 +4,7 @@ var orderItemSchema = Mongoose.Schema({
 	product:				 { type: Mongoose.Schema.Types.ObjectId, ref: "Product" },
 	quantity:				 { type: Number },
 	subTotal:				 { type: Number },
-	VAT:					 { type: Number }
+	VAT:					 { type: Number },
 	total:					 { type: Number }
 });
 
