@@ -121,6 +121,8 @@ orderController.prototype.saveOrderAction = function(request, response, next) {
 	d.run(function() {
 		var data = request.body.order;
 
+console.log(data);
+
 		var order = orderController
 		.prototype
 		.modelsContainer
