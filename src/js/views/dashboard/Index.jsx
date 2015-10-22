@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactDOM = require("react-dom");
 var Layout = require("../Layout");
 var ActionsBar = require("../../components/ActionsBar");
 
@@ -22,7 +23,7 @@ var View = React.createClass({
 });
 
 if(process.browser) {
-	React.render(<View locals={locals} />, document);
+	ReactDOM.render(<View locals={locals} />, document);
 }
 
 exports = module.exports = View;

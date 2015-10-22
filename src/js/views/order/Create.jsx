@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactDOM = require("react-dom");
 var Layout = require("../Layout");
 var ActionsBar = require("../../components/ActionsBar");
 var CustomersSelect = require("../../components/CustomersSelect");
@@ -43,8 +44,6 @@ var View = React.createClass({
 		console.log(event);
 	},
 	render: function() {
-		var handleProductQuantityChange = this.handleProductQuantityChange;
-
 		var pageTitle = "New order";
 		var propertyOpts = {};
 
@@ -228,10 +227,10 @@ var View = React.createClass({
 					<div className="large-12 columns">
 						<div className="row">
 							<div className="large-1 columns">
-								<label class="inline">Add Product</label>
+								<label className="inline">Add Product</label>
 							</div>
 							<div className="large-6 columns">
-								<ProductsSelect name={"order[products][]"} onChange={this.handleProductChange} />
+								<ProductsSelect onChange={this.handleProductChange} />
 							</div>
 							<div className="large-2 columns end">
 								<a className="button tiny radius fancy" onClick={this.handleAddProduct}>Add Product</a>
@@ -264,9 +263,9 @@ var View = React.createClass({
 							</div>
 							<div className="table-body">
 								{
-									this.state.order.products.map(function(product) {
+									this.state.order.products.map(function(product, productIndex) {
 										return (
-											<div className="table-row">
+											<div className="table-row" key={productIndex}>
 												<div className="table-cell">
 													{product.name}
 												</div>
@@ -274,7 +273,7 @@ var View = React.createClass({
 													{product.price}
 												</div>
 												<div className="table-cell">
-													<input type="number" onChange={handleProductQuantityChange} value={product.quantity} />
+													<input type="number" onChange={this.handleProductQuantityChange.bind(this, productIndex)} value={product.quantity} />
 												</div>
 												<div className="table-cell">
 													{product.VAT}
@@ -284,7 +283,7 @@ var View = React.createClass({
 												</div>
 											</div>
 										);
-									})
+									}, this)
 								}
 							</div>
 							<div className="table-foot">
@@ -319,7 +318,7 @@ var View = React.createClass({
 });
 
 if(process.browser) {
-	React.render(<View locals={locals} />, document);
+	ReactDOM.render(<View locals={locals} />, document);
 }
 
 exports = module.exports = View;
