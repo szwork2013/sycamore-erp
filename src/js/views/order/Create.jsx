@@ -31,7 +31,31 @@ var View = React.createClass({
 		}
 	},
 	handleCreateOrder: function() {
-		ApplicationActions.createOrder(this.state.order);
+		var order = {};
+		order.products = [];
+		async.eachSeries(
+			this.state.order.products,
+			function(product, callback) {
+				if(typeof(product._id) != "undefined") {
+					order.products.push(product._id);
+				}
+				callback();
+			},
+			function() {
+				if(	(typeof(this.state.order.customer) != "undefined") &&
+					(typeof(this.state.order.customer._id) != "undefined")) {
+					order.customer = this.state.order.customer._id;
+				}
+				if(	(typeof(this.state.order.property) != "undefined") &&
+					(typeof(this.state.order.property._id) != "undefined")) {
+					order.property = this.state.order.property._id;
+				}
+				order.subTotal = this.state.order.subTotal;
+				order.VAT = this.state.order.VAT;
+				order.total = this.state.order.total;
+				ApplicationActions.createOrder(order);
+			}
+		);
 	},
 	handleCustomerChange: function(value) {
 		ApplicationActions.setCustomerOnOrder(value);
