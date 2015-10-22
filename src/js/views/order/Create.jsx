@@ -254,6 +254,9 @@ var View = React.createClass({
 										Quantity
 									</div>
 									<div className="table-cell large-1">
+										Sub Total
+									</div>
+									<div className="table-cell large-1">
 										VAT
 									</div>
 									<div className="table-cell large-1">
@@ -274,6 +277,9 @@ var View = React.createClass({
 												</div>
 												<div className="table-cell">
 													<input type="number" onChange={this.handleProductQuantityChange.bind(this, productIndex)} value={product.quantity} />
+												</div>
+												<div className="table-cell">
+													{product.subTotal}
 												</div>
 												<div className="table-cell">
 													{product.VAT}
