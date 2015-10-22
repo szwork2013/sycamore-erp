@@ -10,6 +10,16 @@ var ApplicationActions = {
 			product: product
 		});
 	},
+	createOrder: function(order) {
+		var queryOptions = {
+			order: order
+		};
+		Api.putOrder(queryOptions, function(error, response) {
+			AppDispatcher.handleViewAction({
+				actionType: AppConstants.CREATE_ORDER
+			});
+		});
+	},
 	setCustomerOnOrder: function(customer) {
 		AppDispatcher.handleViewAction({
 			actionType: AppConstants.SET_CUSTOMER_ON_ORDER,

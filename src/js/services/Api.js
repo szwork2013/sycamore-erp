@@ -20,6 +20,14 @@ var Api = {
 		request
 		.get("/sycamore-erp/suppliers.json")
 		.end(callback);
+	},
+	putOrder: function(queryOptions, callback) {
+		request
+		.put("/sycamore-erp/order")
+		.send(queryOptions)
+		.set('Accept', 'application/json')
+		.set('Content-Type', 'application/json')
+		.end(callback);
 	}
 };
 
