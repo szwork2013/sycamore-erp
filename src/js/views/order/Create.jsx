@@ -117,7 +117,7 @@ var View = React.createClass({
 									<label className="right inline">Name</label>
 								</div>
 								<div className="large-8 columns">
-									<input type="text" disabled="disabled" value={order.customer.Name} />
+									<input type="text" disabled="disabled" value={order.customer.name} />
 								</div>
 							</div>
 							<fieldset>
