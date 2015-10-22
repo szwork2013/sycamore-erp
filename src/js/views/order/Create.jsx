@@ -37,7 +37,13 @@ var View = React.createClass({
 			this.state.order.products,
 			function(product, callback) {
 				if(typeof(product._id) != "undefined") {
-					order.products.push(product._id);
+					var item = {};
+					item.product = product._id;
+					item.quantity = product.quantity;
+					item.subTotal = product.subTotal;
+					item.VAT = product.VAT;
+					item.total = product.total;
+					order.products.push(item);
 				}
 				callback();
 			},
