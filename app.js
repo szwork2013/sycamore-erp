@@ -33,29 +33,46 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 		navigationService.clearMenus();
 		navigationService.addMenu(
 			{
-				"name": "Ordering",
-				"permission": "SYCAMOREERP_ORDER__MODULE",
+				"name": "Sales",
+				"permission": "SYCAMOREERP_SALES__MODULE",
 				"menu": [
 					{
 						"name": "Customers",
 						"permission": "SYCAMOREERP_CUSTOMER__MODULE",
 						"url": response.locals.applicationUrl + "customers/"
 					}, {
-						"name": "Orders",
+						"name": "Sales Quotes",
+						"permission": "SYCAMOREERP_ORDER__MODULE",
+						"url": response.locals.applicationUrl + "orders/"
+					}, {
+						"name": "Sales Orders",
+						"permission": "SYCAMOREERP_ORDER__MODULE",
+						"url": response.locals.applicationUrl + "orders/"
+					}, {
+						"name": "Customer Properties",
+						"permission": "SYCAMOREERP_PROPERTIES__MODULE",
+						"url": response.locals.applicationUrl + "properties/"
+					}
+				]
+			}
+		);
+		navigationService.addMenu(
+			{
+				"name": "Purchasing",
+				"permission": "SYCAMOREERP_SALES__MODULE",
+				"menu": [
+					{
+						"name": "Suppliers",
+						"permission": "SYCAMOREERP_SUPPLIER__MODULE",
+						"url": response.locals.applicationUrl + "suppliers/"
+					}, {
+						"name": "Purchase Orders",
 						"permission": "SYCAMOREERP_ORDER__MODULE",
 						"url": response.locals.applicationUrl + "orders/"
 					}, {
 						"name": "Products",
 						"permission": "SYCAMOREERP_PRODUCT__MODULE",
 						"url": response.locals.applicationUrl + "products/"
-					}, {
-						"name": "Properties",
-						"permission": "SYCAMOREERP_PROPERTIES__MODULE",
-						"url": response.locals.applicationUrl + "properties/"
-					}, {
-						"name": "Suppliers",
-						"permission": "SYCAMOREERP_SUPPLIER__MODULE",
-						"url": response.locals.applicationUrl + "suppliers/"
 					}
 				]
 			}
