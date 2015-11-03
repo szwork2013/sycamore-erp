@@ -1,4 +1,6 @@
 var domain = require("domain");
+var React = require("react");
+var ReactDOMServer = require("react-dom/server");
 
 function dashboardController(servicesContainer, modelsContainer) {
 	dashboardController.prototype.servicesContainer = servicesContainer;
@@ -13,9 +15,8 @@ dashboardController.prototype.viewDashboardAction = function(request, response, 
 	d.run(function() {
 		response.locals.template = "dashboard/Index";
 
-		var React = require("react");
 		var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-		var html = React.renderToString(View({ locals: response.locals }));
+		var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
 
 		response.send(html);
 	});

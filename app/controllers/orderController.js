@@ -1,6 +1,9 @@
 var domain = require("domain");
 var React = require("react");
 var ReactDOMServer = require("react-dom/server");
+var async = require("async");
+
+var getListItems = require("../../../../app/lib/controller/getListItems.js");
 
 function orderController(servicesContainer, modelsContainer) {
 	orderController.prototype.servicesContainer = servicesContainer;
