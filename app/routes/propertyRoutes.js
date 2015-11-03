@@ -3,14 +3,14 @@ var express			= require("express");
 function propertyRoutes(servicesContainer, modelsContainer) {
 	var authenticationService = servicesContainer.getService("authenticationService");
 	var propertyController	= new (require("../controllers/propertyController"))(servicesContainer, modelsContainer);
-/*
-	var getQueryList = require("../lib/getQueryList");
-	var getQueryFilter = require("../lib/getQueryFilter");
-	var getQueryPagination = require("../lib/getQueryPagination");
-	var getQuerySort = require("../lib/getQuerySort");
-	var getQuerySelect = require("../lib/getQuerySelect");
-	var getQuerySearchQuery = require("../lib/getQuerySearchQuery");
-*/	
+
+	var getQueryList = require("../../../../app/lib/getQueryList");
+	var getQueryFilter = require("../../../../app/lib/getQueryFilter");
+	var getQueryPagination = require("../../../../app/lib/getQueryPagination");
+	var getQuerySort = require("../../../../app/lib/getQuerySort");
+	var getQuerySelect = require("../../../../app/lib/getQuerySelect");
+	var getQuerySearchQuery = require("../../../../app/lib/getQuerySearchQuery");
+
 	var Router = express.Router();
 
 // CREATE / GET
@@ -50,24 +50,24 @@ function propertyRoutes(servicesContainer, modelsContainer) {
 		"/properties",
 		authenticationService.ensureAuthenticated(),
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_LIST"),
-//		getQueryList,
-//		getQueryFilter,
-//		getQueryPagination,
-//		getQuerySort,
-//		getQuerySelect,
-//		getQuerySearchQuery,
+		getQueryList,
+		getQueryFilter,
+		getQueryPagination,
+		getQuerySort,
+		getQuerySelect,
+		getQuerySearchQuery,
 		propertyController.listPropertiesAction
 	);
 	Router.get(
 		"/properties.:contentType",
 		authenticationService.ensureAuthenticated(),
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_LIST"),
-//		getQueryList,
-//		getQueryFilter,
-//		getQueryPagination,
-//		getQuerySort,
-//		getQuerySelect,
-//		getQuerySearchQuery,
+		getQueryList,
+		getQueryFilter,
+		getQueryPagination,
+		getQuerySort,
+		getQuerySelect,
+		getQuerySearchQuery,
 		propertyController.listPropertiesAction
 	);
 // VIEW / GET
