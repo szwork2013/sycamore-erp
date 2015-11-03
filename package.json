@@ -37,13 +37,13 @@
     "react": "^0.14.0",
     "react-datetime": "^1.2.1",
     "react-modal": "^0.6.1",
-    "react-paginate": "^0.2.0",
+    "react-paginate": "^0.4.0",
     "react-select": "^0.8.1",
     "react-tabs": "^0.5.0",
     "superagent": "^1.4.0",
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "sycamore-platform-components": "0.0.16"
+    "sycamore-platform-components": "0.0.19"
   }
 }
