@@ -42,5 +42,8 @@
     "react-tabs": "^0.5.0",
     "superagent": "^1.4.0",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "sycamore-platform-components": "0.0.6"
   }
 }

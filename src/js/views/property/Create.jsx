@@ -1,7 +1,7 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
-var Layout = require("../Layout");
-var ActionsBar = require("../../components/ActionsBar");
+var Layout = require("sycamore-platform-components").Layout;
+var ActionsBar = require("sycamore-platform-components").ActionsBar;
 var CustomersSelect = require("../../components/CustomersSelect");
 
 var View = React.createClass({
