@@ -14,8 +14,8 @@ var View = React.createClass({
 	},
 	render: function() {
 		return (
-			<Layout pageTitle={this.state.list.title} locals={this.props.locals}>
-				<ActionsBar pageTitle={this.state.list.title}>
+			<Layout pageTitle={this.props.locals.list.title} locals={this.props.locals}>
+				<ActionsBar pageTitle={this.props.locals.list.title}>
 					<SettingsButton />
 					<a href="/sycamore-erp/supplier" className="right fancy radius button tiny">
 						<i className="in-button-icon fa fa-fw fa-plus"></i> Create
