@@ -21,7 +21,7 @@ var View = React.createClass({
 						<i className="in-button-icon fa fa-fw fa-plus"></i> Create
 					</a>
 				</ActionsBar>
-				<List updateListener={this._onUpdate} />
+				<List list={this.props.locals.list} updateListener={this._onUpdate} />
 			</Layout>
 		);
 	}
