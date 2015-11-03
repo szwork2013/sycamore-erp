@@ -1,4 +1,6 @@
 var domain = require("domain");
+var React = require("react");
+var ReactDOMServer = require("react-dom/server");
 
 function orderController(servicesContainer, modelsContainer) {
 	orderController.prototype.servicesContainer = servicesContainer;
@@ -13,9 +15,8 @@ orderController.prototype.createOrderAction = function(request, response, next) 
 	d.run(function() {
 		response.locals.template = "order/Create";
 
-		var React = require("react");
 		var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-		var html = React.renderToString(View({ locals: response.locals }));
+		var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
 
 		response.send(html);
 	});
@@ -37,9 +38,8 @@ orderController.prototype.editOrderAction = function(request, response, next) {
 			response.locals.order = order;
 			response.locals.template = "order/Edit";
 
-			var React = require("react");
 			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = React.renderToString(View({ locals: response.locals }));
+			var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
 
 			response.send(html);
 		}));
@@ -49,24 +49,43 @@ orderController.prototype.editOrderAction = function(request, response, next) {
 orderController.prototype.listOrdersAction = function(request, response, next) {
 	var d = domain.create();
 	
-	d.on("error", next);
+	d.on('error', next);
 	
 	d.run(function() {
-		orderController
-		.prototype
-		.modelsContainer
-		.getModel("Order")
-		.find({})
-		.exec(d.intercept(function(orders) {
-			response.locals.orders = orders;
-			response.locals.template = "order/List";
+		var list = response.locals.list;
 
-			var React = require("react");
-			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = React.renderToString(View({ locals: response.locals }));
+		list.name = "orders";
+		list.title = "Orders";
 
-			response.send(html);
-		}));
+		list.columns = [
+			{ name: "order.customer.name", label: "Customer Name", display: true }
+		];
+
+		list.entities = [];
+
+		getListItems(
+			orderController.prototype.servicesContainer,
+			orderController.prototype.modelsContainer,
+			"Order",
+			list,
+			d.intercept(function(list) {
+				switch(request.params.contentType) {
+					case 'json':
+						response.json(list);
+						break;
+					case 'html':
+					default:
+						response.locals.list = list;
+						response.locals.template = "order/List";
+
+						var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
+						var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
+
+						response.send(html);
+						break;
+				}
+			})
+		);
 	});
 }
 
@@ -86,9 +105,8 @@ orderController.prototype.viewOrderAction = function(request, response, next) {
 			response.locals.order = order;
 			response.locals.template = "order/View";
 
-			var React = require("react");
 			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = React.renderToString(View({ locals: response.locals }));
+			var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
 
 			response.send(html);
 		}));

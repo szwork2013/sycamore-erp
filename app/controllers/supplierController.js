@@ -1,4 +1,6 @@
 var domain = require("domain");
+var React = require("react");
+var ReactDOMServer = require("react-dom/server");
 
 function supplierController(servicesContainer, modelsContainer) {
 	supplierController.prototype.servicesContainer = servicesContainer;
@@ -13,9 +15,8 @@ supplierController.prototype.createSupplierAction = function(request, response, 
 	d.run(function() {
 		response.locals.template = "supplier/Create";
 
-		var React = require("react");
 		var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-		var html = React.renderToString(View({ locals: response.locals }));
+		var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
 
 		response.send(html);
 	});
@@ -37,9 +38,8 @@ supplierController.prototype.editSupplierAction = function(request, response, ne
 			response.locals.supplier = supplier;
 			response.locals.template = "supplier/Edit";
 
-			var React = require("react");
 			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = React.renderToString(View({ locals: response.locals }));
+			var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
 
 			response.send(html);
 		}));
@@ -49,42 +49,43 @@ supplierController.prototype.editSupplierAction = function(request, response, ne
 supplierController.prototype.listSuppliersAction = function(request, response, next) {
 	var d = domain.create();
 	
-	d.on("error", next);
+	d.on('error', next);
 	
 	d.run(function() {
-		var contentType = "html";
+		var list = response.locals.list;
 
-		if(request.params.contentType != "undefined") {
-			contentType = request.params.contentType;
-		}
+		list.name = "suppliers";
+		list.title = "Suppliers";
 
-		supplierController
-		.prototype
-		.modelsContainer
-		.getModel("Supplier")
-		.find({})
-		.exec(d.intercept(function(suppliers) {
-			switch(contentType) {
-				case "json":
-					var data = {};
-					data.items = suppliers;
+		list.columns = [
+			{ name: "supplier.name", label: "Name", display: true }
+		];
 
-					response.json(data);
-					break;
+		list.entities = [];
 
-				default:
-				case "html":
-					response.locals.suppliers = suppliers;
-					response.locals.template = "supplier/List";
+		getListItems(
+			supplierController.prototype.servicesContainer,
+			supplierController.prototype.modelsContainer,
+			"Supplier",
+			list,
+			d.intercept(function(list) {
+				switch(request.params.contentType) {
+					case 'json':
+						response.json(list);
+						break;
+					case 'html':
+					default:
+						response.locals.list = list;
+						response.locals.template = "supplier/List";
 
-					var React = require("react");
-					var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-					var html = React.renderToString(View({ locals: response.locals }));
+						var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
+						var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
 
-					response.send(html);
-					break;
-			}
-		}));
+						response.send(html);
+						break;
+				}
+			})
+		);
 	});
 }
 
@@ -104,9 +105,8 @@ supplierController.prototype.viewSupplierAction = function(request, response, ne
 			response.locals.supplier = supplier;
 			response.locals.template = "supplier/View";
 
-			var React = require("react");
 			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = React.renderToString(View({ locals: response.locals }));
+			var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
 
 			response.send(html);
 		}));

@@ -1,4 +1,6 @@
 var domain = require("domain");
+var React = require("react");
+var ReactDOMServer = require("react-dom/server");
 
 function propertyController(servicesContainer, modelsContainer) {
 	propertyController.prototype.servicesContainer = servicesContainer;
@@ -13,9 +15,8 @@ propertyController.prototype.createPropertyAction = function(request, response, 
 	d.run(function() {
 		response.locals.template = "property/Create";
 
-		var React = require("react");
 		var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-		var html = React.renderToString(View({ locals: response.locals }));
+		var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
 
 		response.send(html);
 	});
@@ -37,9 +38,8 @@ propertyController.prototype.editPropertyAction = function(request, response, ne
 			response.locals.property = property;
 			response.locals.template = "property/Edit";
 
-			var React = require("react");
 			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = React.renderToString(View({ locals: response.locals }));
+			var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
 
 			response.send(html);
 		}));
@@ -49,41 +49,43 @@ propertyController.prototype.editPropertyAction = function(request, response, ne
 propertyController.prototype.listPropertiesAction = function(request, response, next) {
 	var d = domain.create();
 	
-	d.on("error", next);
+	d.on('error', next);
 	
 	d.run(function() {
-		var contentType = "html";
+		var list = response.locals.list;
 
-		if(request.params.contentType != "undefined") {
-			contentType = request.params.contentType;
-		}
-		
-		propertyController
-		.prototype
-		.modelsContainer
-		.getModel("Property")
-		.find({})
-		.exec(d.intercept(function(properties) {
-			switch(contentType) {
-				case "json":
-					var data = {};
-					data.items = properties;
+		list.name = "properties";
+		list.title = "Properties";
 
-					response.json(data);
-					break;
+		list.columns = [
+			{ name: "property.name", label: "Name", display: true }
+		];
 
-				default:
-				case "html":
-					response.locals.properties = properties;
-					response.locals.template = "property/List";
+		list.entities = [];
 
-					var React = require("react");
-					var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-					var html = React.renderToString(View({ locals: response.locals }));
+		getListItems(
+			propertyController.prototype.servicesContainer,
+			propertyController.prototype.modelsContainer,
+			"Property",
+			list,
+			d.intercept(function(list) {
+				switch(request.params.contentType) {
+					case 'json':
+						response.json(list);
+						break;
+					case 'html':
+					default:
+						response.locals.list = list;
+						response.locals.template = "property/List";
 
-					response.send(html);
-			}
-		}));
+						var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
+						var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
+
+						response.send(html);
+						break;
+				}
+			})
+		);
 	});
 }
 
@@ -103,9 +105,8 @@ propertyController.prototype.viewPropertyAction = function(request, response, ne
 			response.locals.property = property;
 			response.locals.template = "property/View";
 
-			var React = require("react");
 			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = React.renderToString(View({ locals: response.locals }));
+			var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
 
 			response.send(html);
 		}));

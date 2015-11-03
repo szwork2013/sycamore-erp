@@ -1,4 +1,6 @@
 var domain = require("domain");
+var React = require("react");
+var ReactDOMServer = require("react-dom/server");
 
 function customerController(servicesContainer, modelsContainer) {
 	customerController.prototype.servicesContainer = servicesContainer;
@@ -13,9 +15,8 @@ customerController.prototype.createCustomerAction = function(request, response, 
 	d.run(function() {
 		response.locals.template = "customer/Create";
 
-		var React = require("react");
 		var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-		var html = React.renderToString(View({ locals: response.locals }));
+		var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
 
 		response.send(html);
 	});
@@ -37,9 +38,8 @@ customerController.prototype.editCustomerAction = function(request, response, ne
 			response.locals.customer = customer;
 			response.locals.template = "customer/Edit";
 
-			var React = require("react");
 			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = React.renderToString(View({ locals: response.locals }));
+			var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
 
 			response.send(html);
 		}));
@@ -49,41 +49,47 @@ customerController.prototype.editCustomerAction = function(request, response, ne
 customerController.prototype.listCustomersAction = function(request, response, next) {
 	var d = domain.create();
 	
-	d.on("error", next);
+	d.on('error', next);
 	
 	d.run(function() {
-		var contentType = "html";
+		var list = response.locals.list;
 
-		if(request.params.contentType != "undefined") {
-			contentType = request.params.contentType;
-		}
-		
-		customerController
-		.prototype
-		.modelsContainer
-		.getModel("Customer")
-		.find({})
-		.exec(d.intercept(function(customers) {
-			switch(contentType) {
-				case "json":
-					var data = {};
-					data.items = customers;
+		list.name = "customers";
+		list.title = "Customers";
 
-					response.json(data);
-					break;
+		list.columns = [
+			{ name: "customer.name", label: "Name", display: true },
+			{ name: "customer.telephone", label: "Telephone", display: true },
+			{ name: "customer.email", label: "Email", display: true },
+			{ name: "customer.billingAddress", label: "Billing Address", display: true },
+			{ name: "updated", label: "Updated", display: true }
+		];
 
-				default:
-				case "html":
-					response.locals.customers = customers;
-					response.locals.template = "customer/List";
+		list.entities = [];
 
-					var React = require("react");
-					var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-					var html = React.renderToString(View({ locals: response.locals }));
+		getListItems(
+			customerController.prototype.servicesContainer,
+			customerController.prototype.modelsContainer,
+			"Customer",
+			list,
+			d.intercept(function(list) {
+				switch(request.params.contentType) {
+					case 'json':
+						response.json(list);
+						break;
+					case 'html':
+					default:
+						response.locals.list = list;
+						response.locals.template = "customer/List";
 
-					response.send(html);
-			}
-		}));
+						var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
+						var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
+
+						response.send(html);
+						break;
+				}
+			})
+		);
 	});
 }
 
@@ -103,9 +109,8 @@ customerController.prototype.viewCustomerAction = function(request, response, ne
 			response.locals.customer = customer;
 			response.locals.template = "customer/View";
 
-			var React = require("react");
 			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = React.renderToString(View({ locals: response.locals }));
+			var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
 
 			response.send(html);
 		}));

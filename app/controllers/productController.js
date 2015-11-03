@@ -1,4 +1,6 @@
 var domain = require("domain");
+var React = require("react");
+var ReactDOMServer = require("react-dom/server");
 
 function productController(servicesContainer, modelsContainer) {
 	productController.prototype.servicesContainer = servicesContainer;
@@ -13,9 +15,8 @@ productController.prototype.createProductAction = function(request, response, ne
 	d.run(function() {
 		response.locals.template = "product/Create";
 
-		var React = require("react");
 		var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-		var html = React.renderToString(View({ locals: response.locals }));
+		var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
 
 		response.send(html);
 	});
@@ -38,9 +39,8 @@ productController.prototype.editProductAction = function(request, response, next
 			response.locals.product = product;
 			response.locals.template = "product/Edit";
 
-			var React = require("react");
 			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = React.renderToString(View({ locals: response.locals }));
+			var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
 
 			response.send(html);
 		}));
@@ -50,42 +50,43 @@ productController.prototype.editProductAction = function(request, response, next
 productController.prototype.listProductsAction = function(request, response, next) {
 	var d = domain.create();
 	
-	d.on("error", next);
+	d.on('error', next);
 	
 	d.run(function() {
-		var contentType = "html";
+		var list = response.locals.list;
 
-		if(request.params.contentType != "undefined") {
-			contentType = request.params.contentType;
-		}
+		list.name = "products";
+		list.title = "Products";
 
-		productController
-		.prototype
-		.modelsContainer
-		.getModel("Product")
-		.find({})
-		.populate("supplier")
-		.exec(d.intercept(function(products) {
-			switch(contentType) {
-				case "json":
-					var data = {};
-					data.items = products;
+		list.columns = [
+			{ name: "product.customer.name", label: "Customer Name", display: true }
+		];
 
-					response.json(data);
-					break;
+		list.entities = [];
 
-				default:
-				case "html":
-					response.locals.products = products;
-					response.locals.template = "product/List";
+		getListItems(
+			productController.prototype.servicesContainer,
+			productController.prototype.modelsContainer,
+			"Product",
+			list,
+			d.intercept(function(list) {
+				switch(request.params.contentType) {
+					case 'json':
+						response.json(list);
+						break;
+					case 'html':
+					default:
+						response.locals.list = list;
+						response.locals.template = "product/List";
 
-					var React = require("react");
-					var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-					var html = React.renderToString(View({ locals: response.locals }));
+						var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
+						var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
 
-					response.send(html);
-			}
-		}));
+						response.send(html);
+						break;
+				}
+			})
+		);
 	});
 }
 
