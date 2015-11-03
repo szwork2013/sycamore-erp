@@ -51,32 +51,40 @@ var ApplicationActions = {
 	getCustomers: function(queryOptions) {
 		Api.getCustomers(queryOptions, function(error, response) {
 			AppDispatcher.handleViewAction({
-				actionType: AppConstants.UPDATE_CUSTOMERS,
-				items: response.body.items
+				actionType: AppConstants.UPDATE_LIST,
+				list: response.body
+			});
+		});
+	},
+	getOrders: function(queryOptions) {
+		Api.getOrders(queryOptions, function(error, response) {
+			AppDispatcher.handleViewAction({
+				actionType: AppConstants.UPDATE_LIST,
+				list: response.body
 			});
 		});
 	},
 	getProducts: function(queryOptions) {
 		Api.getProducts(queryOptions, function(error, response) {
 			AppDispatcher.handleViewAction({
-				actionType: AppConstants.UPDATE_PRODUCTS,
-				items: response.body.items
+				actionType: AppConstants.UPDATE_LIST,
+				list: response.body
 			});
 		});
 	},
 	getProperties: function(queryOptions) {
 		Api.getProperties(queryOptions, function(error, response) {
 			AppDispatcher.handleViewAction({
-				actionType: AppConstants.UPDATE_PROPERTIES,
-				items: response.body.items
+				actionType: AppConstants.UPDATE_LIST,
+				list: response.body
 			});
 		});
 	},
 	getSuppliers: function(queryOptions) {
 		Api.getSuppliers(queryOptions, function(error, response) {
 			AppDispatcher.handleViewAction({
-				actionType: AppConstants.UPDATE_SUPPLIERS,
-				items: response.body.items
+				actionType: AppConstants.UPDATE_LIST,
+				list: response.body
 			});
 		});
 	}
