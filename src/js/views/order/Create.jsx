@@ -276,7 +276,7 @@ var View = React.createClass({
 				<div className="row">
 					<div className="large-12 columns">
 						<div className="table">
-							<div className="table-head">
+							<div className="table-header">
 								<div className="table-row">
 									<div className="table-cell large-6">
 										Product
@@ -326,7 +326,7 @@ var View = React.createClass({
 									}, this)
 								}
 							</div>
-							<div className="table-foot">
+							<div className="table-footer">
 								<div className="table-row">
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">&#160;</div>
