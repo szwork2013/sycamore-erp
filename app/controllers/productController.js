@@ -62,7 +62,10 @@ productController.prototype.listProductsAction = function(request, response, nex
 		list.title = "Products";
 
 		list.columns = [
-			{ name: "product.customer.name", label: "Customer Name", display: true }
+			{ name: "name", label: "Name", display: true },
+			{ name: "supplier.name", label: "Supplier", display: true },
+			{ name: "productCode", label: "Product Code", display: true },
+			{ name: "price", label: "Price", display: true }
 		];
 
 		list.entities = [];

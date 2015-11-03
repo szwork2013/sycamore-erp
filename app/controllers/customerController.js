@@ -61,10 +61,10 @@ customerController.prototype.listCustomersAction = function(request, response, n
 		list.title = "Customers";
 
 		list.columns = [
-			{ name: "customer.name", label: "Name", display: true },
-			{ name: "customer.telephone", label: "Telephone", display: true },
-			{ name: "customer.email", label: "Email", display: true },
-			{ name: "customer.billingAddress", label: "Billing Address", display: true },
+			{ name: "name", label: "Name", display: true },
+			{ name: "telephone", label: "Telephone", display: true },
+			{ name: "email", label: "Email", display: true },
+			{ name: "billingAddress", label: "Billing Address", display: true },
 			{ name: "updated", label: "Updated", display: true }
 		];
 

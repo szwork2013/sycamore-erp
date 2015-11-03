@@ -61,7 +61,7 @@ propertyController.prototype.listPropertiesAction = function(request, response, 
 		list.title = "Properties";
 
 		list.columns = [
-			{ name: "property.name", label: "Name", display: true }
+			{ name: "name", label: "Name", display: true }
 		];
 
 		list.entities = [];

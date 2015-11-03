@@ -61,7 +61,7 @@ supplierController.prototype.listSuppliersAction = function(request, response, n
 		list.title = "Suppliers";
 
 		list.columns = [
-			{ name: "supplier.name", label: "Name", display: true }
+			{ name: "name", label: "Name", display: true }
 		];
 
 		list.entities = [];

@@ -61,7 +61,11 @@ orderController.prototype.listOrdersAction = function(request, response, next) {
 		list.title = "Orders";
 
 		list.columns = [
-			{ name: "order.customer.name", label: "Customer Name", display: true }
+			{ name: "customer", label: "Customer Name", display: true },
+			{ name: "property", label: "Property Name", display: true },
+			{ name: "subTotal", label: "Sub Total", display: true },
+			{ name: "VAT", label: "VAT", display: true },
+			{ name: "total", label: "Total", display: true }
 		];
 
 		list.entities = [];
