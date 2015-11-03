@@ -12,6 +12,9 @@ var View = React.createClass({
 	_onUpdate: function() {
 		ApplicationActions.getSuppliers(ListStore.getQueryOptions());
 	},
+	selectRow: function(id) {
+		console.log("Row: " + id + " Clicked");
+	},
 	render: function() {
 		return (
 			<Layout pageTitle={this.props.locals.list.title} locals={this.props.locals}>
@@ -21,7 +24,7 @@ var View = React.createClass({
 						<i className="in-button-icon fa fa-fw fa-plus"></i> Create
 					</a>
 				</ActionsBar>
-				<List list={this.props.locals.list} updateListener={this._onUpdate} />
+				<List list={this.props.locals.list} selectRow={this.selectRow} updateListener={this._onUpdate} />
 			</Layout>
 		);
 	}
