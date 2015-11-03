@@ -21,6 +21,7 @@ var Layout = React.createClass({
 			{ label: "TEST" },
 			{ label: "TEST 2" }
 		];
+		locals.notifications = [];
 /* TESTING */
 
 		var jsTemplate = "";
