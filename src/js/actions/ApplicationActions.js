@@ -1,5 +1,6 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var AppConstants = require('../constants/AppConstants');
+var domain = require("domain");
+var AppDispatcher = require("sycamore-platform-components").Dispatcher;
+var AppConstants = require("../constants/AppConstants");
 
 var Api = require("../services/Api");
 

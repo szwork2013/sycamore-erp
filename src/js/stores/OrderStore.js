@@ -1,4 +1,4 @@
-var AppDispatcher = require("../dispatcher/AppDispatcher");
+var AppDispatcher = require("sycamore-platform-components").Dispatcher;
 var EventEmitter = require("events").EventEmitter;
 var AppConstants = require("../constants/AppConstants");
 var assign = require("object-assign");

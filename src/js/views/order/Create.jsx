@@ -10,13 +10,17 @@ var ProductsSelect = require("../../components/ProductsSelect");
 var ApplicationActions = require("../../actions/ApplicationActions");
 var OrderStore = require("../../stores/OrderStore");
 
+var Customer = require("../../components/Customer");
+var Property = require("../../components/Property");
+
 var async = require("async");
 
 function getOrderFromStore() {
 	return {
 		order: OrderStore.getOrder(),
 		product: null,
-		modalIsOpen: false
+		customerModalIsOpen: false,
+		propertyModalIsOpen: false
 	}
 }
 
@@ -30,13 +34,23 @@ var View = React.createClass({
 	getInitialState: function() {
 		return getOrderFromStore();
 	},
-  openModal: function() {
-    this.setState({modalIsOpen: true});
-  },
 
-  closeModal: function() {
-    this.setState({modalIsOpen: false});
-  },
+	openCustomerModal: function() {
+		this.setState({customerModalIsOpen: true});
+	},
+
+	closeCustomerModal: function() {
+		this.setState({customerModalIsOpen: false});
+	},
+
+	openPropertyModal: function() {
+		this.setState({propertyModalIsOpen: true});
+	},
+
+	closePropertyModal: function() {
+		this.setState({propertyModalIsOpen: false});
+	},
+
 	handleAddProduct: function() {
 		if(this.state.product) {
 			ApplicationActions.addProductToOrder(this.state.product);
@@ -108,18 +122,14 @@ var View = React.createClass({
 					<ActionButton onClick={this.handleCreateOrder} label={"Create"} />
 				</ActionsBar>
 
-				<Modal isOpen={this.state.modalIsOpen}
-					   onRequestClose={this.closeModal}>
-					<h2>Hello</h2>
-					<button onClick={this.closeModal}>close</button>
-					<div>I am a modal</div>
-					<form>
-						<input />
-						<button>tab navigation</button>
-						<button>stays</button>
-						<button>inside</button>
-						<button>the modal</button>
-					</form>
+				<Modal isOpen={this.state.customerModalIsOpen}
+					   onRequestClose={this.closeCustomerModal}>
+					<Customer customer={order.customer} editable={true} isNew={true} />
+				</Modal>
+
+				<Modal isOpen={this.state.propertyModalIsOpen}
+					   onRequestClose={this.closePropertyModal}>
+					<Property property={order.property} editable={true} isNew={true} />
 				</Modal>
 
 				<div className="row">
@@ -133,76 +143,10 @@ var View = React.createClass({
 									<CustomersSelect name={"order[customer]"} onChange={this.handleCustomerChange} />
 								</div>
 								<div className="large-2 columns">
-									<input className="right fancy radius button tiny" type="button" value="New" onClick={this.openModal} />
+									<input className="right fancy radius button tiny" type="button" value="New" onClick={this.openCustomerModal} />
 								</div>
 							</div>
-							<div className="row">
-								<div className="large-4 columns">
-									<label className="right inline">Name</label>
-								</div>
-								<div className="large-8 columns">
-									<input type="text" disabled="disabled" value={order.customer.name} />
-								</div>
-							</div>
-							<fieldset>
-								<label>Billing Address</label>
-								<div className="row">
-									<div className="large-4 columns">
-										<label className="right inline">Line 1</label>
-									</div>
-									<div className="large-8 columns">
-										<input type="text" disabled="disabled" value={order.customer.billingAddress.line1} />
-									</div>
-								</div>
-								<div className="row">
-									<div className="large-4 columns">
-										<label className="right inline">Line 2</label>
-									</div>
-									<div className="large-8 columns">
-										<input type="text" disabled="disabled" value={order.customer.billingAddress.line2} />
-									</div>
-								</div>
-								<div className="row">
-									<div className="large-4 columns">
-										<label className="right inline">Line 3</label>
-									</div>
-									<div className="large-8 columns">
-										<input type="text" disabled="disabled" value={order.customer.billingAddress.line3} />
-									</div>
-								</div>
-								<div className="row">
-									<div className="large-4 columns">
-										<label className="right inline">Line 4</label>
-									</div>
-									<div className="large-8 columns">
-										<input type="text" disabled="disabled" value={order.customer.billingAddress.line4} />
-									</div>
-								</div>
-								<div className="row">
-									<div className="large-4 columns">
-										<label className="right inline">PostCode</label>
-									</div>
-									<div className="large-8 columns">
-										<input type="text" disabled="disabled" value={order.customer.billingAddress.postCode} />
-									</div>
-								</div>
-							</fieldset>
-							<div className="row">
-								<div className="large-4 columns">
-									<label className="right inline">Telephone</label>
-								</div>
-								<div className="large-8 columns">
-									<input type="text" disabled="disabled" value={order.customer.telephone} />
-								</div>
-							</div>
-							<div className="row">
-								<div className="large-4 columns">
-									<label className="right inline">Email</label>
-								</div>
-								<div className="large-8 columns">
-									<input type="text" disabled="disabled" value={order.customer.email} />
-								</div>
-							</div>
+							<Customer customer={order.customer} editable={false} />
 						</fieldset>
 					</div>
 					<div className="large-6 columns">
@@ -215,68 +159,10 @@ var View = React.createClass({
 									<PropertiesSelect name={"order[property]"} onChange={this.handlePropertyChange} />
 								</div>
 								<div className="large-2 columns">
-									<input className="right fancy radius button tiny" type="button" value="New" />
+									<input className="right fancy radius button tiny" type="button" value="New" onClick={this.openPropertyModal} />
 								</div>
 							</div>
-							<fieldset>
-								<label>Property Address</label>
-								<div className="row">
-									<div className="large-4 columns">
-										<label className="right inline"></label>
-									</div>
-									<div className="large-8 columns">
-										<input type="text" disabled="disabled" value={""} />
-									</div>
-								</div>
-								<div className="row">
-									<div className="large-4 columns">
-										<label className="right inline"></label>
-									</div>
-									<div className="large-8 columns">
-										<input type="text" disabled="disabled" value={""} />
-									</div>
-								</div>
-								<div className="row">
-									<div className="large-4 columns">
-										<label className="right inline"></label>
-									</div>
-									<div className="large-8 columns">
-										<input type="text" disabled="disabled" value={""} />
-									</div>
-								</div>
-								<div className="row">
-									<div className="large-4 columns">
-										<label className="right inline"></label>
-									</div>
-									<div className="large-8 columns">
-										<input type="text" disabled="disabled" value={""} />
-									</div>
-								</div>
-								<div className="row">
-									<div className="large-4 columns">
-										<label className="right inline"></label>
-									</div>
-									<div className="large-8 columns">
-										<input type="text" disabled="disabled" value={""} />
-									</div>
-								</div>
-							</fieldset>
-							<div className="row">
-								<div className="large-4 columns">
-									<label className="right inline">Access Arrangements</label>
-								</div>
-								<div className="large-8 columns">
-									<textarea></textarea>
-								</div>
-							</div>
-							<div className="row">
-								<div className="large-4 columns">
-									<label className="right inline">Access Telephone</label>
-								</div>
-								<div className="large-8 columns">
-									<input type="text" disabled="disabled" value={""} />
-								</div>
-							</div>
+							<Property property={order.property} editable={false} />
 						</fieldset>
 					</div>
 				</div>
