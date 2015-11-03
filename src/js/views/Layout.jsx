@@ -16,15 +16,10 @@ var Layout = React.createClass({
 
 		var js = "var locals = " + JSON.stringify(locals);
 
-
 /* TESTING */
 		var breadcrumbs = [
 			{ label: "TEST" },
 			{ label: "TEST 2" }
-		];
-		var now = new Date();
-		locals.notifications = [
-			{ unread: true, message: 'TEST MESSAGE', from: 'John', time: now }
 		];
 /* TESTING */
 

@@ -1,5 +1,6 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
+var Modal = require("react-modal");
 var Layout = require("../Layout");
 var ActionsBar = require("../../components/ActionsBar");
 var ActionButton = require("../../components/ActionsBar/ActionButton");
@@ -14,7 +15,8 @@ var async = require("async");
 function getOrderFromStore() {
 	return {
 		order: OrderStore.getOrder(),
-		product: null
+		product: null,
+		modalIsOpen: false
 	}
 }
 
@@ -28,6 +30,13 @@ var View = React.createClass({
 	getInitialState: function() {
 		return getOrderFromStore();
 	},
+  openModal: function() {
+    this.setState({modalIsOpen: true});
+  },
+
+  closeModal: function() {
+    this.setState({modalIsOpen: false});
+  },
 	handleAddProduct: function() {
 		if(this.state.product) {
 			ApplicationActions.addProductToOrder(this.state.product);
@@ -98,6 +107,21 @@ var View = React.createClass({
 				<ActionsBar pageTitle={pageTitle}>
 					<ActionButton onClick={this.handleCreateOrder} label={"Create"} />
 				</ActionsBar>
+
+				<Modal isOpen={this.state.modalIsOpen}
+					   onRequestClose={this.closeModal}>
+					<h2>Hello</h2>
+					<button onClick={this.closeModal}>close</button>
+					<div>I am a modal</div>
+					<form>
+						<input />
+						<button>tab navigation</button>
+						<button>stays</button>
+						<button>inside</button>
+						<button>the modal</button>
+					</form>
+				</Modal>
+
 				<div className="row">
 					<div className="large-6 columns">
 						<fieldset>
@@ -109,7 +133,7 @@ var View = React.createClass({
 									<CustomersSelect name={"order[customer]"} onChange={this.handleCustomerChange} />
 								</div>
 								<div className="large-2 columns">
-									<input className="right fancy radius button tiny" type="button" value="New" />
+									<input className="right fancy radius button tiny" type="button" value="New" onClick={this.openModal} />
 								</div>
 							</div>
 							<div className="row">
