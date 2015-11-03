@@ -17,6 +17,7 @@ var ProductsSelect = React.createClass({
 	},
 	componentDidMount: function() {
 		ProductsStore.addChangeListener(this._onChange);
+		ApplicationActions.getProducts({});
 	},
 	getInitialState: function() {
 		return getProductsFromStore();

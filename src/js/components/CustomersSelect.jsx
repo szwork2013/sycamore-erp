@@ -17,6 +17,7 @@ var CustomersSelect = React.createClass({
 	},
 	componentDidMount: function() {
 		CustomersStore.addChangeListener(this._onChange);
+		ApplicationActions.getCustomers({});
 	},
 	getInitialState: function() {
 		return getCustomersFromStore();

@@ -17,6 +17,7 @@ var SuppliersSelect = React.createClass({
 	},
 	componentDidMount: function() {
 		SuppliersStore.addChangeListener(this._onChange);
+		ApplicationActions.getSuppliers({});
 	},
 	getInitialState: function() {
 		return getSuppliersFromStore();

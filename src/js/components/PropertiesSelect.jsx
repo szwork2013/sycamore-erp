@@ -17,6 +17,7 @@ var PropertiesSelect = React.createClass({
 	},
 	componentDidMount: function() {
 		PropertiesStore.addChangeListener(this._onChange);
+		ApplicationActions.getProperties({});
 	},
 	getInitialState: function() {
 		return getPropertiesFromStore();
