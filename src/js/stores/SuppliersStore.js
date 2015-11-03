@@ -26,8 +26,8 @@ var SuppliersStore = assign({}, EventEmitter.prototype, {
 SuppliersStore.dispatchToken = AppDispatcher.register(function(payload) {
 	var action = payload.action;
 	switch(action.actionType) {
-		case AppConstants.UPDATE_SUPPLIERS:
-			SuppliersStore.updateSuppliers(action.items);
+		case AppConstants.UPDATE_LIST:
+			SuppliersStore.updateSuppliers(action.list.rows);
 			SuppliersStore.emitChange();
 			break;
 		default:

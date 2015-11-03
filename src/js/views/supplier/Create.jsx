@@ -27,7 +27,7 @@ var View = React.createClass({
 								<section role="tabpanel" aria-hidden="false" id="general" className="content active">
 									<div className="row">
 										<div className="large-4 columns">
-											<label for="name" className="right inline">Name</label>
+											<label className="right inline">Name</label>
 										</div>
 										<div className="large-8 columns">
 											<input type="text" name="supplier[name]"/>

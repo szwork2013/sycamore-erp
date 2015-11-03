@@ -26,8 +26,8 @@ var ProductsStore = assign({}, EventEmitter.prototype, {
 ProductsStore.dispatchToken = AppDispatcher.register(function(payload) {
 	var action = payload.action;
 	switch(action.actionType) {
-		case AppConstants.UPDATE_PRODUCTS:
-			ProductsStore.updateProducts(action.items);
+		case AppConstants.UPDATE_LIST:
+			ProductsStore.updateProducts(action.list.rows);
 			ProductsStore.emitChange();
 			break;
 		default:

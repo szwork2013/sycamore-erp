@@ -26,8 +26,8 @@ var PropertiesStore = assign({}, EventEmitter.prototype, {
 PropertiesStore.dispatchToken = AppDispatcher.register(function(payload) {
 	var action = payload.action;
 	switch(action.actionType) {
-		case AppConstants.UPDATE_PROPERTIES:
-			PropertiesStore.updateProperties(action.items);
+		case AppConstants.UPDATE_LIST:
+			PropertiesStore.updateProperties(action.list.rows);
 			PropertiesStore.emitChange();
 			break;
 		default:
