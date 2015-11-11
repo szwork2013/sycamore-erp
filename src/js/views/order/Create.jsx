@@ -126,6 +126,13 @@ var View = React.createClass({
 				<Modal isOpen={this.state.customerModalIsOpen}
 					   onRequestClose={this.closeCustomerModal}>
 					<div className="row">
+						<div className="large-12 columns">
+							<a className="fancy radius button tiny right">
+								Save
+							</a>
+						</div>
+					</div>
+					<div className="row">
 						<div className="large-6 columns">
 							<Customer customer={order.customer} editable={true} isNew={true} />
 						</div>
@@ -134,7 +141,18 @@ var View = React.createClass({
 
 				<Modal isOpen={this.state.propertyModalIsOpen}
 					   onRequestClose={this.closePropertyModal}>
-					<Property property={order.property} editable={true} isNew={true} />
+					<div className="row">
+						<div className="large-12 columns">
+							<a className="fancy radius button tiny right">
+								Save
+							</a>
+						</div>
+					</div>
+					<div className="row">
+						<div className="large-6 columns">
+							<Property property={order.property} editable={true} isNew={true} />
+						</div>
+					</div>							
 				</Modal>
 
 				<div className="row">
