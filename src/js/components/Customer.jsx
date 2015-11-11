@@ -25,7 +25,7 @@ var Customer = React.createClass({
 		});
 	},
 	componentDidMount: function() {
-		CustomerStore.addListener(this._onChange);
+		CustomerStore.addChangeListener(this._onChange);
 	},
 	getInitialState: function() {
 		return {
