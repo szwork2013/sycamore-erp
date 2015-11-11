@@ -19,27 +19,80 @@ var _customer = {
 };
 
 var CustomerStore = assign({}, EventEmitter.prototype, {
-	emitChange: function() {
-		this.emit(AppConstants.CHANGE_EVENT);
-	},
-
 	addChangeListener: function(callback) {
 		this.on(AppConstants.CHANGE_EVENT, callback);
 	},
 
-	getCustomer: function(customer) {
-		if(customer) {
-			_customer = customer;
-		}
-		return _customer;
+	emitChange: function() {
+		this.emit(AppConstants.CHANGE_EVENT);
 	},
 
-	setName: function(name) {
-		_customer.name = name;
+	getBillingAddressLine1: function() {
+		return _customer.billingAddress.line1;
+	},
+
+	getBillingAddressLine2: function() {
+		return _customer.billingAddress.line2;
+	},
+
+	getBillingAddressLine3: function() {
+		return _customer.billingAddress.line3;
+	},
+
+	getBillingAddressLine4: function() {
+		return _customer.billingAddress.line4;
+	},
+
+	getBillingAddressPostCode: function() {
+		return _customer.billingAddress.postCode;
+	},
+
+	getEmail: function() {
+		return _customer.email;
+	},
+
+	getId: function() {
+		return _customer._id;
+	},
+
+	getName: function() {
+		return _customer.name;
+	},
+
+	getTelephone: function() {
+		return _customer.telephone;
+	},
+
+	removeChangeListener: function(callback) {
+		this.removeListener(AppConstants.CHANGE_EVENT, callback);
+	},
+
+	setBillingAddressLine1: function(line1) {
+		_customer.billingAddress.line1 = line1;
+	},
+
+	setBillingAddressLine2: function(line2) {
+		_customer.billingAddress.line2 = line2;
+	},
+
+	setBillingAddressLine3: function(line3) {
+		_customer.billingAddress.line3 = line3;
+	},
+
+	setBillingAddressLine4: function(line4) {
+		_customer.billingAddress.line4 = line4;
+	},
+
+	setBillingAddressPostCode: function(postCode) {
+		_customer.billingAddress.postCode = postCode;
 	},
 
 	setEmail: function(email) {
 		_customer.email = email;
+	},
+
+	setName: function(name) {
+		_customer.name = name;
 	},
 
 	setTelephone: function(telephone) {

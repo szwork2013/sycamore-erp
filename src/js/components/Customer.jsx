@@ -2,36 +2,49 @@ var React = require("react");
 
 var CustomerStore = require("../stores/CustomerStore");
 
-function getCustomerFromStore(customer) {
-	return {
-		customer: CustomerStore.getCustomer(customer)
-	}
-}
-
 var Customer = React.createClass({
+	"propTypes": {
+		"editable": React.PropTypes.bool.isRequired,
+		"isNew": React.PropTypes.bool.isRequired
+	},
 	_onChange: function() {
-		this.setState(getCustomerFromStore());
+		this.setState({
+			customer: {
+				_id: CustomerStore.getId(),
+				name: CustomerStore.getName(),
+				billingAddress: {
+					line1: CustomerStore.getBillingAddressLine1(),
+					line2: CustomerStore.getBillingAddressLine2(),
+					line3: CustomerStore.getBillingAddressLine3(),
+					line4: CustomerStore.getBillingAddressLine4(),
+					postCode: CustomerStore.getBillingAddressPostCode()
+				},
+				telephone: CustomerStore.getTelephone(),
+				email: CustomerStore.getEmail()
+			}
+		});
 	},
 	componentDidMount: function() {
 		CustomerStore.addListener(this._onChange);
 	},
 	getInitialState: function() {
-		var customer;
-		
-		if(typeof(this.props.customer) != "undefined") {
-			customer = this.props.customer;
-		}
-
-		return getCustomerFromStore(customer);
+		return {
+			customer: {
+				_id: CustomerStore.getId(),
+				name: CustomerStore.getName(),
+				billingAddress: {
+					line1: CustomerStore.getBillingAddressLine1(),
+					line2: CustomerStore.getBillingAddressLine2(),
+					line3: CustomerStore.getBillingAddressLine3(),
+					line4: CustomerStore.getBillingAddressLine4(),
+					postCode: CustomerStore.getBillingAddressPostCode()
+				},
+				telephone: CustomerStore.getTelephone(),
+				email: CustomerStore.getEmail()
+			}
+		};
 	},
 	render: function () {
-		var customer = this.state.customer;
-
-		var disabled = false;
-		if(this.props.editable) {
-			disabled = true;
-		}
-
 		return (
 			<div>
 				<div className="row">
@@ -39,7 +52,7 @@ var Customer = React.createClass({
 						<label className="right inline">Name</label>
 					</div>
 					<div className="large-8 columns">
-						<input type="text" disabled={disabled} value={customer.name} />
+						<input type="text" disabled={!(this.props.editable)} value={this.state.customer.name} />
 					</div>
 				</div>
 				<fieldset>
@@ -49,7 +62,7 @@ var Customer = React.createClass({
 							<label className="right inline">Line 1</label>
 						</div>
 						<div className="large-8 columns">
-							<input type="text" disabled={disabled} value={customer.billingAddress.line1} />
+							<input type="text" disabled={!(this.props.editable)} value={this.state.customer.billingAddress.line1} />
 						</div>
 					</div>
 					<div className="row">
@@ -57,7 +70,7 @@ var Customer = React.createClass({
 							<label className="right inline">Line 2</label>
 						</div>
 						<div className="large-8 columns">
-							<input type="text" disabled={disabled} value={customer.billingAddress.line2} />
+							<input type="text" disabled={!(this.props.editable)} value={this.state.customer.billingAddress.line2} />
 						</div>
 					</div>
 					<div className="row">
@@ -65,7 +78,7 @@ var Customer = React.createClass({
 							<label className="right inline">Line 3</label>
 						</div>
 						<div className="large-8 columns">
-							<input type="text" disabled={disabled} value={customer.billingAddress.line3} />
+							<input type="text" disabled={!(this.props.editable)} value={this.state.customer.billingAddress.line3} />
 						</div>
 					</div>
 					<div className="row">
@@ -73,7 +86,7 @@ var Customer = React.createClass({
 							<label className="right inline">Line 4</label>
 						</div>
 						<div className="large-8 columns">
-							<input type="text" disabled={disabled} value={customer.billingAddress.line4} />
+							<input type="text" disabled={!(this.props.editable)} value={this.state.customer.billingAddress.line4} />
 						</div>
 					</div>
 					<div className="row">
@@ -81,7 +94,7 @@ var Customer = React.createClass({
 							<label className="right inline">PostCode</label>
 						</div>
 						<div className="large-8 columns">
-							<input type="text" disabled={disabled} value={customer.billingAddress.postCode} />
+							<input type="text" disabled={!(this.props.editable)} value={this.state.customer.billingAddress.postCode} />
 						</div>
 					</div>
 				</fieldset>
@@ -90,7 +103,7 @@ var Customer = React.createClass({
 						<label className="right inline">Telephone</label>
 					</div>
 					<div className="large-8 columns">
-						<input type="text" disabled={disabled} value={customer.telephone} />
+						<input type="text" disabled={!(this.props.editable)} value={this.state.customer.telephone} />
 					</div>
 				</div>
 				<div className="row">
@@ -98,7 +111,7 @@ var Customer = React.createClass({
 						<label className="right inline">Email</label>
 					</div>
 					<div className="large-8 columns">
-						<input type="text" disabled={disabled} value={customer.email} />
+						<input type="text" disabled={!(this.props.editable)} value={this.state.customer.email} />
 					</div>
 				</div>
 			</div>
