@@ -9,9 +9,6 @@ var SettingsButton = require("sycamore-platform-components").SettingsButton;
 var ApplicationActions = require("../../actions/ApplicationActions");
 
 var View = React.createClass({
-	_onUpdate: function() {
-		ApplicationActions.getSuppliers(ListStore.getQueryOptions());
-	},
 	selectRow: function(id) {
 		console.log("Row: " + id + " Clicked");
 	},
@@ -20,11 +17,11 @@ var View = React.createClass({
 			<Layout pageTitle={this.props.locals.list.title} locals={this.props.locals}>
 				<ActionsBar pageTitle={this.props.locals.list.title}>
 					<SettingsButton />
-					<a href="/sycamore-erp/supplier" className="right fancy radius button tiny">
+					<a href={this.props.locals.applicationUrl + "supplier"} className="right fancy radius button tiny">
 						<i className="in-button-icon fa fa-fw fa-plus"></i> Create
 					</a>
 				</ActionsBar>
-				<List list={this.props.locals.list} selectRow={this.selectRow} updateListener={this._onUpdate} />
+				<List apiUrl={this.props.locals.applicationUrl + "suppliers.json"} list={this.props.locals.list} selectRow={this.selectRow} updateListener={this._onUpdate} />
 			</Layout>
 		);
 	}
