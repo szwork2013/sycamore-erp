@@ -147,7 +147,7 @@ var View = React.createClass({
 									<input className="right fancy radius button tiny" type="button" value="New" onClick={this.openCustomerModal} />
 								</div>
 							</div>
-							<Customer customer={order.customer} editable={false} />
+							<Customer customer={order.customer} editable={false} isNew={false} />
 						</fieldset>
 					</div>
 					<div className="large-6 columns">
@@ -163,7 +163,7 @@ var View = React.createClass({
 									<input className="right fancy radius button tiny" type="button" value="New" onClick={this.openPropertyModal} />
 								</div>
 							</div>
-							<Property property={order.property} editable={false} />
+							<Property property={order.property} editable={false} isNew={false} />
 						</fieldset>
 					</div>
 				</div>

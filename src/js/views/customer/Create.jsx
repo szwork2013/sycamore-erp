@@ -22,7 +22,9 @@ var View = React.createClass({
 						<input type="submit" className="right fancy radius button tiny" value="Create" />
 					</ActionsBar>
 					<Tabs>
-						<Tab>General</Tab>
+						<TabList>
+							<Tab>General</Tab>
+						</TabList>
 						<TabPanel>
 							<Customer editable={true} isNew={true} />
 						</TabPanel>
