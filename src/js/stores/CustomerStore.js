@@ -56,4 +56,4 @@ CustomerStore.dispatchToken = AppDispatcher.register(function(payload) {
 	}
 });
 
-module.exports = OrderStore;
+module.exports = CustomerStore;
