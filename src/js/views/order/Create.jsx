@@ -125,7 +125,11 @@ var View = React.createClass({
 
 				<Modal isOpen={this.state.customerModalIsOpen}
 					   onRequestClose={this.closeCustomerModal}>
-					<Customer customer={order.customer} editable={true} isNew={true} />
+					<div className="row">
+						<div className="large-6 columns">
+							<Customer customer={order.customer} editable={true} isNew={true} />
+						</div>
+					</div>
 				</Modal>
 
 				<Modal isOpen={this.state.propertyModalIsOpen}

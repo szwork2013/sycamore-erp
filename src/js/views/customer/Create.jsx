@@ -26,7 +26,11 @@ var View = React.createClass({
 							<Tab>General</Tab>
 						</TabList>
 						<TabPanel>
-							<Customer editable={true} isNew={true} />
+							<div className="row">
+								<div className="large-6 columns">
+									<Customer editable={true} isNew={true} />
+								</div>
+							</div>
 						</TabPanel>
 					</Tabs>
 				</form>
