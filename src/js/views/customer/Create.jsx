@@ -9,6 +9,8 @@ var TabList = ReactTabs.TabList;
 var TabPanel = ReactTabs.TabPanel;
 var Customer = require("../../components/Customer");
 
+Tabs.setUseDefaultStyles(false);
+
 var View = React.createClass({
 	render: function() {
 		var pageTitle = "New customer";
