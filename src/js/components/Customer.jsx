@@ -46,72 +46,74 @@ var Customer = React.createClass({
 	},
 	render: function () {
 		return (
-			<div>
-				<div className="row">
-					<div className="large-4 columns">
-						<label className="right inline">Name</label>
-					</div>
-					<div className="large-8 columns">
-						<input type="text" disabled={!(this.props.editable)} value={this.state.customer.name} />
-					</div>
-				</div>
-				<fieldset>
-					<label>Billing Address</label>
+			<div className="row">
+				<div className="large-6 columns">
 					<div className="row">
 						<div className="large-4 columns">
-							<label className="right inline">Line 1</label>
+							<label className="right inline">Name</label>
 						</div>
 						<div className="large-8 columns">
-							<input type="text" disabled={!(this.props.editable)} value={this.state.customer.billingAddress.line1} />
+							<input type="text" disabled={!(this.props.editable)} value={this.state.customer.name} />
+						</div>
+					</div>
+					<fieldset>
+						<label>Billing Address</label>
+						<div className="row">
+							<div className="large-4 columns">
+								<label className="right inline">Line 1</label>
+							</div>
+							<div className="large-8 columns">
+								<input type="text" disabled={!(this.props.editable)} value={this.state.customer.billingAddress.line1} />
+							</div>
+						</div>
+						<div className="row">
+							<div className="large-4 columns">
+								<label className="right inline">Line 2</label>
+							</div>
+							<div className="large-8 columns">
+								<input type="text" disabled={!(this.props.editable)} value={this.state.customer.billingAddress.line2} />
+							</div>
+						</div>
+						<div className="row">
+							<div className="large-4 columns">
+								<label className="right inline">Line 3</label>
+							</div>
+							<div className="large-8 columns">
+								<input type="text" disabled={!(this.props.editable)} value={this.state.customer.billingAddress.line3} />
+							</div>
+						</div>
+						<div className="row">
+							<div className="large-4 columns">
+								<label className="right inline">Line 4</label>
+							</div>
+							<div className="large-8 columns">
+								<input type="text" disabled={!(this.props.editable)} value={this.state.customer.billingAddress.line4} />
+							</div>
+						</div>
+						<div className="row">
+							<div className="large-4 columns">
+								<label className="right inline">PostCode</label>
+							</div>
+							<div className="large-8 columns">
+								<input type="text" disabled={!(this.props.editable)} value={this.state.customer.billingAddress.postCode} />
+							</div>
+						</div>
+					</fieldset>
+					<div className="row">
+						<div className="large-4 columns">
+							<label className="right inline">Telephone</label>
+						</div>
+						<div className="large-8 columns">
+							<input type="text" disabled={!(this.props.editable)} value={this.state.customer.telephone} />
 						</div>
 					</div>
 					<div className="row">
 						<div className="large-4 columns">
-							<label className="right inline">Line 2</label>
+							<label className="right inline">Email</label>
 						</div>
 						<div className="large-8 columns">
-							<input type="text" disabled={!(this.props.editable)} value={this.state.customer.billingAddress.line2} />
+							<input type="text" disabled={!(this.props.editable)} value={this.state.customer.email} />
 						</div>
-					</div>
-					<div className="row">
-						<div className="large-4 columns">
-							<label className="right inline">Line 3</label>
-						</div>
-						<div className="large-8 columns">
-							<input type="text" disabled={!(this.props.editable)} value={this.state.customer.billingAddress.line3} />
-						</div>
-					</div>
-					<div className="row">
-						<div className="large-4 columns">
-							<label className="right inline">Line 4</label>
-						</div>
-						<div className="large-8 columns">
-							<input type="text" disabled={!(this.props.editable)} value={this.state.customer.billingAddress.line4} />
-						</div>
-					</div>
-					<div className="row">
-						<div className="large-4 columns">
-							<label className="right inline">PostCode</label>
-						</div>
-						<div className="large-8 columns">
-							<input type="text" disabled={!(this.props.editable)} value={this.state.customer.billingAddress.postCode} />
-						</div>
-					</div>
-				</fieldset>
-				<div className="row">
-					<div className="large-4 columns">
-						<label className="right inline">Telephone</label>
-					</div>
-					<div className="large-8 columns">
-						<input type="text" disabled={!(this.props.editable)} value={this.state.customer.telephone} />
-					</div>
-				</div>
-				<div className="row">
-					<div className="large-4 columns">
-						<label className="right inline">Email</label>
-					</div>
-					<div className="large-8 columns">
-						<input type="text" disabled={!(this.props.editable)} value={this.state.customer.email} />
 					</div>
 				</div>
 			</div>
