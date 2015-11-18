@@ -1,6 +1,6 @@
 var AppDispatcher = require("sycamore-platform-components").Dispatcher;
 var EventEmitter = require("events").EventEmitter;
-var AppConstants = require("../constants/AppConstants");
+var CustomerConstants = require("../constants/CustomerConstants");
 var assign = require("object-assign");
 var async = require("async");
 
@@ -20,11 +20,11 @@ var _customer = {
 
 var CustomerStore = assign({}, EventEmitter.prototype, {
 	addChangeListener: function(callback) {
-		this.on(AppConstants.CHANGE_EVENT, callback);
+		this.on(CustomerConstants.CHANGE_EVENT, callback);
 	},
 
 	emitChange: function() {
-		this.emit(AppConstants.CHANGE_EVENT);
+		this.emit(CustomerConstants.CHANGE_EVENT);
 	},
 
 	getBillingAddressLine1: function() {
@@ -63,8 +63,43 @@ var CustomerStore = assign({}, EventEmitter.prototype, {
 		return _customer.telephone;
 	},
 
+	loadData: function(customer) {
+		if(customer != null) {
+			if(typeof(customer._id) != "undefined") {
+				_customer._id = customer._id;
+			}
+			if(typeof(customer.name) != "undefined") {
+				this.setName(customer.name);
+			}
+			if(typeof(customer.billingAddress) != "undefined") {
+				if(typeof(customer.billingAddress.line1) != "undefined") {
+					this.setBillingAddressLine1(customer.billingAddress.line1);
+				}
+				if(typeof(customer.billingAddress.line2) != "undefined") {
+					this.setBillingAddressLine1(customer.billingAddress.line2);
+				}
+				if(typeof(customer.billingAddress.line3) != "undefined") {
+					this.setBillingAddressLine1(customer.billingAddress.line3);
+				}
+				if(typeof(customer.billingAddress.line4) != "undefined") {
+					this.setBillingAddressLine1(customer.billingAddress.line4);
+				}
+				if(typeof(customer.billingAddress.postCode) != "undefined") {
+					this.setBillingAddressLine1(customer.billingAddress.postCode);
+				}
+			}
+			if(typeof(customer.telephone) != "undefined") {
+				this.setTelephone(customer.telephone);
+			}
+			if(typeof(customer.email) != "undefined") {
+				this.setEmail(customer.email);
+			}
+		}
+		this.emitChange();
+	},
+
 	removeChangeListener: function(callback) {
-		this.removeListener(AppConstants.CHANGE_EVENT, callback);
+		this.removeListener(CustomerConstants.CHANGE_EVENT, callback);
 	},
 
 	setBillingAddressLine1: function(line1) {
@@ -98,12 +133,46 @@ var CustomerStore = assign({}, EventEmitter.prototype, {
 	setTelephone: function(telephone) {
 		_customer.telephone = telephone;
 	}
-
 });
 
 CustomerStore.dispatchToken = AppDispatcher.register(function(payload) {
 	var action = payload.action;
 	switch(action.actionType) {
+		case CustomerConstants.UPDATE_CUSTOMER:
+			CustomerStore.loadData(action.customer);
+		break;
+		case CustomerConstants.UPDATE_CUSTOMER_NAME:
+			CustomerStore.setName(action.name);
+			CustomerStore.emitChange();
+		break;
+		case CustomerConstants.UPDATE_CUSTOMER_BILLING_ADDRESS_LINE1:
+			CustomerStore.setBillingAddressLine1(action.line1);
+			CustomerStore.emitChange();
+		break;
+		case CustomerConstants.UPDATE_CUSTOMER_BILLING_ADDRESS_LINE2:
+			CustomerStore.setBillingAddressLine2(action.line2);
+			CustomerStore.emitChange();
+		break;
+		case CustomerConstants.UPDATE_CUSTOMER_BILLING_ADDRESS_LINE3:
+			CustomerStore.setBillingAddressLine3(action.line3);
+			CustomerStore.emitChange();
+		break;
+		case CustomerConstants.UPDATE_CUSTOMER_BILLING_ADDRESS_LINE4:
+			CustomerStore.setBillingAddressLine4(action.line4);
+			CustomerStore.emitChange();
+		break;
+		case CustomerConstants.UPDATE_CUSTOMER_BILLING_ADDRESS_POSTCODE:
+			CustomerStore.setBillingAddressPostCode(action.postCode);
+			CustomerStore.emitChange();
+		break;
+		case CustomerConstants.UPDATE_CUSTOMER_TELEPHONE:
+			CustomerStore.setTelephone(action.telephone);
+			CustomerStore.emitChange();
+		break;
+		case CustomerConstants.UPDATE_CUSTOMER_EMAIL:
+			CustomerStore.setEmail(action.email);
+			CustomerStore.emitChange();
+		break;
 		default:
 			// do nothing
 	}
