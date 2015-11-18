@@ -1,37 +1,35 @@
 var React = require("react");
 
+var PropertyActions = require("../actions/PropertyActions");
 var PropertyStore = require("../stores/PropertyStore");
 
-function getPropertyFromStore(property) {
-	return {
-		property: PropertyStore.getProperty(property)
-	}
-}
-
 var Property = React.createClass({
+	"propTypes": {
+		"property": React.PropTypes.object,
+		"editable": React.PropTypes.bool.isRequired,
+		"isNew": React.PropTypes.bool.isRequired
+	},
 	_onChange: function() {
-		this.setState(getPropertyFromStore());
+		this.setState({
+			property: {
+				_id: PropertyStore.getId(),
+				name: PropertyStore.getName()
+			}
+		});
 	},
 	componentDidMount: function() {
-		PropertyStore.addListener(this._onChange);
+		PropertyStore.addChangeListener(this._onChange);
+		PropertyStore.loadData(this.props.property);
 	},
 	getInitialState: function() {
-		var property;
-		
-		if(typeof(this.props.property) != "undefined") {
-			property = this.props.property;
-		}
-
-		return getPropertyFromStore(property);
+		return {
+			property: {
+				_id: PropertyStore.getId(),
+				name: PropertyStore.getName()
+			}
+		};
 	},
 	render: function () {
-		var property = this.state.property;
-
-		var disabled = false;
-		if(this.props.editable) {
-			disabled = true;
-		}
-
 		return (
 			<div>
 				<fieldset>
@@ -41,7 +39,10 @@ var Property = React.createClass({
 							<label className="right inline"></label>
 						</div>
 						<div className="large-8 columns">
-							<input type="text" disabled="disabled" value={property.address.line1} />
+							<input disabled={!(this.props.editable)}
+								   onChange={PropertyActions.updatePropertyAddressLine1}
+								   type="text"
+								   value={this.state.property.address.line1} />
 						</div>
 					</div>
 					<div className="row">
@@ -49,7 +50,10 @@ var Property = React.createClass({
 							<label className="right inline"></label>
 						</div>
 						<div className="large-8 columns">
-							<input type="text" disabled="disabled" value={property.address.line2} />
+							<input disabled={!(this.props.editable)}
+								   onChange={PropertyActions.updatePropertyAddressLine2}
+								   type="text"
+								   value={this.state.property.address.line2} />
 						</div>
 					</div>
 					<div className="row">
@@ -57,7 +61,10 @@ var Property = React.createClass({
 							<label className="right inline"></label>
 						</div>
 						<div className="large-8 columns">
-							<input type="text" disabled="disabled" value={property.address.line3} />
+							<input disabled={!(this.props.editable)}
+								   onChange={PropertyActions.updatePropertyAddressLine3}
+								   type="text"
+								   value={this.state.property.address.line3} />
 						</div>
 					</div>
 					<div className="row">
@@ -65,7 +72,10 @@ var Property = React.createClass({
 							<label className="right inline"></label>
 						</div>
 						<div className="large-8 columns">
-							<input type="text" disabled="disabled" value={property.address.line4} />
+							<input disabled={!(this.props.editable)}
+								   onChange={PropertyActions.updatePropertyAddressLine4}
+								   type="text"
+								   value={this.state.property.address.line4} />
 						</div>
 					</div>
 					<div className="row">
@@ -73,7 +83,10 @@ var Property = React.createClass({
 							<label className="right inline"></label>
 						</div>
 						<div className="large-8 columns">
-							<input type="text" disabled="disabled" value={property.address.postCode} />
+							<input disabled={!(this.props.editable)}
+								   onChange={PropertyActions.updatePropertyAddressPostCode}
+								   type="text"
+								   value={this.state.property.address.postCode} />
 						</div>
 					</div>
 				</fieldset>
@@ -82,7 +95,10 @@ var Property = React.createClass({
 						<label className="right inline">Access Arrangements</label>
 					</div>
 					<div className="large-8 columns">
-						<textarea></textarea>
+						<textarea disabled={!(this.props.editable)}
+								  onChange={PropertyActions.updatePropertyAccessArrangements}
+								  value={this.state.property.accessArrangements}>
+						</textarea>
 					</div>
 				</div>
 				<div className="row">
@@ -90,7 +106,10 @@ var Property = React.createClass({
 						<label className="right inline">Access Telephone</label>
 					</div>
 					<div className="large-8 columns">
-						<input type="text" disabled="disabled" value={property.telephone} />
+						<input disabled={!(this.props.editable)}
+							   onChange={PropertyActions.updatePropertyTelephone}
+							   type="text"
+							   value={this.state.property.telephone} />
 					</div>
 				</div>
 			</div>

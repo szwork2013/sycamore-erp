@@ -23,8 +23,8 @@ var Product = React.createClass({
 		});
 	},
 	componentDidMount: function() {
-		ProductStore.loadData(this.props.product);
 		ProductStore.addChangeListener(this._onChange);
+		ProductStore.loadData(this.props.product);
 	},
 	getInitialState: function() {
 		return {
