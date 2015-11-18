@@ -13,7 +13,15 @@ var Property = React.createClass({
 		this.setState({
 			property: {
 				_id: PropertyStore.getId(),
-				name: PropertyStore.getName()
+				accessArrangements: PropertyStore.getAccessArrangements(),
+				address: {
+					line1: PropertyStore.getAddressLine1(),
+					line2: PropertyStore.getAddressLine2(),
+					line3: PropertyStore.getAddressLine3(),
+					line4: PropertyStore.getAddressLine4(),
+					postCode: PropertyStore.getAddressPostCode()
+				},
+				telephone: PropertyStore.getTelephone()
 			}
 		});
 	},
@@ -25,7 +33,15 @@ var Property = React.createClass({
 		return {
 			property: {
 				_id: PropertyStore.getId(),
-				name: PropertyStore.getName()
+				accessArrangements: PropertyStore.getAccessArrangements(),
+				address: {
+					line1: PropertyStore.getAddressLine1(),
+					line2: PropertyStore.getAddressLine2(),
+					line3: PropertyStore.getAddressLine3(),
+					line4: PropertyStore.getAddressLine4(),
+					postCode: PropertyStore.getAddressPostCode()
+				},
+				telephone: PropertyStore.getTelephone()
 			}
 		};
 	},

@@ -8,7 +8,7 @@ var _product = {
 	_id: null,
 	name: null,
 	supplier: null,
-	code: null,
+	productCode: null,
 	price: 0
 };
 
@@ -25,8 +25,8 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 		return _product._id;
 	},
 
-	getCode: function() {
-		return _product.code;
+	getProductCode: function() {
+		return _product.productCode;
 	},
 
 	getName: function() {
@@ -46,8 +46,8 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 			if(typeof(product._id) != "undefined") {
 				_product._id = product._id;
 			}
-			if(typeof(product.code) != "undefined") {
-				this.setCode(product.code);
+			if(typeof(product.productCode) != "undefined") {
+				this.setProductCode(product.productCode);
 			}
 			if(typeof(product.name) != "undefined") {
 				this.setName(product.name);
@@ -66,8 +66,8 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 		this.removeListener(ProductConstants.CHANGE_EVENT, callback);
 	},
 
-	setCode: function(code) {
-		_product.code = code;
+	setProductCode: function(productCode) {
+		_product.productCode = productCode;
 	},
 
 	setName: function(name) {
@@ -90,7 +90,7 @@ ProductStore.dispatchToken = AppDispatcher.register(function(payload) {
 			ProductStore.loadData(action.product);
 		break;
 		case ProductConstants.UPDATE_PRODUCT_CODE:
-			ProductStore.setCode(action.code);
+			ProductStore.setProductCode(action.productCode);
 			ProductStore.emitChange();
 		break;
 		case ProductConstants.UPDATE_PRODUCT_NAME:

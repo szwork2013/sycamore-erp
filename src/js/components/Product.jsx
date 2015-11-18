@@ -16,7 +16,7 @@ var Product = React.createClass({
 			product: {
 				_id: ProductStore.getId(),
 				name: ProductStore.getName(),
-				code: ProductStore.getCode(),
+				productCode: ProductStore.getCode(),
 				supplier: ProductStore.getSupplier(),
 				price: ProductStore.getPrice()
 			}
@@ -31,7 +31,7 @@ var Product = React.createClass({
 			product: {
 				_id: ProductStore.getId(),
 				name: ProductStore.getName(),
-				code: ProductStore.getCode(),
+				productCode: ProductStore.getCode(),
 				supplier: ProductStore.getSupplier(),
 				price: ProductStore.getPrice()
 			}
@@ -67,7 +67,7 @@ var Product = React.createClass({
 					<div className="large-8 columns">
 						<input onChange={ProductActions.updateProductCode}
 							   type="text"
-							   value={this.state.product.code} />
+							   value={this.state.product.productCode} />
 					</div>
 				</div>
 				<div className="row">

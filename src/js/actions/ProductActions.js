@@ -47,7 +47,7 @@ var ProductActions = {
 	updateProductCode: function(event) {
 		AppDispatcher.handleViewAction({
 			actionType: ProductConstants.UPDATE_PRODUCT_CODE,
-			code: event.target.value
+			productCode: event.target.value
 		});
 	},
 	updateProductPrice: function(event) {
