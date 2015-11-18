@@ -54,14 +54,24 @@ orderController.prototype.listOrdersAction = function(request, response, next) {
 		list.title = "Orders";
 
 		list.columns = [
-			{ name: "customer", label: "Order Name", display: true },
-			{ name: "property", label: "Property Name", display: true },
+			{ name: "customer.name", label: "Customer", display: true },
+			{ name: "property.address.line1", label: "Property Address", display: true },
 			{ name: "subTotal", label: "Sub Total", display: true },
 			{ name: "VAT", label: "VAT", display: true },
 			{ name: "total", label: "Total", display: true }
 		];
 
 		list.entities = [];
+
+		list.populate = [
+			{
+				path: "customer",
+				select: "name"
+			}, {
+				path: "property",
+				select: "address.line1"
+			}
+		];
 
 		getListItems(
 			orderController.prototype.servicesContainer,
