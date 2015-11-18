@@ -17,7 +17,7 @@ var View = React.createClass({
 
 		return (
 			<Layout pageTitle={pageTitle} locals={this.props.locals}>
-				<form action="/sycamore-erp/customer" encType="application/x-www-form-urlencoded" method="POST">
+				<form action={this.props.locals.applicationUrl + "customer"} encType="application/x-www-form-urlencoded" method="POST">
 					<ActionsBar pageTitle={pageTitle}>
 						<input type="submit" className="right fancy radius button tiny" value="Create" />
 					</ActionsBar>
@@ -28,7 +28,7 @@ var View = React.createClass({
 						<TabPanel>
 							<div className="row">
 								<div className="large-6 columns">
-									<Customer editable={true} isNew={true} />
+									<Customer customer={this.props.locals.customer} editable={true} isNew={true} />
 								</div>
 							</div>
 						</TabPanel>

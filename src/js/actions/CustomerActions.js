@@ -38,31 +38,31 @@ var CustomerActions = {
 			name: event.target.value
 		});
 	},
-	updateBillingAddressLine1: function(event) {
+	updateCustomerBillingAddressLine1: function(event) {
 		AppDispatcher.handleViewAction({
 			actionType: CustomerConstants.UPDATE_CUSTOMER_BILLING_ADDRESS_LINE1,
 			line1: event.target.value
 		});
 	},
-	updateBillingAddressLine2: function(event) {
+	updateCustomerBillingAddressLine2: function(event) {
 		AppDispatcher.handleViewAction({
 			actionType: CustomerConstants.UPDATE_CUSTOMER_BILLING_ADDRESS_LINE2,
 			line2: event.target.value
 		});
 	},
-	updateBillingAddressLine3: function(event) {
+	updateCustomerBillingAddressLine3: function(event) {
 		AppDispatcher.handleViewAction({
 			actionType: CustomerConstants.UPDATE_CUSTOMER_BILLING_ADDRESS_LINE3,
 			line3: event.target.value
 		});
 	},
-	updateBillingAddressLine4: function(event) {
+	updateCustomerBillingAddressLine4: function(event) {
 		AppDispatcher.handleViewAction({
 			actionType: CustomerConstants.UPDATE_CUSTOMER_BILLING_ADDRESS_LINE4,
 			line4: event.target.value
 		});
 	},
-	updateBillingAddressPostCode: function(event) {
+	updateCustomerBillingAddressPostCode: function(event) {
 		AppDispatcher.handleViewAction({
 			actionType: CustomerConstants.UPDATE_CUSTOMER_BILLING_ADDRESS_POSTCODE,
 			postCode: event.target.value

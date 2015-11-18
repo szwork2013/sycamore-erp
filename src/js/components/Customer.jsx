@@ -56,7 +56,7 @@ var Customer = React.createClass({
 					</div>
 					<div className="large-8 columns">
 						<input disabled={!(this.props.editable)}
-							   onChange={CustomerActions.updateName}
+							   onChange={CustomerActions.updateCustomerName}
 							   type="text"
 							   value={this.state.customer.name} />
 					</div>
@@ -69,7 +69,7 @@ var Customer = React.createClass({
 						</div>
 						<div className="large-8 columns">
 							<input disabled={!(this.props.editable)}
-								   onChange={CustomerActions.updateBillingAddressLine1}
+								   onChange={CustomerActions.updateCustomerBillingAddressLine1}
 								   type="text"
 								   value={this.state.customer.billingAddress.line1} />
 						</div>
@@ -80,7 +80,7 @@ var Customer = React.createClass({
 						</div>
 						<div className="large-8 columns">
 							<input disabled={!(this.props.editable)}
-								   onChange={CustomerActions.updateBillingAddressLine2}
+								   onChange={CustomerActions.updateCustomerBillingAddressLine2}
 								   type="text"
 								   value={this.state.customer.billingAddress.line2} />
 						</div>
@@ -91,7 +91,7 @@ var Customer = React.createClass({
 						</div>
 						<div className="large-8 columns">
 							<input disabled={!(this.props.editable)}
-								   onChange={CustomerActions.updateBillingAddressLine3}
+								   onChange={CustomerActions.updateCustomerBillingAddressLine3}
 								   type="text"
 								   value={this.state.customer.billingAddress.line3} />
 						</div>
@@ -102,7 +102,7 @@ var Customer = React.createClass({
 						</div>
 						<div className="large-8 columns">
 							<input disabled={!(this.props.editable)}
-								   onChange={CustomerActions.updateBillingAddressLine4}
+								   onChange={CustomerActions.updateCustomerBillingAddressLine4}
 								   type="text"
 								   value={this.state.customer.billingAddress.line4} />
 						</div>
@@ -113,7 +113,7 @@ var Customer = React.createClass({
 						</div>
 						<div className="large-8 columns">
 							<input disabled={!(this.props.editable)}
-								   onChange={CustomerActions.updateBillingAddressPostCode}
+								   onChange={CustomerActions.updateCustomerBillingAddressPostCode}
 								   type="text"
 								   value={this.state.customer.billingAddress.postCode} />
 						</div>
@@ -125,7 +125,7 @@ var Customer = React.createClass({
 					</div>
 					<div className="large-8 columns">
 						<input disabled={!(this.props.editable)}
-							   onChange={CustomerActions.updateTelephone}
+							   onChange={CustomerActions.updateCustomerTelephone}
 							   type="text"
 							   value={this.state.customer.telephone} />
 					</div>
@@ -136,7 +136,7 @@ var Customer = React.createClass({
 					</div>
 					<div className="large-8 columns">
 						<input disabled={!(this.props.editable)}
-							   onChange={CustomerActions.updateEmail}
+							   onChange={CustomerActions.updateCustomerEmail}
 							   type="text"
 							   value={this.state.customer.email} />
 					</div>

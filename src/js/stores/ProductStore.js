@@ -1,42 +1,110 @@
 var AppDispatcher = require("sycamore-platform-components").Dispatcher;
 var EventEmitter = require("events").EventEmitter;
-var AppConstants = require("../constants/AppConstants");
+var ProductConstants = require("../constants/ProductConstants");
 var assign = require("object-assign");
+var async = require("async");
 
-var CHANGE_EVENT = "change";
-var product = {
-	supplier: null
+var _product = {
+	_id: null,
+	name: null,
+	supplier: null,
+	code: null,
+	price: 0
 };
 
 var ProductStore = assign({}, EventEmitter.prototype, {
-	emitChange: function() {
-		this.emit(CHANGE_EVENT);
-	},
-
 	addChangeListener: function(callback) {
-		this.on(CHANGE_EVENT, callback);
+		this.on(ProductConstants.CHANGE_EVENT, callback);
 	},
-/*
-	removeChangeListener: function() {
 
+	emitChange: function() {
+		this.emit(ProductConstants.CHANGE_EVENT);
 	},
-*/
 
-	addTask: function(task) {
-		if(application.application.tasks.indexOf(task) === -1) {
-			application.application.tasks.push(task);
+	getId: function() {
+		return _product._id;
+	},
+
+	getCode: function() {
+		return _product.code;
+	},
+
+	getName: function() {
+		return _product.name;
+	},
+
+	getPrice: function() {
+		return _product.price;
+	},
+
+	getSupplier: function() {
+		return _product.supplier;
+	},
+
+	loadData: function(product) {
+		if(product != null) {
+			if(typeof(product._id) != "undefined") {
+				_product._id = product._id;
+			}
+			if(typeof(product.code) != "undefined") {
+				this.setCode(product.code);
+			}
+			if(typeof(product.name) != "undefined") {
+				this.setName(product.name);
+			}
+			if(typeof(product.price) != "undefined") {
+				this.setPrice(product.price);
+			}
+			if(typeof(product.supplier) != "undefined") {
+				this.setSupplier(product.supplier);
+			}
 		}
-	}
+		this.emitChange();
+	},
 
+	removeChangeListener: function(callback) {
+		this.removeListener(ProductConstants.CHANGE_EVENT, callback);
+	},
+
+	setCode: function(code) {
+		_product.code = code;
+	},
+
+	setName: function(name) {
+		_product.name = name;
+	},
+
+	setPrice: function(price) {
+		_product.price = price;
+	},
+
+	setSupplier: function(supplier) {
+		_product.supplier = supplier;
+	}
 });
 
-ProductStore.dispatchToken = AppDispatcher.register(function(payload){
+ProductStore.dispatchToken = AppDispatcher.register(function(payload) {
 	var action = payload.action;
 	switch(action.actionType) {
-		case AppConstants.ADD_TASK:
-			ProductStore.addTask(action.task);
+		case ProductConstants.UPDATE_PRODUCT:
+			ProductStore.loadData(action.product);
+		break;
+		case ProductConstants.UPDATE_PRODUCT_CODE:
+			ProductStore.setCode(action.code);
 			ProductStore.emitChange();
-			break;
+		break;
+		case ProductConstants.UPDATE_PRODUCT_NAME:
+			ProductStore.setName(action.name);
+			ProductStore.emitChange();
+		break;
+		case ProductConstants.SELECT_PRODUCT_SUPPLIER:
+			ProductStore.setSupplier(action.supplier);
+			ProductStore.emitChange();
+		break;
+		case ProductConstants.UPDATE_PRODUCT_PRICE:
+			ProductStore.setPrice(action.price);
+			ProductStore.emitChange();
+		break;
 		default:
 			// do nothing
 	}
