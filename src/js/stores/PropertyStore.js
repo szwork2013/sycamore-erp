@@ -50,8 +50,44 @@ var PropertyStore = assign({}, EventEmitter.prototype, {
 		return _property.address.postCode;
 	},
 
+	getId: function() {
+		return _property._id;
+	},
+
 	getTelephone: function() {
 		return _property.telephone;
+	},
+
+	loadData: function(property) {
+		if(property != null) {
+			if(typeof(property._id) != "undefined") {
+				_property._id = property._id;
+			}
+			if(typeof(property.accessArrangements) != "undefined") {
+				this.setAccessArrangements(property.accessArrangements);
+			}
+			if(typeof(property.telephone) != "undefined") {
+				this.setTelephone(property.telephone);
+			}
+			if(typeof(property.address) != "undefined") {
+				if(typeof(property.address.line1) != "undefined") {
+					this.setAddressLine1(property.address.line1);
+				}
+				if(typeof(property.address.line2) != "undefined") {
+					this.setAddressLine2(property.address.line2);
+				}
+				if(typeof(property.address.line3) != "undefined") {
+					this.setAddressLine3(property.address.line3);
+				}
+				if(typeof(property.address.line4) != "undefined") {
+					this.setAddressLine4(property.address.line4);
+				}
+				if(typeof(property.address.postCode) != "undefined") {
+					this.setAddressPostCode(property.address.postCode);
+				}
+			}
+		}
+		this.emitChange();
 	},
 
 	removeChangeListener: function(callback) {
@@ -91,6 +127,7 @@ PropertyStore.dispatchToken = AppDispatcher.register(function(payload) {
 	var action = payload.action;
 	switch(action.actionType) {
 		case UPDATE_PROPERTY:
+			PropertyStore.loadData(action.property);
 		break;
 		case UPDATE_PROPERTY_ADDRESS_LINE1:
 			PropertyStore.setAddressLine1(action.line1);
