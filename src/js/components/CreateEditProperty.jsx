@@ -3,6 +3,8 @@ var Modal = require("react-modal");
 var Property = require("./Property");
 var PropertiesSelect = require("./PropertiesSelect");
 
+var OrderActions = require("../actions/OrderActions");
+
 var CreditEditProperty = React.createClass({
 	getInitialState: function() {
 		return {

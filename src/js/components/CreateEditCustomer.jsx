@@ -3,6 +3,8 @@ var Modal = require("react-modal");
 var Customer = require("./Customer");
 var CustomersSelect = require("./CustomersSelect");
 
+var OrderActions = require("../actions/OrderActions");
+
 var CreditEditCustomer = React.createClass({
 	getInitialState: function() {
 		return {
