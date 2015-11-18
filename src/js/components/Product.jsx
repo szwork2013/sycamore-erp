@@ -16,7 +16,7 @@ var Product = React.createClass({
 			product: {
 				_id: ProductStore.getId(),
 				name: ProductStore.getName(),
-				productCode: ProductStore.getCode(),
+				productCode: ProductStore.getProductCode(),
 				supplier: ProductStore.getSupplier(),
 				price: ProductStore.getPrice()
 			}
@@ -31,7 +31,7 @@ var Product = React.createClass({
 			product: {
 				_id: ProductStore.getId(),
 				name: ProductStore.getName(),
-				productCode: ProductStore.getCode(),
+				productCode: ProductStore.getProductCode(),
 				supplier: ProductStore.getSupplier(),
 				price: ProductStore.getPrice()
 			}
