@@ -10,7 +10,7 @@ var ApplicationActions = require("../../actions/ApplicationActions");
 
 var View = React.createClass({
 	selectRow: function(id) {
-		window.location.href = this.props.locals.applicationUrl + "/customer/" + id;
+		window.location.href = this.props.locals.applicationUrl + "customer/" + id;
 	},
 	render: function() {
 		return (
