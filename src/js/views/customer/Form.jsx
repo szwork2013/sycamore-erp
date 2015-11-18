@@ -7,33 +7,53 @@ var Tab = ReactTabs.Tab;
 var Tabs = ReactTabs.Tabs;
 var TabList = ReactTabs.TabList;
 var TabPanel = ReactTabs.TabPanel;
-var Customer = require("../../components/Customer");
 
 Tabs.setUseDefaultStyles(false);
 
+var Customer = require("../../components/Customer");
+var CustomerStore = require("../../stores/CustomerStore");
+var CustomerActions = require("../../actions/CustomerActions");
+
 var View = React.createClass({
+	handleSaveClick: function() {
+		CustomerActions.saveCustomer(CustomerStore.getCustomer());
+	},
 	render: function() {
-		var pageTitle = "New customer";
+		var buttonAction,
+			pageTitle,
+			customer;
+
+		if(typeof(this.props.locals.customer) != "undefined") {
+			customer = this.props.locals.customer;
+		}
+
+		if((customer != null) && (typeof(customer._id) != "undefined")) {
+			pageTitle = "Edit customer";
+			buttonAction = "Save";
+		} else {
+			pageTitle = "New customer";
+			buttonAction = "Create";
+		}
 
 		return (
 			<Layout pageTitle={pageTitle} locals={this.props.locals}>
-				<form action={this.props.locals.applicationUrl + "customer"} encType="application/x-www-form-urlencoded" method="POST">
-					<ActionsBar pageTitle={pageTitle}>
-						<input type="submit" className="right fancy radius button tiny" value="Create" />
-					</ActionsBar>
-					<Tabs>
-						<TabList>
-							<Tab>General</Tab>
-						</TabList>
-						<TabPanel>
-							<div className="row">
-								<div className="large-6 columns">
-									<Customer customer={this.props.locals.customer} editable={true} isNew={true} />
-								</div>
+				<ActionsBar pageTitle={pageTitle}>
+					<a className="right fancy radius button tiny" href="#" onClick={this.handleSaveClick}>
+						{buttonAction}
+					</a>
+				</ActionsBar>
+				<Tabs>
+					<TabList>
+						<Tab>General</Tab>
+					</TabList>
+					<TabPanel>
+						<div className="row">
+							<div className="large-6 columns">
+								<Customer customer={customer} editable={true} isNew={true} />
 							</div>
-						</TabPanel>
-					</Tabs>
-				</form>
+						</div>
+					</TabPanel>
+				</Tabs>
 			</Layout>
 		);
 	}

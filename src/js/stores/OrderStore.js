@@ -1,34 +1,13 @@
 var AppDispatcher = require("sycamore-platform-components").Dispatcher;
 var EventEmitter = require("events").EventEmitter;
-var AppConstants = require("../constants/AppConstants");
+var OrderConstants = require("../constants/OrderConstants");
 var assign = require("object-assign");
 var async = require("async");
 
 var _order = {
 	_id: null,
-	customer: {
-		name: null,
-		billingAddress: {
-			line1: null,
-			line2: null,
-			line3: null,
-			line4: null,
-			postCode: null
-		},
-		telephone: null,
-		email: null
-	},
-	property: {
-		address: {
-			line1: null,
-			line2: null,
-			line3: null,
-			line4: null,
-			postCode: null
-		},
-		telephone: null,
-		accessArrangements: null
-	},
+	customer: null,
+	property: null,
 	products: [],
 	subTotal: 0,
 	VAT: 0,
@@ -36,12 +15,8 @@ var _order = {
 };
 
 var OrderStore = assign({}, EventEmitter.prototype, {
-	emitChange: function() {
-		this.emit(AppConstants.CHANGE_EVENT);
-	},
-
 	addChangeListener: function(callback) {
-		this.on(AppConstants.CHANGE_EVENT, callback);
+		this.on(OrderConstants.CHANGE_EVENT, callback);
 	},
 
 	addProduct: function(product, callback) {
@@ -80,12 +55,44 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		);
 	},
 
-	getOrder: function() {
-		return _order;
+	emitChange: function() {
+		this.emit(OrderConstants.CHANGE_EVENT);
+	},
+
+	getId: function() {
+		return _order._id;
+	},
+
+	getCustomer: function() {
+		return _order.customer;
+	},
+
+	getProducts: function() {
+		return _order.products;
+	},
+
+	getProperty: function() {
+		return _order.property;
+	},
+
+	getSubTotal: function() {
+		return _order.subTotal;
+	},
+
+	getTotal: function() {
+		return _order.total;
+	},
+
+	getVAT: function() {
+		return _order.VAT;
 	},
 
 	setCustomer: function(customer) {
 		_order.customer = customer;
+	},
+
+	setProducts: function(products) {
+		_order.products = products
 	},
 
 	setProperty: function(property) {
@@ -95,27 +102,39 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	setProductQuantity: function(productIndex, value, callback) {
 		_order.products[productIndex].quantity = value;
 		this.calculateTotals(callback);
+	},
+
+	setSubTotal: function(subTotal) {
+		_order.subTotal = subTotal;
+	},
+
+	setTotal: function(total) {
+		_order.total = total;
+	},
+
+	setVAT: function(VAT) {
+		_order.VAT = VAT;
 	}
 });
 
 OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 	var action = payload.action;
 	switch(action.actionType) {
-		case AppConstants.ADD_PRODUCT_TO_ORDER:
+		case OrderConstants.ADD_PRODUCT_TO_ORDER:
 			OrderStore.addProduct(action.product, function() {
 				OrderStore.emitChange();
 			});
 			break;
-		case AppConstants.SET_CUSTOMER_ON_ORDER:
+		case OrderConstants.SET_CUSTOMER_ON_ORDER:
 			OrderStore.setCustomer(action.customer);
 			OrderStore.emitChange();
 			break;
-		case AppConstants.SET_PRODUCT_QUANTITY_ON_ORDER:
+		case OrderConstants.SET_PRODUCT_QUANTITY_ON_ORDER:
 			OrderStore.setProductQuantity(action.productIndex, action.value, function() {
 				OrderStore.emitChange();
 			});
 			break;
-		case AppConstants.SET_PROPERTY_ON_ORDER:
+		case OrderConstants.SET_PROPERTY_ON_ORDER:
 			OrderStore.setProperty(action.property);
 			OrderStore.emitChange();
 			break;

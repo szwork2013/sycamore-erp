@@ -52,29 +52,13 @@ var ApplicationActions = {
 	getCustomers: function(queryOptions) {
 		Api.getCustomers(queryOptions, function(error, response) {
 			AppDispatcher.handleViewAction({
-				actionType: AppConstants.UPDATE_LIST,
-				list: response.body
-			});
-			AppDispatcher.handleViewAction({
 				actionType: AppConstants.UPDATE_CUSTOMERS,
-				list: response.body
-			});
-		});
-	},
-	getOrders: function(queryOptions) {
-		Api.getOrders(queryOptions, function(error, response) {
-			AppDispatcher.handleViewAction({
-				actionType: AppConstants.UPDATE_LIST,
 				list: response.body
 			});
 		});
 	},
 	getProducts: function(queryOptions) {
 		Api.getProducts(queryOptions, function(error, response) {
-			AppDispatcher.handleViewAction({
-				actionType: AppConstants.UPDATE_LIST,
-				list: response.body
-			});
 			AppDispatcher.handleViewAction({
 				actionType: AppConstants.UPDATE_PRODUCTS,
 				list: response.body
@@ -84,10 +68,6 @@ var ApplicationActions = {
 	getProperties: function(queryOptions) {
 		Api.getProperties(queryOptions, function(error, response) {
 			AppDispatcher.handleViewAction({
-				actionType: AppConstants.UPDATE_LIST,
-				list: response.body
-			});
-			AppDispatcher.handleViewAction({
 				actionType: AppConstants.UPDATE_PROPERTIES,
 				list: response.body
 			});
@@ -95,10 +75,6 @@ var ApplicationActions = {
 	},
 	getSuppliers: function(queryOptions) {
 		Api.getSuppliers(queryOptions, function(error, response) {
-			AppDispatcher.handleViewAction({
-				actionType: AppConstants.UPDATE_LIST,
-				list: response.body
-			});
 			AppDispatcher.handleViewAction({
 				actionType: AppConstants.UPDATE_SUPPLIERS,
 				list: response.body

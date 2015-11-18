@@ -47,6 +47,10 @@ var CustomerStore = assign({}, EventEmitter.prototype, {
 		return _customer.billingAddress.postCode;
 	},
 
+	getCustomer: function() {
+		return _customer;
+	},
+
 	getEmail: function() {
 		return _customer.email;
 	},

@@ -59,6 +59,10 @@ var SupplierStore = assign({}, EventEmitter.prototype, {
 		return _supplier.name;
 	},
 
+	getSupplier: function() {
+		return _supplier;
+	},
+
 	getTelephone: function() {
 		return _supplier.telephone;
 	},

@@ -25,6 +25,10 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 		return _product._id;
 	},
 
+	getProduct: function() {
+		return _product;
+	},
+
 	getProductCode: function() {
 		return _product.productCode;
 	},

@@ -54,6 +54,10 @@ var PropertyStore = assign({}, EventEmitter.prototype, {
 		return _property._id;
 	},
 
+	getProperty: function() {
+		return _property;
+	},
+
 	getTelephone: function() {
 		return _property.telephone;
 	},
