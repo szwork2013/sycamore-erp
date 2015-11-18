@@ -13,17 +13,11 @@ function customerRoutes(servicesContainer, modelsContainer) {
 
 	var Router = express.Router();
 
-// CREATE / GET
-	Router.get( "/customer",
+// DELETE / DELETE
+	Router.delete("/customer/:id",
 		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
-		customerController.createCustomerAction
-	);
-// CREATE / POST
-	Router.post("/customer",
-		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_CREATE"),
-		customerController.saveCustomerAction
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
+		customerController.deleteCustomerAction
 	);
 // CREATE / PUT
 	Router.put(	"/customer",
@@ -31,16 +25,26 @@ function customerRoutes(servicesContainer, modelsContainer) {
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_CREATE"),
 		customerController.saveCustomerAction
 	);
-
 // UPDATE / POST
 	Router.post("/customer/:id",
 		authenticationService.ensureAuthenticated(),
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
-		customerController.updateCustomerAction
+		customerController.saveCustomerAction
 	);
 
-// EDIT / GET
-	Router.get( "/customer/:id/edit.html",
+// CREATE / GET
+	Router.get( "/customer",
+		authenticationService.ensureAuthenticated(),
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
+		customerController.editCustomerAction
+	);
+// EDIT/VIEW / GET
+	Router.get( "/customer/:id",
+		authenticationService.ensureAuthenticated(),
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
+		customerController.editCustomerAction
+	);
+	Router.get( "/customer/:id.:contentType",
 		authenticationService.ensureAuthenticated(),
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
 		customerController.editCustomerAction
@@ -69,17 +73,6 @@ function customerRoutes(servicesContainer, modelsContainer) {
 		getQuerySelect,
 		getQuerySearchQuery,
 		customerController.listCustomersAction
-	);
-// VIEW / GET
-	Router.get( "/customer/:id",
-		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
-		customerController.viewCustomerAction
-	);
-	Router.get( "/customer/:id.:contentType",
-		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
-		customerController.viewCustomerAction
 	);
 
 	return Router;

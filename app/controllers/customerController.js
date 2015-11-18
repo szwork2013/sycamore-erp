@@ -1,7 +1,4 @@
 var domain = require("domain");
-var React = require("react");
-var ReactDOMServer = require("react-dom/server");
-var async = require("async");
 
 var getListItems = require("../../../../app/lib/controller/getListItems.js");
 
@@ -10,49 +7,45 @@ function customerController(servicesContainer, modelsContainer) {
 	customerController.prototype.modelsContainer = modelsContainer;
 }
 
-customerController.prototype.createCustomerAction = function(request, response, next) {
-	var d = domain.create();
-	
-	d.on("error", next);
-	
-	d.run(function() {
-		response.locals.template = "customer/Create";
-
-		var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-		var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
-
-		response.send(html);
-	});
-}
-
 customerController.prototype.editCustomerAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
-		var id = request.params.id;
-		customerController
-		.prototype
-		.modelsContainer
-		.getModel("Customer")
-		.findOne({ _id: id })
-		.exec(d.intercept(function(customer) {
-			response.locals.customer = customer;
-			response.locals.template = "customer/Edit";
+		var Customer = customerController.prototype.modelsContainer.getModel("Customer");
+		var id;
 
-			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
+		if(typeof(request.params.id) != "undefined") {
+			id = request.params.id;
 
-			response.send(html);
-		}));
+			Customer.findOne({ _id: id }, d.intercept(function(customer) {
+				if(customer != null) {
+					response.locals.customer = customer;
+					switch(request.params.contentType) {
+						case "json":
+							response.json(customer);
+							break;
+						case "html":
+						default:
+							response.renderReact("customer/Form", response.locals);
+							break;
+					}
+				} else {
+// Throw 404 - Not Found
+					next(new Error("404 - Not Found"));
+				}
+			}));
+		} else {
+			response.renderReact("customer/Form", response.locals);
+		}
 	});
 }
 
 customerController.prototype.listCustomersAction = function(request, response, next) {
 	var d = domain.create();
 	
-	d.on('error', next);
+	d.on("error", next);
 	
 	d.run(function() {
 		var list = response.locals.list;
@@ -77,46 +70,17 @@ customerController.prototype.listCustomersAction = function(request, response, n
 			list,
 			d.intercept(function(list) {
 				switch(request.params.contentType) {
-					case 'json':
+					case "json":
 						response.json(list);
 						break;
-					case 'html':
+					case "html":
 					default:
 						response.locals.list = list;
-						response.locals.template = "customer/List";
-
-						var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-						var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
-
-						response.send(html);
+						response.renderReact("customer/List", response.locals);
 						break;
 				}
 			})
 		);
-	});
-}
-
-customerController.prototype.viewCustomerAction = function(request, response, next) {
-	var d = domain.create();
-	
-	d.on("error", next);
-	
-	d.run(function() {
-		var id = request.params.id;
-		customerController
-		.prototype
-		.modelsContainer
-		.getModel("Customer")
-		.findOne({ _id: id })
-		.exec(d.intercept(function(customer) {
-			response.locals.customer = customer;
-			response.locals.template = "customer/View";
-
-			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
-
-			response.send(html);
-		}));
 	});
 }
 
@@ -126,15 +90,18 @@ customerController.prototype.deleteCustomerAction = function(request, response, 
 	d.on("error", next);
 	
 	d.run(function() {
-		var id = request.params.id;
-		customerController
-		.prototype
-		.modelsContainer
-		.getModel("Customer")
-		.remove({ _id: id })
-		.exec(d.intercept(function() {
-			response.redirect("/sycamore-erp/customers");
-		}));
+		var Customer = customerController.prototype.modelsContainer.getModel("Customer");
+		var id;
+
+		if(typeof(request.params.id) != "undefined") {
+			id = request.params.id;
+			Customer.remove({ _id: id }, d.intercept(function() {
+				response.redirect(response.locals.applicationUrl + "customers");
+			}));
+		} else {
+// Throw 400 - Bad Request
+			next(new Error("400 - Bad Request"));
+		}
 	});
 }
 
@@ -144,35 +111,26 @@ customerController.prototype.saveCustomerAction = function(request, response, ne
 	d.on("error", next);
 
 	d.run(function() {
-		var data = request.body.customer;
+		var Customer = customerController.prototype.modelsContainer.getModel("Customer");
+		var data,
+			id;
 
-		var customer = customerController
-		.prototype
-		.modelsContainer
-		.getModel("Customer")(data);
-
-		customer.save(d.intercept(function(createdCustomer) {
-			response.redirect("/sycamore-erp/customer/" + createdCustomer.id);
-		}));
-	});
-}
-
-customerController.prototype.updateCustomerAction = function(request, response, next) {
-	var d = domain.create();
-	
-	d.on("error", next);
-	
-	d.run(function() {
-		var id = request.params.id;
-		var customer = request.body.customer;
-
-		customerController
-		.prototype
-		.modelsContainer
-		.getModel("Customer")
-		.findByIdAndUpdate(id, { $set: customer }, {}, d.intercept(function(updatedCustomer) {
-			response.redirect("/sycamore-erp/customer/" + updatedCustomer.id);
-		}));
+		if(typeof(request.body.customer) != "undefined") {
+			if(typeof(request.params.id) == "undefined") {
+// Create
+				Customer.create(data, d.intercept(function(createdCustomer) {
+					response.redirect(response.locals.applicationUrl + "customer/" + createdCustomer.id);
+				}));
+			} else {
+// Update
+				Customer.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedCustomer) {
+					response.redirect(response.locals.applicationUrl + "customer/" + updatedCustomer.id);
+				}));
+			}
+		} else {
+// Throw 400 - Bad Request
+			next(new Error("400 - Bad Request"));
+		}
 	});
 }
 

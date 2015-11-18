@@ -1,7 +1,4 @@
 var domain = require("domain");
-var React = require("react");
-var ReactDOMServer = require("react-dom/server");
-var async = require("async");
 
 var getListItems = require("../../../../app/lib/controller/getListItems.js");
 
@@ -10,42 +7,38 @@ function orderController(servicesContainer, modelsContainer) {
 	orderController.prototype.modelsContainer = modelsContainer;
 }
 
-orderController.prototype.createOrderAction = function(request, response, next) {
-	var d = domain.create();
-	
-	d.on("error", next);
-	
-	d.run(function() {
-		response.locals.template = "order/Create";
-
-		var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-		var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
-
-		response.send(html);
-	});
-}
-
 orderController.prototype.editOrderAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
-		var id = request.params.id;
-		orderController
-		.prototype
-		.modelsContainer
-		.getModel("Order")
-		.findOne({ _id: id })
-		.exec(d.intercept(function(order) {
-			response.locals.order = order;
-			response.locals.template = "order/Edit";
+		var Order = orderController.prototype.modelsContainer.getModel("Order");
+		var id;
 
-			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
+		if(typeof(request.params.id) != "undefined") {
+			id = request.params.id;
 
-			response.send(html);
-		}));
+			Order.findOne({ _id: id }, d.intercept(function(order) {
+				if(order != null) {
+					response.locals.order = order;
+					switch(request.params.contentType) {
+						case "json":
+							response.json(order);
+							break;
+						case "html":
+						default:
+							response.renderReact("order/Form", response.locals);
+							break;
+					}
+				} else {
+// Throw 404 - Not Found
+					next(new Error("404 - Not Found"));
+				}
+			}));
+		} else {
+			response.renderReact("order/Form", response.locals);
+		}
 	});
 }
 
@@ -61,7 +54,7 @@ orderController.prototype.listOrdersAction = function(request, response, next) {
 		list.title = "Orders";
 
 		list.columns = [
-			{ name: "customer", label: "Customer Name", display: true },
+			{ name: "customer", label: "Order Name", display: true },
 			{ name: "property", label: "Property Name", display: true },
 			{ name: "subTotal", label: "Sub Total", display: true },
 			{ name: "VAT", label: "VAT", display: true },
@@ -83,40 +76,11 @@ orderController.prototype.listOrdersAction = function(request, response, next) {
 					case 'html':
 					default:
 						response.locals.list = list;
-						response.locals.template = "order/List";
-
-						var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-						var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
-
-						response.send(html);
+						response.renderReact("order/List", response.locals);
 						break;
 				}
 			})
 		);
-	});
-}
-
-orderController.prototype.viewOrderAction = function(request, response, next) {
-	var d = domain.create();
-	
-	d.on("error", next);
-	
-	d.run(function() {
-		var id = request.params.id;
-		orderController
-		.prototype
-		.modelsContainer
-		.getModel("Order")
-		.findOne({ _id: id })
-		.exec(d.intercept(function(order) {
-			response.locals.order = order;
-			response.locals.template = "order/View";
-
-			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
-
-			response.send(html);
-		}));
 	});
 }
 
@@ -126,15 +90,18 @@ orderController.prototype.deleteOrderAction = function(request, response, next) 
 	d.on("error", next);
 	
 	d.run(function() {
-		var id = request.params.id;
-		orderController
-		.prototype
-		.modelsContainer
-		.getModel("Order")
-		.remove({ _id: id })
-		.exec(d.intercept(function() {
-			response.redirect("/sycamore-erp/orders");
-		}));
+		var Order = orderController.prototype.modelsContainer.getModel("Order");
+		var id;
+
+		if(typeof(request.params.id) != "undefined") {
+			id = request.params.id;
+			Order.remove({ _id: id }, d.intercept(function() {
+				response.redirect(response.locals.applicationUrl + "orders");
+			}));
+		} else {
+// Throw 400 - Bad Request
+			next(new Error("400 - Bad Request"));
+		}
 	});
 }
 
@@ -144,37 +111,26 @@ orderController.prototype.saveOrderAction = function(request, response, next) {
 	d.on("error", next);
 
 	d.run(function() {
-		var data = request.body.order;
+		var Order = orderController.prototype.modelsContainer.getModel("Order");
+		var data,
+			id;
 
-console.log(data);
-
-		var order = orderController
-		.prototype
-		.modelsContainer
-		.getModel("Order")(data);
-
-		order.save(d.intercept(function(createdOrder) {
-			response.redirect("/sycamore-erp/order/" + createdOrder.id);
-		}));
-	});
-}
-
-orderController.prototype.updateOrderAction = function(request, response, next) {
-	var d = domain.create();
-	
-	d.on("error", next);
-	
-	d.run(function() {
-		var id = request.params.id;
-		var order = request.body.order;
-
-		orderController
-		.prototype
-		.modelsContainer
-		.getModel("Order")
-		.findByIdAndUpdate(id, { $set: order }, {}, d.intercept(function(updatedOrder) {
-			response.redirect("/sycamore-erp/order/" + updatedOrder.id);
-		}));
+		if(typeof(request.body.order) != "undefined") {
+			if(typeof(request.params.id) == "undefined") {
+// Create
+				Order.create(data, d.intercept(function(createdOrder) {
+					response.redirect(response.locals.applicationUrl + "order/" + createdOrder.id);
+				}));
+			} else {
+// Update
+				Order.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedOrder) {
+					response.redirect(response.locals.applicationUrl + "order/" + updatedOrder.id);
+				}));
+			}
+		} else {
+// Throw 400 - Bad Request
+			next(new Error("400 - Bad Request"));
+		}
 	});
 }
 

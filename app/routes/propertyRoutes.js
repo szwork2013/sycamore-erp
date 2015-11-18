@@ -13,17 +13,11 @@ function propertyRoutes(servicesContainer, modelsContainer) {
 
 	var Router = express.Router();
 
-// CREATE / GET
-	Router.get( "/property",
+// DELETE / DELETE
+	Router.delete("/property/:id",
 		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
-		propertyController.createPropertyAction
-	);
-// CREATE / POST
-	Router.post("/property",
-		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_CREATE"),
-		propertyController.savePropertyAction
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
+		propertyController.deletePropertyAction
 	);
 // CREATE / PUT
 	Router.put(	"/property",
@@ -31,23 +25,33 @@ function propertyRoutes(servicesContainer, modelsContainer) {
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_CREATE"),
 		propertyController.savePropertyAction
 	);
-
 // UPDATE / POST
 	Router.post("/property/:id",
 		authenticationService.ensureAuthenticated(),
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
-		propertyController.updatePropertyAction
+		propertyController.savePropertyAction
 	);
 
-// EDIT / GET
-	Router.get( "/property/:id/edit.html",
+// CREATE / GET
+	Router.get( "/property",
+		authenticationService.ensureAuthenticated(),
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
+		propertyController.editPropertyAction
+	);
+// EDIT/VIEW / GET
+	Router.get( "/property/:id",
+		authenticationService.ensureAuthenticated(),
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
+		propertyController.editPropertyAction
+	);
+	Router.get( "/property/:id.:contentType",
 		authenticationService.ensureAuthenticated(),
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
 		propertyController.editPropertyAction
 	);
 // LIST / GET
 	Router.get(
-		"/properties",
+		"/propertys",
 		authenticationService.ensureAuthenticated(),
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_LIST"),
 		getQueryList,
@@ -59,7 +63,7 @@ function propertyRoutes(servicesContainer, modelsContainer) {
 		propertyController.listPropertiesAction
 	);
 	Router.get(
-		"/properties.:contentType",
+		"/propertys.:contentType",
 		authenticationService.ensureAuthenticated(),
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_LIST"),
 		getQueryList,
@@ -69,17 +73,6 @@ function propertyRoutes(servicesContainer, modelsContainer) {
 		getQuerySelect,
 		getQuerySearchQuery,
 		propertyController.listPropertiesAction
-	);
-// VIEW / GET
-	Router.get( "/property/:id",
-		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
-		propertyController.viewPropertyAction
-	);
-	Router.get( "/property/:id.:contentType",
-		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
-		propertyController.viewPropertyAction
 	);
 
 	return Router;

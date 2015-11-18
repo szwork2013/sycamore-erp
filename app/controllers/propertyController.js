@@ -10,42 +10,38 @@ function propertyController(servicesContainer, modelsContainer) {
 	propertyController.prototype.modelsContainer = modelsContainer;
 }
 
-propertyController.prototype.createPropertyAction = function(request, response, next) {
-	var d = domain.create();
-	
-	d.on("error", next);
-	
-	d.run(function() {
-		response.locals.template = "property/Create";
-
-		var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-		var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
-
-		response.send(html);
-	});
-}
-
 propertyController.prototype.editPropertyAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
-		var id = request.params.id;
-		propertyController
-		.prototype
-		.modelsContainer
-		.getModel("Property")
-		.findOne({ _id: id })
-		.exec(d.intercept(function(property) {
-			response.locals.property = property;
-			response.locals.template = "property/Edit";
+		var Property = propertyController.prototype.modelsContainer.getModel("Property");
+		var id;
 
-			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
+		if(typeof(request.params.id) != "undefined") {
+			id = request.params.id;
 
-			response.send(html);
-		}));
+			Property.findOne({ _id: id }, d.intercept(function(property) {
+				if(property != null) {
+					response.locals.property = property;
+					switch(request.params.contentType) {
+						case "json":
+							response.json(property);
+							break;
+						case "html":
+						default:
+							response.renderReact("property/Form", response.locals);
+							break;
+					}
+				} else {
+// Throw 404 - Not Found
+					next(new Error("404 - Not Found"));
+				}
+			}));
+		} else {
+			response.renderReact("property/Form", response.locals);
+		}
 	});
 }
 
@@ -79,40 +75,11 @@ propertyController.prototype.listPropertiesAction = function(request, response, 
 					case 'html':
 					default:
 						response.locals.list = list;
-						response.locals.template = "property/List";
-
-						var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-						var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
-
-						response.send(html);
+						response.renderReact("property/List", response.locals);
 						break;
 				}
 			})
 		);
-	});
-}
-
-propertyController.prototype.viewPropertyAction = function(request, response, next) {
-	var d = domain.create();
-	
-	d.on("error", next);
-	
-	d.run(function() {
-		var id = request.params.id;
-		propertyController
-		.prototype
-		.modelsContainer
-		.getModel("Property")
-		.findOne({ _id: id })
-		.exec(d.intercept(function(property) {
-			response.locals.property = property;
-			response.locals.template = "property/View";
-
-			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
-
-			response.send(html);
-		}));
 	});
 }
 
@@ -122,15 +89,18 @@ propertyController.prototype.deletePropertyAction = function(request, response, 
 	d.on("error", next);
 	
 	d.run(function() {
-		var id = request.params.id;
-		propertyController
-		.prototype
-		.modelsContainer
-		.getModel("Property")
-		.remove({ _id: id })
-		.exec(d.intercept(function() {
-			response.redirect("/sycamore-erp/propertys");
-		}));
+		var Property = propertyController.prototype.modelsContainer.getModel("Property");
+		var id;
+
+		if(typeof(request.params.id) != "undefined") {
+			id = request.params.id;
+			Property.remove({ _id: id }, d.intercept(function() {
+				response.redirect(response.locals.applicationUrl + "propertys");
+			}));
+		} else {
+// Throw 400 - Bad Request
+			next(new Error("400 - Bad Request"));
+		}
 	});
 }
 
@@ -140,35 +110,26 @@ propertyController.prototype.savePropertyAction = function(request, response, ne
 	d.on("error", next);
 
 	d.run(function() {
-		var data = request.body.property;
+		var Property = propertyController.prototype.modelsContainer.getModel("Property");
+		var data,
+			id;
 
-		var property = propertyController
-		.prototype
-		.modelsContainer
-		.getModel("Property")(data);
-
-		property.save(d.intercept(function(createdProperty) {
-			response.redirect("/sycamore-erp/property/" + createdProperty.id);
-		}));
-	});
-}
-
-propertyController.prototype.updatePropertyAction = function(request, response, next) {
-	var d = domain.create();
-	
-	d.on("error", next);
-	
-	d.run(function() {
-		var id = request.params.id;
-		var property = request.body.property;
-
-		propertyController
-		.prototype
-		.modelsContainer
-		.getModel("Property")
-		.findByIdAndUpdate(id, { $set: property }, {}, d.intercept(function(updatedProperty) {
-			response.redirect("/sycamore-erp/property/" + updatedProperty.id);
-		}));
+		if(typeof(request.body.property) != "undefined") {
+			if(typeof(request.params.id) == "undefined") {
+// Create
+				Property.create(data, d.intercept(function(createdProperty) {
+					response.redirect(response.locals.applicationUrl + "property/" + createdProperty.id);
+				}));
+			} else {
+// Update
+				Property.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedProperty) {
+					response.redirect(response.locals.applicationUrl + "property/" + updatedProperty.id);
+				}));
+			}
+		} else {
+// Throw 400 - Bad Request
+			next(new Error("400 - Bad Request"));
+		}
 	});
 }
 

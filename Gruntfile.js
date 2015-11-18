@@ -22,27 +22,17 @@ module.exports = function(grunt) {
 		"browserify": {
 			dist: {
 				files: {
-					'public/js/views/customer/Create.js': ['src/js/views/customer/Create.jsx'],
-					'public/js/views/customer/Edit.js': ['src/js/views/customer/Edit.jsx'],
+					'public/js/views/customer/Form.js': ['src/js/views/customer/Form.jsx'],
 					'public/js/views/customer/List.js': ['src/js/views/customer/List.jsx'],
-					'public/js/views/customer/View.js': ['src/js/views/customer/View.jsx'],
 					'public/js/views/dashboard/Index.js': ['src/js/views/dashboard/Index.jsx'],
-					'public/js/views/order/Create.js': ['src/js/views/order/Create.jsx'],
-					'public/js/views/order/Edit.js': ['src/js/views/order/Edit.jsx'],
+					'public/js/views/order/Form.js': ['src/js/views/order/Form.jsx'],
 					'public/js/views/order/List.js': ['src/js/views/order/List.jsx'],
-					'public/js/views/order/View.js': ['src/js/views/order/View.jsx'],
-					'public/js/views/product/Create.js': ['src/js/views/product/Create.jsx'],
-					'public/js/views/product/Edit.js': ['src/js/views/product/Edit.jsx'],
+					'public/js/views/product/Form.js': ['src/js/views/product/Form.jsx'],
 					'public/js/views/product/List.js': ['src/js/views/product/List.jsx'],
-					'public/js/views/product/View.js': ['src/js/views/product/View.jsx'],
-					'public/js/views/property/Create.js': ['src/js/views/property/Create.jsx'],
-					'public/js/views/property/Edit.js': ['src/js/views/property/Edit.jsx'],
+					'public/js/views/property/Form.js': ['src/js/views/property/Form.jsx'],
 					'public/js/views/property/List.js': ['src/js/views/property/List.jsx'],
-					'public/js/views/property/View.js': ['src/js/views/property/View.jsx'],
-					'public/js/views/supplier/Create.js': ['src/js/views/supplier/Create.jsx'],
-					'public/js/views/supplier/Edit.js': ['src/js/views/supplier/Edit.jsx'],
-					'public/js/views/supplier/List.js': ['src/js/views/supplier/List.jsx'],
-					'public/js/views/supplier/View.js': ['src/js/views/supplier/View.jsx']
+					'public/js/views/supplier/Form.js': ['src/js/views/supplier/Form.jsx'],
+					'public/js/views/supplier/List.js': ['src/js/views/supplier/List.jsx']
 				},
 				options: {
 					browserifyOptions: {

@@ -13,17 +13,11 @@ function supplierRoutes(servicesContainer, modelsContainer) {
 
 	var Router = express.Router();
 
-// CREATE / GET
-	Router.get( "/supplier",
+// DELETE / DELETE
+	Router.delete("/supplier/:id",
 		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
-		supplierController.createSupplierAction
-	);
-// CREATE / POST
-	Router.post("/supplier",
-		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_CREATE"),
-		supplierController.saveSupplierAction
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
+		supplierController.deleteSupplierAction
 	);
 // CREATE / PUT
 	Router.put(	"/supplier",
@@ -31,21 +25,30 @@ function supplierRoutes(servicesContainer, modelsContainer) {
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_CREATE"),
 		supplierController.saveSupplierAction
 	);
-
 // UPDATE / POST
 	Router.post("/supplier/:id",
 		authenticationService.ensureAuthenticated(),
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
-		supplierController.updateSupplierAction
+		supplierController.saveSupplierAction
 	);
 
-// EDIT / GET
-	Router.get( "/supplier/:id/edit.html",
+// CREATE / GET
+	Router.get( "/supplier",
+		authenticationService.ensureAuthenticated(),
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
+		supplierController.editSupplierAction
+	);
+// EDIT/VIEW / GET
+	Router.get( "/supplier/:id",
 		authenticationService.ensureAuthenticated(),
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
 		supplierController.editSupplierAction
 	);
-	
+	Router.get( "/supplier/:id.:contentType",
+		authenticationService.ensureAuthenticated(),
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
+		supplierController.editSupplierAction
+	);
 // LIST / GET
 	Router.get(
 		"/suppliers",
@@ -70,18 +73,6 @@ function supplierRoutes(servicesContainer, modelsContainer) {
 		getQuerySelect,
 		getQuerySearchQuery,
 		supplierController.listSuppliersAction
-	);
-
-// VIEW / GET
-	Router.get( "/supplier/:id",
-		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
-		supplierController.viewSupplierAction
-	);
-	Router.get( "/supplier/:id.:contentType",
-		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
-		supplierController.viewSupplierAction
 	);
 
 	return Router;

@@ -10,42 +10,38 @@ function supplierController(servicesContainer, modelsContainer) {
 	supplierController.prototype.modelsContainer = modelsContainer;
 }
 
-supplierController.prototype.createSupplierAction = function(request, response, next) {
-	var d = domain.create();
-	
-	d.on("error", next);
-	
-	d.run(function() {
-		response.locals.template = "supplier/Create";
-
-		var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-		var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
-
-		response.send(html);
-	});
-}
-
 supplierController.prototype.editSupplierAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
-		var id = request.params.id;
-		supplierController
-		.prototype
-		.modelsContainer
-		.getModel("Supplier")
-		.findOne({ _id: id })
-		.exec(d.intercept(function(supplier) {
-			response.locals.supplier = supplier;
-			response.locals.template = "supplier/Edit";
+		var Supplier = supplierController.prototype.modelsContainer.getModel("Supplier");
+		var id;
 
-			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
+		if(typeof(request.params.id) != "undefined") {
+			id = request.params.id;
 
-			response.send(html);
-		}));
+			Supplier.findOne({ _id: id }, d.intercept(function(supplier) {
+				if(supplier != null) {
+					response.locals.supplier = supplier;
+					switch(request.params.contentType) {
+						case "json":
+							response.json(supplier);
+							break;
+						case "html":
+						default:
+							response.renderReact("supplier/Form", response.locals);
+							break;
+					}
+				} else {
+// Throw 404 - Not Found
+					next(new Error("404 - Not Found"));
+				}
+			}));
+		} else {
+			response.renderReact("supplier/Form", response.locals);
+		}
 	});
 }
 
@@ -92,45 +88,24 @@ supplierController.prototype.listSuppliersAction = function(request, response, n
 	});
 }
 
-supplierController.prototype.viewSupplierAction = function(request, response, next) {
-	var d = domain.create();
-	
-	d.on("error", next);
-	
-	d.run(function() {
-		var id = request.params.id;
-		supplierController
-		.prototype
-		.modelsContainer
-		.getModel("Supplier")
-		.findOne({ _id: id })
-		.exec(d.intercept(function(supplier) {
-			response.locals.supplier = supplier;
-			response.locals.template = "supplier/View";
-
-			var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-			var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
-
-			response.send(html);
-		}));
-	});
-}
-
 supplierController.prototype.deleteSupplierAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
-		var id = request.params.id;
-		supplierController
-		.prototype
-		.modelsContainer
-		.getModel("Supplier")
-		.remove({ _id: id })
-		.exec(d.intercept(function() {
-			response.redirect("/sycamore-erp/suppliers");
-		}));
+		var Supplier = supplierController.prototype.modelsContainer.getModel("Supplier");
+		var id;
+
+		if(typeof(request.params.id) != "undefined") {
+			id = request.params.id;
+			Supplier.remove({ _id: id }, d.intercept(function() {
+				response.redirect(response.locals.applicationUrl + "suppliers");
+			}));
+		} else {
+// Throw 400 - Bad Request
+			next(new Error("400 - Bad Request"));
+		}
 	});
 }
 
@@ -140,35 +115,26 @@ supplierController.prototype.saveSupplierAction = function(request, response, ne
 	d.on("error", next);
 
 	d.run(function() {
-		var data = request.body.supplier;
+		var Supplier = supplierController.prototype.modelsContainer.getModel("Supplier");
+		var data,
+			id;
 
-		var supplier = supplierController
-		.prototype
-		.modelsContainer
-		.getModel("Supplier")(data);
-
-		supplier.save(d.intercept(function(createdSupplier) {
-			response.redirect("/sycamore-erp/supplier/" + createdSupplier.id);
-		}));
-	});
-}
-
-supplierController.prototype.updateSupplierAction = function(request, response, next) {
-	var d = domain.create();
-	
-	d.on("error", next);
-	
-	d.run(function() {
-		var id = request.params.id;
-		var supplier = request.body.supplier;
-
-		supplierController
-		.prototype
-		.modelsContainer
-		.getModel("Supplier")
-		.findByIdAndUpdate(id, { $set: supplier }, {}, d.intercept(function(updatedSupplier) {
-			response.redirect("/sycamore-erp/supplier/" + updatedSupplier.id);
-		}));
+		if(typeof(request.body.supplier) != "undefined") {
+			if(typeof(request.params.id) == "undefined") {
+// Create
+				Supplier.create(data, d.intercept(function(createdSupplier) {
+					response.redirect(response.locals.applicationUrl + "supplier/" + createdSupplier.id);
+				}));
+			} else {
+// Update
+				Supplier.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedSupplier) {
+					response.redirect(response.locals.applicationUrl + "supplier/" + updatedSupplier.id);
+				}));
+			}
+		} else {
+// Throw 400 - Bad Request
+			next(new Error("400 - Bad Request"));
+		}
 	});
 }
 

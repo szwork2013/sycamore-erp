@@ -13,17 +13,11 @@ function productRoutes(servicesContainer, modelsContainer) {
 
 	var Router = express.Router();
 
-// CREATE / GET
-	Router.get( "/product",
+// DELETE / DELETE
+	Router.delete("/product/:id",
 		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
-		productController.createProductAction
-	);
-// CREATE / POST
-	Router.post("/product",
-		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_CREATE"),
-		productController.saveProductAction
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
+		productController.deleteProductAction
 	);
 // CREATE / PUT
 	Router.put(	"/product",
@@ -31,16 +25,26 @@ function productRoutes(servicesContainer, modelsContainer) {
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_CREATE"),
 		productController.saveProductAction
 	);
-
 // UPDATE / POST
 	Router.post("/product/:id",
 		authenticationService.ensureAuthenticated(),
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
-		productController.updateProductAction
+		productController.saveProductAction
 	);
 
-// EDIT / GET
-	Router.get( "/product/:id/edit.html",
+// CREATE / GET
+	Router.get( "/product",
+		authenticationService.ensureAuthenticated(),
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
+		productController.editProductAction
+	);
+// EDIT/VIEW / GET
+	Router.get( "/product/:id",
+		authenticationService.ensureAuthenticated(),
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
+		productController.editProductAction
+	);
+	Router.get( "/product/:id.:contentType",
 		authenticationService.ensureAuthenticated(),
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
 		productController.editProductAction
@@ -69,17 +73,6 @@ function productRoutes(servicesContainer, modelsContainer) {
 		getQuerySelect,
 		getQuerySearchQuery,
 		productController.listProductsAction
-	);
-// VIEW / GET
-	Router.get( "/product/:id",
-		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
-		productController.viewProductAction
-	);
-	Router.get( "/product/:id.:contentType",
-		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
-		productController.viewProductAction
 	);
 
 	return Router;
