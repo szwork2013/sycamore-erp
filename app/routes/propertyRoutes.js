@@ -51,7 +51,7 @@ function propertyRoutes(servicesContainer, modelsContainer) {
 	);
 // LIST / GET
 	Router.get(
-		"/propertys",
+		"/properties",
 		authenticationService.ensureAuthenticated(),
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_LIST"),
 		getQueryList,
@@ -63,7 +63,7 @@ function propertyRoutes(servicesContainer, modelsContainer) {
 		propertyController.listPropertiesAction
 	);
 	Router.get(
-		"/propertys.:contentType",
+		"/properties.:contentType",
 		authenticationService.ensureAuthenticated(),
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_LIST"),
 		getQueryList,
