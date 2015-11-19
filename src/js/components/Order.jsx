@@ -47,10 +47,10 @@ var Order = React.createClass({
 			<div>
 				<div className="row">
 					<div className="large-6 columns">
-						<CreateEditCustomer />
+						<CreateEditCustomer customer={this.state.order.customer} />
 					</div>
 					<div className="large-6 columns">
-						<CreateEditProperty />
+						<CreateEditProperty property={this.state.order.property} />
 					</div>
 				</div>
 

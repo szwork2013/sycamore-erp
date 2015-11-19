@@ -18,7 +18,7 @@ var CreditEditCustomer = React.createClass({
 		this.setState({ customerModalIsOpen: false });
 	},
 	render: function () {
-		var customer = {};
+		var customer = this.props.customer;
 
 		return (
 			<fieldset>

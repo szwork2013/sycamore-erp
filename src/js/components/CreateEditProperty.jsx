@@ -18,9 +18,8 @@ var CreditEditProperty = React.createClass({
 		this.setState({propertyModalIsOpen: false});
 	},
 	render: function () {
+		var property = this.props.property;
 		var propertyOpts = {};
-
-		var property = {};
 
 		return (
 			<fieldset {...propertyOpts}>
