@@ -44,14 +44,10 @@ var View = React.createClass({
 				</ActionsBar>
 				<Tabs>
 					<TabList>
-						<Tab>General</Tab>
+						<Tab>Order</Tab>
 					</TabList>
 					<TabPanel>
-						<div className="row">
-							<div className="large-6 columns">
-								<Order order={order} editable={true} isNew={true} />
-							</div>
-						</div>
+						<Order order={order} editable={true} isNew={true} />
 					</TabPanel>
 				</Tabs>
 			</Layout>
