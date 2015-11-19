@@ -18,6 +18,8 @@ var CreditEditCustomer = React.createClass({
 		this.setState({ customerModalIsOpen: false });
 	},
 	render: function () {
+		var customer = {};
+
 		return (
 			<fieldset>
 				<div className="row">
@@ -42,11 +44,11 @@ var CreditEditCustomer = React.createClass({
 					</div>
 					<div className="row">
 						<div className="large-6 columns">
-							<Customer customer={order.customer} editable={true} isNew={true} />
+							<Customer customer={customer} editable={true} isNew={true} />
 						</div>
 					</div>
 				</Modal>
-				<Customer customer={order.customer} editable={false} isNew={false} />
+				<Customer customer={customer} editable={false} isNew={false} />
 			</fieldset>
 		);
 	}

@@ -20,6 +20,8 @@ var CreditEditProperty = React.createClass({
 	render: function () {
 		var propertyOpts = {};
 
+		var property = {};
+
 		return (
 			<fieldset {...propertyOpts}>
 				<div className="row">				
@@ -44,11 +46,11 @@ var CreditEditProperty = React.createClass({
 					</div>
 					<div className="row">
 						<div className="large-6 columns">
-							<Property property={order.property} editable={true} isNew={true} />
+							<Property property={property} editable={true} isNew={true} />
 						</div>
 					</div>
 				</Modal>
-				<Property property={order.property} editable={false} isNew={false} />
+				<Property property={property} editable={false} isNew={false} />
 			</fieldset>
 		);
 	}
