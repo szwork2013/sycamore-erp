@@ -155,4 +155,4 @@ var ProductsTable = React.createClass({
 	}
 });
 
-exports = module.exports = ProductsSelect;
+exports = module.exports = ProductsTable;
