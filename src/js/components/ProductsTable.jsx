@@ -34,6 +34,9 @@ var ProductsTable = React.createClass({
 		}
 	},
 	render: function () {
+		var order = this.props.order;
+		var products = this.props.products;
+		
 		return (
 			<div>
 				<div className="row">

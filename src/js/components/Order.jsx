@@ -54,7 +54,7 @@ var Order = React.createClass({
 					</div>
 				</div>
 
-				<ProductsTable />
+				<ProductsTable order={this.state.order} products={this.state.order.products} />
 			</div>
 		);
 	}
