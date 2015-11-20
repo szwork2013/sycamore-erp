@@ -19,7 +19,7 @@ orderController.prototype.editOrderAction = function(request, response, next) {
 		if(typeof(request.params.id) != "undefined") {
 			id = request.params.id;
 
-			Order.findOne({ _id: id }).populate("customer", "property").exec(d.intercept(function(order) {
+			Order.findOne({ _id: id }).populate([{ path: "customer"}, { path: "property" }, { path: "products.product" }]).exec(d.intercept(function(order) {
 				if(order != null) {
 					response.locals.order = order;
 					switch(request.params.contentType) {
