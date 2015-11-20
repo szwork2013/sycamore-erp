@@ -93,29 +93,29 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 							{
 								"name": "Users",
 								"permission": "USER__MODULE",
-								"url": "/user/"
+								"url": "/users/"
 							}, {
 								"name": "Roles",
 								"permission": "ROLE__MODULE",
-								"url": "/platform/role/"
+								"url": "/roles/"
 							}, {
 								"name": "Permissions",
 								"permission": "PERMISSION__MODULE",
-								"url": "/platform/permission/"
+								"url": "/permissions/"
 							}, {
 								"name": "Applications",
 								"permission": "APPLICATION__MODULE",
-								"url": "/platform/application/"
+								"url": "/applications/"
 							}
 						]
 					}, {
 						"name": "Entities",
 						"permission": "ENTITIES__MODULE",
-						"url": "/entity/"
+						"url": "/entities/"
 					}, {
 						"name": "Integrations",
 						"permission": "INTEGRATIONS__MODULE",
-						"url": "/integration/"
+						"url": "/integrations/"
 					}
 				]
 			}
