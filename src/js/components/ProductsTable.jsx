@@ -4,6 +4,8 @@ var ProductsSelect = require("./ProductsSelect");
 var ApplicationActions = require("../actions/ApplicationActions");
 var ProductsStore = require("../stores/ProductsStore");
 
+var OrderActions = require("../actions/OrderActions");
+
 function getProductsFromStore() {
 	return {
 		products: ProductsStore.getProducts(),
