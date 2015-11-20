@@ -89,6 +89,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 
 	loadData: function(order) {
 		_order = order;
+		this.emitChange();
 	},
 
 	setCustomer: function(customer) {
@@ -124,24 +125,27 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 	var action = payload.action;
 	switch(action.actionType) {
+		case OrderConstants.UPDATE_ORDER:
+			OrderStore.loadData(action.order);
+		break;
 		case OrderConstants.ADD_PRODUCT_TO_ORDER:
 			OrderStore.addProduct(action.product, function() {
 				OrderStore.emitChange();
 			});
-			break;
+		break;
 		case OrderConstants.SET_CUSTOMER_ON_ORDER:
 			OrderStore.setCustomer(action.customer);
 			OrderStore.emitChange();
-			break;
+		break;
 		case OrderConstants.SET_PRODUCT_QUANTITY_ON_ORDER:
 			OrderStore.setProductQuantity(action.productIndex, action.value, function() {
 				OrderStore.emitChange();
 			});
-			break;
+		break;
 		case OrderConstants.SET_PROPERTY_ON_ORDER:
 			OrderStore.setProperty(action.property);
 			OrderStore.emitChange();
-			break;
+		break;
 		default:
 			// do nothing
 	}
