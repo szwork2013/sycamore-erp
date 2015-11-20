@@ -120,6 +120,8 @@ customerController.prototype.saveCustomerAction = function(request, response, ne
 			
 			if(typeof(request.params.id) == "undefined") {
 // Create
+				delete data._id;
+				
 				Customer.create(data, d.intercept(function(createdCustomer) {
 					response.json(createdCustomer);
 				}));

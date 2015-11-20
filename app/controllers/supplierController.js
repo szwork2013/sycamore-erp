@@ -124,6 +124,8 @@ supplierController.prototype.saveSupplierAction = function(request, response, ne
 
 			if(typeof(request.params.id) == "undefined") {
 // Create
+				delete data._id;
+				
 				Supplier.create(data, d.intercept(function(createdSupplier) {
 					response.json(createdSupplier);
 				}));

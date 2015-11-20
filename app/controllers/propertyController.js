@@ -119,6 +119,8 @@ propertyController.prototype.savePropertyAction = function(request, response, ne
 			
 			if(typeof(request.params.id) == "undefined") {
 // Create
+				delete data._id;
+				
 				Property.create(data, d.intercept(function(createdProperty) {
 					response.json(createdProperty);
 				}));
