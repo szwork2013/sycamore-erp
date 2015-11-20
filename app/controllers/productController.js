@@ -19,7 +19,7 @@ productController.prototype.editProductAction = function(request, response, next
 		if(typeof(request.params.id) != "undefined") {
 			id = request.params.id;
 
-			Product.findOne({ _id: id }, d.intercept(function(product) {
+			Product.findOne({ _id: id }).populate([{ path: "supplier" }]).exec(d.intercept(function(product) {
 				if(product != null) {
 					response.locals.product = product;
 					switch(request.params.contentType) {
@@ -61,6 +61,13 @@ productController.prototype.listProductsAction = function(request, response, nex
 		];
 
 		list.entities = [];
+
+		list.populate = [
+			{
+				path: "supplier",
+				select: "name"
+			}
+		];
 
 		getListItems(
 			productController.prototype.servicesContainer,
@@ -120,13 +127,13 @@ productController.prototype.saveProductAction = function(request, response, next
 			if(typeof(request.params.id) == "undefined") {
 // Create
 				delete data._id;
-				
+
 				Product.create(data, d.intercept(function(createdProduct) {
 					response.json(createdProduct);
 				}));
 			} else {
 // Update
-				Product.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedProduct) {
+				Product.findByIdAndUpdate(id, { { $set: data } }, {}, d.intercept(function(updatedProduct) {
 					response.json(updatedProduct);
 				}));
 			}
