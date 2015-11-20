@@ -20,9 +20,10 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	},
 
 	addProduct: function(product, callback) {
-		product.quantity = 1;
-
-		_order.products.push(product);
+		_order.products.push({
+			product: product,
+			quantity: 1
+		});
 
 		this.calculateTotals(callback);
 	},
