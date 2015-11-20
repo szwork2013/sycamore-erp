@@ -5,6 +5,14 @@ var ProductConstants = require("../constants/ProductConstants");
 var Api = require("../services/Api");
 
 var ProductActions = {
+	getProducts: function(queryOptions) {
+		Api.getProducts(queryOptions, function(error, response) {
+			AppDispatcher.handleViewAction({
+				actionType: ProductConstants.UPDATE_PRODUCTS,
+				list: response.body
+			});
+		});
+	},
 	saveProduct: function(product) {
 		if(typeof(product._id) != "undefined") {
 			Api.postProduct(

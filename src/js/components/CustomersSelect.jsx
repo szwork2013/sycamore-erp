@@ -1,33 +1,31 @@
 var React = require("react");
 var Select = require("react-select");
 
-var ApplicationActions = require("../actions/ApplicationActions");
+var CustomerActions = require("../actions/CustomerActions");
 var CustomersStore = require("../stores/CustomersStore");
-
-function getCustomersFromStore() {
-	return {
-		customers: CustomersStore.getCustomers(),
-		customer: null
-	};
-}
 
 var CustomersSelect = React.createClass({
 	_onChange: function() {
-		this.setState(getCustomersFromStore());
+		this.setState({
+			customers: CustomersStore.getCustomers()
+		});
 	},
 	componentDidMount: function() {
 		CustomersStore.addChangeListener(this._onChange);
-		ApplicationActions.getCustomers({});
+		CustomerActions.getCustomers({});
 	},
 	getInitialState: function() {
-		return getCustomersFromStore();
+		return {
+			customers: CustomersStore.getCustomers(),
+			customer: null
+		};
 	},
 	handleOnInputChange: function(inputValue) {
-		ApplicationActions.getCustomers({ searchQuery: inputValue });
+		CustomerActions.getCustomers({ searchQuery: inputValue });
 	},
 	handleOnChange: function(value, selectedOptions) {
 		if(value) {
-			this.setState({ product: value });
+			this.setState({ customer: value });
 		}
 		if(selectedOptions.length == 1) {
 			this.props.onChange(selectedOptions[0]);

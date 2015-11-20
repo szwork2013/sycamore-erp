@@ -5,6 +5,14 @@ var CustomerConstants = require("../constants/CustomerConstants");
 var Api = require("../services/Api");
 
 var CustomerActions = {
+	getCustomers: function(queryOptions) {
+		Api.getCustomers(queryOptions, function(error, response) {
+			AppDispatcher.handleViewAction({
+				actionType: CustomerConstants.UPDATE_CUSTOMERS,
+				list: response.body
+			});
+		});
+	},
 	saveCustomer: function(customer) {
 		if(typeof(customer._id) != "undefined") {
 			Api.postCustomer(

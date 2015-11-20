@@ -1,9 +1,6 @@
 var React = require("react");
+
 var ProductsSelect = require("./ProductsSelect");
-
-var ApplicationActions = require("../actions/ApplicationActions");
-var ProductsStore = require("../stores/ProductsStore");
-
 var OrderActions = require("../actions/OrderActions");
 
 var ProductsTable = React.createClass({

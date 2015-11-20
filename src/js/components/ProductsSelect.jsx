@@ -1,29 +1,27 @@
 var React = require("react");
 var Select = require("react-select");
 
-var ApplicationActions = require("../actions/ApplicationActions");
+var ProductActions = require("../actions/ProductActions");
 var ProductsStore = require("../stores/ProductsStore");
-
-function getProductsFromStore() {
-	return {
-		products: ProductsStore.getProducts(),
-		product: null
-	};
-}
 
 var ProductsSelect = React.createClass({
 	_onChange: function() {
-		this.setState(getProductsFromStore());
+		this.setState({
+			products: ProductsStore.getProducts()
+		});
 	},
 	componentDidMount: function() {
 		ProductsStore.addChangeListener(this._onChange);
-		ApplicationActions.getProducts({});
+		ProductActions.getProducts({});
 	},
 	getInitialState: function() {
-		return getProductsFromStore();
+		return {
+			products: ProductsStore.getProducts(),
+			product: null
+		};
 	},
 	handleOnInputChange: function(inputValue) {
-		ApplicationActions.getProducts({ searchQuery: inputValue });
+		ProductActions.getProducts({ searchQuery: inputValue });
 	},
 	handleOnChange: function(value, selectedOptions) {
 		if(value) {
