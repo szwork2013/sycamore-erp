@@ -1,4 +1,3 @@
-var domain = require("domain");
 var AppDispatcher = require("sycamore-platform-components").Dispatcher;
 var OrderConstants = require("../constants/OrderConstants");
 

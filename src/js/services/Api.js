@@ -1,3 +1,4 @@
+var domain = require("domain");
 var request = require("superagent");
 
 var Api = {
