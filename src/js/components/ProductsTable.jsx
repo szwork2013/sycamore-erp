@@ -82,7 +82,7 @@ var ProductsTable = React.createClass({
 							</div>
 							<div className="table-body">
 								{
-									this.state.products.map(function(product, productIndex) {
+									products.map(function(product, productIndex) {
 										return (
 											<div className="table-row" key={productIndex}>
 												<div className="table-cell">

@@ -87,6 +87,10 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		return _order.VAT;
 	},
 
+	loadData: function(order) {
+		_order = order;
+	},
+
 	setCustomer: function(customer) {
 		_order.customer = customer;
 	},
