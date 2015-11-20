@@ -13,7 +13,7 @@ var ProductsTable = React.createClass({
 		};
 	},
 	handleAddProduct: function() {
-		OrderActions.addProduct(this.state.product);
+		OrderActions.addProductToOrder(this.state.product);
 	},
 	handleProductChange: function(value) {
 		this.setState({ product: value });
