@@ -6,31 +6,40 @@ var Api = require("../services/Api");
 
 var OrderActions = {
 	saveOrder: function(order) {
-		if(typeof(order._id) != "undefined") {
-			Api.postOrder(
-				{
-					order: order
-				},
-				function(error, response) {
-					AppDispatcher.handleViewAction({
-						actionType: OrderConstants.UPDATE_ORDER,
-						order: response.body
-					});
-				}
-			);			
-		} else {
-			Api.putOrder(
-				{
-					order: order
-				},
-				function(error, response) {
-					AppDispatcher.handleViewAction({
-						actionType: OrderConstants.UPDATE_ORDER,
-						order: response.body
-					});
-				}
-			);
-		}
+		var d = domain.create();
+
+		d.on("error", function(error) {
+			console.log("saveOrder() -> error:");
+			console.log(error);
+		});
+
+		d.run(function() {
+			if(typeof(order._id) != "undefined") {
+				Api.postOrder(
+					{
+						order: order
+					},
+					d.intercept(function(response) {
+						AppDispatcher.handleViewAction({
+							actionType: OrderConstants.UPDATE_ORDER,
+							order: response.body
+						});
+					})
+				);			
+			} else {
+				Api.putOrder(
+					{
+						order: order
+					},
+					d.intercept(function(response) {
+						AppDispatcher.handleViewAction({
+							actionType: OrderConstants.UPDATE_ORDER,
+							order: response.body
+						});
+					})
+				);
+			}
+		});
 	},
 	addProductToOrder: function(product) {
 		AppDispatcher.handleViewAction({

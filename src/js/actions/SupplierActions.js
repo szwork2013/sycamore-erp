@@ -6,39 +6,57 @@ var Api = require("../services/Api");
 
 var SupplierActions = {
 	getSuppliers: function(queryOptions) {
-		Api.getSuppliers(queryOptions, function(error, response) {
-			AppDispatcher.handleViewAction({
-				actionType: SupplierConstants.UPDATE_SUPPLIERS,
-				list: response.body
-			});
+		var d = domain.create();
+
+		d.on("error", function(error) {
+			console.log("getSuppliers() -> error:");
+			console.log(error);
+		});
+
+		d.run(function() {
+			Api.getSuppliers(queryOptions, d.intercept(function(response) {
+				AppDispatcher.handleViewAction({
+					actionType: SupplierConstants.UPDATE_SUPPLIERS,
+					list: response.body
+				});
+			}));
 		});
 	},
 	saveSupplier: function(supplier) {
-		if(typeof(supplier._id) != "undefined") {
-			Api.postSupplier(
-				{
-					supplier: supplier
-				},
-				function(error, response) {
-					AppDispatcher.handleViewAction({
-						actionType: SupplierConstants.UPDATE_SUPPLIER,
-						supplier: response.body
-					});
-				}
-			);			
-		} else {
-			Api.putSupplier(
-				{
-					supplier: supplier
-				},
-				function(error, response) {
-					AppDispatcher.handleViewAction({
-						actionType: SupplierConstants.UPDATE_SUPPLIER,
-						supplier: response.body
-					});
-				}
-			);
-		}
+		var d = domain.create();
+
+		d.on("error", function(error) {
+			console.log("saveSupplier() -> error:");
+			console.log(error);
+		});
+
+		d.run(function() {
+			if(typeof(supplier._id) != "undefined") {
+				Api.postSupplier(
+					{
+						supplier: supplier
+					},
+					d.intercept(function(response) {
+						AppDispatcher.handleViewAction({
+							actionType: SupplierConstants.UPDATE_SUPPLIER,
+							supplier: response.body
+						});
+					})
+				);			
+			} else {
+				Api.putSupplier(
+					{
+						supplier: supplier
+					},
+					d.intercept(function(response) {
+						AppDispatcher.handleViewAction({
+							actionType: SupplierConstants.UPDATE_SUPPLIER,
+							supplier: response.body
+						});
+					})
+				);
+			}
+		});
 	},
 	updateSupplierName: function(event) {
 		AppDispatcher.handleViewAction({

@@ -6,39 +6,57 @@ var Api = require("../services/Api");
 
 var CustomerActions = {
 	getCustomers: function(queryOptions) {
-		Api.getCustomers(queryOptions, function(error, response) {
-			AppDispatcher.handleViewAction({
-				actionType: CustomerConstants.UPDATE_CUSTOMERS,
-				list: response.body
-			});
+		var d = domain.create();
+
+		d.on("error", function(error) {
+			console.log("getCustomers() -> error:");
+			console.log(error);
+		});
+
+		d.run(function() {
+			Api.getCustomers(queryOptions, d.intercept(function(response) {
+				AppDispatcher.handleViewAction({
+					actionType: CustomerConstants.UPDATE_CUSTOMERS,
+					list: response.body
+				});
+			}));
 		});
 	},
 	saveCustomer: function(customer) {
-		if(typeof(customer._id) != "undefined") {
-			Api.postCustomer(
-				{
-					customer: customer
-				},
-				function(error, response) {
-					AppDispatcher.handleViewAction({
-						actionType: CustomerConstants.UPDATE_CUSTOMER,
-						customer: response.body
-					});
-				}
-			);			
-		} else {
-			Api.putCustomer(
-				{
-					customer: customer
-				},
-				function(error, response) {
-					AppDispatcher.handleViewAction({
-						actionType: CustomerConstants.UPDATE_CUSTOMER,
-						customer: response.body
-					});
-				}
-			);
-		}
+		var d = domain.create();
+
+		d.on("error", function(error) {
+			console.log("saveCustomer() -> error:");
+			console.log(error);
+		});
+
+		d.run(function() {
+			if(typeof(customer._id) != "undefined") {
+				Api.postCustomer(
+					{
+						customer: customer
+					},
+					d.intercept(function(response) {
+						AppDispatcher.handleViewAction({
+							actionType: CustomerConstants.UPDATE_CUSTOMER,
+							customer: response.body
+						});
+					})
+				);			
+			} else {
+				Api.putCustomer(
+					{
+						customer: customer
+					},
+					d.intercept(function(response) {
+						AppDispatcher.handleViewAction({
+							actionType: CustomerConstants.UPDATE_CUSTOMER,
+							customer: response.body
+						});
+					})
+				);
+			}
+		});
 	},
 	updateCustomerName: function(event) {
 		AppDispatcher.handleViewAction({
