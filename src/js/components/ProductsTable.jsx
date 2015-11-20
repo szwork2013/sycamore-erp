@@ -71,10 +71,10 @@ var ProductsTable = React.createClass({
 										return (
 											<div className="table-row" key={productIndex}>
 												<div className="table-cell">
-													{product.name}
+													{product.product.name}
 												</div>
 												<div className="table-cell">
-													{product.price}
+													{product.product.price}
 												</div>
 												<div className="table-cell">
 													<input type="number" onChange={OrderActions.setProductQuantityOnOrder.bind(this, productIndex)} value={product.quantity} />
