@@ -120,6 +120,8 @@ supplierController.prototype.saveSupplierAction = function(request, response, ne
 			id;
 
 		if(typeof(request.body.supplier) != "undefined") {
+			var data = request.body.supplier;
+
 			if(typeof(request.params.id) == "undefined") {
 // Create
 				Supplier.create(data, d.intercept(function(createdSupplier) {

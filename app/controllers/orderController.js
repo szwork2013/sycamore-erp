@@ -126,6 +126,8 @@ orderController.prototype.saveOrderAction = function(request, response, next) {
 			id;
 
 		if(typeof(request.body.order) != "undefined") {
+			var data = request.body.order;
+			
 			if(typeof(request.params.id) == "undefined") {
 // Create
 				Order.create(data, d.intercept(function(createdOrder) {

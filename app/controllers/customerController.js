@@ -116,6 +116,8 @@ customerController.prototype.saveCustomerAction = function(request, response, ne
 			id;
 
 		if(typeof(request.body.customer) != "undefined") {
+			var data = request.body.customer;
+			
 			if(typeof(request.params.id) == "undefined") {
 // Create
 				Customer.create(data, d.intercept(function(createdCustomer) {

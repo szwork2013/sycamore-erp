@@ -115,6 +115,8 @@ productController.prototype.saveProductAction = function(request, response, next
 			id;
 
 		if(typeof(request.body.product) != "undefined") {
+			var data = request.body.product;
+			
 			if(typeof(request.params.id) == "undefined") {
 // Create
 				Product.create(data, d.intercept(function(createdProduct) {
