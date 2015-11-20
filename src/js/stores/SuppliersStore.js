@@ -1,17 +1,17 @@
 var AppDispatcher = require("sycamore-platform-components").Dispatcher;
 var EventEmitter = require("events").EventEmitter;
-var AppConstants = require("../constants/AppConstants");
+var SupplierConstants = require("../constants/SupplierConstants");
 var assign = require("object-assign");
 
 var _suppliers = [];
 
 var SuppliersStore = assign({}, EventEmitter.prototype, {
 	emitChange: function() {
-		this.emit(AppConstants.CHANGE_EVENT);
+		this.emit(SupplierConstants.CHANGE_EVENT);
 	},
 
 	addChangeListener: function(callback) {
-		this.on(AppConstants.CHANGE_EVENT, callback);
+		this.on(SupplierConstants.CHANGE_EVENT, callback);
 	},
 
 	getSuppliers: function() {
@@ -26,7 +26,7 @@ var SuppliersStore = assign({}, EventEmitter.prototype, {
 SuppliersStore.dispatchToken = AppDispatcher.register(function(payload) {
 	var action = payload.action;
 	switch(action.actionType) {
-		case AppConstants.UPDATE_SUPPLIERS:
+		case SupplierConstants.UPDATE_SUPPLIERS:
 			SuppliersStore.updateSuppliers(action.list.rows);
 			SuppliersStore.emitChange();
 			break;

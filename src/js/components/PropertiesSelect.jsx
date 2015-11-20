@@ -1,33 +1,31 @@
 var React = require("react");
 var Select = require("react-select");
 
-var ApplicationActions = require("../actions/ApplicationActions");
+var PropertyActions = require("../actions/PropertyActions");
 var PropertiesStore = require("../stores/PropertiesStore");
-
-function getPropertiesFromStore() {
-	return {
-		properties: PropertiesStore.getProperties(),
-		property: null
-	};
-}
 
 var PropertiesSelect = React.createClass({
 	_onChange: function() {
-		this.setState(getPropertiesFromStore());
+		this.setState({
+			properties: PropertiesStore.getProperties()
+		});
 	},
 	componentDidMount: function() {
 		PropertiesStore.addChangeListener(this._onChange);
-		ApplicationActions.getProperties({});
+		PropertyActions.getProperties({});
 	},
 	getInitialState: function() {
-		return getPropertiesFromStore();
+		return {
+			properties: PropertiesStore.getProperties(),
+			property: null
+		};
 	},
 	handleOnInputChange: function(inputValue) {
-		ApplicationActions.getProperties({ searchQuery: inputValue });
+		PropertyActions.getProperties({ searchQuery: inputValue });
 	},
 	handleOnChange: function(value, selectedOptions) {
 		if(value) {
-			this.setState({ product: value });
+			this.setState({ property: value });
 		}
 		if(selectedOptions.length == 1) {
 			this.props.onChange(selectedOptions[0]);

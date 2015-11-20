@@ -6,8 +6,6 @@ var List = require("sycamore-platform-components").List;
 var ListStore = require("sycamore-platform-components").ListStore;
 var SettingsButton = require("sycamore-platform-components").SettingsButton;
 
-var ApplicationActions = require("../../actions/ApplicationActions");
-
 var View = React.createClass({
 	selectRow: function(id) {
 		window.location.href = this.props.locals.applicationUrl + "product/" + id;

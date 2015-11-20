@@ -5,6 +5,14 @@ var PropertyConstants = require("../constants/PropertyConstants");
 var Api = require("../services/Api");
 
 var PropertyActions = {
+	getProperties: function(queryOptions) {
+		Api.getProperties(queryOptions, function(error, response) {
+			AppDispatcher.handleViewAction({
+				actionType: PropertyConstants.UPDATE_PROPERTIES,
+				list: response.body
+			});
+		});
+	},	
 	saveProperty: function(property) {
 		if(typeof(property._id) != "undefined") {
 			Api.postProperty(

@@ -5,6 +5,14 @@ var SupplierConstants = require("../constants/SupplierConstants");
 var Api = require("../services/Api");
 
 var SupplierActions = {
+	getSuppliers: function(queryOptions) {
+		Api.getSuppliers(queryOptions, function(error, response) {
+			AppDispatcher.handleViewAction({
+				actionType: SupplierConstants.UPDATE_SUPPLIERS,
+				list: response.body
+			});
+		});
+	},
 	saveSupplier: function(supplier) {
 		if(typeof(supplier._id) != "undefined") {
 			Api.postSupplier(

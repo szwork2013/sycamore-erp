@@ -1,33 +1,31 @@
 var React = require("react");
 var Select = require("react-select");
 
-var ApplicationActions = require("../actions/ApplicationActions");
+var SupplierActions = require("../actions/SupplierActions");
 var SuppliersStore = require("../stores/SuppliersStore");
-
-function getSuppliersFromStore() {
-	return {
-		suppliers: SuppliersStore.getSuppliers(),
-		supplier: null
-	};
-}
 
 var SuppliersSelect = React.createClass({
 	_onChange: function() {
-		this.setState(getSuppliersFromStore());
+		this.setState({
+			suppliers: SuppliersStore.getSuppliers()
+		});
 	},
 	componentDidMount: function() {
 		SuppliersStore.addChangeListener(this._onChange);
-		ApplicationActions.getSuppliers({});
+		SupplierActions.getSuppliers({});
 	},
 	getInitialState: function() {
-		return getSuppliersFromStore();
+		return {
+			suppliers: SuppliersStore.getSuppliers(),
+			supplier: null
+		};
 	},
 	handleOnInputChange: function(inputValue) {
-		ApplicationActions.getSuppliers({ searchQuery: inputValue });
+		SupplierActions.getSuppliers({ searchQuery: inputValue });
 	},
 	handleOnChange: function(value, selectedOptions) {
 		if(value) {
-			this.setState({ product: value });
+			this.setState({ supplier: value });
 		}
 		if(selectedOptions.length == 1) {
 			this.props.onChange(selectedOptions[0]);
