@@ -120,12 +120,12 @@ propertyController.prototype.savePropertyAction = function(request, response, ne
 			if(typeof(request.params.id) == "undefined") {
 // Create
 				Property.create(data, d.intercept(function(createdProperty) {
-					response.redirect(response.locals.applicationUrl + "property/" + createdProperty.id);
+					response.json(createdProperty);
 				}));
 			} else {
 // Update
 				Property.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedProperty) {
-					response.redirect(response.locals.applicationUrl + "property/" + updatedProperty.id);
+					response.json(updatedProperty);
 				}));
 			}
 		} else {

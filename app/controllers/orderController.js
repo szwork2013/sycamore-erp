@@ -131,12 +131,12 @@ orderController.prototype.saveOrderAction = function(request, response, next) {
 			if(typeof(request.params.id) == "undefined") {
 // Create
 				Order.create(data, d.intercept(function(createdOrder) {
-					response.redirect(response.locals.applicationUrl + "order/" + createdOrder.id);
+					response.json(createdOrder);
 				}));
 			} else {
 // Update
 				Order.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedOrder) {
-					response.redirect(response.locals.applicationUrl + "order/" + updatedOrder.id);
+					response.json(updatedOrder);
 				}));
 			}
 		} else {

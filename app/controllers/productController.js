@@ -120,12 +120,12 @@ productController.prototype.saveProductAction = function(request, response, next
 			if(typeof(request.params.id) == "undefined") {
 // Create
 				Product.create(data, d.intercept(function(createdProduct) {
-					response.redirect(response.locals.applicationUrl + "product/" + createdProduct.id);
+					response.json(createdProduct);
 				}));
 			} else {
 // Update
 				Product.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedProduct) {
-					response.redirect(response.locals.applicationUrl + "product/" + updatedProduct.id);
+					response.json(updatedProduct);
 				}));
 			}
 		} else {

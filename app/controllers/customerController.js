@@ -121,12 +121,12 @@ customerController.prototype.saveCustomerAction = function(request, response, ne
 			if(typeof(request.params.id) == "undefined") {
 // Create
 				Customer.create(data, d.intercept(function(createdCustomer) {
-					response.redirect(response.locals.applicationUrl + "customer/" + createdCustomer.id);
+					response.json(createdCustomer);
 				}));
 			} else {
 // Update
 				Customer.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedCustomer) {
-					response.redirect(response.locals.applicationUrl + "customer/" + updatedCustomer.id);
+					response.json(updatedCustomer);
 				}));
 			}
 		} else {

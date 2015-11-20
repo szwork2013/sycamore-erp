@@ -125,12 +125,12 @@ supplierController.prototype.saveSupplierAction = function(request, response, ne
 			if(typeof(request.params.id) == "undefined") {
 // Create
 				Supplier.create(data, d.intercept(function(createdSupplier) {
-					response.redirect(response.locals.applicationUrl + "supplier/" + createdSupplier.id);
+					response.json(createdSupplier);
 				}));
 			} else {
 // Update
 				Supplier.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedSupplier) {
-					response.redirect(response.locals.applicationUrl + "supplier/" + updatedSupplier.id);
+					response.json(updatedSupplier);
 				}));
 			}
 		} else {
