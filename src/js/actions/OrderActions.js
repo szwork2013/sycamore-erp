@@ -34,13 +34,13 @@ var OrderActions = {
 	},
 	addProductToOrder: function(product) {
 		AppDispatcher.handleViewAction({
-			actionType: AppConstants.ADD_PRODUCT_TO_ORDER,
+			actionType: OrderConstants.ADD_PRODUCT_TO_ORDER,
 			product: product
 		});
 	},
 	setCustomerOnOrder: function(customer) {
 		AppDispatcher.handleViewAction({
-			actionType: AppConstants.SET_CUSTOMER_ON_ORDER,
+			actionType: OrderConstants.SET_CUSTOMER_ON_ORDER,
 			customer: customer
 		});
 		var queryOptions = {
@@ -48,21 +48,21 @@ var OrderActions = {
 		};
 		Api.getProperties(queryOptions, function(error, response) {
 			AppDispatcher.handleViewAction({
-				actionType: AppConstants.UPDATE_PROPERTIES,
+				actionType: OrderConstants.UPDATE_PROPERTIES,
 				items: response.body.items
 			});
 		});
 	},
 	setProductQuantityOnOrder: function(productIndex, event) {
 		AppDispatcher.handleViewAction({
-			actionType: AppConstants.SET_PRODUCT_QUANTITY_ON_ORDER,
+			actionType: OrderConstants.SET_PRODUCT_QUANTITY_ON_ORDER,
 			productIndex: productIndex,
 			value: event.target.value
 		});
 	},
 	setPropertyOnOrder: function(property) {
 		AppDispatcher.handleViewAction({
-			actionType: AppConstants.SET_PROPERTY_ON_ORDER,
+			actionType: OrderConstants.SET_PROPERTY_ON_ORDER,
 			property: property
 		});
 	},

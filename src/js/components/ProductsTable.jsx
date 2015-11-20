@@ -6,34 +6,17 @@ var ProductsStore = require("../stores/ProductsStore");
 
 var OrderActions = require("../actions/OrderActions");
 
-function getProductsFromStore() {
-	return {
-		products: ProductsStore.getProducts(),
-		product: null
-	};
-}
-
 var ProductsTable = React.createClass({
-	_onChange: function() {
-		this.setState(getProductsFromStore());
-	},
-	componentDidMount: function() {
-		ProductsStore.addChangeListener(this._onChange);
-		ApplicationActions.getProducts({});
-	},
 	getInitialState: function() {
-		return getProductsFromStore();
+		return {
+			product: null
+		};
 	},
-	handleOnInputChange: function(inputValue) {
-		ApplicationActions.getProducts({ searchQuery: inputValue });
+	handleAddProduct: function() {
+		OrderActions.addProduct(this.state.product);
 	},
-	handleOnChange: function(value, selectedOptions) {
-		if(value) {
-			this.setState({ product: value });
-		}
-		if(selectedOptions.length == 1) {
-			this.props.onChange(selectedOptions[0]);
-		}
+	handleProductChange: function(value) {
+		this.setState({ product: value });
 	},
 	render: function () {
 		var order = this.props.order;
