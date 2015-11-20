@@ -1,120 +1,200 @@
 var request = require("superagent");
 
 var Api = {
+	handleError: function(error) {
+		console.log(error);
+	},
 	getCustomers: function(queryOptions, callback) {
-		request
-		.get("/sycamore-erp/customers.json")
-		.end(callback);
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.get("/sycamore-erp/customers.json")
+			.send(queryOptions)
+			.set("Accept", "application/json")
+			.end(d.intercept(callback));
+		});
 	},
 	getProducts: function(queryOptions, callback) {
-		request
-		.get("/sycamore-erp/products.json")
-		.end(callback);
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.get("/sycamore-erp/products.json")
+			.send(queryOptions)
+			.set("Accept", "application/json")
+			.end(d.intercept(callback));
+		});
 	},
 	getProperties: function(queryOptions, callback) {
-		request
-		.get("/sycamore-erp/properties.json")
-		.end(callback);
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.get("/sycamore-erp/properties.json")
+			.send(queryOptions)
+			.set("Accept", "application/json")
+			.end(d.intercept(callback));
+		});
 	},
 	getSuppliers: function(queryOptions, callback) {
-		request
-		.get("/sycamore-erp/suppliers.json")
-		.end(callback);
-	},
-	putCustomer: function(queryOptions, callback) {
-		request
-		.put("/sycamore-erp/customer")
-		.send(queryOptions)
-		.set('Accept', 'application/json')
-		.set('Content-Type', 'application/json')
-		.end(callback);
-	},
-	putOrder: function(queryOptions, callback) {
-		request
-		.put("/sycamore-erp/order")
-		.send(queryOptions)
-		.set('Accept', 'application/json')
-		.set('Content-Type', 'application/json')
-		.end(callback);
-	},
-	putProduct: function(queryOptions, callback) {
-		request
-		.put("/sycamore-erp/product")
-		.send(queryOptions)
-		.set('Accept', 'application/json')
-		.set('Content-Type', 'application/json')
-		.end(callback);
-	},
-	putProperty: function(queryOptions, callback) {
-		request
-		.put("/sycamore-erp/property")
-		.send(queryOptions)
-		.set('Accept', 'application/json')
-		.set('Content-Type', 'application/json')
-		.end(callback);
-	},
-	putSupplier: function(queryOptions, callback) {
-		request
-		.put("/sycamore-erp/supplier")
-		.send(queryOptions)
-		.set('Accept', 'application/json')
-		.set('Content-Type', 'application/json')
-		.end(callback);
-	},
-	postCustomer: function(queryOptions, callback) {
-		var customer = queryOptions.customer;
-		var id = customer._id;
+		var d = domain.create();
 
-		request
-		.post("/sycamore-erp/customer/" + id)
-		.send(queryOptions)
-		.set('Accept', 'application/json')
-		.set('Content-Type', 'application/json')
-		.end(callback);
-	},
-	postOrder: function(queryOptions, callback) {
-		var order = queryOptions.order;
-		var id = order._id;
+		d.on("error", this.handleError);
 
-		request
-		.post("/sycamore-erp/order/" + id)
-		.send(queryOptions)
-		.set('Accept', 'application/json')
-		.set('Content-Type', 'application/json')
-		.end(callback);
+		d.run(function() {
+			request
+			.get("/sycamore-erp/suppliers.json")
+			.send(queryOptions)
+			.set("Accept", "application/json")
+			.end(d.intercept(callback));
+		});
 	},
-	postProduct: function(queryOptions, callback) {
-		var product = queryOptions.product;
-		var id = product._id;
+	putCustomer: function(customer, callback) {
+		var d = domain.create();
 
-		request
-		.post("/sycamore-erp/product/" + id)
-		.send(queryOptions)
-		.set('Accept', 'application/json')
-		.set('Content-Type', 'application/json')
-		.end(callback);
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.put("/sycamore-erp/customer")
+			.send({ customer: customer })
+			.set("Accept", "application/json")
+			.set("Content-Type", "application/json")
+			.end(d.intercept(callback));
+		});
 	},
-	postProperty: function(queryOptions, callback) {
-		var property = queryOptions.property;
-		var id = property._id;
+	putOrder: function(order, callback) {
+		var d = domain.create();
 
-		request
-		.post("/sycamore-erp/property/" + id)
-		.send(queryOptions)
-		.set('Accept', 'application/json')
-		.set('Content-Type', 'application/json')
-		.end(callback);
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.put("/sycamore-erp/order")
+			.send({ order: order })
+			.set("Accept", "application/json")
+			.set("Content-Type", "application/json")
+			.end(d.intercept(callback));
+		});
 	},
-	postSupplier: function(queryOptions, callback) {
-		var supplier = queryOptions.supplier;
-		var id = supplier._id;
+	putProduct: function(product, callback) {
+		var d = domain.create();
 
-		request
-		.post("/sycamore-erp/supplier/" + id)
-		.send(queryOptions)
-		.set('Accept', 'application/json')
-		.set('Content-Type', 'application/json')
-		.end(callback);
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.put("/sycamore-erp/product")
+			.send({ product: product })
+			.set("Accept", "application/json")
+			.set("Content-Type", "application/json")
+			.end(d.intercept(callback));
+		});
+	},
+	putProperty: function(property, callback) {
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.put("/sycamore-erp/property")
+			.send({ property: property })
+			.set("Accept", "application/json")
+			.set("Content-Type", "application/json")
+			.end(d.intercept(callback));
+		});
+	},
+	putSupplier: function(supplier, callback) {
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.put("/sycamore-erp/supplier")
+			.send({ supplier: supplier })
+			.set("Accept", "application/json")
+			.set("Content-Type", "application/json")
+			.end(d.intercept(callback));
+		});
+	},
+	postCustomer: function(id, customer, callback) {
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.post("/sycamore-erp/customer/" + id)
+			.send({ customer: customer })
+			.set("Accept", "application/json")
+			.set("Content-Type", "application/json")
+			.end(d.intercept(callback));
+		});
+	},
+	postOrder: function(id, order, callback) {
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.post("/sycamore-erp/order/" + id)
+			.send({ order: order })
+			.set("Accept", "application/json")
+			.set("Content-Type", "application/json")
+			.end(d.intercept(callback));
+		});
+	},
+	postProduct: function(id, product, callback) {
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.post("/sycamore-erp/product/" + id)
+			.send({ product: product })
+			.set("Accept", "application/json")
+			.set("Content-Type", "application/json")
+			.end(d.intercept(callback));
+		});
+	},
+	postProperty: function(id, property, callback) {
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.post("/sycamore-erp/property/" + id)
+			.send({ property: property })
+			.set("Accept", "application/json")
+			.set("Content-Type", "application/json")
+			.end(d.intercept(callback));
+		});
+	},
+	postSupplier: function(id, supplier, callback) {
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.post("/sycamore-erp/supplier/" + id)
+			.send({ supplier: supplier })
+			.set("Accept", "application/json")
+			.set("Content-Type", "application/json")
+			.end(d.intercept(callback));
+		});
 	}
 };
 

@@ -6,57 +6,39 @@ var Api = require("../services/Api");
 
 var PropertyActions = {
 	getProperties: function(queryOptions) {
-		var d = domain.create();
-
-		d.on("error", function(error) {
-			console.log("getProperties() -> error:");
-			console.log(error);
-		});
-
-		d.run(function() {
-			Api.getProperties(queryOptions, d.intercept(function(response) {
-				AppDispatcher.handleViewAction({
-					actionType: PropertyConstants.UPDATE_PROPERTIES,
-					list: response.body
-				});
-			}));
+		Api.getProperties(queryOptions, function(response) {
+			AppDispatcher.handleViewAction({
+				actionType: PropertyConstants.UPDATE_PROPERTIES,
+				list: response.body
+			});
 		});
 	},	
 	saveProperty: function(property) {
-		var d = domain.create();
-
-		d.on("error", function(error) {
-			console.log("saveProperty() -> error:");
-			console.log(error);
-		});
-
-		d.run(function() {
-			if(typeof(property._id) != "undefined") {
-				Api.postProperty(
-					{
-						property: property
-					},
-					d.intercept(function(response) {
-						AppDispatcher.handleViewAction({
-							actionType: PropertyConstants.UPDATE_PROPERTY,
-							property: response.body
-						});
-					})
-				);			
-			} else {
-				Api.putProperty(
-					{
-						property: property
-					},
-					d.intercept(function(response) {
-						AppDispatcher.handleViewAction({
-							actionType: PropertyConstants.UPDATE_PROPERTY,
-							property: response.body
-						});
-					})
-				);
-			}
-		});
+		if(	(typeof(property._id) != "undefined") &&
+			(property._id != null) ) {
+// POST
+			Api.postProperty(
+				property._id,
+				property,
+				function(response) {
+					AppDispatcher.handleViewAction({
+						actionType: PropertyConstants.UPDATE_PROPERTY,
+						property: response.body
+					});
+				}
+			);			
+		} else {
+// PUT
+			Api.putProperty(
+				property,
+				function(response) {
+					AppDispatcher.handleViewAction({
+						actionType: PropertyConstants.UPDATE_PROPERTY,
+						property: response.body
+					});
+				}
+			);
+		}
 	},
 	updatePropertyAddressLine1: function(event) {
 		AppDispatcher.handleViewAction({
