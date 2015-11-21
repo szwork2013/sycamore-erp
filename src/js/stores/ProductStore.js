@@ -26,8 +26,10 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 	},
 
 	getProduct: function() {
-		var id;
-		var product = {
+		var id,
+			supplier,
+			product;
+		product = {
 			name: this.getName(),
 			productCode: this.getProductCode(),
 			price: this.getPrice()
