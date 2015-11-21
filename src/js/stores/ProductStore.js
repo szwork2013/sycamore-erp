@@ -7,7 +7,9 @@ var async = require("async");
 var _product = {
 	_id: null,
 	name: null,
-	supplier: null,
+	supplier: {
+		_id: null
+	},
 	productCode: null,
 	price: 0
 };

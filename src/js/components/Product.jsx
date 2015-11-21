@@ -57,7 +57,7 @@ var Product = React.createClass({
 					<div className="large-8 columns">
 						<SuppliersSelect onChange={ProductActions.selectProductSupplier}
 										 type="text"
-										 value={this.state.product.supplier} />
+										 value={this.state.product.supplier._id} />
 					</div>
 				</div>
 				<div className="row">
