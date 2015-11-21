@@ -24,6 +24,8 @@ var SuppliersSelect = React.createClass({
 		SupplierActions.getSuppliers({ searchQuery: inputValue });
 	},
 	handleOnChange: function(value, selectedOptions) {
+		console.log(value);
+		console.log(selectedOptions);
 		if(value) {
 			this.setState({ supplier: value });
 		}

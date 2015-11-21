@@ -46,6 +46,7 @@ var ProductActions = {
 		});
 	},
 	selectProductSupplier: function(supplierId) {
+		console.log(supplierId);
 		AppDispatcher.handleViewAction({
 			actionType: ProductConstants.SELECT_PRODUCT_SUPPLIER,
 			supplierId: supplierId
