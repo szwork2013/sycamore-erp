@@ -10,7 +10,7 @@ function productController(servicesContainer, modelsContainer) {
 productController.prototype.getProduct = function(id, callback) {
 	var d = domain.create();
 	
-	d.on("error", next);
+	d.on("error", callback);
 	
 	d.run(function() {
 		if(id != null) {
