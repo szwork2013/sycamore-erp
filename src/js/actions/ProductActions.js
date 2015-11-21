@@ -46,7 +46,6 @@ var ProductActions = {
 		});
 	},
 	selectProductSupplier: function(supplier) {
-		console.log(supplier);
 		AppDispatcher.handleViewAction({
 			actionType: ProductConstants.SELECT_PRODUCT_SUPPLIER,
 			supplier: supplier

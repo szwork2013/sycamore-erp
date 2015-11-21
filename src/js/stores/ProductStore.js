@@ -26,6 +26,7 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 	},
 
 	getProduct: function() {
+		var id;
 		var product = {
 			name: this.getName(),
 			productCode: this.getProductCode(),
