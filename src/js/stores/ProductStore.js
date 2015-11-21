@@ -41,8 +41,8 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 			product._id = id;
 		}
 		supplier = this.getSupplier();
-		if(supplier !== null && typeof supplier === 'object') {
-			if(typeof supplier._id !== "undefined") {
+		if((supplier !== null) && (typeof supplier === 'object')) {
+			if((typeof supplier._id !== "undefined") && (supplier._id !== null)) {
 				product.supplier = supplier._id;
 			}
 		}
