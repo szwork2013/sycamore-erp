@@ -45,11 +45,11 @@ var ProductActions = {
 			name: event.target.value
 		});
 	},
-	selectProductSupplier: function(supplierId) {
-		console.log(supplierId);
+	selectProductSupplier: function(supplier) {
+		console.log(supplier);
 		AppDispatcher.handleViewAction({
 			actionType: ProductConstants.SELECT_PRODUCT_SUPPLIER,
-			supplierId: supplierId
+			supplier: supplier
 		});
 	},
 	updateProductCode: function(event) {
