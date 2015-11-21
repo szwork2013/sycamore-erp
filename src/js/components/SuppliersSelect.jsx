@@ -13,12 +13,11 @@ var SuppliersSelect = React.createClass({
 	componentDidMount: function() {
 		SuppliersStore.addChangeListener(this._onChange);
 		SupplierActions.getSuppliers({});
-		this.setState({ value: this.props.value });
 	},
 	getInitialState: function() {
 		return {
 			suppliers: SuppliersStore.getSuppliers(),
-			supplier: null
+			supplier: this.props.value
 		};
 	},
 	handleOnInputChange: function(inputValue) {
