@@ -127,6 +127,9 @@ customerController.prototype.saveCustomerAction = function(request, response, ne
 				}));
 			} else {
 // Update
+				var id = request.params.id;
+				delete data._id;
+				
 				Customer.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedCustomer) {
 					response.json(updatedCustomer);
 				}));

@@ -133,7 +133,10 @@ productController.prototype.saveProductAction = function(request, response, next
 				}));
 			} else {
 // Update
-				Product.findByIdAndUpdate(id, { { $set: data } }, {}, d.intercept(function(updatedProduct) {
+				var id = request.params.id;
+				delete data._id;
+								
+				Product.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedProduct) {
 					response.json(updatedProduct);
 				}));
 			}

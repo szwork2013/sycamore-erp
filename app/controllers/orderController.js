@@ -137,6 +137,9 @@ orderController.prototype.saveOrderAction = function(request, response, next) {
 				}));
 			} else {
 // Update
+				var id = request.params.id;
+				delete data._id;
+				
 				Order.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedOrder) {
 					response.json(updatedOrder);
 				}));

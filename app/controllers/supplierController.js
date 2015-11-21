@@ -131,6 +131,9 @@ supplierController.prototype.saveSupplierAction = function(request, response, ne
 				}));
 			} else {
 // Update
+				var id = request.params.id;
+				delete data._id;
+				
 				Supplier.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedSupplier) {
 					response.json(updatedSupplier);
 				}));

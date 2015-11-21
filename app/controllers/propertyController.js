@@ -126,6 +126,9 @@ propertyController.prototype.savePropertyAction = function(request, response, ne
 				}));
 			} else {
 // Update
+				var id = request.params.id;
+				delete data._id;
+				
 				Property.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedProperty) {
 					response.json(updatedProperty);
 				}));
