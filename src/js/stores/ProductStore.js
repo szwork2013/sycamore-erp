@@ -26,6 +26,7 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 	},
 
 	getProduct: function() {
+		console.log(_product);
 		return _product;
 	},
 
