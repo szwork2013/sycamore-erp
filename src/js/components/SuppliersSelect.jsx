@@ -5,6 +5,10 @@ var SupplierActions = require("../actions/SupplierActions");
 var SuppliersStore = require("../stores/SuppliersStore");
 
 var SuppliersSelect = React.createClass({
+	propTypes: {
+		"onChange": React.PropTypes.func.isRequired,
+		"value": React.PropTypes.any.isRequired
+	},
 	_onChange: function() {
 		this.setState({
 			suppliers: SuppliersStore.getSuppliers()
@@ -16,30 +20,21 @@ var SuppliersSelect = React.createClass({
 	},
 	getInitialState: function() {
 		return {
-			suppliers: SuppliersStore.getSuppliers(),
-			supplier: this.props.value
+			suppliers: SuppliersStore.getSuppliers()
 		};
 	},
 	handleOnInputChange: function(inputValue) {
 		SupplierActions.getSuppliers({ searchQuery: inputValue });
-	},
-	handleOnChange: function(value, selectedOptions) {
-		if(value) {
-			this.setState({ supplier: value });
-		}
-		if(selectedOptions.length == 1) {
-			this.props.onChange(selectedOptions[0]);
-		}
 	},
 	render: function () {
 		return (
 			<Select labelKey={"name"}
 					name={this.props.name}
 					onInputChange={this.handleOnInputChange}
-					onChange={this.handleOnChange}
+					onChange={this.props.onChange}
 					options={this.state.suppliers}
 					valueKey={"_id"}
-					value={this.state.supplier} />
+					value={this.props.value} />
 		);
 	}
 });

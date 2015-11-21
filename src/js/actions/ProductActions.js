@@ -45,7 +45,8 @@ var ProductActions = {
 			name: event.target.value
 		});
 	},
-	selectProductSupplier: function(supplier) {
+	selectProductSupplier: function(supplierId, selectedOptions) {
+		var supplier = selectedOptions[0];
 		AppDispatcher.handleViewAction({
 			actionType: ProductConstants.SELECT_PRODUCT_SUPPLIER,
 			supplier: supplier
