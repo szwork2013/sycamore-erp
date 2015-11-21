@@ -7,6 +7,20 @@ function productController(servicesContainer, modelsContainer) {
 	productController.prototype.modelsContainer = modelsContainer;
 }
 
+productController.prototype.getProduct = function(id, callback) {
+	var d = domain.create();
+	
+	d.on("error", next);
+	
+	d.run(function() {
+		if(id != null) {
+			Product.findOne({ _id: id }).populate([{ path: "supplier" }]).exec(callback);
+		} else {
+			callback();
+		}
+	});
+}
+
 productController.prototype.editProductAction = function(request, response, next) {
 	var d = domain.create();
 	
@@ -19,7 +33,7 @@ productController.prototype.editProductAction = function(request, response, next
 		if(typeof(request.params.id) != "undefined") {
 			id = request.params.id;
 
-			Product.findOne({ _id: id }).populate([{ path: "supplier" }]).exec(d.intercept(function(product) {
+			productController.prototype.getProduct(id, d.intercept(function(product) {
 				if(product != null) {
 					response.locals.product = product;
 					switch(request.params.contentType) {
@@ -121,29 +135,38 @@ productController.prototype.saveProductAction = function(request, response, next
 		var data,
 			id;
 
-		if(typeof(request.body.product) != "undefined") {
-			var data = request.body.product;
-			
-			if(typeof(request.params.id) == "undefined") {
-// Create
-				delete data._id;
-
-				Product.create(data, d.intercept(function(createdProduct) {
-					response.json(createdProduct);
-				}));
-			} else {
-// Update
-				var id = request.params.id;
-				delete data._id;
-								
-				Product.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedProduct) {
-					response.json(updatedProduct);
-				}));
-			}
-		} else {
+		async.waterfall(
+			[
+				function(callback) {
+					if(typeof(request.body.product) != "undefined") {
+						data = request.body.product;
+						callback(null, data);
+					} else {
 // Throw 400 - Bad Request
-			next(new Error("400 - Bad Request"));
-		}
+						callback(new Error("400 - Bad Request"));
+					}
+				},
+				function(data, callback) {
+					if(typeof(request.params.id) == "undefined") {
+// Create
+						delete data._id;
+						Product.create(data, callback);
+					} else {
+// Update
+						var id = request.params.id;
+						delete data._id;						
+						Product.findByIdAndUpdate(id, { $set: data }, {}, callback);
+					}
+				},
+				function(product, callback) {
+// Populate
+					productController.prototype.getProduct(product._id, callback);
+				}
+			],
+			d.intercept(function(product) {
+				response.json(product);
+			})
+		);
 	});
 }
 
