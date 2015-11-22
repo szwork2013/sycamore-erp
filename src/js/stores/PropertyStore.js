@@ -63,6 +63,19 @@ var PropertyStore = assign({}, EventEmitter.prototype, {
 	},
 
 	loadData: function(property) {
+		_property = {
+			_id: null,
+			accessArrangements: null,
+			address: {
+				line1: null,
+				line2: null,
+				line3: null,
+				line4: null,
+				postCode: null
+			},
+			telephone: null
+		};
+		
 		if(property != null) {
 			if(typeof(property._id) != "undefined") {
 				_property._id = property._id;

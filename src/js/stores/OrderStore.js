@@ -147,6 +147,8 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 
 	loadData: function(order) {
 		_order = order;
+		CustomerStore.loadData(order.customer);
+		PropertyStore.loadData(order.property);
 		this.emitChange();
 	},
 
