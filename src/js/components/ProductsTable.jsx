@@ -31,7 +31,7 @@ var ProductsTable = React.createClass({
 								<label className="inline">Add Product</label>
 							</div>
 							<div className="large-6 columns">
-								<ProductsSelect onChange={this.handleProductChange} value={this.product._id} />
+								<ProductsSelect onChange={this.handleProductChange} value={this.state.product._id} />
 							</div>
 							<div className="large-2 columns end">
 								<a className="button tiny radius fancy" onClick={this.handleAddProduct}>Add Product</a>
