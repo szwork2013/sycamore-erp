@@ -4,22 +4,22 @@ var Property = require("./Property");
 var PropertiesSelect = require("./PropertiesSelect");
 
 var OrderActions = require("../actions/OrderActions");
-var OrderStore = require("../stores/OrderStore");
+var PropertyStore = require("../stores/PropertyStore");
 
 var CreditEditProperty = React.createClass({
 	_onChange: function() {
 		this.setState({
-			property: OrderStore.getProperty()
+			property: PropertyStore.getProperty()
 		});
 	},
 	getInitialState: function() {
 		return {
-			property: OrderStore.getProperty(),
+			property: PropertyStore.getProperty(),
 			propertyModalIsOpen: false
 		}
 	},
 	componentDidMount: function() {
-		OrderStore.addChangeListener(this._onChange);
+		PropertyStore.addChangeListener(this._onChange);
 	},
 	openPropertyModal: function() {
 		this.setState({propertyModalIsOpen: true});

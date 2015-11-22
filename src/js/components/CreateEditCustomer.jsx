@@ -4,22 +4,22 @@ var Customer = require("./Customer");
 var CustomersSelect = require("./CustomersSelect");
 
 var OrderActions = require("../actions/OrderActions");
-var OrderStore = require("../stores/OrderStore");
+var CustomerStore = require("../stores/CustomerStore");
 
 var CreditEditCustomer = React.createClass({
 	_onChange: function() {
 		this.setState({
-			customer: OrderStore.getCustomer()
+			customer: CustomerStore.getCustomer()
 		});
 	},
 	getInitialState: function() {
 		return {
-			customer: OrderStore.getCustomer(),
+			customer: CustomerStore.getCustomer(),
 			customerModalIsOpen: false
 		}
 	},
 	componentDidMount: function() {
-		OrderStore.addChangeListener(this._onChange);
+		CustomerStore.addChangeListener(this._onChange);
 	},
 	openCustomerModal: function() {
 		this.setState({ customerModalIsOpen: true });

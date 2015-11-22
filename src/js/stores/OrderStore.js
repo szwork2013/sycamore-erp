@@ -4,6 +4,9 @@ var OrderConstants = require("../constants/OrderConstants");
 var assign = require("object-assign");
 var async = require("async");
 
+var CustomerStore = require("./CustomerStore");
+var PropertyStore = require("./PropertyStore");
+
 var _order = {
 	_id: null,
 	customer: {
@@ -69,7 +72,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	},
 
 	getCustomer: function() {
-		return _order.customer;
+		return CustomerStore.getCustomer();
 	},
 
 	getOrder: function() {
@@ -127,7 +130,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	},
 
 	getProperty: function() {
-		return _order.property;
+		return PropertyStore.getProperty();
 	},
 
 	getSubTotal: function() {
@@ -148,7 +151,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	},
 
 	setCustomer: function(customer) {
-		_order.customer = customer;
+		CustomerStore.loadData(customer);
 	},
 
 	setProducts: function(products) {
@@ -156,7 +159,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	},
 
 	setProperty: function(property) {
-		_order.property = property;
+		PropertyStore.loadData(customer);
 	},
 
 	setProductQuantity: function(productIndex, value, callback) {
