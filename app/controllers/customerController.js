@@ -1,10 +1,26 @@
 var domain = require("domain");
+var async = require("async");
 
 var getListItems = require("../../../../app/lib/controller/getListItems.js");
 
 function customerController(servicesContainer, modelsContainer) {
 	customerController.prototype.servicesContainer = servicesContainer;
 	customerController.prototype.modelsContainer = modelsContainer;
+}
+
+customerController.prototype.getCustomer = function(id, callback) {
+	var d = domain.create();
+	
+	d.on("error", callback);
+	
+	d.run(function() {
+		if(id != null) {
+			var Customer = customerController.prototype.modelsContainer.getModel("Customer");
+			Customer.findOne({ _id: id }).exec(callback);
+		} else {
+			callback();
+		}
+	});
 }
 
 customerController.prototype.editCustomerAction = function(request, response, next) {
@@ -19,7 +35,7 @@ customerController.prototype.editCustomerAction = function(request, response, ne
 		if(typeof(request.params.id) != "undefined") {
 			id = request.params.id;
 
-			Customer.findOne({ _id: id }, d.intercept(function(customer) {
+			customerController.prototype.getCustomer(id, d.intercept(function(customer) {
 				if(customer != null) {
 					response.locals.customer = customer;
 					switch(request.params.contentType) {
@@ -115,29 +131,38 @@ customerController.prototype.saveCustomerAction = function(request, response, ne
 		var data,
 			id;
 
-		if(typeof(request.body.customer) != "undefined") {
-			var data = request.body.customer;
-			
-			if(typeof(request.params.id) == "undefined") {
-// Create
-				delete data._id;
-				
-				Customer.create(data, d.intercept(function(createdCustomer) {
-					response.json(createdCustomer);
-				}));
-			} else {
-// Update
-				var id = request.params.id;
-				delete data._id;
-				
-				Customer.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedCustomer) {
-					response.json(updatedCustomer);
-				}));
-			}
-		} else {
+		async.waterfall(
+			[
+				function(callback) {
+					if(typeof(request.body.customer) != "undefined") {
+						data = request.body.customer;
+						callback(null, data);
+					} else {
 // Throw 400 - Bad Request
-			next(new Error("400 - Bad Request"));
-		}
+						callback(new Error("400 - Bad Request"));
+					}
+				},
+				function(data, callback) {
+					if(typeof(request.params.id) == "undefined") {
+// Create
+						delete data._id;
+						Customer.create(data, callback);
+					} else {
+// Update
+						var id = request.params.id;
+						delete data._id;						
+						Customer.findByIdAndUpdate(id, { $set: data }, {}, callback);
+					}
+				},
+				function(customer, callback) {
+// Populate
+					customerController.prototype.getCustomer(customer._id, callback);
+				}
+			],
+			d.intercept(function(customer) {
+				response.json(customer);
+			})
+		);
 	});
 }
 

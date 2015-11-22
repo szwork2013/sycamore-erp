@@ -4,8 +4,7 @@ exports.propertySchema = function() {
 	return new Mongoose.Schema({
 		metadata:						{ type: Mongoose.Schema.Types.Mixed },
 		customer:						{ type: Mongoose.Schema.Types.ObjectId, ref: "Customer" },
-		name:							{ type: String },
-		billingAddress:					{
+		address:						{
 			line1:						{ type: String },
 			line2:						{ type: String },
 			line3:						{ type: String },

@@ -1,4 +1,5 @@
 var domain = require("domain");
+var async = require("async");
 
 var getListItems = require("../../../../app/lib/controller/getListItems.js");
 

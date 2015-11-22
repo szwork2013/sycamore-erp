@@ -6,7 +6,9 @@ var OrderActions = require("../actions/OrderActions");
 var ProductsTable = React.createClass({
 	getInitialState: function() {
 		return {
-			product: null
+			product: {
+				_id: null
+			}
 		};
 	},
 	handleAddProduct: function() {

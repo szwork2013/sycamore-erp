@@ -1,6 +1,4 @@
 var domain = require("domain");
-var React = require("react");
-var ReactDOMServer = require("react-dom/server");
 var async = require("async");
 
 var getListItems = require("../../../../app/lib/controller/getListItems.js");
@@ -8,6 +6,21 @@ var getListItems = require("../../../../app/lib/controller/getListItems.js");
 function supplierController(servicesContainer, modelsContainer) {
 	supplierController.prototype.servicesContainer = servicesContainer;
 	supplierController.prototype.modelsContainer = modelsContainer;
+}
+
+supplierController.prototype.getSupplier = function(id, callback) {
+	var d = domain.create();
+	
+	d.on("error", callback);
+	
+	d.run(function() {
+		if(id != null) {
+			var Supplier = supplierController.prototype.modelsContainer.getModel("Supplier");
+			Supplier.findOne({ _id: id }).exec(callback);
+		} else {
+			callback();
+		}
+	});
 }
 
 supplierController.prototype.editSupplierAction = function(request, response, next) {
@@ -75,12 +88,7 @@ supplierController.prototype.listSuppliersAction = function(request, response, n
 					case 'html':
 					default:
 						response.locals.list = list;
-						response.locals.template = "supplier/List";
-
-						var View = React.createFactory(require("../../lib/views/" + response.locals.template + ".js"));
-						var html = ReactDOMServer.renderToString(View({ locals: response.locals }));
-
-						response.send(html);
+						response.renderReact("supplier/List", response.locals);
 						break;
 				}
 			})
@@ -119,29 +127,38 @@ supplierController.prototype.saveSupplierAction = function(request, response, ne
 		var data,
 			id;
 
-		if(typeof(request.body.supplier) != "undefined") {
-			var data = request.body.supplier;
-
-			if(typeof(request.params.id) == "undefined") {
-// Create
-				delete data._id;
-				
-				Supplier.create(data, d.intercept(function(createdSupplier) {
-					response.json(createdSupplier);
-				}));
-			} else {
-// Update
-				var id = request.params.id;
-				delete data._id;
-				
-				Supplier.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedSupplier) {
-					response.json(updatedSupplier);
-				}));
-			}
-		} else {
+		async.waterfall(
+			[
+				function(callback) {
+					if(typeof(request.body.supplier) != "undefined") {
+						data = request.body.supplier;
+						callback(null, data);
+					} else {
 // Throw 400 - Bad Request
-			next(new Error("400 - Bad Request"));
-		}
+						callback(new Error("400 - Bad Request"));
+					}
+				},
+				function(data, callback) {
+					if(typeof(request.params.id) == "undefined") {
+// Create
+						delete data._id;
+						Supplier.create(data, callback);
+					} else {
+// Update
+						var id = request.params.id;
+						delete data._id;						
+						Supplier.findByIdAndUpdate(id, { $set: data }, {}, callback);
+					}
+				},
+				function(supplier, callback) {
+// Populate
+					supplierController.prototype.getSupplier(supplier._id, callback);
+				}
+			],
+			d.intercept(function(supplier) {
+				response.json(supplier);
+			})
+		);
 	});
 }
 
