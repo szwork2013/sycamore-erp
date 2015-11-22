@@ -12,7 +12,12 @@ var Property = React.createClass({
 		"editable": React.PropTypes.bool.isRequired,
 		"isNew": React.PropTypes.bool.isRequired
 	},
-	_onChange: function() {
+	_onCustomerChange: function() {
+		this.setState({
+			customer: CustomerStore.getCustomer()
+		});
+	},
+	_onPropertyChange: function() {
 		this.setState({
 			property: {
 				_id: PropertyStore.getId(),
@@ -30,7 +35,8 @@ var Property = React.createClass({
 		});
 	},
 	componentDidMount: function() {
-		PropertyStore.addChangeListener(this._onChange);
+		CustomerStore.addChangeListener(this._onCustomerChange);
+		PropertyStore.addChangeListener(this._onPropertyChange);
 		PropertyStore.loadData(this.props.property);
 	},
 	getInitialState: function() {
