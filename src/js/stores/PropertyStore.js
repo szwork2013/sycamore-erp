@@ -163,6 +163,10 @@ var PropertyStore = assign({}, EventEmitter.prototype, {
 		_property.address.postCode = postCode;
 	},
 
+	setCustomer: function(customer) {
+		CustomerStore.loadData(customer);
+	},
+
 	setTelephone: function(telephone) {
 		_property.telephone = telephone;
 	}
