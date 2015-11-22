@@ -4,12 +4,22 @@ var Customer = require("./Customer");
 var CustomersSelect = require("./CustomersSelect");
 
 var OrderActions = require("../actions/OrderActions");
+var OrderStore = require("../stores/CustomerStore");
 
 var CreditEditCustomer = React.createClass({
+	_onChange: function() {
+		this.setState({
+			customer: OrderStore.getCustomer()
+		});
+	},
 	getInitialState: function() {
 		return {
+			customer: OrderStore.getCustomer(),
 			customerModalIsOpen: false
 		}
+	},
+	componentDidMount: function() {
+		OrderStore.addChangeListener(this._onChange);
 	},
 	openCustomerModal: function() {
 		this.setState({ customerModalIsOpen: true });
@@ -18,8 +28,6 @@ var CreditEditCustomer = React.createClass({
 		this.setState({ customerModalIsOpen: false });
 	},
 	render: function () {
-		var customer = this.props.customer;
-
 		return (
 			<fieldset>
 				<div className="row">
@@ -27,7 +35,7 @@ var CreditEditCustomer = React.createClass({
 						<label className="inline">Customer</label>
 					</div>
 					<div className="large-8 columns">
-						<CustomersSelect onChange={OrderActions.setCustomerOnOrder} value={customer._id} />
+						<CustomersSelect onChange={OrderActions.setCustomerOnOrder} value={this.state.customer._id} />
 					</div>
 					<div className="large-2 columns">
 						<input className="right fancy radius button tiny" type="button" value="New" onClick={this.openCustomerModal} />
@@ -44,11 +52,11 @@ var CreditEditCustomer = React.createClass({
 					</div>
 					<div className="row">
 						<div className="large-6 columns">
-							<Customer customer={customer} editable={true} isNew={true} />
+							<Customer customer={this.state.customer} editable={true} isNew={true} />
 						</div>
 					</div>
 				</Modal>
-				<Customer customer={customer} editable={false} isNew={false} />
+				<Customer customer={this.state.customer} editable={false} isNew={false} />
 			</fieldset>
 		);
 	}

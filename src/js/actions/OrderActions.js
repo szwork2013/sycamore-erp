@@ -46,7 +46,7 @@ var OrderActions = {
 		var queryOptions = {
 			customer: customer._id
 		};
-		Api.getProperties(queryOptions, function(error, response) {
+		Api.getProperties(queryOptions, function(response) {
 			AppDispatcher.handleViewAction({
 				actionType: OrderConstants.UPDATE_PROPERTIES,
 				items: response.body.items
