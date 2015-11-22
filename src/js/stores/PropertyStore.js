@@ -87,12 +87,11 @@ var PropertyStore = assign({}, EventEmitter.prototype, {
 	},
 
 	loadData: function(property) {
-		if(	(typeof property.customer !== "undefined") && (typeof property.customer === "object") ) {
-			CustomerStore.loadData(property.customer);
-		}
 		_property = {
 			_id: null,
-			customer: CustomerStore.getCustomer(),
+			customer: {
+				_id: null
+			},
 			accessArrangements: null,
 			address: {
 				line1: null,
@@ -105,29 +104,33 @@ var PropertyStore = assign({}, EventEmitter.prototype, {
 		};
 		
 		if(property != null) {
-			if(typeof(property._id) != "undefined") {
+			if(typeof property._id != "undefined") {
 				_property._id = property._id;
 			}
-			if(typeof(property.accessArrangements) != "undefined") {
+			if(	(typeof property.customer !== "undefined") && (typeof property.customer === "object") ) {
+				CustomerStore.loadData(property.customer);
+				_property.customer = CustomerStore.getCustomer();
+			}
+			if(typeof property.accessArrangements != "undefined") {
 				this.setAccessArrangements(property.accessArrangements);
 			}
-			if(typeof(property.telephone) != "undefined") {
+			if(typeof property.telephone != "undefined") {
 				this.setTelephone(property.telephone);
 			}
-			if(typeof(property.address) != "undefined") {
-				if(typeof(property.address.line1) != "undefined") {
+			if(typeof property.address != "undefined") {
+				if(typeof property.address.line1 != "undefined") {
 					this.setAddressLine1(property.address.line1);
 				}
-				if(typeof(property.address.line2) != "undefined") {
+				if(typeof property.address.line2 != "undefined") {
 					this.setAddressLine2(property.address.line2);
 				}
-				if(typeof(property.address.line3) != "undefined") {
+				if(typeof property.address.line3 != "undefined") {
 					this.setAddressLine3(property.address.line3);
 				}
-				if(typeof(property.address.line4) != "undefined") {
+				if(typeof property.address.line4 != "undefined") {
 					this.setAddressLine4(property.address.line4);
 				}
-				if(typeof(property.address.postCode) != "undefined") {
+				if(typeof property.address.postCode != "undefined") {
 					this.setAddressPostCode(property.address.postCode);
 				}
 			}
