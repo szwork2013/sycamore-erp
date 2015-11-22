@@ -79,7 +79,8 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		var order,
 			id,
 			customer,
-			property;
+			property,
+			products;
 
 		order = {
 			products: [],
