@@ -3,6 +3,8 @@ var React = require("react");
 var PropertyActions = require("../actions/PropertyActions");
 var PropertyStore = require("../stores/PropertyStore");
 
+var CustomerStore = require("../stores/CustomerStore");
+
 var Property = React.createClass({
 	"propTypes": {
 		"property": React.PropTypes.object,
@@ -13,6 +15,7 @@ var Property = React.createClass({
 		this.setState({
 			property: {
 				_id: PropertyStore.getId(),
+				customer: CustomerStore.getCustomer(),
 				accessArrangements: PropertyStore.getAccessArrangements(),
 				address: {
 					line1: PropertyStore.getAddressLine1(),
@@ -33,6 +36,7 @@ var Property = React.createClass({
 		return {
 			property: {
 				_id: PropertyStore.getId(),
+				customer: CustomerStore.getCustomer(),
 				accessArrangements: PropertyStore.getAccessArrangements(),
 				address: {
 					line1: PropertyStore.getAddressLine1(),
@@ -48,6 +52,14 @@ var Property = React.createClass({
 	render: function () {
 		return (
 			<div>
+				<div className="row">
+					<div className="large-4 columns">
+						<label className="right inline">Customer</label>
+					</div>
+					<div className="large-8 columns">
+						<CustomersSelect onChange={PropertyActions.setCustomerOnProperty} value={this.state.property.customer._id} />
+					</div>
+				</div>
 				<fieldset>
 					<label>Property Address</label>
 					<div className="row">

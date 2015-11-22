@@ -44,7 +44,9 @@ var OrderActions = {
 			customer: customer
 		});
 		var queryOptions = {
-			customer: customer._id
+			filter: {
+				customer: customer._id
+			}
 		};
 		Api.getProperties(queryOptions, function(response) {
 			AppDispatcher.handleViewAction({

@@ -39,6 +39,13 @@ var PropertyActions = {
 			);
 		}
 	},
+	setCustomerOnProperty: function(value, selectedOptions) {
+		var customer = selectedOptions[0];
+		AppDispatcher.handleViewAction({
+			actionType: PropertyConstants.SET_CUSTOMER_ON_PROPERTY,
+			customer: customer
+		});
+	},
 	updatePropertyAddressLine1: function(event) {
 		AppDispatcher.handleViewAction({
 			actionType: PropertyConstants.UPDATE_PROPERTY_ADDRESS_LINE1,
