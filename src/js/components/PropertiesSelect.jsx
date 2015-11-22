@@ -5,6 +5,17 @@ var PropertyActions = require("../actions/PropertyActions");
 var PropertiesStore = require("../stores/PropertiesStore");
 
 var PropertiesSelect = React.createClass({
+	"propTypes": {
+		"onChange": React.PropTypes.func.isRequired,
+		"value": React.PropTypes.any
+	},
+	getDefaultProps: function() {
+		var onChange = function(value, selectedOptions) {};
+		return {
+			"onChange": onChange,
+			"value": null
+		};
+	},
 	_onChange: function() {
 		this.setState({
 			properties: PropertiesStore.getProperties()
@@ -16,30 +27,21 @@ var PropertiesSelect = React.createClass({
 	},
 	getInitialState: function() {
 		return {
-			properties: PropertiesStore.getProperties(),
-			property: null
+			properties: PropertiesStore.getProperties()
 		};
 	},
 	handleOnInputChange: function(inputValue) {
 		PropertyActions.getProperties({ searchQuery: inputValue });
-	},
-	handleOnChange: function(value, selectedOptions) {
-		if(value) {
-			this.setState({ property: value });
-		}
-		if(selectedOptions.length == 1) {
-			this.props.onChange(selectedOptions[0]);
-		}
 	},
 	render: function () {
 		return (
 			<Select labelKey={"name"}
 					name={this.props.name}
 					onInputChange={this.handleOnInputChange}
-					onChange={this.handleOnChange}
+					onChange={this.props.onChange}
 					options={this.state.properties}
 					valueKey={"_id"}
-					value={this.state.property} />
+					value={this.props.value} />
 		);
 	}
 });

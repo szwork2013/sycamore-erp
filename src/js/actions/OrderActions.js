@@ -37,7 +37,8 @@ var OrderActions = {
 			product: product
 		});
 	},
-	setCustomerOnOrder: function(customer) {
+	setCustomerOnOrder: function(value, selectedOptions) {
+		var customer = selectedOptions[0];
 		AppDispatcher.handleViewAction({
 			actionType: OrderConstants.SET_CUSTOMER_ON_ORDER,
 			customer: customer
@@ -59,7 +60,8 @@ var OrderActions = {
 			value: event.target.value
 		});
 	},
-	setPropertyOnOrder: function(property) {
+	setPropertyOnOrder: function(value, selectedOptions) {
+		var property = selectedOptions[0];
 		AppDispatcher.handleViewAction({
 			actionType: OrderConstants.SET_PROPERTY_ON_ORDER,
 			property: property

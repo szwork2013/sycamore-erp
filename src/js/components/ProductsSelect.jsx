@@ -5,6 +5,17 @@ var ProductActions = require("../actions/ProductActions");
 var ProductsStore = require("../stores/ProductsStore");
 
 var ProductsSelect = React.createClass({
+	"propTypes": {
+		"onChange": React.PropTypes.func.isRequired,
+		"value": React.PropTypes.any
+	},
+	getDefaultProps: function() {
+		var onChange = function(value, selectedOptions) {};
+		return {
+			"onChange": onChange,
+			"value": null
+		};
+	},
 	_onChange: function() {
 		this.setState({
 			products: ProductsStore.getProducts()
@@ -16,30 +27,21 @@ var ProductsSelect = React.createClass({
 	},
 	getInitialState: function() {
 		return {
-			products: ProductsStore.getProducts(),
-			product: null
+			products: ProductsStore.getProducts()
 		};
 	},
 	handleOnInputChange: function(inputValue) {
 		ProductActions.getProducts({ searchQuery: inputValue });
-	},
-	handleOnChange: function(value, selectedOptions) {
-		if(value) {
-			this.setState({ product: value });
-		}
-		if(selectedOptions.length == 1) {
-			this.props.onChange(selectedOptions[0]);
-		}
 	},
 	render: function () {
 		return (
 			<Select labelKey={"name"}
 					name={this.props.name}
 					onInputChange={this.handleOnInputChange}
-					onChange={this.handleOnChange}
+					onChange={this.props.onChange}
 					options={this.state.products}
 					valueKey={"_id"}
-					value={this.state.product} />
+					value={this.props.value} />
 		);
 	}
 });

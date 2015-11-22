@@ -5,6 +5,17 @@ var CustomerActions = require("../actions/CustomerActions");
 var CustomersStore = require("../stores/CustomersStore");
 
 var CustomersSelect = React.createClass({
+	"propTypes": {
+		"onChange": React.PropTypes.func.isRequired,
+		"value": React.PropTypes.any
+	},
+	getDefaultProps: function() {
+		var onChange = function(value, selectedOptions) {};
+		return {
+			"onChange": onChange,
+			"value": null
+		};
+	},
 	_onChange: function() {
 		this.setState({
 			customers: CustomersStore.getCustomers()
@@ -16,30 +27,21 @@ var CustomersSelect = React.createClass({
 	},
 	getInitialState: function() {
 		return {
-			customers: CustomersStore.getCustomers(),
-			customer: null
+			customers: CustomersStore.getCustomers()
 		};
 	},
 	handleOnInputChange: function(inputValue) {
 		CustomerActions.getCustomers({ searchQuery: inputValue });
-	},
-	handleOnChange: function(value, selectedOptions) {
-		if(value) {
-			this.setState({ customer: value });
-		}
-		if(selectedOptions.length == 1) {
-			this.props.onChange(selectedOptions[0]);
-		}
 	},
 	render: function () {
 		return (
 			<Select labelKey={"name"}
 					name={this.props.name}
 					onInputChange={this.handleOnInputChange}
-					onChange={this.handleOnChange}
+					onChange={this.props.onChange}
 					options={this.state.customers}
 					valueKey={"_id"}
-					value={this.state.customer} />
+					value={this.props.value} />
 		);
 	}
 });
