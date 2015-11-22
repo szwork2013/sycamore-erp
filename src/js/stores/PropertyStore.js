@@ -87,7 +87,7 @@ var PropertyStore = assign({}, EventEmitter.prototype, {
 	},
 
 	loadData: function(property) {
-		if(	(typeof order.customer !== "undefined") && (typeof order.customer === "object") ) {
+		if(	(typeof property.customer !== "undefined") && (typeof property.customer === "object") ) {
 			CustomerStore.loadData(property.customer);
 		}
 		_property = {
