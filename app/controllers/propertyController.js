@@ -16,7 +16,7 @@ propertyController.prototype.getProperty = function(id, callback) {
 	d.run(function() {
 		if(id != null) {
 			var Property = propertyController.prototype.modelsContainer.getModel("Property");
-			Property.findOne({ _id: id }).populate([{ select: "customer" }]).exec(callback);
+			Property.findOne({ _id: id }).populate([{ path: "customer" }]).exec(callback);
 		} else {
 			callback();
 		}
@@ -148,7 +148,9 @@ propertyController.prototype.savePropertyAction = function(request, response, ne
 						callback(null, data);
 					} else {
 // Throw 400 - Bad Request
-						callback(new Error("400 - Bad Request"));
+						var error = new Error("400 - Bad Request");
+						error.httpStatus = 400;
+						callback(error);
 					}
 				},
 				function(data, callback) {
