@@ -18,10 +18,7 @@ var ProductsTable = React.createClass({
 		var product = selectedOptions[0];
 		this.setState({ product: product });
 	},
-	render: function () {
-		var order = this.props.order;
-		var products = this.props.products;
-		
+	render: function () {	
 		return (
 			<div>
 				<div className="row">
@@ -67,7 +64,7 @@ var ProductsTable = React.createClass({
 							</div>
 							<div className="table-body">
 								{
-									products.map(function(product, productIndex) {
+									this.props.order.products.map(function(product, productIndex) {
 										return (
 											<div className="table-row" key={productIndex}>
 												<div className="table-cell">
@@ -100,7 +97,7 @@ var ProductsTable = React.createClass({
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">Sub Total</div>
-									<div className="table-cell">{order.subTotal}</div>
+									<div className="table-cell">{this.props.order.subTotal}</div>
 								</div>
 								<div className="table-row">
 									<div className="table-cell">&#160;</div>
@@ -108,7 +105,7 @@ var ProductsTable = React.createClass({
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">VAT</div>
-									<div className="table-cell">{order.VAT}</div>
+									<div className="table-cell">{this.props.order.VAT}</div>
 								</div>
 								<div className="table-row">
 									<div className="table-cell">&#160;</div>
@@ -116,7 +113,7 @@ var ProductsTable = React.createClass({
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell"><strong>Total</strong></div>
-									<div className="table-cell">{order.total}</div>
+									<div className="table-cell">{this.props.order.total}</div>
 								</div>
 								<div className="table-row">
 									<div className="table-cell">
