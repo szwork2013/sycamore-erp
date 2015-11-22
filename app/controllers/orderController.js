@@ -7,19 +7,34 @@ function orderController(servicesContainer, modelsContainer) {
 	orderController.prototype.modelsContainer = modelsContainer;
 }
 
+orderController.prototype.getOrder = function(id, callback) {
+	var d = domain.create();
+	
+	d.on("error", callback);
+	
+	d.run(function() {
+		if(id != null) {
+			var Order = orderController.prototype.modelsContainer.getModel("Order");
+			Order.findOne({ _id: id }).populate([{ path: "customer"}, { path: "property" }, { path: "products.product" }]).exec(callback);
+		} else {
+			callback();
+		}
+	});
+}
+
 orderController.prototype.editOrderAction = function(request, response, next) {
 	var d = domain.create();
 	
 	d.on("error", next);
 	
 	d.run(function() {
-		var Order = orderController.prototype.modelsContainer.getModel("Order");
+
 		var id;
 
 		if(typeof(request.params.id) != "undefined") {
 			id = request.params.id;
 
-			Order.findOne({ _id: id }).populate([{ path: "customer"}, { path: "property" }, { path: "products.product" }]).exec(d.intercept(function(order) {
+			orderController.prototype.getOrder(id, d.intercept(function(order) {
 				if(order != null) {
 					response.locals.order = order;
 					switch(request.params.contentType) {
@@ -125,29 +140,38 @@ orderController.prototype.saveOrderAction = function(request, response, next) {
 		var data,
 			id;
 
-		if(typeof(request.body.order) != "undefined") {
-			var data = request.body.order;
-			
-			if(typeof(request.params.id) == "undefined") {
-// Create
-				delete data._id;
-				
-				Order.create(data, d.intercept(function(createdOrder) {
-					response.json(createdOrder);
-				}));
-			} else {
-// Update
-				var id = request.params.id;
-				delete data._id;
-				
-				Order.findByIdAndUpdate(id, { $set: data }, {}, d.intercept(function(updatedOrder) {
-					response.json(updatedOrder);
-				}));
-			}
-		} else {
+		async.waterfall(
+			[
+				function(callback) {
+					if(typeof(request.body.order) != "undefined") {
+						data = request.body.order;
+						callback(null, data);
+					} else {
 // Throw 400 - Bad Request
-			next(new Error("400 - Bad Request"));
-		}
+						callback(new Error("400 - Bad Request"));
+					}
+				},
+				function(data, callback) {
+					if(typeof(request.params.id) == "undefined") {
+// Create
+						delete data._id;
+						Order.create(data, callback);
+					} else {
+// Update
+						var id = request.params.id;
+						delete data._id;						
+						Order.findByIdAndUpdate(id, { $set: data }, {}, callback);
+					}
+				},
+				function(order, callback) {
+// Populate
+					orderController.prototype.getOrder(order._id, callback);
+				}
+			],
+			d.intercept(function(order) {
+				response.json(order);
+			})
+		);
 	});
 }
 

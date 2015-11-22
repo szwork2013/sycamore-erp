@@ -4,12 +4,22 @@ var Property = require("./Property");
 var PropertiesSelect = require("./PropertiesSelect");
 
 var OrderActions = require("../actions/OrderActions");
+var OrderStore = require("../stores/OrderStore");
 
 var CreditEditProperty = React.createClass({
+	_onChange: function() {
+		this.setState({
+			property: OrderStore.getProperty()
+		});
+	},
 	getInitialState: function() {
 		return {
+			property: OrderStore.getProperty(),
 			propertyModalIsOpen: false
 		}
+	},
+	componentDidMount: function() {
+		OrderStore.addChangeListener(this._onChange);
 	},
 	openPropertyModal: function() {
 		this.setState({propertyModalIsOpen: true});
@@ -18,7 +28,6 @@ var CreditEditProperty = React.createClass({
 		this.setState({propertyModalIsOpen: false});
 	},
 	render: function () {
-		var property = this.props.property;
 		var propertyOpts = {};
 
 		return (
@@ -28,7 +37,7 @@ var CreditEditProperty = React.createClass({
 						<label className="inline">Property</label>
 					</div>
 					<div className="large-8 columns">
-						<PropertiesSelect name={"order[property]"} onChange={OrderActions.setPropertyOnOrder} value={property._id} />
+						<PropertiesSelect name={"order[property]"} onChange={OrderActions.setPropertyOnOrder} value={this.state.property._id} />
 					</div>
 					<div className="large-2 columns">
 						<input className="right fancy radius button tiny" type="button" value="New" onClick={this.openPropertyModal} />
@@ -45,11 +54,11 @@ var CreditEditProperty = React.createClass({
 					</div>
 					<div className="row">
 						<div className="large-6 columns">
-							<Property property={property} editable={true} isNew={true} />
+							<Property property={this.state.property} editable={true} isNew={true} />
 						</div>
 					</div>
 				</Modal>
-				<Property property={property} editable={false} isNew={false} />
+				<Property property={this.state.property} editable={false} isNew={false} />
 			</fieldset>
 		);
 	}

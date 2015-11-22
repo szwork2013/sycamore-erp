@@ -4,7 +4,7 @@ var Customer = require("./Customer");
 var CustomersSelect = require("./CustomersSelect");
 
 var OrderActions = require("../actions/OrderActions");
-var OrderStore = require("../stores/CustomerStore");
+var OrderStore = require("../stores/OrderStore");
 
 var CreditEditCustomer = React.createClass({
 	_onChange: function() {
