@@ -3,6 +3,7 @@ var React = require("react");
 var PropertyActions = require("../actions/PropertyActions");
 var PropertyStore = require("../stores/PropertyStore");
 
+var CustomersSelect = require("./CustomersSelect");
 var CustomerStore = require("../stores/CustomerStore");
 
 var Property = React.createClass({
