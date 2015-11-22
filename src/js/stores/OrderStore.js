@@ -78,11 +78,11 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	getOrder: function(callback) {
 		var order,
 			id,
-			customer,
-			property,
 			products;
 
 		order = {
+			customer: CustomerStore.getId(),
+			property: PropertyStore.getId(),
 			products: [],
 			subTotal: this.getSubTotal(),
 			VAT: this.getVAT(),
@@ -93,23 +93,9 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		if(id != null) {
 			order._id = id;
 		}
-		customer = this.getCustomer();
-		if((customer !== null) && (typeof customer !== "object")) {
-			if(typeof customer._id !== "undefined") {
-				order.customer = customer._id;
-			}
-		}
-		property = this.getProperty();
-		if((property !== null) && (typeof property !== "object")) {
-			if(typeof property._id !== "undefined") {
-				order.property = property._id;
-			}
-		}
-
-		products = this.getProducts();
 
 		async.eachSeries(
-			products,
+			this.getProducts(),
 			function(product, callback) {
 				order.products.push({
 					product: product.product._id,
