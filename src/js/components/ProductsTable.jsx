@@ -12,8 +12,9 @@ var ProductsTable = React.createClass({
 	handleAddProduct: function() {
 		OrderActions.addProductToOrder(this.state.product);
 	},
-	handleProductChange: function(value) {
-		this.setState({ product: value });
+	handleProductChange: function(value, selectedOptions) {
+		var product = selectedOptions[0];
+		this.setState({ product: product });
 	},
 	render: function () {
 		var order = this.props.order;
@@ -28,7 +29,7 @@ var ProductsTable = React.createClass({
 								<label className="inline">Add Product</label>
 							</div>
 							<div className="large-6 columns">
-								<ProductsSelect onChange={this.handleProductChange} />
+								<ProductsSelect onChange={this.handleProductChange} value={this.product._id} />
 							</div>
 							<div className="large-2 columns end">
 								<a className="button tiny radius fancy" onClick={this.handleAddProduct}>Add Product</a>
