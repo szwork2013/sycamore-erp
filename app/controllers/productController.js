@@ -14,6 +14,7 @@ productController.prototype.getProduct = function(id, callback) {
 	
 	d.run(function() {
 		if(id != null) {
+			var Product = productController.prototype.modelsContainer.getModel("Product");
 			Product.findOne({ _id: id }).populate([{ path: "supplier" }]).exec(callback);
 		} else {
 			callback();
@@ -27,7 +28,6 @@ productController.prototype.editProductAction = function(request, response, next
 	d.on("error", next);
 	
 	d.run(function() {
-		var Product = productController.prototype.modelsContainer.getModel("Product");
 		var id;
 
 		if(typeof(request.params.id) != "undefined") {
