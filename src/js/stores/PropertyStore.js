@@ -62,7 +62,7 @@ var PropertyStore = assign({}, EventEmitter.prototype, {
 			id;
 
 		property = {
-			customer: CustomerStore.getCustomer(),
+			customer: CustomerStore.getId(),
 			accessArrangements: this.getAccessArrangements(),
 			address: {
 				line1: this.getAddressLine1(),
