@@ -1,3 +1,4 @@
+var domain = require("domain");
 var React = require("react");
 var ReactDOM = require("react-dom");
 var Layout = require("sycamore-platform-components").Layout;
@@ -16,7 +17,17 @@ var OrderActions = require("../../actions/OrderActions");
 
 var View = React.createClass({
 	handleSaveClick: function() {
-		OrderActions.saveOrder(OrderStore.getOrder());
+		var d = domain.create();
+
+		d.on("error", function(error) {
+			console.log(error);
+		});
+
+		d.run(function() {
+			OrderStore.getOrder(d.intercept(function(order) {
+				OrderActions.saveOrder(order);
+			}));
+		});
 	},
 	render: function() {
 		var buttonAction,

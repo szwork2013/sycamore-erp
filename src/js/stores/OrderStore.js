@@ -75,7 +75,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		return CustomerStore.getCustomer();
 	},
 
-	getOrder: function() {
+	getOrder: function(callback) {
 		var order,
 			id,
 			customer,
@@ -121,7 +121,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 				callback();
 			},
 			function(error) {
-				return order;
+				callback(error, order);
 			}
 		);
 	},
