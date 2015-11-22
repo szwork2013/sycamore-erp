@@ -6,8 +6,12 @@ var async = require("async");
 
 var _order = {
 	_id: null,
-	customer: null,
-	property: null,
+	customer: {
+		_id: null
+	},
+	property: {
+		_id: null
+	},
 	products: [],
 	subTotal: 0,
 	VAT: 0,
@@ -35,7 +39,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		async.eachSeries(
 			_order.products,
 			function(product, callback) {
-				product.subTotal = Math.round((product.quantity * product.price) * 100) / 100;
+				product.subTotal = Math.round((product.quantity * product.product.price) * 100) / 100;
 				product.VAT = Math.round((((product.subTotal) * 1.2) - product.subTotal) * 100) / 100;
 				product.total = Math.round((product.subTotal + product.VAT) * 100) / 100;
 
@@ -66,6 +70,56 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 
 	getCustomer: function() {
 		return _order.customer;
+	},
+
+	getOrder: function() {
+		var order,
+			id,
+			customer,
+			property;
+
+		order = {
+			products: [],
+			subTotal: this.getSubTotal(),
+			VAT: this.getVAT(),
+			total: this.getTotal()
+		};
+
+		id = this.getId();
+		if(id != null) {
+			order._id = id;
+		}
+		customer = this.getCustomer();
+		if((customer !== null) && (typeof customer !== "object")) {
+			if(typeof customer._id !== "undefined") {
+				order.customer = customer._id;
+			}
+		}
+		property = this.getProperty();
+		if((property !== null) && (typeof property !== "object")) {
+			if(typeof property._id !== "undefined") {
+				order.property = property._id;
+			}
+		}
+
+		products = this.getProducts();
+
+		async.eachSeries(
+			products,
+			function(product, callback) {
+				order.products.push({
+					product: product.product._id,
+					quantity: product.quantity,
+					subTotal: product.subTotal,
+					VAT: product.VAT,
+					total: product.total
+				});
+				callback();
+			},
+			function(error) {
+				return order;
+			}
+		);
 	},
 
 	getProducts: function() {
