@@ -20,7 +20,7 @@ var Product = React.createClass({
 				price: ProductStore.getPrice(),
 				productCode: ProductStore.getProductCode(),
 				productType: ProductStore.getProductType(),
-				productVariationGroup: null,
+				productVariationGroup: ProductStore.getProductVariationGroup(),
 				supplier: ProductStore.getSupplier()
 			}
 		});
@@ -37,7 +37,7 @@ var Product = React.createClass({
 				price: ProductStore.getPrice(),
 				productCode: ProductStore.getProductCode(),
 				productType: ProductStore.getProductType(),
-				productVariationGroup: getProductVariationGroup(),
+				productVariationGroup: ProductStore.getProductVariationGroup(),
 				supplier: ProductStore.getSupplier()
 			}
 		};

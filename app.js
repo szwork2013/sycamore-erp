@@ -71,7 +71,16 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 						"name": "Purchase Orders",
 						"permission": "SYCAMOREERP_ORDER__MODULE",
 						"url": response.locals.applicationUrl + "orders/"
-					}, {
+					}
+				]
+			}
+		);
+		navigationService.addMenu(
+			{
+				"name": "Stock",
+				"permission": "SYCAMOREERP_STOCK__MODULE",
+				"menu": [
+					{
 						"name": "Products",
 						"permission": "SYCAMOREERP_PRODUCT__MODULE",
 						"url": response.locals.applicationUrl + "products/"
