@@ -27,7 +27,11 @@ var ProductVariationStore = assign({}, EventEmitter.prototype, {
 	},
 
 	getProductVariation: function() {
-		return _productVariation;
+		var productVariation = {
+			name: this.getName()
+		};
+		
+		return productVariation;
 	},
 
 	loadData: function(productVariation) {

@@ -27,7 +27,11 @@ var ProductVariationGroupStore = assign({}, EventEmitter.prototype, {
 	},
 
 	getProductVariationGroup: function() {
-		return _productVariationGroup;
+		var productVariationGroup = {
+			name: this.getName()
+		};
+		
+		return productVariationGroup;
 	},
 
 	loadData: function(productVariationGroup) {

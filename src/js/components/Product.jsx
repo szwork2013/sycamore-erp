@@ -1,6 +1,7 @@
 var React = require("react");
 var Select = require("react-select");
 
+var ProductVariationGroupsSelect = require("./ProductVariationGroupsSelect");
 var SuppliersSelect = require("./SuppliersSelect");
 
 var ProductActions = require("../actions/ProductActions");

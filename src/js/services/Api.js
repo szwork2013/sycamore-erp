@@ -125,7 +125,7 @@ var Api = {
 			.end(d.intercept(callback));
 		});
 	},
-	putProductVariation: function(product, callback) {
+	putProductVariation: function(productVariation, callback) {
 		var d = domain.create();
 
 		d.on("error", this.handleError);
@@ -133,13 +133,13 @@ var Api = {
 		d.run(function() {
 			request
 			.put("/sycamore-erp/productVariation")
-			.send({ product: product })
+			.send({ productVariation: productVariation })
 			.set("Accept", "application/json")
 			.set("Content-Type", "application/json")
 			.end(d.intercept(callback));
 		});
 	},
-	putProductVariationGroup: function(product, callback) {
+	putProductVariationGroup: function(productVariationGroup, callback) {
 		var d = domain.create();
 
 		d.on("error", this.handleError);
@@ -147,7 +147,7 @@ var Api = {
 		d.run(function() {
 			request
 			.put("/sycamore-erp/productVariationGroup")
-			.send({ product: product })
+			.send({ productVariationGroup: productVariationGroup })
 			.set("Accept", "application/json")
 			.set("Content-Type", "application/json")
 			.end(d.intercept(callback));
