@@ -31,6 +31,32 @@ var Api = {
 			.end(d.intercept(callback));
 		});
 	},
+	getProductVariations: function(queryOptions, callback) {
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.get("/sycamore-erp/productVariations.json")
+			.send(queryOptions)
+			.set("Accept", "application/json")
+			.end(d.intercept(callback));
+		});
+	},
+	getProductVariationGroups: function(queryOptions, callback) {
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.get("/sycamore-erp/productVariationGroups.json")
+			.send(queryOptions)
+			.set("Accept", "application/json")
+			.end(d.intercept(callback));
+		});
+	},
 	getProperties: function(queryOptions, callback) {
 		var d = domain.create();
 
@@ -93,6 +119,34 @@ var Api = {
 		d.run(function() {
 			request
 			.put("/sycamore-erp/product")
+			.send({ product: product })
+			.set("Accept", "application/json")
+			.set("Content-Type", "application/json")
+			.end(d.intercept(callback));
+		});
+	},
+	putProductVariation: function(product, callback) {
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.put("/sycamore-erp/productVariation")
+			.send({ product: product })
+			.set("Accept", "application/json")
+			.set("Content-Type", "application/json")
+			.end(d.intercept(callback));
+		});
+	},
+	putProductVariationGroup: function(product, callback) {
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.put("/sycamore-erp/productVariationGroup")
 			.send({ product: product })
 			.set("Accept", "application/json")
 			.set("Content-Type", "application/json")
@@ -163,6 +217,34 @@ var Api = {
 		d.run(function() {
 			request
 			.post("/sycamore-erp/product/" + id)
+			.send({ product: product })
+			.set("Accept", "application/json")
+			.set("Content-Type", "application/json")
+			.end(d.intercept(callback));
+		});
+	},
+	postProductVariation: function(id, product, callback) {
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.post("/sycamore-erp/productVariation/" + id)
+			.send({ product: product })
+			.set("Accept", "application/json")
+			.set("Content-Type", "application/json")
+			.end(d.intercept(callback));
+		});
+	},
+	postProductVariationGroup: function(id, product, callback) {
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.post("/sycamore-erp/productVariationGroup/" + id)
 			.send({ product: product })
 			.set("Accept", "application/json")
 			.set("Content-Type", "application/json")

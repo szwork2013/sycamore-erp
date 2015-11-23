@@ -10,28 +10,28 @@ var TabPanel = ReactTabs.TabPanel;
 
 Tabs.setUseDefaultStyles(false);
 
-var Supplier = require("../../components/Supplier");
-var SupplierStore = require("../../stores/SupplierStore");
-var SupplierActions = require("../../actions/SupplierActions");
+var ProductVariationGroup = require("../../components/ProductVariationGroup");
+var ProductVariationGroupStore = require("../../stores/ProductVariationGroupStore");
+var ProductVariationGroupActions = require("../../actions/ProductVariationGroupActions");
 
 var View = React.createClass({
 	handleSaveClick: function() {
-		SupplierActions.saveSupplier(SupplierStore.getSupplier());
+		ProductVariationGroupActions.saveProductVariationGroup(ProductVariationGroupStore.getProductVariationGroup());
 	},
 	render: function() {
 		var buttonAction,
 			pageTitle,
-			supplier;
+			productVariation;
 
-		if(typeof(this.props.locals.supplier) != "undefined") {
-			supplier = this.props.locals.supplier;
+		if(typeof(this.props.locals.productVariation) != "undefined") {
+			productVariation = this.props.locals.productVariation;
 		}
 
-		if((supplier != null) && (typeof(supplier._id) != "undefined")) {
-			pageTitle = "Edit supplier";
+		if((productVariation != null) && (typeof(productVariation._id) != "undefined")) {
+			pageTitle = "Edit product variation";
 			buttonAction = "Save";
 		} else {
-			pageTitle = "New supplier";
+			pageTitle = "New product variation";
 			buttonAction = "Create";
 		}
 
@@ -49,7 +49,7 @@ var View = React.createClass({
 					<TabPanel>
 						<div className="row">
 							<div className="large-6 columns">
-								<Supplier supplier={supplier} editable={true} isNew={true} />
+								<ProductVariationGroup productVariation={productVariation} editable={true} isNew={true} />
 							</div>
 						</div>
 					</TabPanel>
