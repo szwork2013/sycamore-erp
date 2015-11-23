@@ -7,11 +7,13 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 	modelsContainer.addModel("Customer",	require("./models/customerSchema").customerSchema());
 	modelsContainer.addModel("Order",		require("./models/orderSchema").orderSchema());
 	modelsContainer.addModel("Product",		require("./models/productSchema").productSchema());
+	modelsContainer.addModel("ProductVariation",		require("./models/productVariationSchema").productVariationSchema());
+	modelsContainer.addModel("ProductVariationGroup",	require("./models/productVariationGroupSchema").productVariationGroupSchema());
 	modelsContainer.addModel("Property",	require("./models/propertySchema").propertySchema());
 	modelsContainer.addModel("Supplier",	require("./models/supplierSchema").supplierSchema());
 
 	sycamoreErpApplication.prototype.Router	= express.Router();
-	
+
 	sycamoreErpApplication.prototype.Router.use(function(request, response, next) {
 		var d = domain.create();
 
@@ -73,6 +75,20 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 						"name": "Products",
 						"permission": "SYCAMOREERP_PRODUCT__MODULE",
 						"url": response.locals.applicationUrl + "products/"
+					}, {
+						"name": "Product Variations",
+						"permission": "USER__MODULE",
+						"submenu": [
+							{
+								"name": "Variation Groups",
+								"permission": "SYCAMOREERP_VARIATION_GROUP__MODULE",
+								"url": response.locals.applicationUrl + "productVariationGroups/"
+							}, {
+								"name": "Variations",
+								"permission": "SYCAMOREERP_VARIATION__MODULE",
+								"url": response.locals.applicationUrl + "productVariations/"
+							}
+						]
 					}
 				]
 			}

@@ -1,7 +1,19 @@
 var Mongoose = require("mongoose");
 
-exports.supplierSchema =  function() {
+exports.supplierSchema = function() {
 	return new Mongoose.Schema({
-		name:				 { type: String }
+		metadata:						 { type: Mongoose.Schema.Types.Mixed },
+		name:							 { type: String },
+		billingAddress: {
+			line1:						 { type: String },
+			line2:						 { type: String },
+			line3:						 { type: String },
+			line4:						 { type: String },
+			postCode:					 { type: String }
+		},
+		telephone:						 { type: String },
+		email:							 { type: String }
+	}, {
+		collection: "suppliers"
 	});
-}
+};

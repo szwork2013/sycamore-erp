@@ -1,4 +1,5 @@
 var React = require("react");
+var Select = require("react-select");
 
 var SuppliersSelect = require("./SuppliersSelect");
 
@@ -16,9 +17,11 @@ var Product = React.createClass({
 			product: {
 				_id: ProductStore.getId(),
 				name: ProductStore.getName(),
+				price: ProductStore.getPrice(),
 				productCode: ProductStore.getProductCode(),
-				supplier: ProductStore.getSupplier(),
-				price: ProductStore.getPrice()
+				productType: ProductStore.getProductType(),
+				productVariationGroup: null,
+				supplier: ProductStore.getSupplier()
 			}
 		});
 	},
@@ -31,15 +34,35 @@ var Product = React.createClass({
 			product: {
 				_id: ProductStore.getId(),
 				name: ProductStore.getName(),
+				price: ProductStore.getPrice(),
 				productCode: ProductStore.getProductCode(),
-				supplier: ProductStore.getSupplier(),
-				price: ProductStore.getPrice()
+				productType: ProductStore.getProductType(),
+				productVariationGroup: null,
+				supplier: ProductStore.getSupplier()
 			}
 		};
 	},
 	render: function () {
 		return (
 			<div>
+				<div className="row">
+					<div className="large-4 columns">
+						<label className="right inline">Type</label>
+					</div>
+					<div className="large-8 columns">
+						<Select onChange={ProductActions.updateProductType}
+								value={this.state.product.productType}
+								values={[ "Simple", "Configurable", "Package" ]} />
+					</div>
+				</div>
+				<div className="row">
+					<div className="large-4 columns">
+						<label className="right inline">Variation Group</label>
+					</div>
+					<div className="large-8 columns">
+
+					</div>
+				</div>
 				<div className="row">
 					<div className="large-4 columns">
 						<label className="right inline">Name</label>

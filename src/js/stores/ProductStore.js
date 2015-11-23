@@ -11,6 +11,8 @@ var _product = {
 		_id: null
 	},
 	productCode: null,
+	productType: null,
+	productVariationGroup: null,	
 	price: 0
 };
 
@@ -61,6 +63,10 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 		return _product.price;
 	},
 
+	getProductType: function() {
+		return _product.productType;
+	},
+
 	getSupplier: function() {
 		return _product.supplier;
 	},
@@ -102,6 +108,10 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 		_product.price = price;
 	},
 
+	setProductType: function(type) {
+		_product.productType = type;
+	},
+
 	setSupplier: function(supplier) {
 		_product.supplier = supplier;
 	}
@@ -119,6 +129,10 @@ ProductStore.dispatchToken = AppDispatcher.register(function(payload) {
 		break;
 		case ProductConstants.UPDATE_PRODUCT_NAME:
 			ProductStore.setName(action.name);
+			ProductStore.emitChange();
+		break;
+		case ProductConstants.UPDATE_PRODUCT_TYPE:
+			ProductStore.setProductType(action.type);
 			ProductStore.emitChange();
 		break;
 		case ProductConstants.SELECT_PRODUCT_SUPPLIER:

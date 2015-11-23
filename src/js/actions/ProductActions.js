@@ -39,6 +39,12 @@ var ProductActions = {
 			);
 		}
 	},
+	updateProductType: function(value) {
+		AppDispatcher.handleViewAction({
+			actionType: ProductConstants.UPDATE_PRODUCT_TYPE,
+			type: value
+		});
+	},
 	updateProductName: function(event) {
 		AppDispatcher.handleViewAction({
 			actionType: ProductConstants.UPDATE_PRODUCT_NAME,
