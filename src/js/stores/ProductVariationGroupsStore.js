@@ -1,9 +1,9 @@
 var AppDispatcher = require("sycamore-platform-components").Dispatcher;
 var EventEmitter = require("events").EventEmitter;
-var ProductVariationConstants = require("../constants/ProductVariationConstants");
+var ProductVariationGroupConstants = require("../constants/ProductVariationGroupConstants");
 var assign = require("object-assign");
 
-var _suppliers = [];
+var _productVariationGroups = [];
 
 var ProductVariationsStore = assign({}, EventEmitter.prototype, {
 	emitChange: function() {
@@ -11,23 +11,23 @@ var ProductVariationsStore = assign({}, EventEmitter.prototype, {
 	},
 
 	addChangeListener: function(callback) {
-		this.on(ProductVariationConstants.CHANGE_EVENT, callback);
+		this.on(ProductVariationGroupConstants.CHANGE_EVENT, callback);
 	},
 
-	getProductVariations: function() {
-		return _suppliers;
+	getProductVariationGroups: function() {
+		return _productVariationGroups;
 	},
 
-	updateProductVariations: function(items) {
-		_suppliers = items;
+	updateProductVariationGroups: function(items) {
+		_productVariationGroups = items;
 	}
 });
 
 ProductVariationsStore.dispatchToken = AppDispatcher.register(function(payload) {
 	var action = payload.action;
 	switch(action.actionType) {
-		case ProductVariationConstants.UPDATE_PRODUCT_VARIATIONS:
-			ProductVariationsStore.updateProductVariations(action.list.rows);
+		case ProductVariationConstants.UPDATE_PRODUCT_VARIATION_GROUPS:
+			ProductVariationsStore.updateProductVariationGroups(action.list.rows);
 			ProductVariationsStore.emitChange();
 			break;
 		default:
