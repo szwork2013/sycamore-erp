@@ -58,6 +58,13 @@ var ProductActions = {
 			supplier: supplier
 		});
 	},
+	selectProductVariationGroup: function(productVariationGroupId, selectedOptions) {
+		var productVariationGroup = selectedOptions[0];
+		AppDispatcher.handleViewAction({
+			actionType: ProductConstants.SELECT_PRODUCT_VARIATION_GROUP,
+			productVariationGroup: productVariationGroup
+		});
+	},
 	updateProductCode: function(event) {
 		AppDispatcher.handleViewAction({
 			actionType: ProductConstants.UPDATE_PRODUCT_CODE,

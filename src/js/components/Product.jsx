@@ -37,7 +37,7 @@ var Product = React.createClass({
 				price: ProductStore.getPrice(),
 				productCode: ProductStore.getProductCode(),
 				productType: ProductStore.getProductType(),
-				productVariationGroup: null,
+				productVariationGroup: getProductVariationGroup(),
 				supplier: ProductStore.getSupplier()
 			}
 		};
@@ -51,8 +51,8 @@ var Product = React.createClass({
 					</div>
 					<div className="large-8 columns">
 						<Select onChange={ProductActions.updateProductType}
-								value={this.state.product.productType}
-								values={[ "Simple", "Configurable", "Package" ]} />
+								options={[ "Simple", "Configurable", "Package" ]}
+								value={this.state.product.productType} />
 					</div>
 				</div>
 				<div className="row">
@@ -60,7 +60,9 @@ var Product = React.createClass({
 						<label className="right inline">Variation Group</label>
 					</div>
 					<div className="large-8 columns">
-
+						<ProductVariationGroupsSelect onChange={ProductActions.selectProductVariationGroup}
+													  type="text"
+													  value={this.state.product.productVariationGroup._id} />
 					</div>
 				</div>
 				<div className="row">

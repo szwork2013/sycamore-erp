@@ -4,6 +4,9 @@ var ProductConstants = require("../constants/ProductConstants");
 var assign = require("object-assign");
 var async = require("async");
 
+var ProductVariationGroupStore = require("./ProductVariationGroupStore");
+var SupplierStore = require("./SupplierStore");
+
 var _product = {
 	_id: null,
 	name: null,
@@ -12,7 +15,9 @@ var _product = {
 	},
 	productCode: null,
 	productType: null,
-	productVariationGroup: null,	
+	productVariationGroup: {
+		_id: null
+	},	
 	price: 0
 };
 
@@ -31,23 +36,21 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 
 	getProduct: function() {
 		var id,
-			supplier,
 			product;
+
 		product = {
 			name: this.getName(),
 			productCode: this.getProductCode(),
-			price: this.getPrice()
+			price: this.getPrice(),
+			supplier: SupplierStore.getId(),
+			productVariationGroup: ProductVariationGroupStore.getId()
 		};
+
 		id = this.getId();
 		if(id != null) {
 			product._id = id;
 		}
-		supplier = this.getSupplier();
-		if((supplier !== null) && (typeof supplier === 'object')) {
-			if((typeof supplier._id !== "undefined") && (supplier._id !== null)) {
-				product.supplier = supplier._id;
-			}
-		}
+
 		return product;
 	},
 
@@ -67,8 +70,12 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 		return _product.productType;
 	},
 
+	getProductVariationGroup: function() {
+		return ProductVariationGroupStore.getProductVariationGroup();
+	},
+
 	getSupplier: function() {
-		return _product.supplier;
+		return SupplierStore.getSupplier();
 	},
 
 	loadData: function(product) {
@@ -85,8 +92,14 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 			if(typeof(product.price) != "undefined") {
 				this.setPrice(product.price);
 			}
+			if(typeof(product.type) != "undefined") {
+				this.setProductType(product.type);
+			}
 			if(typeof(product.supplier) != "undefined") {
 				this.setSupplier(product.supplier);
+			}
+			if(typeof(product.productVariationGroup) != "undefined") {
+				this.setProductVariationGroup(product.productVariationGroup);
 			}
 		}
 		this.emitChange();
@@ -112,8 +125,12 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 		_product.productType = type;
 	},
 
+	setProductVariationGroup: function(productVariationGroup) {
+		ProductVariationGroupStore.loadData(productVariationGroup);
+	},
+
 	setSupplier: function(supplier) {
-		_product.supplier = supplier;
+		SupplierStore.loadData(supplier);
 	}
 });
 
@@ -141,6 +158,10 @@ ProductStore.dispatchToken = AppDispatcher.register(function(payload) {
 		break;
 		case ProductConstants.UPDATE_PRODUCT_PRICE:
 			ProductStore.setPrice(action.price);
+			ProductStore.emitChange();
+		break;
+		case ProductConstants.UPDATE_PRODUCT_VARIATION_GROUP:
+			ProductStore.setProductVariationGroup(action.productVariationGroup);
 			ProductStore.emitChange();
 		break;
 		default:
