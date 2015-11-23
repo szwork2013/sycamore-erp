@@ -81,6 +81,10 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 				"permission": "SYCAMOREERP_STOCK__MODULE",
 				"menu": [
 					{
+						"name": "Inventory",
+						"permission": "SYCAMOREERP_INVENTORY__MODULE",
+						"url": response.locals.applicationUrl + "inventory/"
+					}, {
 						"name": "Products",
 						"permission": "SYCAMOREERP_PRODUCT__MODULE",
 						"url": response.locals.applicationUrl + "products/"
