@@ -67,7 +67,7 @@ productVariationGroupController.prototype.listProductVariationGroupsAction = fun
 		var list = response.locals.list;
 
 		list.name = "productVariationGroups";
-		list.title = "ProductVariationGroups";
+		list.title = "Product Variation Groups";
 
 		list.columns = [
 			{ name: "name", label: "Name", display: true }

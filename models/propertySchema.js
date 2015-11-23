@@ -13,5 +13,7 @@ exports.propertySchema = function() {
 		},
 		telephone:						 { type: String },
 		accessArrangements:				 { type: String }
+	}, {
+		collection: "properties"
 	});
 }

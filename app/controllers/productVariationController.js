@@ -67,7 +67,7 @@ productVariationController.prototype.listProductVariationsAction = function(requ
 		var list = response.locals.list;
 
 		list.name = "productVariations";
-		list.title = "ProductVariations";
+		list.title = "Product Variations";
 
 		list.columns = [
 			{ name: "name", label: "Name", display: true }
