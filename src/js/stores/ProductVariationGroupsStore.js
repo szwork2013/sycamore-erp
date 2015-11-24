@@ -5,9 +5,9 @@ var assign = require("object-assign");
 
 var _productVariationGroups = [];
 
-var ProductVariationsStore = assign({}, EventEmitter.prototype, {
+var ProductVariationGroupsStore = assign({}, EventEmitter.prototype, {
 	emitChange: function() {
-		this.emit(ProductVariationConstants.CHANGE_EVENT);
+		this.emit(ProductVariationGroupConstants.CHANGE_EVENT);
 	},
 
 	addChangeListener: function(callback) {
@@ -26,13 +26,13 @@ var ProductVariationsStore = assign({}, EventEmitter.prototype, {
 ProductVariationsStore.dispatchToken = AppDispatcher.register(function(payload) {
 	var action = payload.action;
 	switch(action.actionType) {
-		case ProductVariationConstants.UPDATE_PRODUCT_VARIATION_GROUPS:
-			ProductVariationsStore.updateProductVariationGroups(action.list.rows);
-			ProductVariationsStore.emitChange();
+		case ProductVariationGroupConstants.UPDATE_PRODUCT_VARIATION_GROUPS:
+			ProductVariationGroupsStore.updateProductVariationGroups(action.list.rows);
+			ProductVariationGroupsStore.emitChange();
 			break;
 		default:
 			// do nothing
 	}
 });
 
-module.exports = ProductVariationsStore;
+module.exports = ProductVariationGroupsStore;
