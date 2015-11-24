@@ -7,7 +7,7 @@ var ProductVariationActions = {
 	getProductVariations: function(queryOptions) {
 		Api.getProductVariations(queryOptions, function(response) {
 			AppDispatcher.handleViewAction({
-				actionType: ProductVariationConstants.UPDATE_PRODUCT_VARIATION_GROUPS,
+				actionType: ProductVariationConstants.UPDATE_PRODUCT_VARIATIONS,
 				list: response.body
 			});
 		});
@@ -21,7 +21,7 @@ var ProductVariationActions = {
 				productVariation,
 				function(response) {
 					AppDispatcher.handleViewAction({
-						actionType: ProductVariationConstants.UPDATE_PRODUCT_VARIATION_GROUP,
+						actionType: ProductVariationConstants.UPDATE_PRODUCT_VARIATION,
 						productVariation: response.body
 					});
 				}
@@ -32,7 +32,7 @@ var ProductVariationActions = {
 				productVariation,
 				function(response) {
 					AppDispatcher.handleViewAction({
-						actionType: ProductVariationConstants.UPDATE_PRODUCT_VARIATION_GROUP,
+						actionType: ProductVariationConstants.UPDATE_PRODUCT_VARIATION,
 						productVariation: response.body
 					});
 				}
@@ -41,13 +41,13 @@ var ProductVariationActions = {
 	},
 	updateProductVariationLabel: function(event) {
 		AppDispatcher.handleViewAction({
-			actionType: ProductVariationConstants.UPDATE_PRODUCT_VARIATION_GROUP_LABEL,
+			actionType: ProductVariationConstants.UPDATE_PRODUCT_VARIATION_LABEL,
 			label: event.target.value
 		});
 	},
 	updateProductVariationName: function(event) {
 		AppDispatcher.handleViewAction({
-			actionType: ProductVariationConstants.UPDATE_PRODUCT_VARIATION_GROUP_NAME,
+			actionType: ProductVariationConstants.UPDATE_PRODUCT_VARIATION_NAME,
 			name: event.target.value
 		});
 	}
