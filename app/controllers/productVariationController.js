@@ -70,6 +70,7 @@ productVariationController.prototype.listProductVariationsAction = function(requ
 		list.title = "Product Variations";
 
 		list.columns = [
+			{ name: "label", label: "Label", display: true },
 			{ name: "name", label: "Name", display: true }
 		];
 
