@@ -16,7 +16,7 @@ productController.prototype.getProduct = function(id, callback) {
 	d.run(function() {
 		if(id != null) {
 			var Product = productController.prototype.modelsContainer.getModel("Product");
-			Product.findOne({ _id: id }).populate([{ path: "productVariationGroup" },  path: "supplier" }]).exec(callback);
+			Product.findOne({ _id: id }).populate([{ path: "productVariationGroup" }, { path: "supplier" }]).exec(callback);
 		} else {
 			callback();
 		}
