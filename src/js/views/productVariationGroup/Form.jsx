@@ -21,17 +21,17 @@ var View = React.createClass({
 	render: function() {
 		var buttonAction,
 			pageTitle,
-			productVariation;
+			productVariationGroup;
 
-		if(typeof(this.props.locals.productVariation) != "undefined") {
-			productVariation = this.props.locals.productVariation;
+		if(typeof(this.props.locals.productVariationGroup) != "undefined") {
+			productVariationGroup = this.props.locals.productVariationGroup;
 		}
 
-		if((productVariation != null) && (typeof(productVariation._id) != "undefined")) {
-			pageTitle = "Edit product variation";
+		if((productVariationGroup != null) && (typeof(productVariationGroup._id) != "undefined")) {
+			pageTitle = "Edit product variation group";
 			buttonAction = "Save";
 		} else {
-			pageTitle = "New product variation";
+			pageTitle = "New product variation group";
 			buttonAction = "Create";
 		}
 
@@ -49,7 +49,7 @@ var View = React.createClass({
 					<TabPanel>
 						<div className="row">
 							<div className="large-6 columns">
-								<ProductVariationGroup productVariation={productVariation} editable={true} isNew={true} />
+								<ProductVariationGroup productVariationGroup={productVariationGroup} editable={true} isNew={true} />
 							</div>
 						</div>
 					</TabPanel>
