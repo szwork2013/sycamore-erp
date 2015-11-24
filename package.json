@@ -1,6 +1,6 @@
 {
   "name": "sycamore-erp",
-  "version": "0.0.244",
+  "version": "0.0.245",
   "description": "Enterprise Resource Management App for Sycamore Platform",
   "main": "app.js",
   "scripts": {
