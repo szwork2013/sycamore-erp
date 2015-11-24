@@ -10,14 +10,8 @@ var SupplierStore = require("./SupplierStore");
 var _product = {
 	_id: null,
 	name: null,
-	supplier: {
-		_id: null
-	},
 	productCode: null,
 	productType: null,
-	productVariationGroup: {
-		_id: null
-	},	
 	price: 0
 };
 
@@ -156,12 +150,12 @@ ProductStore.dispatchToken = AppDispatcher.register(function(payload) {
 			ProductStore.setSupplier(action.supplier);
 			ProductStore.emitChange();
 		break;
-		case ProductConstants.UPDATE_PRODUCT_PRICE:
-			ProductStore.setPrice(action.price);
-			ProductStore.emitChange();
-		break;
 		case ProductConstants.SELECT_PRODUCT_VARIATION_GROUP:
 			ProductStore.setProductVariationGroup(action.productVariationGroup);
+			ProductStore.emitChange();
+		break;
+		case ProductConstants.UPDATE_PRODUCT_PRICE:
+			ProductStore.setPrice(action.price);
 			ProductStore.emitChange();
 		break;
 		default:
