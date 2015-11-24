@@ -7,6 +7,12 @@ var SuppliersSelect = require("./SuppliersSelect");
 var ProductActions = require("../actions/ProductActions");
 var ProductStore = require("../stores/ProductStore");
 
+var ProductTypeOptions = [
+	{ label: "Simple", value: "Simple" },
+	{ label: "Configurable", value: "Configurable" },
+	{ label: "Pacakge", value: "Package" }
+];
+
 var Product = React.createClass({
 	"propTypes": {
 		"product": React.PropTypes.object,
@@ -52,7 +58,7 @@ var Product = React.createClass({
 					</div>
 					<div className="large-8 columns">
 						<Select onChange={ProductActions.updateProductType}
-								options={[ "Simple", "Configurable", "Package" ]}
+								options={ProductTypeOptions}
 								value={this.state.product.productType} />
 					</div>
 				</div>
