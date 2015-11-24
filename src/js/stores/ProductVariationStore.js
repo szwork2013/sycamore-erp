@@ -33,6 +33,7 @@ var ProductVariationStore = assign({}, EventEmitter.prototype, {
 
 	getProductVariation: function() {
 		var productVariation = {
+			label: this.getLabel(),
 			name: this.getName()
 		};
 		
