@@ -13,6 +13,7 @@ var ProductVariation = React.createClass({
 		this.setState({
 			productVariation: {
 				_id: ProductVariationStore.getId(),
+				label: ProductVariationStore.getLabel(),
 				name: ProductVariationStore.getName()
 			}
 		});
@@ -25,6 +26,7 @@ var ProductVariation = React.createClass({
 		return {
 			productVariation: {
 				_id: ProductVariationStore.getId(),
+				label: ProductVariationStore.getLabel(),
 				name: ProductVariationStore.getName()
 			}
 		};
@@ -32,6 +34,17 @@ var ProductVariation = React.createClass({
 	render: function () {
 		return (
 			<div>
+				<div className="row">
+					<div className="large-4 columns">
+						<label className="right inline">Label</label>
+					</div>
+					<div className="large-8 columns">
+						<input disabled={!(this.props.editable)}
+							   onChange={ProductVariationActions.updateProductVariationLabel}
+							   type="text"
+							   value={this.state.productVariation.label} />
+					</div>
+				</div>
 				<div className="row">
 					<div className="large-4 columns">
 						<label className="right inline">Name</label>

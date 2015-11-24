@@ -6,6 +6,7 @@ var async = require("async");
 
 var _productVariation = {
 	_id: null,
+	label: null,
 	name: null
 };
 
@@ -20,6 +21,10 @@ var ProductVariationStore = assign({}, EventEmitter.prototype, {
 
 	getId: function() {
 		return _productVariation._id;
+	},
+
+	getLabel: function() {
+		return _productVariation.label;
 	},
 
 	getName: function() {
@@ -50,6 +55,10 @@ var ProductVariationStore = assign({}, EventEmitter.prototype, {
 		this.removeListener(ProductVariationConstants.CHANGE_EVENT, callback);
 	},
 
+	setLabel: function(label) {
+		_productVariation.label = label;
+	},
+
 	setName: function(name) {
 		_productVariation.name = name;
 	}
@@ -60,6 +69,10 @@ ProductVariationStore.dispatchToken = AppDispatcher.register(function(payload) {
 	switch(action.actionType) {
 		case ProductVariationConstants.UPDATE_PRODUCT_VARIATION:
 			ProductVariationStore.loadData(action.productVariation);
+		break;
+		case ProductVariationConstants.UPDATE_PRODUCT_VARIATION_LABEL:
+			ProductVariationStore.setLabel(action.label);
+			ProductVariationStore.emitChange();
 		break;
 		case ProductVariationConstants.UPDATE_PRODUCT_VARIATION_NAME:
 			ProductVariationStore.setName(action.name);

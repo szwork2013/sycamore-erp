@@ -39,6 +39,12 @@ var ProductVariationActions = {
 			);
 		}
 	},
+	updateProductVariationLabel: function(event) {
+		AppDispatcher.handleViewAction({
+			actionType: ProductVariationConstants.UPDATE_PRODUCT_VARIATION_GROUP_LABEL,
+			label: event.target.value
+		});
+	},
 	updateProductVariationName: function(event) {
 		AppDispatcher.handleViewAction({
 			actionType: ProductVariationConstants.UPDATE_PRODUCT_VARIATION_GROUP_NAME,
