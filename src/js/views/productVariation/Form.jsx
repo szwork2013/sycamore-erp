@@ -2,13 +2,6 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 var Layout = require("sycamore-platform-components").Layout;
 var ActionsBar = require("sycamore-platform-components").ActionsBar;
-var ReactTabs = require("react-tabs");
-var Tab = ReactTabs.Tab;
-var Tabs = ReactTabs.Tabs;
-var TabList = ReactTabs.TabList;
-var TabPanel = ReactTabs.TabPanel;
-
-Tabs.setUseDefaultStyles(false);
 
 var ProductVariation = require("../../components/ProductVariation");
 var ProductVariationStore = require("../../stores/ProductVariationStore");
@@ -42,18 +35,7 @@ var View = React.createClass({
 						{buttonAction}
 					</a>
 				</ActionsBar>
-				<Tabs>
-					<TabList>
-						<Tab>General</Tab>
-					</TabList>
-					<TabPanel>
-						<div className="row">
-							<div className="large-6 columns">
-								<ProductVariation productVariation={productVariation} editable={true} isNew={true} />
-							</div>
-						</div>
-					</TabPanel>
-				</Tabs>
+				<ProductVariation productVariation={productVariation} editable={true} isNew={true} />
 			</Layout>
 		);
 	}

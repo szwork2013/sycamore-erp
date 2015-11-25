@@ -50,6 +50,31 @@ var ProductVariationActions = {
 			actionType: ProductVariationConstants.UPDATE_PRODUCT_VARIATION_NAME,
 			name: event.target.value
 		});
+	},
+	addValue: function() {
+		AppDispatcher.handleViewAction({
+			actionType: ProductVariationConstants.ADD_PRODUCT_VARIATION_VALUE
+		});
+	},
+	updateLabel: function(valueIndex, event) {
+		AppDispatcher.handleViewAction({
+			actionType: ProductVariationConstants.UPDATE_PRODUCT_VARIATION_LABEL,
+			valueIndex: valueIndex,
+			label: event.target.value
+		});
+	},
+	updateValue: function(valueIndex, event) {
+		AppDispatcher.handleViewAction({
+			actionType: ProductVariationConstants.UPDATE_PRODUCT_VARIATION_VALUE,
+			valueIndex: valueIndex,
+			value: event.target.value
+		});
+	},
+	removeValue: function(valueIndex) {
+		AppDispatcher.handleViewAction({
+			actionType: ProductVariationConstants.REMOVE_PRODUCT_VARIATION_VALUE,
+			valueIndex: valueIndex
+		});
 	}
 }
 
