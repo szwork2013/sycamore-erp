@@ -39,7 +39,7 @@ function orderRoutes(servicesContainer, modelsContainer) {
 		orderController.editOrderAction
 	);
 // VIEW / GET (Customer)
-	Router.get( "/order/:customer_id/:order_id",
+	Router.get( "/customer/:customer_id/order/:order_id",
 //		authenticationService.ensureAuthenticated(),
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
 		orderController.viewOrderAction
