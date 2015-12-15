@@ -38,6 +38,12 @@ function orderRoutes(servicesContainer, modelsContainer) {
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_VIEW"),
 		orderController.editOrderAction
 	);
+// VIEW / GET (Customer)
+	Router.get( "/order/:customer_id/:order_id",
+//		authenticationService.ensureAuthenticated(),
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
+		orderController.viewOrderAction
+	);
 // EDIT/VIEW / GET
 	Router.get( "/order/:id",
 		authenticationService.ensureAuthenticated(),
@@ -48,12 +54,6 @@ function orderRoutes(servicesContainer, modelsContainer) {
 		authenticationService.ensureAuthenticated(),
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
 		orderController.editOrderAction
-	);
-// VIEW / GET (Customer)
-	Router.get( "/order/:customer_id/:order_id",
-//		authenticationService.ensureAuthenticated(),
-//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
-		orderController.viewOrderAction
 	);
 
 // LIST / GET
