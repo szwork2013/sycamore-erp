@@ -69,7 +69,7 @@ orderController.prototype.viewOrderAction = function(request, response, next) {
 
 		if(typeof(request.params.order_id) != "undefined") {
 			order_id = request.params.order_id;
-/*
+
 			orderController.prototype.getOrder(order_id, d.intercept(function(order) {
 				if(order != null) {
 					response.locals.order = order;
@@ -79,9 +79,7 @@ orderController.prototype.viewOrderAction = function(request, response, next) {
 							break;
 						case "html":
 						default:
-*/
 							response.renderReact("order/View", response.locals);
-/*
 							break;
 					}
 				} else {
@@ -89,7 +87,6 @@ orderController.prototype.viewOrderAction = function(request, response, next) {
 					next(new Error("404 - Not Found"));
 				}
 			}));
-*/
 		} else {
 			response.renderReact("order/View", response.locals);
 		}
