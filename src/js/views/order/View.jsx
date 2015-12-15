@@ -122,7 +122,7 @@ var View = React.createClass({
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">Sub Total</div>
-										<div className="table-cell">{this.props.order.subTotal}</div>
+										<div className="table-cell">{order.subTotal}</div>
 									</div>
 									<div className="table-row">
 										<div className="table-cell">&#160;</div>
@@ -130,7 +130,7 @@ var View = React.createClass({
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">VAT</div>
-										<div className="table-cell">{this.props.order.VAT}</div>
+										<div className="table-cell">{order.VAT}</div>
 									</div>
 									<div className="table-row">
 										<div className="table-cell">&#160;</div>
@@ -138,7 +138,7 @@ var View = React.createClass({
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell"><strong>Total</strong></div>
-										<div className="table-cell">{this.props.order.total}</div>
+										<div className="table-cell">{order.total}</div>
 									</div>
 								</div>
 							</div>
