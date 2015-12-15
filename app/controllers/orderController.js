@@ -67,7 +67,7 @@ orderController.prototype.viewOrderAction = function(request, response, next) {
 
 		var id;
 
-		if(typeof(request.params.id) != "undefined") {
+		if(typeof(request.params.order_id) != "undefined") {
 			order_id = request.params.order_id;
 /*
 			orderController.prototype.getOrder(order_id, d.intercept(function(order) {
@@ -91,7 +91,7 @@ orderController.prototype.viewOrderAction = function(request, response, next) {
 			}));
 */
 		} else {
-			response.renderReact("order/Form", response.locals);
+			response.renderReact("order/View", response.locals);
 		}
 	});
 }
