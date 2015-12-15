@@ -3,7 +3,8 @@ var ActionsBar = require("sycamore-platform-components").ActionsBar;
 
 var View = React.createClass({
 	render: function() {
-		var order = this.props.locals.order,
+		var locals = this.props.locals;
+		var order = locals.order,
 			customer = {},
 			billingAddress = {},
 			delivery = {},
@@ -30,7 +31,7 @@ var View = React.createClass({
 		} else {
 			jsTemplate = "/node_modules" + applicationUrl + "public/js/views/" + locals.template + ".js";
 		}
-		
+
 		return (
 			<html>
 				<head>
