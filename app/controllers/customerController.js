@@ -29,7 +29,6 @@ customerController.prototype.editCustomerAction = function(request, response, ne
 	d.on("error", next);
 	
 	d.run(function() {
-		var Customer = customerController.prototype.modelsContainer.getModel("Customer");
 		var id;
 
 		if(typeof(request.params.id) != "undefined") {

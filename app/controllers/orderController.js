@@ -58,6 +58,44 @@ orderController.prototype.editOrderAction = function(request, response, next) {
 	});
 }
 
+orderController.prototype.viewOrderAction = function(request, response, next) {
+	var d = domain.create();
+	
+	d.on("error", next);
+	
+	d.run(function() {
+
+		var id;
+
+		if(typeof(request.params.id) != "undefined") {
+			order_id = request.params.order_id;
+/*
+			orderController.prototype.getOrder(order_id, d.intercept(function(order) {
+				if(order != null) {
+					response.locals.order = order;
+					switch(request.params.contentType) {
+						case "json":
+							response.json(order);
+							break;
+						case "html":
+						default:
+*/
+							response.renderReact("order/View", response.locals);
+/*
+							break;
+					}
+				} else {
+// Throw 404 - Not Found
+					next(new Error("404 - Not Found"));
+				}
+			}));
+*/
+		} else {
+			response.renderReact("order/Form", response.locals);
+		}
+	});
+}
+
 orderController.prototype.listOrdersAction = function(request, response, next) {
 	var d = domain.create();
 	
