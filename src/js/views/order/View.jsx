@@ -8,16 +8,16 @@ var View = React.createClass({
 			delivery = {},
 			deliveryAddress = {};
 
-		if(typeof order.customer != "undefined") {
+		if ((typeof order.customer != "undefined") && (order.customer != null)) {
 			customer = order.customer;
-			if(typeof customer.billingAddress != "undefined") {
+			if ((typeof customer.billingAddress != "undefined") && (customer.billingAddress != null)) {
 				billingAddress = customer.billingAddress;
 			}
 		}
 
-		if(typeof order.property != "undefined") {
+		if ((typeof order.property != "undefined") && (order.property != null)) {
 			delivery = order.property;
-			if(typeof delivery.address != "undefined") {
+			if ((typeof delivery.address != "undefined") && (delivery.address != null)) {
 				deliveryAddress = delivery.address;
 			}
 		}
