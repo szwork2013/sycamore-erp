@@ -23,6 +23,14 @@ var View = React.createClass({
 			}
 		}
 
+		var js = "var locals = JSON.parse('" + JSON.stringify(locals) + "');";
+		var jsTemplate = "";
+		if(applicationUrl == "/") {
+			jsTemplate = "/js/views/" + locals.template + ".js";
+		} else {
+			jsTemplate = "/node_modules" + applicationUrl + "public/js/views/" + locals.template + ".js";
+		}
+		
 		return (
 			<html>
 				<head>
