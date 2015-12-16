@@ -53,112 +53,118 @@ var View = React.createClass({
 					</ActionsBar>
 					<div className="row">
 						<div className="large-6 columns">
-							<div className="row">
-								<div className="large-4 columns">
-									<label className="right">Name</label>
-								</div>
-								<div className="large-8 columns">
-									{customer.name}
-								</div>
-							</div>
-							<div className="row">
-								<div className="large-4 columns">
-									<label className="right">Billing Address</label>
-								</div>
-								<div className="large-8 columns">
-									<div className="row">
-										<div className="large-12 columns">
-											{billingAddress.line1}
-										</div>
+							<fieldset>
+								<label>Billing Details</label>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right">Name</label>
 									</div>
-									<div className="row">
-										<div className="large-12 columns">
-											{billingAddress.line2}
-										</div>
-									</div>
-									<div className="row">
-										<div className="large-12 columns">
-											{billingAddress.line3}
-										</div>
-									</div>
-									<div className="row">
-										<div className="large-12 columns">
-											{billingAddress.line4}
-										</div>
-									</div>
-									<div className="row">
-										<div className="large-12 columns">
-											{billingAddress.postCode}
-										</div>
+									<div className="large-8 columns">
+										{customer.name}
 									</div>
 								</div>
-							</div>
-							<div className="row">
-								<div className="large-4 columns">
-									<label className="right">Telephone</label>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right">Billing Address</label>
+									</div>
+									<div className="large-8 columns">
+										<div className="row">
+											<div className="large-12 columns">
+												{billingAddress.line1}
+											</div>
+										</div>
+										<div className="row">
+											<div className="large-12 columns">
+												{billingAddress.line2}
+											</div>
+										</div>
+										<div className="row">
+											<div className="large-12 columns">
+												{billingAddress.line3}
+											</div>
+										</div>
+										<div className="row">
+											<div className="large-12 columns">
+												{billingAddress.line4}
+											</div>
+										</div>
+										<div className="row">
+											<div className="large-12 columns">
+												{billingAddress.postCode}
+											</div>
+										</div>
+									</div>
 								</div>
-								<div className="large-8 columns">
-									{customer.telephone}
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right">Telephone</label>
+									</div>
+									<div className="large-8 columns">
+										{customer.telephone}
+									</div>
 								</div>
-							</div>
-							<div className="row">
-								<div className="large-4 columns">
-									<label className="right">Email</label>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right">Email</label>
+									</div>
+									<div className="large-8 columns">
+										{customer.email}
+									</div>
 								</div>
-								<div className="large-8 columns">
-									{customer.email}
-								</div>
-							</div>
+							</fieldset>
 						</div>
 						<div className="large-6 columns">
-							<div className="row">
-								<div className="large-4 columns">
-									<label className="right">Delivery Address</label>
-								</div>
-								<div className="large-8 columns">
-									<div className="row">
-										<div className="large-12 columns">
-											{deliveryAddress.line1}
+							<fieldset>
+								<label>Delivery Details</label>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right">Delivery Address</label>
+									</div>
+									<div className="large-8 columns">
+										<div className="row">
+											<div className="large-12 columns">
+												{deliveryAddress.line1}
+											</div>
+										</div>
+										<div className="row">
+											<div className="large-12 columns">
+												{deliveryAddress.line2}
+											</div>
+										</div>
+										<div className="row">
+											<div className="large-12 columns">
+												{deliveryAddress.line3}
+											</div>
+										</div>
+										<div className="row">
+											<div className="large-12 columns">
+												{deliveryAddress.line4}
+											</div>
+										</div>
+										<div className="row">
+											<div className="large-12 columns">
+												{deliveryAddress.postCode}
+											</div>
 										</div>
 									</div>
-									<div className="row">
-										<div className="large-12 columns">
-											{deliveryAddress.line2}
-										</div>
+								</div>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right">Telephone</label>
 									</div>
-									<div className="row">
-										<div className="large-12 columns">
-											{deliveryAddress.line3}
-										</div>
-									</div>
-									<div className="row">
-										<div className="large-12 columns">
-											{deliveryAddress.line4}
-										</div>
-									</div>
-									<div className="row">
-										<div className="large-12 columns">
-											{deliveryAddress.postCode}
-										</div>
+									<div className="large-8 columns">
+										{delivery.telephone}
 									</div>
 								</div>
-							</div>
-							<div className="row">
-								<div className="large-4 columns">
-									<label className="right">Telephone</label>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right">Access Arrangements</label>
+									</div>
+									<div className="large-8 columns">
+										{delivery.accessArrangements}
+									</div>
 								</div>
-								<div className="large-8 columns">
-									{delivery.telephone}
-								</div>
-							</div>
-							<div className="row">
-								<div className="large-4 columns">
-									<label className="right">Access Arrangements</label>
-								</div>
-								<div className="large-8 columns">
-									{delivery.accessArrangements}
-								</div>
-							</div>
+							</fieldset>
 						</div>
 					</div>
 					<div className="row">
