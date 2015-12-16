@@ -39,6 +39,7 @@ var View = React.createClass({
 				<head>
 					<meta charSet="utf-8" />
 					<link rel="stylesheet" type="text/css" href="/css/styles.css" />
+					<title>Order Confirmation</title>
 				</head>
 				<body>
 					<div className="row" style={{"background": "#0a1724" }}>
@@ -46,7 +47,7 @@ var View = React.createClass({
 							<img className="img-responsive" src="http://www.fusionfurnituresolutions.co.uk/images/logo.png" />
 						</div>
 					</div>
-					<ActionsBar pageTitle={"Order"}>
+					<ActionsBar pageTitle={"Order Confirmation"}>
 						<a href={this.props.locals.applicationUrl + "order"} className="right fancy radius button tiny" style={{ "background": "lightgreen", "color": "green" }}>
 							<i className="in-button-icon fa fa-fw fa-plus"></i> Save &amp; Agree
 						</a>
@@ -226,24 +227,24 @@ var View = React.createClass({
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
-										<div className="table-cell">Sub Total</div>
-										<div className="table-cell">{order.subTotal}</div>
+										<div className="table-cell left-box">Sub Total</div>
+										<div className="table-cell right-box">{order.subTotal}</div>
 									</div>
 									<div className="table-row">
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
-										<div className="table-cell">VAT</div>
-										<div className="table-cell">{order.VAT}</div>
+										<div className="table-cell left-box">VAT</div>
+										<div className="table-cell right-box">{order.VAT}</div>
 									</div>
 									<div className="table-row">
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
-										<div className="table-cell"><label className="right">Total</label></div>
-										<div className="table-cell">{order.total}</div>
+										<div className="table-cell left-box"><strong>Total</strong></div>
+										<div className="table-cell right-box">{order.total}</div>
 									</div>
 								</div>
 							</div>
