@@ -36,12 +36,14 @@ var CreateEditCustomer = React.createClass({
 		var self = this;
 
 		if((typeof this.state.customer._id != "undefined") && (this.state.customer._id != null)) {
-			Api.postCustomer(CustomerStore.getCustomer(), function() {
+			Api.postCustomer(CustomerStore.getCustomer(), function(error, response) {
 				self.closeCustomerModal();
+				CustomerStore.loadData(response.body);
 			});
 		} else {
-			Api.putCustomer(CustomerStore.getCustomer(), function() {
+			Api.putCustomer(CustomerStore.getCustomer(), function(error, response) {
 				self.closeCustomerModal();
+				CustomerStore.loadData(response.body);
 			});
 		}
 	},
