@@ -3,6 +3,25 @@ var ReactDOM = require("react-dom");
 var ActionsBar = require("sycamore-platform-components").ActionsBar;
 
 var View = React.createClass({
+	renderAgreeButton: function() {
+		var locals = this.props.locals;
+		var applicationUrl = locals.applicationUrl,
+			order = locals.order;
+		var	customer = order.customer,
+			orderStatus = order.status;
+
+		if ((typeof order.customer != "undefined") && (order.customer != null)) {
+			customer = order.customer;
+		}
+
+		if(orderStatus != "Accepted") {
+			return (
+				<a href={this.props.locals.applicationUrl + "customer/" + customer._id + "/order/" + order._id + "/confirm"} className="right fancy radius button tiny" style={{ "background": "lightgreen", "color": "green" }}>
+					<i className="in-button-icon fa fa-fw fa-check"></i> Agree
+				</a>
+			);
+		}
+	},
 	render: function() {
 		var locals = this.props.locals;
 		var applicationUrl = locals.applicationUrl;
@@ -49,9 +68,7 @@ var View = React.createClass({
 					</div>
 					<div style={{ "background": "#fff" }}>
 						<ActionsBar pageTitle={"Order Confirmation"}>
-							<a href={this.props.locals.applicationUrl + "customer/" + customer._id + "/order/" + order._id + "/confirm"} className="right fancy radius button tiny" style={{ "background": "lightgreen", "color": "green" }}>
-								<i className="in-button-icon fa fa-fw fa-check"></i> Agree
-							</a>
+							{this.renderAgreeButton()}
 						</ActionsBar>
 					</div>
 					<div className="row">
