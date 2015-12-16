@@ -39,7 +39,7 @@ var CreditEditCustomer = React.createClass({
 					</div>
 					<div className="large-4 columns">
 						<input className="right fancy radius button tiny" type="button" value="New" onClick={this.openCustomerModal} />
-						<input style={{ "margin-right": "10px" }} className="right fancy radius button tiny" type="button" value="Edit" onClick={this.openCustomerModal} />
+						<input style={{ "marginRight": "10px" }} className="right fancy radius button tiny" type="button" value="Edit" onClick={this.openCustomerModal} />
 					</div>
 				</div>
 				<Modal isOpen={this.state.customerModalIsOpen}
