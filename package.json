@@ -44,6 +44,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
+    "mandrill-api": "^1.0.45",
     "sycamore-platform-components": "0.0.56"
   }
 }
