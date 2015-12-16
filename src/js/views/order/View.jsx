@@ -61,7 +61,7 @@ var View = React.createClass({
 								<hr />
 								<div className="row">
 									<div className="large-4 columns">
-										<label className="right">Name</label>
+										<label className="right">Company Name / Name</label>
 									</div>
 									<div className="large-8 columns">
 										{customer.name}

@@ -52,7 +52,7 @@ var Customer = React.createClass({
 			<div>
 				<div className="row">
 					<div className="large-4 columns">
-						<label className="right inline">Name</label>
+						<label className="right inline">Company Name / Name</label>
 					</div>
 					<div className="large-8 columns">
 						<input disabled={!(this.props.editable)}
