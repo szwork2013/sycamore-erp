@@ -29,6 +29,42 @@ var View = React.createClass({
 			}));
 		});
 	},
+	renderSaveButton: function() {
+		var buttonAction;
+
+		if((typeof this.props.locals != "undefined") && (typeof this.props.locals.order != "undefined") && (this.props.locals.order != null) && (typeof this.props.locals.order._id != "undefined")) {
+			buttonAction = "Save";
+		} else {
+			buttonAction = "Create";
+		}
+
+		return (
+			<a className="right fancy radius button tiny" href="#" onClick={this.handleSaveClick}>
+				{buttonAction}
+			</a>
+		);
+	},
+	renderEmailButton: function() {
+		var orderId;
+
+		if((typeof this.props.locals != "undefined") && (typeof this.props.locals.order != "undefined") && (this.props.locals.order != null) && (typeof this.props.locals.order._id != "undefined")) {
+			return (
+				<a className="right fancy radius button tiny" href={"/sycamore-erp/order/" + this.props.locals.order._id + "/email"}>
+					Email Order
+				</a>
+			);
+		}
+	},
+	renderButtons: function() {
+		return (
+			<div>
+				{this.renderSaveButton()}
+				{this.renderEmailButton()}
+			</div>
+		);
+
+
+	},
 	render: function() {
 		var buttonAction,
 			pageTitle,
@@ -49,12 +85,7 @@ var View = React.createClass({
 		return (
 			<Layout pageTitle={pageTitle} locals={this.props.locals}>
 				<ActionsBar pageTitle={pageTitle}>
-					<a className="right fancy radius button tiny" href="#" onClick={this.handleSaveClick}>
-						{buttonAction}
-					</a>
-					<a className="right fancy radius button tiny" href="/sycamore-erp/order/asdsd/email">
-						Email Order
-					</a>
+					{this.renderButtons()}
 				</ActionsBar>
 				<Tabs>
 					<TabList>

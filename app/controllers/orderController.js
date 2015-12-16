@@ -134,8 +134,7 @@ orderController.prototype.sendEmailOrderAction = function(request, response, nex
 							"async": async
 						},
 						function(result) {
-							response.json(result);
-//							response.redirect("/sycamore-erp/order/5628f38fe94a520300dce338");
+							response.redirect("/sycamore-erp/order/" + orderId);
 						},
 						function(e) {
 							next(e);
