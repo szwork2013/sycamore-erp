@@ -4,6 +4,7 @@ var ActionsBar = require("sycamore-platform-components").ActionsBar;
 var View = React.createClass({
 	render: function() {
 		var locals = this.props.locals;
+		var applicationUrl = locals.applicationUrl;
 		var order = locals.order,
 			customer = {},
 			billingAddress = {},
