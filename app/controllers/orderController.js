@@ -88,53 +88,65 @@ orderController.prototype.editOrderAction = function(request, response, next) {
 }
 
 orderController.prototype.sendEmailOrderAction = function(request, response, next) {
-	mandrill_client = new mandrill.Mandrill(process.env.MANDRILL_APIKEY);
-	var template_name = "Order Confirmation";
-	var template_content = [{
-			"name": "name",
-			"content": "John Smith"
-		},{
-			"name": "orderurl",
-			"content": "http://admin.fusionfurnituresolutions.co.uk/sycamore-erp/customer/a/order/5628f38fe94a520300dce338"
-		}];
-	var message = {
-		"to": [{
-				"email": "peter.johnson@sycamoreconsulting.co.uk",
-				"name": "Peter Johnson",
-				"type": "to"
-			}],
- 		"merge": true,
-    	"merge_language": "mailchimp",
-    	"global_merge_vars": template_content
-	};
-	var async = false;
+	var d = domain.create();
+	
+	d.on("error", next);
+	
+	d.run(function() {
 
-	mandrill_client.messages.sendTemplate(
-		{
-			"template_name": template_name,
-			"template_content": template_content,
-			"message": message,
-			"async": async
-		},
-		function(result) {
-			response.json(result);
-//			console.log(result);
-			/*
-			[{
-					"email": "recipient.email@example.com",
-					"status": "sent",
-					"reject_reason": "hard-bounce",
-					"_id": "abc123abc123abc123abc123abc123"
-				}]
-			*/
-		},
-		function(e) {
-			// Mandrill returns the error as an object with name and message keys
-			console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-			// A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
-			next(e);
+		var id;
+
+		if(typeof(request.params.id) != "undefined") {
+			id = request.params.id;
+
+			orderController.prototype.getOrder(id, d.intercept(function(order) {
+				if(order != null) {
+					var customerName = order.customer.name;
+					var email = "peter.johnson@sycamoreconsulting.co.uk"; //order.customer.email;
+					var orderUrl = "http://admin.fusionfurnituresolutions.co.uk/sycamore-erp/customer/a/order/5628f38fe94a520300dce338";
+	
+					mandrill_client = new mandrill.Mandrill(process.env.MANDRILL_APIKEY);
+					var template_name = "order-confirmation";
+					var template_content = [
+						{ "name": "name", "content": customerName },
+						{ "name": "orderurl", "content": orderUrl }
+					];
+					var message = {
+						"to": [{
+								"email": email,
+								"name": customerName,
+								"type": "to"
+							}],
+				 		"merge": true,
+				    	"merge_language": "mailchimp",
+				    	"global_merge_vars": template_content
+					};
+					var async = false;
+
+					mandrill_client.messages.sendTemplate(
+						{
+							"template_name": template_name,
+							"template_content": template_content,
+							"message": message,
+							"async": async
+						},
+						function(result) {
+							response.json(result);
+//							response.redirect("/sycamore-erp/order/5628f38fe94a520300dce338");
+						},
+						function(e) {
+							next(e);
+						}
+					);
+				} else {
+// Throw 404 - Not Found
+					next(new Error("404 - Not Found"));
+				}
+			}));
+		} else {
+			response.renderReact("order/Form", response.locals);
 		}
-	);
+	});
 }
 
 orderController.prototype.viewOrderAction = function(request, response, next) {
