@@ -68,7 +68,6 @@ var CustomerStore = assign({}, EventEmitter.prototype, {
 	},
 
 	loadData: function(customer) {
-		console.log(customer);
 		if(customer != null) {
 			if(typeof(customer._id) != "undefined") {
 				_customer._id = customer._id;
@@ -105,7 +104,6 @@ var CustomerStore = assign({}, EventEmitter.prototype, {
 	},
 
 	removeChangeListener: function(callback) {
-		console.log("removeChangeListener");
 		this.removeListener(CustomerConstants.CHANGE_EVENT, callback);
 	},
 
