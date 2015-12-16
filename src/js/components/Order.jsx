@@ -50,7 +50,7 @@ var Order = React.createClass({
 						<CreateEditCustomer />
 					</div>
 					<div className="large-6 columns">
-						<CreateEditProperty />
+						<CreateEditProperty displayCustomerDropdown={false} />
 					</div>
 				</div>
 

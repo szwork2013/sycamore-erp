@@ -56,9 +56,9 @@ var Property = React.createClass({
 			}
 		};
 	},
-	render: function () {
-		return (
-			<div>
+	renderCustomerDropdown: function() {
+		if(this.props.displayCustomerDropdown != false) {
+			return (
 				<div className="row">
 					<div className="large-4 columns">
 						<label className="right inline">Customer</label>
@@ -67,6 +67,13 @@ var Property = React.createClass({
 						<CustomersSelect onChange={PropertyActions.setCustomerOnProperty} value={this.state.property.customer._id} />
 					</div>
 				</div>
+			);
+		}
+	},
+	render: function () {
+		return (
+			<div>
+				{renderCustomerDropdown()}
 				<fieldset>
 					<label>Delivery Address</label>
 					<div className="row">

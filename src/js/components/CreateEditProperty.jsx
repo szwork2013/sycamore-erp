@@ -55,11 +55,11 @@ var CreditEditProperty = React.createClass({
 					</div>
 					<div className="row">
 						<div className="large-6 columns">
-							<Property property={this.state.property} editable={true} isNew={true} />
+							<Property property={this.state.property} displayCustomerDropdown={this.props.displayCustomerDropdown} editable={true} isNew={true} />
 						</div>
 					</div>
 				</Modal>
-				<Property property={this.state.property} editable={false} isNew={false} />
+				<Property property={this.state.property} displayCustomerDropdown={this.props.displayCustomerDropdown} editable={false} isNew={false} />
 			</fieldset>
 		);
 	}
