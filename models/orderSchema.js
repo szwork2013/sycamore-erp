@@ -11,7 +11,7 @@ var orderItemSchema = Mongoose.Schema({
 exports.orderSchema = function() {
 	return new Mongoose.Schema({
 		metadata:						 { type: Mongoose.Schema.Types.Mixed },
-		status:							 { type: String, default: "Unaccepted" },
+		status:							 { type: String, default: "Draft" },
 		customer:						 { type: Mongoose.Schema.Types.ObjectId, ref: "Customer" },
 		property:						 { type: Mongoose.Schema.Types.ObjectId, ref: "Property" },
 		products:						 [ orderItemSchema ],

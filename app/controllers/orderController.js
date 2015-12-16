@@ -30,6 +30,7 @@ orderController.prototype.confirmOrderAction = function(request, response, next)
 	d.on("error", next);
 	
 	d.run(function() {
+		var Order = orderController.prototype.modelsContainer.getModel("Order");
 		var order_id;
 
 		if(typeof(request.params.order_id) != "undefined") {
@@ -102,14 +103,16 @@ orderController.prototype.sendEmailOrderAction = function(request, response, nex
 			orderController.prototype.getOrder(id, d.intercept(function(order) {
 				if(order != null) {
 					var customerName = order.customer.name;
-					var email = "peter.johnson@sycamoreconsulting.co.uk"; //order.customer.email;
-					var orderUrl = "http://admin.fusionfurnituresolutions.co.uk/sycamore-erp/customer/a/order/5628f38fe94a520300dce338";
+					var customerId = order.customer._id;
+					var orderId = order._id;
+					var email = order.customer.email;
+					var orderUrl = "http://admin.fusionfurnituresolutions.co.uk/sycamore-erp/customer/" + customerId + "/order/" + orderId;
 	
 					mandrill_client = new mandrill.Mandrill(process.env.MANDRILL_APIKEY);
 					var template_name = "order-confirmation";
 					var template_content = [
-						{ "name": "name", "content": customerName },
-						{ "name": "orderurl", "content": orderUrl }
+						{ "name": "name",		"content": customerName },
+						{ "name": "orderurl",	"content": orderUrl }
 					];
 					var message = {
 						"to": [{
@@ -187,6 +190,7 @@ orderController.prototype.listOrdersAction = function(request, response, next) {
 		list.title = "Orders";
 
 		list.columns = [
+			{ name: "status", label: "Status", display: true },
 			{ name: "customer.name", label: "Customer", display: true },
 			{ name: "property.address.line1", label: "Property Address", display: true },
 			{ name: "subTotal", label: "Sub Total", display: true },

@@ -60,8 +60,13 @@ var View = React.createClass({
 					<TabList>
 						<Tab>Order</Tab>
 					</TabList>
+					<TabList>
+						<Tab>Emails</Tab>
+					</TabList>
 					<TabPanel>
 						<Order order={order} editable={true} isNew={true} />
+					</TabPanel>
+					<TabPanel>
 					</TabPanel>
 				</Tabs>
 			</Layout>

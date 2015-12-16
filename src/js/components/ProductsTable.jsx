@@ -96,24 +96,24 @@ var ProductsTable = React.createClass({
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">&#160;</div>
-									<div className="table-cell">Sub Total</div>
-									<div className="table-cell">{this.props.order.subTotal}</div>
+									<div className="table-cell left-box">Sub Total</div>
+									<div className="table-cell text-right right-box">{this.props.order.subTotal}</div>
 								</div>
 								<div className="table-row">
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">&#160;</div>
-									<div className="table-cell">VAT</div>
-									<div className="table-cell">{this.props.order.VAT}</div>
+									<div className="table-cell left-box">VAT</div>
+									<div className="table-cell text-right right-box">{this.props.order.VAT}</div>
 								</div>
 								<div className="table-row">
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell">&#160;</div>
-									<div className="table-cell"><strong>Total</strong></div>
-									<div className="table-cell">{this.props.order.total}</div>
+									<div className="table-cell left-box"><strong>Total</strong></div>
+									<div className="table-cell text-right right-box">{this.props.order.total}</div>
 								</div>
 								<div className="table-row">
 									<div className="table-cell">

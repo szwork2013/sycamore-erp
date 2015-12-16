@@ -34,12 +34,13 @@ var CreditEditProperty = React.createClass({
 			<fieldset {...propertyOpts}>
 				<div className="row">				
 					<div className="large-2 columns">
-						<label className="inline">Property</label>
+						<label className="inline">Deliver To</label>
 					</div>
 					<div className="large-8 columns">
 						<PropertiesSelect name={"order[property]"} onChange={OrderActions.setPropertyOnOrder} value={this.state.property._id} />
 					</div>
 					<div className="large-2 columns">
+						<input className="right fancy radius button tiny" type="button" value="Edit" onClick={this.openPropertyModal} />
 						<input className="right fancy radius button tiny" type="button" value="New" onClick={this.openPropertyModal} />
 					</div>
 				</div>

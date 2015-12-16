@@ -68,7 +68,7 @@ var Property = React.createClass({
 					</div>
 				</div>
 				<fieldset>
-					<label>Property Address</label>
+					<label>Delivery Address</label>
 					<div className="row">
 						<div className="large-4 columns">
 							<label className="right inline"></label>
