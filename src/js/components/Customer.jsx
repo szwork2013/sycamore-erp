@@ -28,6 +28,7 @@ var Customer = React.createClass({
 	},
 
 	componentDidMount: function() {
+		console.log("componentDidMount");
 		CustomerStore.addChangeListener(this._onChange);
 		CustomerStore.loadData(this.props.customer);
 	},
