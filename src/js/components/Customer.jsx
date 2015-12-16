@@ -26,13 +26,17 @@ var Customer = React.createClass({
 			}
 		});
 	},
+
 	componentDidMount: function() {
 		CustomerStore.addChangeListener(this._onChange);
 		CustomerStore.loadData(this.props.customer);
 	},
+
 	componentWillUnmount: function() {
+		console.log("componentWillUnmount");
 		CustomerStore.removeChangeListener(this._onChange);
 	},
+
 	getInitialState: function() {
 		return {
 			customer: {

@@ -145,6 +145,10 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		}
 	},
 
+	removeChangeListener: function(callback) {
+		this.removeListener(OrderConstants.CHANGE_EVENT, callback);
+	},
+
 	setCustomer: function(customer) {
 		CustomerStore.loadData(customer);
 	},

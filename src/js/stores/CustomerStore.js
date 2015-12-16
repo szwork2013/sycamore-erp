@@ -118,6 +118,7 @@ var CustomerStore = assign({}, EventEmitter.prototype, {
 	},
 
 	removeChangeListener: function(callback) {
+		console.log("removeChangeListener");
 		this.removeListener(CustomerConstants.CHANGE_EVENT, callback);
 	},
 
