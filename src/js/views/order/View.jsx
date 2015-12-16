@@ -56,6 +56,7 @@ var View = React.createClass({
 						<div className="large-6 columns">
 							<fieldset>
 								<label>Billing Details</label>
+								<hr />
 								<div className="row">
 									<div className="large-4 columns">
 										<label className="right">Name</label>
@@ -117,6 +118,7 @@ var View = React.createClass({
 						<div className="large-6 columns">
 							<fieldset>
 								<label>Delivery Details</label>
+								<hr />
 								<div className="row">
 									<div className="large-4 columns">
 										<label className="right">Delivery Address</label>
