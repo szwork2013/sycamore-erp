@@ -180,19 +180,19 @@ var View = React.createClass({
 										<div className="table-cell large-6">
 											Product
 										</div>
-										<div className="table-cell large-1">
+										<div className="table-cell large-1 text-right">
 											Item Price
 										</div>
-										<div className="table-cell large-1">
+										<div className="table-cell large-1 text-center">
 											Quantity
 										</div>
-										<div className="table-cell large-1">
+										<div className="table-cell large-1 text-right">
 											Sub Total
 										</div>
-										<div className="table-cell large-1">
+										<div className="table-cell large-1 text-right">
 											VAT
 										</div>
-										<div className="table-cell large-1">
+										<div className="table-cell large-1 text-right">
 											Total
 										</div>
 									</div>
