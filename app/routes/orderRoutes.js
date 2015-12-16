@@ -61,6 +61,12 @@ function orderRoutes(servicesContainer, modelsContainer) {
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
 		orderController.editOrderAction
 	);
+// EMAIL / GET
+	Router.get( "/order/:id/email",
+		authenticationService.ensureAuthenticated(),
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
+		orderController.sendEmailOrderAction
+	);
 
 // LIST / GET
 	Router.get(

@@ -52,6 +52,9 @@ var View = React.createClass({
 					<a className="right fancy radius button tiny" href="#" onClick={this.handleSaveClick}>
 						{buttonAction}
 					</a>
+					<a className="right fancy radius button tiny" href="/sycamore-erp/order/asdsd/email">
+						Email Order
+					</a>
 				</ActionsBar>
 				<Tabs>
 					<TabList>
