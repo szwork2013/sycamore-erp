@@ -134,8 +134,8 @@ var PropertyStore = assign({}, EventEmitter.prototype, {
 					this.setAddressPostCode(property.address.postCode);
 				}
 			}
+			this.emitChange();
 		}
-		this.emitChange();
 	},
 
 	removeChangeListener: function(callback) {

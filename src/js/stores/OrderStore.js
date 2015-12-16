@@ -141,8 +141,8 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 			if(	(typeof order.property !== "undefined") && (typeof order.property === "object") ) {
 				PropertyStore.loadData(order.property);
 			}
+			this.emitChange();
 		}
-		this.emitChange();
 	},
 
 	setCustomer: function(customer) {

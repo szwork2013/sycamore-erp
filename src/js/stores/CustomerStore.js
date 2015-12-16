@@ -112,8 +112,9 @@ var CustomerStore = assign({}, EventEmitter.prototype, {
 			if(typeof(customer.email) != "undefined") {
 				this.setEmail(customer.email);
 			}
+
+			this.emitChange();
 		}
-		this.emitChange();
 	},
 
 	removeChangeListener: function(callback) {
