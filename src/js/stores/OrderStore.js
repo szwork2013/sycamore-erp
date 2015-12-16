@@ -133,12 +133,14 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	},
 
 	loadData: function(order) {
-		_order = order;
-		if(	(typeof order.customer !== "undefined") && (typeof order.customer === "object") ) {
-			CustomerStore.loadData(order.customer);
-		}
-		if(	(typeof order.property !== "undefined") && (typeof order.property === "object") ) {
-			PropertyStore.loadData(order.property);
+		if(order != null) {
+			_order = order;
+			if(	(typeof order.customer !== "undefined") && (typeof order.customer === "object") ) {
+				CustomerStore.loadData(order.customer);
+			}
+			if(	(typeof order.property !== "undefined") && (typeof order.property === "object") ) {
+				PropertyStore.loadData(order.property);
+			}
 		}
 		this.emitChange();
 	},
