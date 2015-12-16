@@ -34,12 +34,12 @@ var CreditEditCustomer = React.createClass({
 					<div className="large-2 columns">
 						<label className="inline">Customer</label>
 					</div>
-					<div className="large-8 columns">
+					<div className="large-6 columns">
 						<CustomersSelect onChange={OrderActions.setCustomerOnOrder} value={this.state.customer._id} />
 					</div>
-					<div className="large-2 columns">
-						<input className="right fancy radius button tiny" type="button" value="Edit" onClick={this.openCustomerModal} />
+					<div className="large-4 columns">
 						<input className="right fancy radius button tiny" type="button" value="New" onClick={this.openCustomerModal} />
+						<input style={{ "margin-right": "10px" }} className="right fancy radius button tiny" type="button" value="Edit" onClick={this.openCustomerModal} />
 					</div>
 				</div>
 				<Modal isOpen={this.state.customerModalIsOpen}
