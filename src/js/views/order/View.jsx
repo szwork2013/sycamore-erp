@@ -52,9 +52,9 @@ var View = React.createClass({
 							<i className="in-button-icon fa fa-fw fa-plus"></i> Save &amp; Agree
 						</a>
 					</ActionsBar>
-					<div className="row">
+					<div className="row" style={{ "background": "#f0f0f0;" }}>
 						<div className="large-6 columns">
-							<fieldset>
+							<fieldset style={{ "background": "#fff;" }}>
 								<label>Billing Details</label>
 								<hr />
 								<div className="row">
@@ -116,7 +116,7 @@ var View = React.createClass({
 							</fieldset>
 						</div>
 						<div className="large-6 columns">
-							<fieldset>
+							<fieldset style={{ "background": "#fff;" }}>
 								<label>Delivery Details</label>
 								<hr />
 								<div className="row">
@@ -170,7 +170,7 @@ var View = React.createClass({
 							</fieldset>
 						</div>
 					</div>
-					<div className="row">
+					<div className="row" style={{ "background": "#f0f0f0;" }}>
 						<div className="large-12 columns">
 							<div className="table">
 								<div className="table-header">
@@ -209,14 +209,14 @@ var View = React.createClass({
 													<div className="table-cell">
 														{product.quantity}
 													</div>
-													<div className="table-cell">
-														{product.subTotal}
+													<div className="table-cell text-right">
+														&pound;&nbsp;{product.subTotal}
 													</div>
-													<div className="table-cell">
-														{product.VAT}
+													<div className="table-cell text-right">
+														&pound;&nbsp;{product.VAT}
 													</div>
-													<div className="table-cell">
-														{product.total}
+													<div className="table-cell text-right">
+														&pound;&nbsp;{product.total}
 													</div>
 												</div>
 											);
@@ -230,7 +230,7 @@ var View = React.createClass({
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell left-box">Sub Total</div>
-										<div className="table-cell right-box">{order.subTotal}</div>
+										<div className="table-cell right-box text-right">&pound;&nbsp;{order.subTotal}</div>
 									</div>
 									<div className="table-row">
 										<div className="table-cell">&#160;</div>
@@ -238,15 +238,15 @@ var View = React.createClass({
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell left-box">VAT</div>
-										<div className="table-cell right-box">{order.VAT}</div>
+										<div className="table-cell right-box text-right">&pound;&nbsp;{order.VAT}</div>
 									</div>
 									<div className="table-row">
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
-										<div className="table-cell left-box"><strong>Total</strong></div>
-										<div className="table-cell right-box">{order.total}</div>
+										<div className="table-cell left-box" style={{ "background": "lightblue", "color": "#02f" }}><strong>Total</strong></div>
+										<div className="table-cell right-box text-right">&pound;&nbsp;{order.total}</div>
 									</div>
 								</div>
 							</div>
