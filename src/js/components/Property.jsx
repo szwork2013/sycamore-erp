@@ -39,6 +39,10 @@ var Property = React.createClass({
 		PropertyStore.addChangeListener(this._onPropertyChange);
 		PropertyStore.loadData(this.props.property);
 	},
+	componentWillUnmount: function() {
+		CustomerStore.removeChangeListener(this._onCustomerChange);
+		PropertyStore.removeChangeListener(this._onPropertyChange);
+	},
 	getInitialState: function() {
 		return {
 			property: {

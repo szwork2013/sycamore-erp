@@ -30,6 +30,9 @@ var Customer = React.createClass({
 		CustomerStore.addChangeListener(this._onChange);
 		CustomerStore.loadData(this.props.customer);
 	},
+	componentWillUnmount: function() {
+		CustomerStore.removeChangeListener(this._onChange);
+	},
 	getInitialState: function() {
 		return {
 			customer: {
