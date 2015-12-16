@@ -18,6 +18,10 @@ var ProductsStore = assign({}, EventEmitter.prototype, {
 		return _products;
 	},
 
+	removeChangeListener: function(callback) {
+		this.removeListener(ProductConstants.CHANGE_EVENT, callback);
+	},
+
 	updateProducts: function(items) {
 		_products = items;
 	}
