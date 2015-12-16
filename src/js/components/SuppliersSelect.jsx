@@ -25,6 +25,9 @@ var SuppliersSelect = React.createClass({
 		SuppliersStore.addChangeListener(this._onChange);
 		SupplierActions.getSuppliers({});
 	},
+	componentWillUnmount: function() {
+		SuppliersStore.removeChangeListener(this._onChange);
+	},
 	getInitialState: function() {
 		return {
 			suppliers: SuppliersStore.getSuppliers()

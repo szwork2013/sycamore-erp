@@ -21,6 +21,9 @@ var CreditEditProperty = React.createClass({
 	componentDidMount: function() {
 		PropertyStore.addChangeListener(this._onChange);
 	},
+	componentWillUnmount: function() {
+		PropertyStore.removeChangeListener(this._onChange);
+	},
 	openPropertyModal: function() {
 		this.setState({propertyModalIsOpen: true});
 	},

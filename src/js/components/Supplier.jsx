@@ -30,6 +30,9 @@ var Supplier = React.createClass({
 		SupplierStore.addChangeListener(this._onChange);
 		SupplierStore.loadData(this.props.supplier);
 	},
+	componentWillUnmount: function() {
+		SupplierStore.removeChangeListener(this._onChange);
+	},
 	getInitialState: function() {
 		return {
 			supplier: {

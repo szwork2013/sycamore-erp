@@ -21,6 +21,9 @@ var ProductVariationGroup = React.createClass({
 		ProductVariationGroupStore.addChangeListener(this._onChange);
 		ProductVariationGroupStore.loadData(this.props.productVariationGroup);
 	},
+	componentWillUnmount: function() {
+		ProductVariationGroupStore.removeChangeListener(this._onChange);
+	},
 	getInitialState: function() {
 		return {
 			productVariationGroup: {

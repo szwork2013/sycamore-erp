@@ -29,6 +29,9 @@ var Order = React.createClass({
 		OrderStore.addChangeListener(this._onChange);
 		OrderStore.loadData(this.props.order);
 	},
+	componentWillUnount: function() {
+		OrderStore.removeChangeListener(this._onChange);
+	},
 	getInitialState: function() {
 		return {
 			order: {

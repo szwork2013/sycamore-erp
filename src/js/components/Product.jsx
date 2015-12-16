@@ -36,6 +36,9 @@ var Product = React.createClass({
 		ProductStore.addChangeListener(this._onChange);
 		ProductStore.loadData(this.props.product);
 	},
+	componentWillUnmount: function() {
+		ProductStore.removeChangeListener(this._onChange);
+	},
 	getInitialState: function() {
 		return {
 			product: {

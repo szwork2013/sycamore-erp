@@ -25,6 +25,9 @@ var CustomersSelect = React.createClass({
 		CustomersStore.addChangeListener(this._onChange);
 		CustomerActions.getCustomers({});
 	},
+	componentWillUnount: function() {
+		CustomersStore.removeChangeListener(this._onChange);
+	},
 	getInitialState: function() {
 		return {
 			customers: CustomersStore.getCustomers()

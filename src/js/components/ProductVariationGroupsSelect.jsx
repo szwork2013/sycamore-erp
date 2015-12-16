@@ -25,6 +25,9 @@ var ProductVariationGroupsSelect = React.createClass({
 		ProductVariationGroupsStore.addChangeListener(this._onChange);
 		ProductVariationGroupActions.getProductVariationGroups({});
 	},
+	componentWillUnmount: function() {
+		ProductVariationGroupsStore.removeChangeListener(this._onChange);
+	},
 	getInitialState: function() {
 		return {
 			productVariationGroups: ProductVariationGroupsStore.getProductVariationGroups()

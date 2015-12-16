@@ -6,7 +6,7 @@ var CustomersSelect = require("./CustomersSelect");
 var OrderActions = require("../actions/OrderActions");
 var CustomerStore = require("../stores/CustomerStore");
 
-var CreditEditCustomer = React.createClass({
+var CreateEditCustomer = React.createClass({
 	_onChange: function() {
 		this.setState({
 			customer: CustomerStore.getCustomer()
@@ -20,6 +20,9 @@ var CreditEditCustomer = React.createClass({
 	},
 	componentDidMount: function() {
 		CustomerStore.addChangeListener(this._onChange);
+	},
+	componentWillUnmount: function() {
+		CustomerStore.removeChangeListener(this._onChange);
 	},
 	openCustomerModal: function() {
 		this.setState({ customerModalIsOpen: true });
@@ -63,4 +66,4 @@ var CreditEditCustomer = React.createClass({
 	}
 });
 
-exports = module.exports = CreditEditCustomer;
+exports = module.exports = CreateEditCustomer;

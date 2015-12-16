@@ -25,6 +25,9 @@ var ProductsSelect = React.createClass({
 		ProductsStore.addChangeListener(this._onChange);
 		ProductActions.getProducts({});
 	},
+	componentWillUnmount: function() {
+		ProductsStore.removeChangeListener(this._onChange);
+	},
 	getInitialState: function() {
 		return {
 			products: ProductsStore.getProducts()
