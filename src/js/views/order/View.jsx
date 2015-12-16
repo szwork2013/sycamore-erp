@@ -49,7 +49,7 @@ var View = React.createClass({
 					</div>
 					<ActionsBar pageTitle={"Order Confirmation"}>
 						<a href={this.props.locals.applicationUrl + "order"} className="right fancy radius button tiny" style={{ "background": "lightgreen", "color": "green" }}>
-							<i className="in-button-icon fa fa-fw fa-plus"></i> Save &amp; Agree
+							<i className="in-button-icon fa fa-fw fa-check"></i> Save &amp; Agree
 						</a>
 					</ActionsBar>
 					<div className="row" style={{ "background": "#f0f0f0;" }}>
@@ -203,8 +203,8 @@ var View = React.createClass({
 													<div className="table-cell">
 														{product.product.name}
 													</div>
-													<div className="table-cell">
-														{product.product.price}
+													<div className="table-cell text-right">
+														&pound;&nbsp;{product.product.price}
 													</div>
 													<div className="table-cell">
 														{product.quantity}
