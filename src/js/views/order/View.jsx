@@ -54,7 +54,7 @@ var View = React.createClass({
 						<div className="large-6 columns">
 							<div className="row">
 								<div className="large-4 columns">
-									<strong>Name</strong>
+									<label className="right">Name</label>
 								</div>
 								<div className="large-8 columns">
 									{customer.name}
@@ -62,7 +62,7 @@ var View = React.createClass({
 							</div>
 							<div className="row">
 								<div className="large-4 columns">
-									<strong>Billing Address</strong>
+									<label className="right">Billing Address</label>
 								</div>
 								<div className="large-8 columns">
 									<div className="row">
@@ -94,7 +94,7 @@ var View = React.createClass({
 							</div>
 							<div className="row">
 								<div className="large-4 columns">
-									<strong>Telephone</strong>
+									<label className="right">Telephone</label>
 								</div>
 								<div className="large-8 columns">
 									{customer.telephone}
@@ -102,7 +102,7 @@ var View = React.createClass({
 							</div>
 							<div className="row">
 								<div className="large-4 columns">
-									<strong>Email</strong>
+									<label className="right">Email</label>
 								</div>
 								<div className="large-8 columns">
 									{customer.email}
@@ -112,7 +112,7 @@ var View = React.createClass({
 						<div className="large-6 columns">
 							<div className="row">
 								<div className="large-4 columns">
-									<strong>Delivery Address</strong>
+									<label className="right">Delivery Address</label>
 								</div>
 								<div className="large-8 columns">
 									<div className="row">
@@ -144,7 +144,7 @@ var View = React.createClass({
 							</div>
 							<div className="row">
 								<div className="large-4 columns">
-									<strong>Telephone</strong>
+									<label className="right">Telephone</label>
 								</div>
 								<div className="large-8 columns">
 									{delivery.telephone}
@@ -152,7 +152,7 @@ var View = React.createClass({
 							</div>
 							<div className="row">
 								<div className="large-4 columns">
-									<strong>Access Arrangements</strong>
+									<label className="right">Access Arrangements</label>
 								</div>
 								<div className="large-8 columns">
 									{delivery.accessArrangements}
@@ -235,7 +235,7 @@ var View = React.createClass({
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
-										<div className="table-cell"><strong>Total</strong></div>
+										<div className="table-cell"><label className="right">Total</label></div>
 										<div className="table-cell">{order.total}</div>
 									</div>
 								</div>
