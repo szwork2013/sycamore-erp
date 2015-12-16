@@ -68,6 +68,7 @@ var CustomerStore = assign({}, EventEmitter.prototype, {
 	},
 
 	loadData: function(customer) {
+		console.log(customer);
 		if(customer != null) {
 			if(typeof(customer._id) != "undefined") {
 				_customer._id = customer._id;

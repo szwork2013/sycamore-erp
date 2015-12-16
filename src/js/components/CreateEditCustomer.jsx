@@ -10,6 +10,7 @@ var Api = require("../services/Api");
 
 var CreateEditCustomer = React.createClass({
 	_onChange: function() {
+		console.log(CustomerStore.getCustomer());
 		this.setState({
 			customer: CustomerStore.getCustomer()
 		});
@@ -36,13 +37,14 @@ var CreateEditCustomer = React.createClass({
 		var self = this;
 
 		if((typeof this.state.customer._id != "undefined") && (this.state.customer._id != null)) {
-			Api.postCustomer(CustomerStore.getCustomer(), function(error, response) {
+			Api.postCustomer(this.state.customer._id, CustomerStore.getCustomer(), function(error, response) {
 				self.closeCustomerModal();
 				CustomerStore.loadData(response.body);
 			});
 		} else {
 			Api.putCustomer(CustomerStore.getCustomer(), function(error, response) {
 				self.closeCustomerModal();
+				console.log(response);
 				CustomerStore.loadData(response.body);
 			});
 		}
