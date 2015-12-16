@@ -41,18 +41,20 @@ var View = React.createClass({
 					<link rel="stylesheet" type="text/css" href="/css/styles.css" />
 					<title>Order Confirmation</title>
 				</head>
-				<body>
+				<body style={{ "background": "#f0f0f0" }}>
 					<div className="row" style={{"background": "#0a1724" }}>
 						<div className="large-1 columns">
 							<img className="img-responsive" src="http://www.fusionfurnituresolutions.co.uk/images/logo.png" />
 						</div>
 					</div>
-					<ActionsBar pageTitle={"Order Confirmation"}>
-						<a href={this.props.locals.applicationUrl + "order"} className="right fancy radius button tiny" style={{ "background": "lightgreen", "color": "green" }}>
-							<i className="in-button-icon fa fa-fw fa-check"></i> Agree
-						</a>
-					</ActionsBar>
-					<div className="row" style={{ "background": "#f0f0f0" }}>
+					<div style={{ "background": "#fff" }}>
+						<ActionsBar pageTitle={"Order Confirmation"}>
+							<a href={this.props.locals.applicationUrl + "order"} className="right fancy radius button tiny" style={{ "background": "lightgreen", "color": "green" }}>
+								<i className="in-button-icon fa fa-fw fa-check"></i> Agree
+							</a>
+						</ActionsBar>
+					</div>
+					<div className="row">
 						<div className="large-6 columns">
 							<fieldset style={{ "background": "#fff" }}>
 								<label>Billing Details</label>
@@ -206,7 +208,7 @@ var View = React.createClass({
 													<div className="table-cell text-right">
 														&pound;&nbsp;{product.product.price}
 													</div>
-													<div className="table-cell">
+													<div className="table-cell text-center">
 														{product.quantity}
 													</div>
 													<div className="table-cell text-right">
