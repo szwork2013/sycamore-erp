@@ -49,7 +49,7 @@ var View = React.createClass({
 					</div>
 					<ActionsBar pageTitle={"Order Confirmation"}>
 						<a href={this.props.locals.applicationUrl + "order"} className="right fancy radius button tiny" style={{ "background": "lightgreen", "color": "green" }}>
-							<i className="in-button-icon fa fa-fw fa-check"></i> Save &amp; Agree
+							<i className="in-button-icon fa fa-fw fa-check"></i> Agree
 						</a>
 					</ActionsBar>
 					<div className="row" style={{ "background": "#f0f0f0;" }}>
