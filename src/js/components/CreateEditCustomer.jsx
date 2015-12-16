@@ -33,13 +33,15 @@ var CreateEditCustomer = React.createClass({
 		this.setState({ customerModalIsOpen: false });
 	},
 	saveCustomer: function() {
+		var self = this;
+
 		if((typeof this.state.customer._id != "undefined") && (this.state.customer._id != null)) {
 			Api.postCustomer(CustomerStore.getCustomer(), function() {
-				this.closeCustomerModal();
+				self.closeCustomerModal();
 			});
 		} else {
 			Api.putCustomer(CustomerStore.getCustomer(), function() {
-				this.closeCustomerModal();
+				self.closeCustomerModal();
 			});
 		}
 	},

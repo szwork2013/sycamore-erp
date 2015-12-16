@@ -33,13 +33,15 @@ var CreditEditProperty = React.createClass({
 		this.setState({propertyModalIsOpen: false});
 	},
 	saveProperty: function() {
+		var self = this;
+
 		if((typeof this.state.property._id != "undefined") && (this.state.property._id != null)) {
 			Api.postProperty(PropertyStore.getProperty(), function() {
-				this.closePropertyModal();
+				self.closePropertyModal();
 			});
 		} else {
 			Api.putProperty(PropertyStore.getProperty(), function() {
-				this.closePropertyModal();
+				self.closePropertyModal();
 			});
 		}
 	},
