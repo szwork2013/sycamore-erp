@@ -59,8 +59,6 @@ var View = React.createClass({
 				<Tabs>
 					<TabList>
 						<Tab>Order</Tab>
-					</TabList>
-					<TabList>
 						<Tab>Emails</Tab>
 					</TabList>
 					<TabPanel>
