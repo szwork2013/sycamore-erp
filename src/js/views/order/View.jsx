@@ -52,9 +52,9 @@ var View = React.createClass({
 							<i className="in-button-icon fa fa-fw fa-check"></i> Agree
 						</a>
 					</ActionsBar>
-					<div className="row" style={{ "background": "#f0f0f0;" }}>
+					<div className="row" style={{ "background": "#f0f0f0" }}>
 						<div className="large-6 columns">
-							<fieldset style={{ "background": "#fff;" }}>
+							<fieldset style={{ "background": "#fff" }}>
 								<label>Billing Details</label>
 								<hr />
 								<div className="row">
@@ -116,7 +116,7 @@ var View = React.createClass({
 							</fieldset>
 						</div>
 						<div className="large-6 columns">
-							<fieldset style={{ "background": "#fff;" }}>
+							<fieldset style={{ "background": "#fff" }}>
 								<label>Delivery Details</label>
 								<hr />
 								<div className="row">
@@ -170,7 +170,7 @@ var View = React.createClass({
 							</fieldset>
 						</div>
 					</div>
-					<div className="row" style={{ "background": "#f0f0f0;" }}>
+					<div className="row" style={{ "background": "#f0f0f0" }}>
 						<div className="large-12 columns">
 							<div className="table">
 								<div className="table-header">
