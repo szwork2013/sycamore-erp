@@ -30,6 +30,14 @@ var View = React.createClass({
 			billingAddress = {},
 			delivery = {},
 			deliveryAddress = {};
+		var	orderStatus = order.status;
+		var pageTitle;
+
+		if(orderStatus == "Accepted") {
+			pageTitle = "Order";
+		} else {
+			pageTitle = "Order Confirmation";
+		}
 
 		if ((typeof order.customer != "undefined") && (order.customer != null)) {
 			customer = order.customer;
@@ -58,7 +66,7 @@ var View = React.createClass({
 				<head>
 					<meta charSet="utf-8" />
 					<link rel="stylesheet" type="text/css" href="/css/styles.css" />
-					<title>Order Confirmation</title>
+					<title>{pageTitle}</title>
 				</head>
 				<body style={{ "background": "#f0f0f0" }}>
 					<div className="row" style={{"background": "#0a1724" }}>
@@ -67,7 +75,7 @@ var View = React.createClass({
 						</div>
 					</div>
 					<div style={{ "background": "#fff" }}>
-						<ActionsBar pageTitle={"Order Confirmation"}>
+						<ActionsBar pageTitle={pageTitle}>
 							{this.renderAgreeButton()}
 						</ActionsBar>
 					</div>
