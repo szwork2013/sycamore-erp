@@ -6,6 +6,8 @@ var PropertiesSelect = require("./PropertiesSelect");
 var OrderActions = require("../actions/OrderActions");
 var PropertyStore = require("../stores/PropertyStore");
 
+var Api = require("../services/Api");
+
 var CreditEditProperty = React.createClass({
 	_onChange: function() {
 		this.setState({
@@ -30,6 +32,17 @@ var CreditEditProperty = React.createClass({
 	closePropertyModal: function() {
 		this.setState({propertyModalIsOpen: false});
 	},
+	saveProperty: function() {
+		if((typeof this.state.property._id != "undefined") && (this.state.property._id != null)) {
+			Api.postProperty(PropertyStore.getProperty(), function() {
+				this.closePropertyModal();
+			});
+		} else {
+			Api.putProperty(PropertyStore.getProperty(), function() {
+				this.closePropertyModal();
+			});
+		}
+	},
 	render: function () {
 		var propertyOpts = {};
 
@@ -51,7 +64,7 @@ var CreditEditProperty = React.createClass({
 					   onRequestClose={this.closePropertyModal}>
 					<div className="row">
 						<div className="large-12 columns">
-							<a className="fancy radius button tiny right">
+							<a className="fancy radius button tiny right" onClick={this.saveProperty}>
 								Save
 							</a>
 						</div>

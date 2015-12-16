@@ -6,6 +6,8 @@ var CustomersSelect = require("./CustomersSelect");
 var OrderActions = require("../actions/OrderActions");
 var CustomerStore = require("../stores/CustomerStore");
 
+var Api = require("../services/Api");
+
 var CreateEditCustomer = React.createClass({
 	_onChange: function() {
 		this.setState({
@@ -30,6 +32,17 @@ var CreateEditCustomer = React.createClass({
 	closeCustomerModal: function() {
 		this.setState({ customerModalIsOpen: false });
 	},
+	saveCustomer: function() {
+		if((typeof this.state.customer._id != "undefined") && (this.state.customer._id != null)) {
+			Api.postCustomer(CustomerStore.getCustomer(), function() {
+				this.closeCustomerModal();
+			});
+		} else {
+			Api.putCustomer(CustomerStore.getCustomer(), function() {
+				this.closeCustomerModal();
+			});
+		}
+	},
 	render: function () {
 		return (
 			<fieldset>
@@ -49,7 +62,7 @@ var CreateEditCustomer = React.createClass({
 					   onRequestClose={this.closeCustomerModal}>
 					<div className="row">
 						<div className="large-12 columns">
-							<a className="fancy radius button tiny right">
+							<a className="fancy radius button tiny right" onClick={this.saveCustomer}>
 								Save
 							</a>
 						</div>
