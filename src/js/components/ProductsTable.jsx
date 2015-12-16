@@ -30,8 +30,12 @@ var ProductsTable = React.createClass({
 							<div className="large-6 columns">
 								<ProductsSelect onChange={this.handleProductChange} value={this.state.product._id} />
 							</div>
-							<div className="large-2 columns end">
+							<div className="large-1 columns">
 								<a className="button tiny radius fancy" onClick={this.handleAddProduct}>Add Product</a>
+							</div>
+							<div className="large-4 columns end">
+								<a className="fancy button tiny radius">Add Discount</a>
+								<a className="fancy button tiny radius">Add Delivery Charge</a>
 							</div>
 						</div>
 					</div>
@@ -114,22 +118,6 @@ var ProductsTable = React.createClass({
 									<div className="table-cell">&#160;</div>
 									<div className="table-cell left-box"><strong>Total</strong></div>
 									<div className="table-cell text-right right-box">{this.props.order.total}</div>
-								</div>
-								<div className="table-row">
-									<div className="table-cell">
-										<a className="fancy button tiny radius">Add Discount</a>
-										<a className="fancy button tiny radius">Add Delivery Charge</a>
-									</div>
-									<div className="table-cell">
-									</div>
-									<div className="table-cell">
-									</div>
-									<div className="table-cell">
-									</div>
-									<div className="table-cell">
-									</div>
-									<div className="table-cell">
-									</div>
 								</div>
 							</div>
 						</div>

@@ -73,7 +73,7 @@ var Property = React.createClass({
 	render: function () {
 		return (
 			<div>
-				{renderCustomerDropdown()}
+				{this.renderCustomerDropdown()}
 				<fieldset>
 					<label>Delivery Address</label>
 					<div className="row">
