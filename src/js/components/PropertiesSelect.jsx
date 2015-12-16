@@ -35,7 +35,7 @@ var PropertiesSelect = React.createClass({
 	},
 	render: function () {
 		return (
-			<Select labelKey={"name"}
+			<Select labelKey={"address.line1"}
 					name={this.props.name}
 					onInputChange={this.handleOnInputChange}
 					onChange={this.props.onChange}
