@@ -94,7 +94,7 @@ orderController.prototype.sendEmailOrderAction = function(request, response, nex
 			"name": "name",
 			"content": "John Smith"
 		},{
-			"name": "url",
+			"name": "orderurl",
 			"content": "http://admin.fusionfurnituresolutions.co.uk/sycamore-erp/customer/a/order/5628f38fe94a520300dce338"
 		}];
 	var message = {
@@ -102,7 +102,10 @@ orderController.prototype.sendEmailOrderAction = function(request, response, nex
 				"email": "peter.johnson@sycamoreconsulting.co.uk",
 				"name": "Peter Johnson",
 				"type": "to"
-			}]
+			}],
+ 		"merge": true,
+    	"merge_language": "mailchimp",
+    	"global_merge_vars": template_content
 	};
 	var async = false;
 
