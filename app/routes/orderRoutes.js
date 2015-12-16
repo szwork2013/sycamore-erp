@@ -44,6 +44,12 @@ function orderRoutes(servicesContainer, modelsContainer) {
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
 		orderController.viewOrderAction
 	);
+// VIEW / GET (Customer Confirm)
+	Router.get( "/customer/:customer_id/order/:order_id/confirm",
+//		authenticationService.ensureAuthenticated(),
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
+		orderController.confirmOrderAction
+	);
 // EDIT/VIEW / GET
 	Router.get( "/order/:id",
 		authenticationService.ensureAuthenticated(),
