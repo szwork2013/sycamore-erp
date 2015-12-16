@@ -29,28 +29,21 @@ orderController.prototype.confirmOrderAction = function(request, response, next)
 	d.on("error", next);
 	
 	d.run(function() {
-
-		var id;
+		var order_id;
 
 		if(typeof(request.params.order_id) != "undefined") {
 			order_id = request.params.order_id;
 
-			orderController.prototype.getOrder(order_id, d.intercept(function(order) {
-				if(order != null) {
-					response.locals.order = order;
-					switch(request.params.contentType) {
-						case "json":
-							response.json(order);
-							break;
-						case "html":
-						default:
-							response.renderReact("order/View", response.locals);
-							break;
-					}
-				} else {
+			Order.findByIdAndUpdate(order_id, { $set: { status: "Accepted" } }, {}, function(error, updatedOrder) {
+				orderController.prototype.getOrder(order_id, d.intercept(function(order) {
+					if(order != null) {
+						response.locals.order = order;
+						response.renderReact("order/View", response.locals);	
+					} else {
 // Throw 404 - Not Found
-					next(new Error("404 - Not Found"));
-				}
+						next(new Error("404 - Not Found"));
+					}
+				});
 			}));
 		} else {
 			response.renderReact("order/View", response.locals);
@@ -99,8 +92,7 @@ orderController.prototype.viewOrderAction = function(request, response, next) {
 	d.on("error", next);
 	
 	d.run(function() {
-
-		var id;
+		var order_id;
 
 		if(typeof(request.params.order_id) != "undefined") {
 			order_id = request.params.order_id;
@@ -108,15 +100,7 @@ orderController.prototype.viewOrderAction = function(request, response, next) {
 			orderController.prototype.getOrder(order_id, d.intercept(function(order) {
 				if(order != null) {
 					response.locals.order = order;
-					switch(request.params.contentType) {
-						case "json":
-							response.json(order);
-							break;
-						case "html":
-						default:
-							response.renderReact("order/View", response.locals);
-							break;
-					}
+					response.renderReact("order/View", response.locals);
 				} else {
 // Throw 404 - Not Found
 					next(new Error("404 - Not Found"));
