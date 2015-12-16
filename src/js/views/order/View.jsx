@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactDOM = require("react-dom");
 var ActionsBar = require("sycamore-platform-components").ActionsBar;
 
 var View = React.createClass({
