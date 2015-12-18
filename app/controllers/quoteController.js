@@ -74,7 +74,7 @@ quoteController.prototype.convertQuoteAction = function(request, response, next)
 					delete data._id;
 					delete data.status;
 					Order.create(data, d.intercept(function(createdOrder) {
-						response.redirect("/sycamore-erp/order/" + createdOrder._id, response.locals);	
+						response.redirect("/sycamore-erp/order/" + createdOrder._id);	
 					}));
 				} else {
 // Throw 404 - Not Found
