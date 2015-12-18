@@ -70,7 +70,7 @@ quoteController.prototype.convertQuoteAction = function(request, response, next)
 			quoteController.prototype.getQuote(id, d.intercept(function(quote) {
 				if(quote != null) {
 					var Order = quoteController.prototype.modelsContainer.getModel("Order");
-					var data = objectAssign({}, quote);
+					var data = quote; //objectAssign({}, quote);
 					delete data._id;
 					delete data.status;
 					Order.create(data, d.intercept(function(createdOrder) {
