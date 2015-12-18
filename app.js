@@ -10,6 +10,7 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 	modelsContainer.addModel("ProductVariation",		require("./models/productVariationSchema").productVariationSchema());
 	modelsContainer.addModel("ProductVariationGroup",	require("./models/productVariationGroupSchema").productVariationGroupSchema());
 	modelsContainer.addModel("Property",	require("./models/propertySchema").propertySchema());
+	modelsContainer.addModel("Quote",		require("./models/quoteSchema").orderSchema());
 	modelsContainer.addModel("Supplier",	require("./models/supplierSchema").supplierSchema());
 
 	sycamoreErpApplication.prototype.Router	= express.Router();
@@ -44,8 +45,8 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 						"url": response.locals.applicationUrl + "customers/"
 					}, {
 						"name": "Sales Quotes",
-						"permission": "SYCAMOREERP_ORDER__MODULE",
-						"url": response.locals.applicationUrl + "orders/"
+						"permission": "SYCAMOREERP_QUOTE__MODULE",
+						"url": response.locals.applicationUrl + "quotes/"
 					}, {
 						"name": "Sales Orders",
 						"permission": "SYCAMOREERP_ORDER__MODULE",
