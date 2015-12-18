@@ -1,7 +1,7 @@
 var React = require("react");
 var CreateEditCustomer = require("./CreateEditCustomer");
 var CreateEditProperty = require("./CreateEditProperty");
-var ProductsTable = require("./ProductsTable");
+var ProductsTable = require("./ProductsTableQuote");
 
 var QuoteActions = require("../actions/QuoteActions");
 var QuoteStore = require("../stores/QuoteStore");
