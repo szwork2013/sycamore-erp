@@ -10,6 +10,7 @@ exports = module.exports = function(servicesContainer, modelsContainer) {
 	var productVariationRoutes			= require("./productVariationRoutes")(servicesContainer, modelsContainer);
 	var productVariationGroupRoutes		= require("./productVariationGroupRoutes")(servicesContainer, modelsContainer);
 	var propertyRoutes					= require("./propertyRoutes")(servicesContainer, modelsContainer);
+	var quoteRoutes						= require("./quoteRoutes")(servicesContainer, modelsContainer);
 	var supplierRoutes					= require("./supplierRoutes")(servicesContainer, modelsContainer);
 
 	Router.use("/",						customerRoutes);
@@ -19,6 +20,7 @@ exports = module.exports = function(servicesContainer, modelsContainer) {
 	Router.use("/",						productVariationRoutes);
 	Router.use("/",						productVariationGroupRoutes);
 	Router.use("/",						propertyRoutes);
+	Router.use("/",						quoteRoutes);
 	Router.use("/",						supplierRoutes);
 
 	return Router;

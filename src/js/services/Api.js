@@ -167,6 +167,20 @@ var Api = {
 			.end(d.intercept(callback));
 		});
 	},
+	putQuote: function(quote, callback) {
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.put("/sycamore-erp/quote")
+			.send({ quote: quote })
+			.set("Accept", "application/json")
+			.set("Content-Type", "application/json")
+			.end(d.intercept(callback));
+		});
+	},
 	putSupplier: function(supplier, callback) {
 		var d = domain.create();
 
@@ -260,6 +274,20 @@ var Api = {
 			request
 			.post("/sycamore-erp/property/" + id)
 			.send({ property: property })
+			.set("Accept", "application/json")
+			.set("Content-Type", "application/json")
+			.end(d.intercept(callback));
+		});
+	},
+	postQuote: function(id, quote, callback) {
+		var d = domain.create();
+
+		d.on("error", this.handleError);
+
+		d.run(function() {
+			request
+			.post("/sycamore-erp/quote/" + id)
+			.send({ quote: quote })
 			.set("Accept", "application/json")
 			.set("Content-Type", "application/json")
 			.end(d.intercept(callback));
