@@ -67,6 +67,12 @@ function quoteRoutes(servicesContainer, modelsContainer) {
 //		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
 		quoteController.sendEmailQuoteAction
 	);
+// CONVERT / GET
+	Router.get( "/quote/:id/convert",
+		authenticationService.ensureAuthenticated(),
+//		authenticationService.hasPermission("CARSALESSUITE_SUPPLIER_EDIT"),
+		quoteController.convertQuoteAction
+	);
 
 // LIST / GET
 	Router.get(
