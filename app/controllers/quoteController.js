@@ -60,10 +60,10 @@ quoteController.prototype.convertQuoteAction = function(request, response, next)
 	
 	d.run(function() {
 		var Quote = quoteController.prototype.modelsContainer.getModel("Quote");
-		var quote_id;
+		var id;
 
 		if(typeof(request.params.id) != "undefined") {
-			quote_id = request.params.id;
+			id = request.params.id;
 
 			quoteController.prototype.getQuote(id, d.intercept(function(quote) {
 				if(quote != null) {
