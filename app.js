@@ -10,7 +10,7 @@ function sycamoreErpApplication(servicesContainer, modelsContainer) {
 	modelsContainer.addModel("ProductVariation",		require("./models/productVariationSchema").productVariationSchema());
 	modelsContainer.addModel("ProductVariationGroup",	require("./models/productVariationGroupSchema").productVariationGroupSchema());
 	modelsContainer.addModel("Property",	require("./models/propertySchema").propertySchema());
-	modelsContainer.addModel("Quote",		require("./models/quoteSchema").orderSchema());
+	modelsContainer.addModel("Quote",		require("./models/quoteSchema").quoteSchema());
 	modelsContainer.addModel("Supplier",	require("./models/supplierSchema").supplierSchema());
 
 	sycamoreErpApplication.prototype.Router	= express.Router();
