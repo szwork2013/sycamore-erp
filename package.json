@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "mandrill-api": "^1.0.45",
+    "object-assign": "^4.0.1",
     "sycamore-platform-components": "0.0.87"
   }
 }

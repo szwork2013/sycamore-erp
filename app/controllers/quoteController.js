@@ -2,6 +2,8 @@ var domain = require("domain");
 var async = require("async");
 var mandrill = require('mandrill-api/mandrill');
 
+var objectAssign = require("object-assign");
+
 var getListItems = require("../../../../app/lib/controller/getListItems.js");
 
 function quoteController(servicesContainer, modelsContainer) {
@@ -68,7 +70,7 @@ quoteController.prototype.convertQuoteAction = function(request, response, next)
 			quoteController.prototype.getQuote(id, d.intercept(function(quote) {
 				if(quote != null) {
 					var Order = quoteController.prototype.modelsContainer.getModel("Order");
-					var data = quote;
+					var data = objectAssign({}, quote);
 					delete data._id;
 					delete data.status;
 					Order.create(data, d.intercept(function(createdOrder) {
