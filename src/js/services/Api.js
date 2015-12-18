@@ -27,7 +27,7 @@ var Api = {
 			queryOptions.itemsPerPage = 100;
 			request
 			.get("/sycamore-erp/products.json")
-			.send(queryOptions)
+			.query(queryOptions)
 			.set("Accept", "application/json")
 			.end(d.intercept(callback));
 		});
