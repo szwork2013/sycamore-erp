@@ -24,6 +24,7 @@ var Api = {
 		d.on("error", this.handleError);
 
 		d.run(function() {
+			queryOptions.itemsPerPage = 100;
 			request
 			.get("/sycamore-erp/products.json")
 			.send(queryOptions)
