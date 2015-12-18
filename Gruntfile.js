@@ -36,6 +36,9 @@ module.exports = function(grunt) {
 					'public/js/views/productVariationGroup/List.js': ['src/js/views/productVariationGroup/List.jsx'],
 					'public/js/views/property/Form.js': ['src/js/views/property/Form.jsx'],
 					'public/js/views/property/List.js': ['src/js/views/property/List.jsx'],
+					'public/js/views/quote/Form.js': ['src/js/views/quote/Form.jsx'],
+					'public/js/views/quote/List.js': ['src/js/views/quote/List.jsx'],
+					'public/js/views/quote/View.js': ['src/js/views/quote/View.jsx'],
 					'public/js/views/supplier/Form.js': ['src/js/views/supplier/Form.jsx'],
 					'public/js/views/supplier/List.js': ['src/js/views/supplier/List.jsx']
 				},
