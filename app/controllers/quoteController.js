@@ -53,6 +53,38 @@ quoteController.prototype.confirmQuoteAction = function(request, response, next)
 	});
 }
 
+quoteController.prototype.convertQuoteAction = function(request, response, next) {
+	var d = domain.create();
+	
+	d.on("error", next);
+	
+	d.run(function() {
+		var Quote = quoteController.prototype.modelsContainer.getModel("Quote");
+		var quote_id;
+
+		if(typeof(request.params.id) != "undefined") {
+			quote_id = request.params.id;
+
+			quoteController.prototype.getQuote(id, d.intercept(function(quote) {
+				if(quote != null) {
+					var Order = quoteController.prototype.modelsContainer.getModel("Order");
+					var data = quote;
+					delete data._id;
+					delete data.status;
+					Order.create(data, d.intercept(function(createdOrder) {
+						response.redirect("/sycamore-erp/order/" + createdOrder._id, response.locals);	
+					}));
+				} else {
+// Throw 404 - Not Found
+					next(new Error("404 - Not Found"));
+				}
+			}));
+		} else {
+			response.renderReact("quote/View", response.locals);
+		}
+	});
+}
+
 quoteController.prototype.editQuoteAction = function(request, response, next) {
 	var d = domain.create();
 	

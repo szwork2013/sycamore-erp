@@ -29,6 +29,17 @@ var View = React.createClass({
 			}));
 		});
 	},
+	renderConvertButton: function() {
+		var quoteId;
+
+		if((typeof this.props.locals != "undefined") && (typeof this.props.locals.quote != "undefined") && (this.props.locals.quote != null) && (typeof this.props.locals.quote._id != "undefined")) {
+			return (
+				<a className="right fancy radius button tiny" href={"/sycamore-erp/quote/" + this.props.locals.quote._id + "/convert"}>
+					Convert to Order
+				</a>
+			);
+		}
+	},
 	renderSaveButton: function() {
 		var buttonAction;
 
@@ -60,6 +71,7 @@ var View = React.createClass({
 			<div>
 				{this.renderSaveButton()}
 				{this.renderEmailButton()}
+				{this.renderConvertButton()}
 			</div>
 		);
 
