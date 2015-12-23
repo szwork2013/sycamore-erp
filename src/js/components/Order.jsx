@@ -50,11 +50,11 @@ var Order = React.createClass({
 			<div>
 				<div className="row">
 					<div className="large-6 columns">
-						<div class="row">
-							<div class="large-4 columns">
+						<div className="row">
+							<div className="large-4 columns">
 								Order Status
 							</div>
-							<div class="large-8 columns">
+							<div className="large-8 columns">
 								<select>
 									<option>Draft</option>
 									<option>Unaccepted</option>
@@ -64,11 +64,11 @@ var Order = React.createClass({
 						</div>
 					</div>
 					<div className="large-6 columns">
-						<div class="row">
-							<div class="large-4 columns">
+						<div className="row">
+							<div className="large-4 columns">
 								Delivery Date
 							</div>
-							<div class="large-8 columns">
+							<div className="large-8 columns">
 								<input type="text" />
 							</div>
 						</div>
