@@ -9,7 +9,7 @@ var Select = require("react-select");
 var OrderActions = require("../actions/OrderActions");
 var OrderStore = require("../stores/OrderStore");
 
-statusOptions = [
+var statusOptions = [
 	{ value: "Draft", label: "Draft" },
 	{ value: "Unaccepted", label: "Unaccepted" },
 	{ value: "Accepted", label: "Accepted" }

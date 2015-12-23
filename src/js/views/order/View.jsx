@@ -101,7 +101,7 @@ var View = React.createClass({
 								</div>
 								<div className="row">
 									<div className="large-12 columns">
-										<label><input type="checkbox" /> I acknowledge that agreeing to this order will result in me/my company being invoiced for this order and I will be under obligation to pay the invoice in full upon completion (delivery &amp; installation) of the order.</label>
+										<label><input type="checkbox" /> I acknowledge that agreeing to this order will result in me/my company being invoiced for this order and I will be under obligation to pay the invoice in full prior to installation.</label>
 									</div>
 								</div>
 							</fieldset>
