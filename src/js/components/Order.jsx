@@ -50,6 +50,32 @@ var Order = React.createClass({
 			<div>
 				<div className="row">
 					<div className="large-6 columns">
+						<div class="row">
+							<div class="large-4 columns">
+								Order Status
+							</div>
+							<div class="large-8 columns">
+								<select>
+									<option>Draft</option>
+									<option>Unaccepted</option>
+									<option>Accepted</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div className="large-6 columns">
+						<div class="row">
+							<div class="large-4 columns">
+								Delivery Date
+							</div>
+							<div class="large-8 columns">
+								<input type="text" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className="row">
+					<div className="large-6 columns">
 						<CreateEditCustomer />
 					</div>
 					<div className="large-6 columns">
