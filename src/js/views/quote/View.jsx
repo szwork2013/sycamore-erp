@@ -2,6 +2,8 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 var ActionsBar = require("sycamore-platform-components").ActionsBar;
 
+var moment = require("moment");
+
 var View = React.createClass({
 	renderAgreeButton: function() {
 		var locals = this.props.locals;
@@ -78,6 +80,28 @@ var View = React.createClass({
 						<ActionsBar pageTitle={pageTitle}>
 							{this.renderAgreeButton()}
 						</ActionsBar>
+					</div>
+					<div className="row">
+						<div className="large-6 columns">
+							<div className="row">
+								<div className="large-4 columns">
+									Quote Status
+								</div>
+								<div className="large-8 columns">
+									{quote.status}
+								</div>
+							</div>
+						</div>
+						<div className="large-6 columns">
+							<div className="row">
+								<div className="large-4 columns">
+									Delivery Date
+								</div>
+								<div className="large-8 columns">
+									{moment(quote.deliveryDate).format("DD/MM/YYYY")}
+								</div>
+							</div>
+						</div>
 					</div>
 					<div className="row">
 						<div className="large-6 columns">

@@ -2,6 +2,8 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 var ActionsBar = require("sycamore-platform-components").ActionsBar;
 
+var moment = require("moment");
+
 var View = React.createClass({
 	renderAgreeButton: function() {
 		var locals = this.props.locals;
@@ -78,6 +80,52 @@ var View = React.createClass({
 						<ActionsBar pageTitle={pageTitle}>
 							{this.renderAgreeButton()}
 						</ActionsBar>
+					</div>
+					<div className="row">
+						<div className="large-8 large-offset-2 columns end">
+							<div className="row">
+								<div className="large-12 columns">
+									<label><input type="checkbox" /> I confirm that the quantities, colours, options and all items of furniture are correct on this order.</label>
+								</div>
+							</div>
+							<div className="row">
+								<div className="large-12 columns">
+									<label><input type="checkbox" /> I confirm that my property will be in a condition where it is ready for the furniture to be installed on the delivery date.</label>
+								</div>
+							</div>
+							<div className="row">
+								<div className="large-12 columns">
+									<label><input type="checkbox" /> I agree to give 48 hours notice in the event that I need to change the delivery date.</label>
+								</div>
+							</div>
+							<div className="row">
+								<div className="large-12 columns">
+									<label><input type="checkbox" /> I acknowledge that agreeing to this order will result in me/my company being invoiced for this order and I will be under obligation to pay the invoice in full upon completion (delivery &amp; installation) of the order.</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div className="row">
+						<div className="large-6 columns">
+							<div className="row">
+								<div className="large-4 columns">
+									Order Status
+								</div>
+								<div className="large-8 columns">
+									{order.status}
+								</div>
+							</div>
+						</div>
+						<div className="large-6 columns">
+							<div className="row">
+								<div className="large-4 columns">
+									Delivery Date
+								</div>
+								<div className="large-8 columns">
+									{moment(order.deliveryDate).format("DD/MM/YYYY")}
+								</div>
+							</div>
+						</div>
 					</div>
 					<div className="row">
 						<div className="large-6 columns">
