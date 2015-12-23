@@ -107,24 +107,28 @@ var View = React.createClass({
 					</div>
 					<div className="row">
 						<div className="large-6 columns">
-							<div className="row">
-								<div className="large-4 columns">
-									Order Status
+							<fieldset style={{ "background": "#fff" }}>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="inline">Order Status</label>
+									</div>
+									<div className="large-8 columns">
+										{order.status}
+									</div>
 								</div>
-								<div className="large-8 columns">
-									{order.status}
-								</div>
-							</div>
+							</fieldset>
 						</div>
 						<div className="large-6 columns">
-							<div className="row">
-								<div className="large-4 columns">
-									Delivery Date
+							<fieldset style={{ "background": "#fff" }}>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="inline">Delivery Date</label>
+									</div>
+									<div className="large-8 columns">
+										{moment(order.deliveryDate).format("DD/MM/YYYY")}
+									</div>
 								</div>
-								<div className="large-8 columns">
-									{moment(order.deliveryDate).format("DD/MM/YYYY")}
-								</div>
-							</div>
+							</fieldset>
 						</div>
 					</div>
 					<div className="row">
