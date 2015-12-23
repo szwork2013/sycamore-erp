@@ -50,28 +50,32 @@ var Order = React.createClass({
 			<div>
 				<div className="row">
 					<div className="large-6 columns">
-						<div className="row">
-							<div className="large-4 columns">
-								Order Status
+						<fieldset>
+							<div className="row">
+								<div className="large-4 columns">
+									<label className="right">Order Status</label>
+								</div>
+								<div className="large-8 columns">
+									<select>
+										<option>Draft</option>
+										<option>Unaccepted</option>
+										<option>Accepted</option>
+									</select>
+								</div>
 							</div>
-							<div className="large-8 columns">
-								<select>
-									<option>Draft</option>
-									<option>Unaccepted</option>
-									<option>Accepted</option>
-								</select>
-							</div>
-						</div>
+						</fieldset>
 					</div>
 					<div className="large-6 columns">
-						<div className="row">
-							<div className="large-4 columns">
-								Delivery Date
+						<fieldset>
+							<div className="row">
+								<div className="large-4 columns">
+									<label>Delivery Date</label>
+								</div>
+								<div className="large-8 columns">
+									<input type="text" />
+								</div>
 							</div>
-							<div className="large-8 columns">
-								<input type="text" />
-							</div>
-						</div>
+						</fieldset>
 					</div>
 				</div>
 				<div className="row">
