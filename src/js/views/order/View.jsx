@@ -112,7 +112,7 @@ var View = React.createClass({
 							<fieldset style={{ "background": "#fff" }}>
 								<div className="row">
 									<div className="large-4 columns">
-										<label className="inline">Order Status</label>
+										<label className="right">Order Status</label>
 									</div>
 									<div className="large-8 columns">
 										{order.status}
@@ -124,7 +124,7 @@ var View = React.createClass({
 							<fieldset style={{ "background": "#fff" }}>
 								<div className="row">
 									<div className="large-4 columns">
-										<label className="inline">Delivery Date</label>
+										<label className="right">Delivery Date</label>
 									</div>
 									<div className="large-8 columns">
 										{moment(order.deliveryDate).format("DD/MM/YYYY")}

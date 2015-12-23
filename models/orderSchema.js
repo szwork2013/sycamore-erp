@@ -16,6 +16,24 @@ exports.orderSchema = function() {
 		customer:						 { type: Mongoose.Schema.Types.ObjectId, ref: "Customer" },
 		property:						 { type: Mongoose.Schema.Types.ObjectId, ref: "Property" },
 		products:						 [ orderItemSchema ],
+		discounts: [
+			{
+				name:					 { type: String },
+				quantity:				 { type: Number },
+				subTotal:				 { type: Number },
+				VAT:					 { type: Number },
+				total:					 { type: Number }
+			}
+		],
+		additionalCharges: [
+			{
+				name:					 { type: String },
+				quantity:				 { type: Number },
+				subTotal:				 { type: Number },
+				VAT:					 { type: Number },
+				total:					 { type: Number }
+			}
+		],
 		subTotal:						 { type: Number },
 		VAT:							 { type: Number },
 		total:							 { type: Number }

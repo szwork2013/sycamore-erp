@@ -81,9 +81,9 @@ var Order = React.createClass({
 						<fieldset>
 							<div className="row">
 								<div className="large-4 columns">
-									<label>Delivery Date</label>
+									<label className="right">Delivery Date</label>
 								</div>
-								<div className="large-8 columns">
+								<div className="large-3 columns end">
 									<DatePicker
 										dateFormat="DD/MM/YYYY"
 										selected={this.state.order.deliveryDate}
