@@ -54,7 +54,7 @@ var CreditEditProperty = React.createClass({
 			<fieldset {...propertyOpts}>
 				<div className="row">				
 					<div className="large-2 columns">
-						<label className="inline">Deliver To</label>
+						<label className="inline right">Deliver To</label>
 					</div>
 					<div className="large-6 columns">
 						<PropertiesSelect name={"order[property]"} onChange={OrderActions.setPropertyOnOrder} value={this.state.property._id} />

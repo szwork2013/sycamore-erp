@@ -52,7 +52,7 @@ var CreateEditCustomer = React.createClass({
 			<fieldset>
 				<div className="row">
 					<div className="large-2 columns">
-						<label className="inline">Customer</label>
+						<label className="inline right">Customer</label>
 					</div>
 					<div className="large-6 columns">
 						<CustomersSelect onChange={OrderActions.setCustomerOnOrder} value={this.state.customer._id} />

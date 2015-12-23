@@ -66,7 +66,7 @@ var Order = React.createClass({
 						<fieldset>
 							<div className="row">
 								<div className="large-4 columns">
-									<label className="right">Order Status</label>
+									<label className="right inline">Order Status</label>
 								</div>
 								<div className="large-8 columns">
 									<Select
@@ -81,7 +81,7 @@ var Order = React.createClass({
 						<fieldset>
 							<div className="row">
 								<div className="large-4 columns">
-									<label className="right">Delivery Date</label>
+									<label className="right inline">Delivery Date</label>
 								</div>
 								<div className="large-3 columns end">
 									<DatePicker
