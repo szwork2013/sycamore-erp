@@ -3,8 +3,17 @@ var CreateEditCustomer = require("./CreateEditCustomer");
 var CreateEditProperty = require("./CreateEditProperty");
 var ProductsTable = require("./ProductsTable");
 
+var DatePicker = require("react-datepicker");
+var Select = require("react-select");
+
 var OrderActions = require("../actions/OrderActions");
 var OrderStore = require("../stores/OrderStore");
+
+statusOptions = [
+	{ value: "Draft", label: "Draft" },
+	{ value: "Unaccepted", label: "Unaccepted" },
+	{ value: "Accepted", label: "Accepted" }
+];
 
 var Order = React.createClass({
 	"propTypes": {
@@ -16,6 +25,8 @@ var Order = React.createClass({
 		this.setState({
 			order: {
 				_id: OrderStore.getId(),
+				status: OrderStore.getStatus(),
+				deliveryDate: OrderStore.getDeliveryDate(),
 				customer: OrderStore.getCustomer(),
 				property: OrderStore.getProperty(),
 				products: OrderStore.getProducts(),
@@ -36,6 +47,8 @@ var Order = React.createClass({
 		return {
 			order: {
 				_id: OrderStore.getId(),
+				status: OrderStore.getStatus(),
+				deliveryDate: OrderStore.getDeliveryDate(),
 				customer: OrderStore.getCustomer(),
 				property: OrderStore.getProperty(),
 				products: OrderStore.getProducts(),
@@ -56,11 +69,10 @@ var Order = React.createClass({
 									<label className="right">Order Status</label>
 								</div>
 								<div className="large-8 columns">
-									<select>
-										<option>Draft</option>
-										<option>Unaccepted</option>
-										<option>Accepted</option>
-									</select>
+									<Select
+										options={statusOptions}
+										onChange={OrderActions.setStatus}
+										value={this.state.order.status} />
 								</div>
 							</div>
 						</fieldset>
@@ -72,7 +84,10 @@ var Order = React.createClass({
 									<label>Delivery Date</label>
 								</div>
 								<div className="large-8 columns">
-									<input type="text" />
+									<DatePicker
+										dateFormat="DD/MM/YYYY"
+										selected={this.state.order.deliveryDate}
+										onChange={OrderActions.setDeliveryDate} />
 								</div>
 							</div>
 						</fieldset>

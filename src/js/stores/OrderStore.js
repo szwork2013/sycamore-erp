@@ -9,6 +9,8 @@ var PropertyStore = require("./PropertyStore");
 
 var _order = {
 	_id: null,
+	status: null,
+	deliveryDate: null,
 	customer: {
 		_id: null
 	},
@@ -75,6 +77,10 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		return CustomerStore.getCustomer();
 	},
 
+	getDeliveryDate: function() {
+		return _order.deliveryDate;
+	},
+
 	getOrder: function(callback) {
 		var order,
 			id,
@@ -120,6 +126,10 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		return PropertyStore.getProperty();
 	},
 
+	getStatus: function() {
+		return _order.status;
+	},
+
 	getSubTotal: function() {
 		return _order.subTotal;
 	},
@@ -153,6 +163,10 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		CustomerStore.loadData(customer);
 	},
 
+	setDeliveryDate: function(deliveryDate) {
+		_order.deliveryDate = deliveryDate;
+	},
+
 	setProducts: function(products) {
 		_order.products = products
 	},
@@ -164,6 +178,10 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	setProductQuantity: function(productIndex, value, callback) {
 		_order.products[productIndex].quantity = value;
 		this.calculateTotals(callback);
+	},
+
+	setStatus: function(status) {
+		_order.status = status;
 	},
 
 	setSubTotal: function(subTotal) {
@@ -194,6 +212,10 @@ OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 			OrderStore.setCustomer(action.customer);
 			OrderStore.emitChange();
 		break;
+		case OrderConstants.SET_DELIVERY_DATE:
+			OrderStore.setDeliveryDate(action.date);
+			OrderStore.emitChange();
+		break;
 		case OrderConstants.SET_PRODUCT_QUANTITY_ON_ORDER:
 			OrderStore.setProductQuantity(action.productIndex, action.value, function() {
 				OrderStore.emitChange();
@@ -201,6 +223,10 @@ OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 		break;
 		case OrderConstants.SET_PROPERTY_ON_ORDER:
 			OrderStore.setProperty(action.property);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.SET_STATUS:
+			OrderStore.setStatus(action.status);
 			OrderStore.emitChange();
 		break;
 		default:

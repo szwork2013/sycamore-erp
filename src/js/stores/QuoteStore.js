@@ -9,6 +9,8 @@ var PropertyStore = require("./PropertyStore");
 
 var _quote = {
 	_id: null,
+	status: null,
+	deliveryDate: null,
 	customer: {
 		_id: null
 	},
@@ -75,6 +77,10 @@ var QuoteStore = assign({}, EventEmitter.prototype, {
 		return CustomerStore.getCustomer();
 	},
 
+	getDeliveryDate: function() {
+		return _quote.deliveryDate;
+	},
+
 	getQuote: function(callback) {
 		var quote,
 			id,
@@ -124,6 +130,10 @@ var QuoteStore = assign({}, EventEmitter.prototype, {
 		return _quote.subTotal;
 	},
 
+	getStatus: function() {
+		return _quote.status;
+	},
+
 	getTotal: function() {
 		return _quote.total;
 	},
@@ -153,6 +163,10 @@ var QuoteStore = assign({}, EventEmitter.prototype, {
 		CustomerStore.loadData(customer);
 	},
 
+	setDeliveryDate: function(deliveryDate) {
+		_quote.deliveryDate = deliveryDate;
+	},
+
 	setProducts: function(products) {
 		_quote.products = products
 	},
@@ -164,6 +178,10 @@ var QuoteStore = assign({}, EventEmitter.prototype, {
 	setProductQuantity: function(productIndex, value, callback) {
 		_quote.products[productIndex].quantity = value;
 		this.calculateTotals(callback);
+	},
+
+	setStatus: function(status) {
+		_quote.status = status;
 	},
 
 	setSubTotal: function(subTotal) {
@@ -194,6 +212,10 @@ QuoteStore.dispatchToken = AppDispatcher.register(function(payload) {
 			QuoteStore.setCustomer(action.customer);
 			QuoteStore.emitChange();
 		break;
+		case QuoteConstants.SET_DELIVERY_DATE:
+			QuoteStore.setDeliveryDate(action.date);
+			QuoteStore.emitChange();
+		break;
 		case QuoteConstants.SET_PRODUCT_QUANTITY_ON_QUOTE:
 			QuoteStore.setProductQuantity(action.productIndex, action.value, function() {
 				QuoteStore.emitChange();
@@ -201,6 +223,10 @@ QuoteStore.dispatchToken = AppDispatcher.register(function(payload) {
 		break;
 		case QuoteConstants.SET_PROPERTY_ON_QUOTE:
 			QuoteStore.setProperty(action.property);
+			QuoteStore.emitChange();
+		break;
+		case QuoteConstants.SET_STATUS:
+			QuoteStore.setStatus(action.status);
 			QuoteStore.emitChange();
 		break;
 		default:

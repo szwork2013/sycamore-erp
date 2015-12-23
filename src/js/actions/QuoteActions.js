@@ -69,6 +69,18 @@ var QuoteActions = {
 			property: property
 		});
 	},
+	setDeliveryDate: function(date) {
+		AppDispatcher.handleViewAction({
+			actionType: QuoteConstants.SET_DELIVERY_DATE,
+			date: date
+		});
+	},
+	setStatus: function(status) {
+		AppDispatcher.handleViewAction({
+			actionType: QuoteConstants.SET_STATUS,
+			status: status
+		});
+	}
 }
 
 module.exports = QuoteActions;

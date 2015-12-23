@@ -69,6 +69,18 @@ var OrderActions = {
 			property: property
 		});
 	},
+	setDeliveryDate: function(date) {
+		AppDispatcher.handleViewAction({
+			actionType: OrderConstants.SET_DELIVERY_DATE,
+			date: date
+		});
+	},
+	setStatus: function(status) {
+		AppDispatcher.handleViewAction({
+			actionType: OrderConstants.SET_STATUS,
+			status: status
+		});
+	}
 }
 
 module.exports = OrderActions;
