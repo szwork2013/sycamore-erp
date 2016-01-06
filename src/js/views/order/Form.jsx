@@ -4,6 +4,9 @@ var ReactDOM = require("react-dom");
 var Layout = require("sycamore-platform-components").Layout;
 var ActionsBar = require("sycamore-platform-components").ActionsBar;
 var ReactTabs = require("react-tabs");
+var DatePicker = require("react-datepicker");
+var Select = require("react-select");
+
 var Tab = ReactTabs.Tab;
 var Tabs = ReactTabs.Tabs;
 var TabList = ReactTabs.TabList;
@@ -14,6 +17,12 @@ Tabs.setUseDefaultStyles(false);
 var Order = require("../../components/Order");
 var OrderStore = require("../../stores/OrderStore");
 var OrderActions = require("../../actions/OrderActions");
+
+var statusOptions = [
+	{ value: "Draft", label: "Draft" },
+	{ value: "Unaccepted", label: "Unaccepted" },
+	{ value: "Accepted", label: "Accepted" }
+];
 
 var View = React.createClass({
 	handleSaveClick: function() {
