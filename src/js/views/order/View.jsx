@@ -9,14 +9,15 @@ var View = React.createClass({
 		var locals = this.props.locals;
 		var applicationUrl = locals.applicationUrl,
 			order = locals.order;
+/*
 		var	customer = order.customer,
 			orderStatus = order.status;
-
+			
 		if ((typeof order.customer != "undefined") && (order.customer != null)) {
 			customer = order.customer;
 		}
-
-		if(orderStatus != "Accepted") {
+*/
+		if(order.status != "Accepted") {
 			return (
 				<a href={this.props.locals.applicationUrl + "customer/a/order/" + order._id + "/confirm"} className="right fancy radius button tiny" style={{ "background": "lightgreen", "color": "green" }}>
 					<i className="in-button-icon fa fa-fw fa-check"></i> Agree
@@ -27,11 +28,11 @@ var View = React.createClass({
 	render: function() {
 		var locals = this.props.locals;
 		var applicationUrl = locals.applicationUrl;
-		var order = locals.order,
+		var order = locals.order; /*,
 			customer = {},
 			billingAddress = {},
 			delivery = {},
-			deliveryAddress = {};
+			deliveryAddress = {}; */
 		var	orderStatus = order.status;
 		var pageTitle;
 
@@ -40,7 +41,7 @@ var View = React.createClass({
 		} else {
 			pageTitle = "Order Confirmation";
 		}
-
+/*
 		if ((typeof order.customer != "undefined") && (order.customer != null)) {
 			customer = order.customer;
 			if ((typeof customer.billingAddress != "undefined") && (customer.billingAddress != null)) {
@@ -54,7 +55,7 @@ var View = React.createClass({
 				deliveryAddress = delivery.address;
 			}
 		}
-
+*/
 		var js = "var locals = JSON.parse('" + JSON.stringify(locals) + "');";
 		var jsTemplate = "";
 		if(applicationUrl == "/") {
