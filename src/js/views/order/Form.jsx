@@ -394,7 +394,16 @@ var View = React.createClass({
 											<div className="table-cell">&#160;</div>
 											<div className="table-cell">&#160;</div>
 											<div className="table-cell left-box">Sub Total</div>
-											<div className="table-cell text-right right-box"><input type="text" value={this.state.order.subTotal} /></div>
+											<div className="table-cell text-right right-box" style={{ "padding": 0 }}>
+												<div className="row collapse">
+													<div className="large-3 columns">
+														<span className="prefix">&pound;</span>
+													</div>
+													<div className="large-9 columns">
+														<input type="text" value={this.state.order.subTotal} style={{ "margin": 0 }} />
+													</div>
+												</div>
+											</div>
 										</div>
 										<div className="table-row">
 											<div className="table-cell">&#160;</div>
@@ -402,7 +411,16 @@ var View = React.createClass({
 											<div className="table-cell">&#160;</div>
 											<div className="table-cell">&#160;</div>
 											<div className="table-cell left-box">VAT</div>
-											<div className="table-cell text-right right-box"><input type="text" value={this.state.order.VAT} /></div>
+											<div className="table-cell text-right right-box" style={{ "padding": 0 }}>
+												<div className="row collapse">
+													<div className="large-3 columns">
+														<span className="prefix">&pound;</span>
+													</div>
+													<div className="large-9 columns">
+														<input type="text" value={this.state.order.VAT} style={{ "margin": 0 }} />
+													</div>
+												</div>
+											</div>
 										</div>
 										<div className="table-row">
 											<div className="table-cell">&#160;</div>
@@ -410,7 +428,16 @@ var View = React.createClass({
 											<div className="table-cell">&#160;</div>
 											<div className="table-cell">&#160;</div>
 											<div className="table-cell left-box"><strong>Total</strong></div>
-											<div className="table-cell text-right right-box"><input type="text" value={this.state.order.total} /></div>
+											<div className="table-cell text-right right-box" style={{ "padding": 0 }}>
+												<div className="row collapse">
+													<div className="large-3 columns">
+														<span className="prefix">&pound;</span>
+													</div>
+													<div className="large-9 columns">
+														<input type="text" value={this.state.order.total} style={{ "margin": 0 }} />
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
