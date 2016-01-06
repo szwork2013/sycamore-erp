@@ -9,7 +9,7 @@ var async = require("async");
 
 var _order = {
 	_id: null,
-	status: null,
+	status: "Draft",
 	billing: {
 		customerName: null,
 		companyName: null,
@@ -48,15 +48,18 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		this.on(OrderConstants.CHANGE_EVENT, callback);
 	},
 
-	addProduct: function(product, callback) {
+	addProduct: function() {
 		_order.products.push({
-			product: product,
-			quantity: 1
+			name: "",
+			quantity: 1,
+			price: 0,
+			VAT: 0,
+			total: 0
 		});
 
-		this.calculateTotals(callback);
+//		this.calculateTotals(callback);
 	},
-
+/*
 	calculateTotals: function(callback) {
 		var subTotal = 0;
 		var VAT = 0;
@@ -84,124 +87,87 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 			}
 		);
 	},
-
+*/
 	emitChange: function() {
 		this.emit(OrderConstants.CHANGE_EVENT);
-	},
-
-	getId: function() {
-		return _order._id;
-	},
-/*
-	getCustomer: function() {
-		return CustomerStore.getCustomer();
-	},
-*/
-	getDeliveryDate: function() {
-		return _order.deliveryDate;
 	},
 
 	getState: function() {
 		return _order;
 	},
 
-	getOrder: function(callback) {
-		var order,
-			id,
-			products;
-
-		order = {
-			customer: CustomerStore.getId(),
-			property: PropertyStore.getId(),
-			products: [],
-			subTotal: this.getSubTotal(),
-			VAT: this.getVAT(),
-			total: this.getTotal()
-		};
-
-		id = this.getId();
-		if(id != null) {
-			order._id = id;
-		}
-
-		async.eachSeries(
-			this.getProducts(),
-			function(product, callback) {
-				order.products.push({
-					product: product.product._id,
-					quantity: product.quantity,
-					subTotal: product.subTotal,
-					VAT: product.VAT,
-					total: product.total
-				});
-				callback();
-			},
-			function(error) {
-				callback(error, order);
-			}
-		);
-	},
-
-	getProducts: function() {
-		return _order.products;
-	},
-
-	getProperty: function() {
-		return PropertyStore.getProperty();
-	},
-
-	getStatus: function() {
-		return _order.status;
-	},
-
-	getSubTotal: function() {
-		return _order.subTotal;
-	},
-
-	getTotal: function() {
-		return _order.total;
-	},
-
-	getVAT: function() {
-		return _order.VAT;
-	},
-
 	loadData: function(order) {
-		if(order != null) {
-			_order = order;
-			if(	(typeof order.customer !== "undefined") && (typeof order.customer === "object") ) {
-				CustomerStore.loadData(order.customer);
-			}
-			if(	(typeof order.property !== "undefined") && (typeof order.property === "object") ) {
-				PropertyStore.loadData(order.property);
-			}
-			this.emitChange();
-		}
+		_order = order;
+		this.emitChange();
 	},
 
 	removeChangeListener: function(callback) {
 		this.removeListener(OrderConstants.CHANGE_EVENT, callback);
 	},
 
-	setCustomer: function(customer) {
-		CustomerStore.loadData(customer);
-	},
-
-	setDeliveryDate: function(deliveryDate) {
-		_order.deliveryDate = deliveryDate;
-	},
-
-	setProducts: function(products) {
-		_order.products = products
-	},
-
-	setProperty: function(property) {
-		PropertyStore.loadData(customer);
-	},
-
 	setProductQuantity: function(productIndex, value, callback) {
 		_order.products[productIndex].quantity = value;
 		this.calculateTotals(callback);
+	},
+
+	setBillingAddressLine1(line1) {
+		_order.billing.address.line1;
+	},
+
+	setBillingAddressLine2(line2) {
+		_order.billing.address.line2;
+	},
+
+	setBillingAddressLine3(line3) {
+		_order.billing.address.line3;
+	},
+
+	setBillingAddressLine4(line4) {
+		_order.billing.address.line4;
+	},
+
+	setBillingAddressPostCode(postCode) {
+		_order.billing.address.postCode;
+	},
+
+	setBillingCompanyName(companyName) {
+		_order.billing.companyName;
+	},
+
+	setBillingCustomerName(customerName) {
+		_order.billing.customerName;
+	},
+
+	setBillingEmail(email) {
+		_order.billing.email;
+	},
+
+	setBillingTelephone(telephone) {
+		_order.billing.telephone;
+	},
+
+	setDeliveryAddressLine1(line1) {
+		_order.delivery.address.line1;
+	},
+
+	setDeliveryAddressLine2(line2) {
+		_order.delivery.address.line2;
+	},
+
+	setDeliveryAddressLine3(line3) {
+		_order.delivery.address.line3;
+	},
+
+	setDeliveryAddressLine4(line4) {
+		_order.delivery.address.line4;
+	},
+
+	setDeliveryAddressPostCode(postCode) {
+		_order.delivery.address.postCode;
+	},
+
+	setDeliveryDate: function(date) {
+		_order.delivery.date = date;
 	},
 
 	setStatus: function(status) {
@@ -228,16 +194,7 @@ OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 			OrderStore.loadData(action.order);
 		break;
 		case OrderConstants.ADD_PRODUCT_TO_ORDER:
-			OrderStore.addProduct(action.product, function() {
-				OrderStore.emitChange();
-			});
-		break;
-		case OrderConstants.SET_CUSTOMER_ON_ORDER:
-			OrderStore.setCustomer(action.customer);
-			OrderStore.emitChange();
-		break;
-		case OrderConstants.SET_DELIVERY_DATE:
-			OrderStore.setDeliveryDate(action.date);
+			OrderStore.addProduct();
 			OrderStore.emitChange();
 		break;
 		case OrderConstants.SET_PRODUCT_QUANTITY_ON_ORDER:
@@ -245,14 +202,79 @@ OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 				OrderStore.emitChange();
 			});
 		break;
-		case OrderConstants.SET_PROPERTY_ON_ORDER:
-			OrderStore.setProperty(action.property);
-			OrderStore.emitChange();
-		break;
 		case OrderConstants.SET_STATUS:
 			OrderStore.setStatus(action.status);
 			OrderStore.emitChange();
 		break;
+		case OrderConstants.SET_DELIVERY_DATE:
+			OrderStore.setDeliveryDate(action.date);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.UPDATE_BILLING_CUSTOMER_NAME:
+			OrderStore.setBillingCustomerName(action.customerName);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.UPDATE_BILLING_COMPANY_NAME:
+			OrderStore.setBillingCompanyName(action.companyName);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.UPDATE_BILLING_ADDRESS_LINE1:
+			OrderStore.setBillingAddressLine1(action.line1);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.UPDATE_BILLING_ADDRESS_LINE2:
+			OrderStore.setBillingAddressLine2(action.line2);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.UPDATE_BILLING_ADDRESS_LINE3:
+			OrderStore.setBillingAddressLine3(action.line3);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.UPDATE_BILLING_ADDRESS_LINE4:
+			OrderStore.setBillingAddressLine4(action.line4);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.UPDATE_BILLING_ADDRESS_POSTCODE:
+			OrderStore.setBillingAddressPostCode(action.postCode);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.UPDATE_BILLING_EMAIL:
+			OrderStore.setBillingEmail(action.email);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.UPDATE_BILLING_TELEPHONE:
+			OrderStore.setBillingTelephone(action.telephone);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.UPDATE_DELIVERY_ADDRESS_LINE1:
+			OrderStore.setDeliveryAddressLine1(action.line1);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.UPDATE_DELIVERY_ADDRESS_LINE2:
+			OrderStore.setDeliveryAddressLine2(action.line2);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.UPDATE_DELIVERY_ADDRESS_LINE3:
+			OrderStore.setDeliveryAddressLine3(action.line3);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.UPDATE_DELIVERY_ADDRESS_LINE4:
+			OrderStore.setDeliveryAddressLine4(action.line4);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.UPDATE_DELIVERY_ADDRESS_POSTCODE:
+			OrderStore.setDeliveryAddressPostCode(action.postCode);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.UPDATE_DELIVERY_ACCESS_ARRANGEMENTS:
+			OrderStore.setDeliveryAccessArrangements(action.accessArrangements);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.UPDATE_DELIVERY_TELEPHONE:
+			OrderStore.setDeliveryTelephone(action.telephone);
+			OrderStore.emitChange();
+		break;
+
 		default:
 			// do nothing
 	}

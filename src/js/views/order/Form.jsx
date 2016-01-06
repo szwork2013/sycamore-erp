@@ -365,22 +365,22 @@ var View = React.createClass({
 												return (
 													<div className="table-row" key={productIndex}>
 														<div className="table-cell">
-															{product.product.name}
+															<input type="text" value={product.product.name} />
 														</div>
 														<div className="table-cell">
-															{product.product.price}
+															<input type="text" value={product.product.price} />
 														</div>
 														<div className="table-cell">
 															<input type="number" onChange={OrderActions.setProductQuantityOnOrder.bind(this, productIndex)} value={product.quantity} />
 														</div>
 														<div className="table-cell">
-															{product.subTotal}
+															<input type="text" value={product.subTotal} />
 														</div>
 														<div className="table-cell">
-															{product.VAT}
+															<input type="text" value={product.VAT} />
 														</div>
 														<div className="table-cell">
-															{product.total}
+															<input type="text" value={product.total} />
 														</div>
 													</div>
 												);
@@ -394,7 +394,7 @@ var View = React.createClass({
 											<div className="table-cell">&#160;</div>
 											<div className="table-cell">&#160;</div>
 											<div className="table-cell left-box">Sub Total</div>
-											<div className="table-cell text-right right-box">{this.state.order.subTotal}</div>
+											<div className="table-cell text-right right-box"><input type="text" value={this.state.order.subTotal} /></div>
 										</div>
 										<div className="table-row">
 											<div className="table-cell">&#160;</div>
@@ -402,7 +402,7 @@ var View = React.createClass({
 											<div className="table-cell">&#160;</div>
 											<div className="table-cell">&#160;</div>
 											<div className="table-cell left-box">VAT</div>
-											<div className="table-cell text-right right-box">{this.state.order.VAT}</div>
+											<div className="table-cell text-right right-box"><input type="text" value={this.state.order.VAT} /></div>
 										</div>
 										<div className="table-row">
 											<div className="table-cell">&#160;</div>
@@ -410,7 +410,7 @@ var View = React.createClass({
 											<div className="table-cell">&#160;</div>
 											<div className="table-cell">&#160;</div>
 											<div className="table-cell left-box"><strong>Total</strong></div>
-											<div className="table-cell text-right right-box">{this.state.order.total}</div>
+											<div className="table-cell text-right right-box"><input type="text" value={this.state.order.total} /></div>
 										</div>
 									</div>
 								</div>
