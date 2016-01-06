@@ -4,8 +4,8 @@ var OrderConstants = require("../constants/OrderConstants");
 var assign = require("object-assign");
 var async = require("async");
 
-var CustomerStore = require("./CustomerStore");
-var PropertyStore = require("./PropertyStore");
+//var CustomerStore = require("./CustomerStore");
+//var PropertyStore = require("./PropertyStore");
 
 var _order = {
 	_id: null,
@@ -72,13 +72,17 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	getId: function() {
 		return _order._id;
 	},
-
+/*
 	getCustomer: function() {
 		return CustomerStore.getCustomer();
 	},
-
+*/
 	getDeliveryDate: function() {
 		return _order.deliveryDate;
+	},
+
+	getState: function() {
+		return _order;
 	},
 
 	getOrder: function(callback) {

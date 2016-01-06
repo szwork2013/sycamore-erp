@@ -69,18 +69,22 @@ var OrderActions = {
 			property: property
 		});
 	},
+
+
+
+	setStatus: function(status) {
+		AppDispatcher.handleViewAction({
+			actionType: OrderConstants.SET_STATUS,
+			status: status
+		});
+	},
 	setDeliveryDate: function(date) {
 		AppDispatcher.handleViewAction({
 			actionType: OrderConstants.SET_DELIVERY_DATE,
 			date: date
 		});
 	},
-	setStatus: function(status) {
-		AppDispatcher.handleViewAction({
-			actionType: OrderConstants.SET_STATUS,
-			status: status
-		});
-	}
+
 }
 
 module.exports = OrderActions;

@@ -27,17 +27,7 @@ var statusOptions = [
 var View = React.createClass({
 	_onChange: function() {
 		this.setState({
-			order: {
-				_id: OrderStore.getId(),
-				status: OrderStore.getStatus(),
-				deliveryDate: OrderStore.getDeliveryDate(),
-				customer: OrderStore.getCustomer(),
-				property: OrderStore.getProperty(),
-				products: OrderStore.getProducts(),
-				subTotal: OrderStore.getSubTotal(),
-				VAT: OrderStore.getVAT(),
-				total: OrderStore.getTotal()
-			}
+			order: OrderStore.getState()
 		});
 	},
 	componentDidMount: function() {
@@ -49,17 +39,7 @@ var View = React.createClass({
 	},
 	getInitialState: function() {
 		return {
-			order: {
-				_id: OrderStore.getId(),
-				status: OrderStore.getStatus(),
-				deliveryDate: OrderStore.getDeliveryDate(),
-				customer: OrderStore.getCustomer(),
-				property: OrderStore.getProperty(),
-				products: OrderStore.getProducts(),
-				subTotal: OrderStore.getSubTotal(),
-				VAT: OrderStore.getVAT(),
-				total: OrderStore.getTotal()
-			}
+			order: OrderStore.getState()
 		};
 	},
 	handleSaveClick: function() {
