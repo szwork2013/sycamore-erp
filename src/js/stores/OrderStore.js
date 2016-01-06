@@ -3,6 +3,7 @@ var EventEmitter = require("events").EventEmitter;
 var OrderConstants = require("../constants/OrderConstants");
 var assign = require("object-assign");
 var async = require("async");
+var moment = require("moment");
 
 //var CustomerStore = require("./CustomerStore");
 //var PropertyStore = require("./PropertyStore");
@@ -168,7 +169,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	},
 
 	setDeliveryDate: function(date) {
-		_order.delivery.date = date;
+		_order.delivery.date = moment(date);
 	},
 
 	setDeliveryTelephone(telephone) {
