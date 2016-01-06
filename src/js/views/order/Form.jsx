@@ -156,7 +156,7 @@ var View = React.createClass({
 										<label className="right inline">Customer Name</label>
 									</div>
 									<div className="large-8 columns">
-										<input onChange={OrderActions.updateCustomerName}
+										<input onChange={OrderActions.updateBillingCustomerName}
 											   type="text"
 											   value={this.state.billing.customerName} />
 									</div>
@@ -166,7 +166,7 @@ var View = React.createClass({
 										<label className="right inline">Company Name</label>
 									</div>
 									<div className="large-8 columns">
-										<input onChange={OrderActions.updateCompanyName}
+										<input onChange={OrderActions.updateBillingCompanyName}
 											   type="text"
 											   value={this.state.billing.companyName} />
 									</div>
