@@ -97,8 +97,10 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	},
 
 	loadData: function(order) {
-		_order = order;
-		this.emitChange();
+		if(order != null) {
+			_order = order;
+			this.emitChange();
+		}
 	},
 
 	removeChangeListener: function(callback) {
