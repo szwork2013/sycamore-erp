@@ -365,10 +365,10 @@ var View = React.createClass({
 												return (
 													<div className="table-row" key={productIndex}>
 														<div className="table-cell">
-															<input type="text" value={product.product.name} />
+															<input type="text" value={product.name} />
 														</div>
 														<div className="table-cell">
-															<input type="text" value={product.product.price} />
+															<input type="text" value={product.price} />
 														</div>
 														<div className="table-cell">
 															<input type="number" onChange={OrderActions.setProductQuantityOnOrder.bind(this, productIndex)} value={product.quantity} />

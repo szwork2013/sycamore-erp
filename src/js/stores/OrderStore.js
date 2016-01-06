@@ -107,9 +107,9 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		this.removeListener(OrderConstants.CHANGE_EVENT, callback);
 	},
 
-	setProductQuantity: function(productIndex, value, callback) {
+	setProductQuantity: function(productIndex, value) {
 		_order.products[productIndex].quantity = value;
-		this.calculateTotals(callback);
+//		this.calculateTotals(callback);
 	},
 
 	setBillingAddressLine1(line1) {
@@ -200,9 +200,8 @@ OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 			OrderStore.emitChange();
 		break;
 		case OrderConstants.SET_PRODUCT_QUANTITY_ON_ORDER:
-			OrderStore.setProductQuantity(action.productIndex, action.value, function() {
-				OrderStore.emitChange();
-			});
+			OrderStore.setProductQuantity(action.productIndex, action.value);
+			OrderStore.emitChange();
 		break;
 		case OrderConstants.SET_STATUS:
 			OrderStore.setStatus(action.status);
