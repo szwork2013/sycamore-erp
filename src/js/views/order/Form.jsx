@@ -333,7 +333,7 @@ var View = React.createClass({
 												return (
 													<div className="table-row" key={productIndex}>
 														<div className="table-cell" style={{ "padding": 0 }}>
-															<input type="text" value={product.name} style={{ "margin": 0 }} />
+															<input onChange={OrderActions.setProductName.bind(this, productIndex)} type="text" value={product.name} style={{ "margin": 0 }} />
 														</div>
 														<div className="table-cell large-1">&nbsp;</div>
 														<div className="table-cell large-1">&nbsp;</div>

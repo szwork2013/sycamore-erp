@@ -18,7 +18,7 @@ var View = React.createClass({
 
 		if(orderStatus != "Accepted") {
 			return (
-				<a href={this.props.locals.applicationUrl + "customer/" + customer._id + "/order/" + order._id + "/confirm"} className="right fancy radius button tiny" style={{ "background": "lightgreen", "color": "green" }}>
+				<a href={this.props.locals.applicationUrl + "customer/a/order/" + order._id + "/confirm"} className="right fancy radius button tiny" style={{ "background": "lightgreen", "color": "green" }}>
 					<i className="in-button-icon fa fa-fw fa-check"></i> Agree
 				</a>
 			);
