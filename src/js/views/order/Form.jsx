@@ -253,7 +253,7 @@ var View = React.createClass({
 											<label className="right inline"></label>
 										</div>
 										<div className="large-8 columns">
-											<input onChange={OrderyActions.updateDeliveryAddressLine1}
+											<input onChange={OrderActions.updateDeliveryAddressLine1}
 												   type="text"
 												   value={this.state.order.delivery.address.line1} />
 										</div>
