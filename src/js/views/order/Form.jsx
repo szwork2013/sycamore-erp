@@ -101,7 +101,6 @@ var View = React.createClass({
 				<Tabs>
 					<TabList>
 						<Tab>Order</Tab>
-						<Tab>Emails</Tab>
 					</TabList>
 					<TabPanel>
 						<div className="row">
@@ -234,7 +233,7 @@ var View = React.createClass({
 									<label>Delivery Address</label>
 									<div className="row">
 										<div className="large-4 columns">
-											<label className="right inline"></label>
+											<label className="right inline">Line 1</label>
 										</div>
 										<div className="large-8 columns">
 											<input onChange={OrderActions.updateDeliveryAddressLine1}
@@ -244,7 +243,7 @@ var View = React.createClass({
 									</div>
 									<div className="row">
 										<div className="large-4 columns">
-											<label className="right inline"></label>
+											<label className="right inline">Line 2</label>
 										</div>
 										<div className="large-8 columns">
 											<input onChange={OrderActions.updateDeliveryAddressLine2}
@@ -254,7 +253,7 @@ var View = React.createClass({
 									</div>
 									<div className="row">
 										<div className="large-4 columns">
-											<label className="right inline"></label>
+											<label className="right inline">Line 3</label>
 										</div>
 										<div className="large-8 columns">
 											<input onChange={OrderActions.updateDeliveryAddressLine3}
@@ -264,7 +263,7 @@ var View = React.createClass({
 									</div>
 									<div className="row">
 										<div className="large-4 columns">
-											<label className="right inline"></label>
+											<label className="right inline">Line 4</label>
 										</div>
 										<div className="large-8 columns">
 											<input onChange={OrderActions.updateDeliveryAddressLine4}
@@ -274,7 +273,7 @@ var View = React.createClass({
 									</div>
 									<div className="row">
 										<div className="large-4 columns">
-											<label className="right inline"></label>
+											<label className="right inline">Post Code</label>
 										</div>
 										<div className="large-8 columns">
 											<input onChange={OrderActions.updateDeliveryAddressPostCode}
@@ -311,8 +310,6 @@ var View = React.createClass({
 								<div className="row">
 									<div className="large-12 columns">
 										<a className="button tiny radius fancy" onClick={OrderActions.addProductToOrder}>Add Product</a>
-										<a className="fancy button tiny radius right">Add Discount</a>
-										<a className="fancy button tiny radius right">Add Delivery Charge</a>
 									</div>
 								</div>
 							</div>
@@ -323,23 +320,8 @@ var View = React.createClass({
 								<div className="table">
 									<div className="table-header">
 										<div className="table-row">
-											<div className="table-cell large-6">
+											<div className="table-cell large-12">
 												Product
-											</div>
-											<div className="table-cell large-1">
-												Item Price
-											</div>
-											<div className="table-cell large-1">
-												Quantity
-											</div>
-											<div className="table-cell large-1">
-												Sub Total
-											</div>
-											<div className="table-cell large-1">
-												VAT
-											</div>
-											<div className="table-cell large-1">
-												Total
 											</div>
 										</div>
 									</div>
@@ -348,23 +330,8 @@ var View = React.createClass({
 											this.state.order.products.map(function(product, productIndex) {
 												return (
 													<div className="table-row" key={productIndex}>
-														<div className="table-cell">
-															<input type="text" value={product.name} />
-														</div>
-														<div className="table-cell">
-															<input type="text" value={product.price} />
-														</div>
-														<div className="table-cell">
-															<input type="number" onChange={OrderActions.setProductQuantityOnOrder.bind(this, productIndex)} value={product.quantity} />
-														</div>
-														<div className="table-cell">
-															<input type="text" value={product.subTotal} />
-														</div>
-														<div className="table-cell">
-															<input type="text" value={product.VAT} />
-														</div>
-														<div className="table-cell">
-															<input type="text" value={product.total} />
+														<div className="table-cell" style={{ "padding": 0 }}>
+															<input type="text" value={product.name} style={{ "margin": 0 }} />
 														</div>
 													</div>
 												);
@@ -427,8 +394,6 @@ var View = React.createClass({
 								</div>
 							</div>
 						</div>
-					</TabPanel>
-					<TabPanel>
 					</TabPanel>
 				</Tabs>
 			</Layout>
