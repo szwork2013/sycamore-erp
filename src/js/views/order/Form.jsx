@@ -158,7 +158,7 @@ var View = React.createClass({
 									<div className="large-8 columns">
 										<input onChange={OrderActions.updateBillingCustomerName}
 											   type="text"
-											   value={this.state.billing.customerName} />
+											   value={this.state.order.billing.customerName} />
 									</div>
 								</div>
 								<div className="row">
@@ -168,7 +168,7 @@ var View = React.createClass({
 									<div className="large-8 columns">
 										<input onChange={OrderActions.updateBillingCompanyName}
 											   type="text"
-											   value={this.state.billing.companyName} />
+											   value={this.state.order.billing.companyName} />
 									</div>
 								</div>
 								<fieldset>
@@ -180,7 +180,7 @@ var View = React.createClass({
 										<div className="large-8 columns">
 											<input onChange={OrderActions.updateBillingAddressLine1}
 												   type="text"
-												   value={this.state.billing.address.line1} />
+												   value={this.state.order.billing.address.line1} />
 										</div>
 									</div>
 									<div className="row">
@@ -190,7 +190,7 @@ var View = React.createClass({
 										<div className="large-8 columns">
 											<input onChange={OrderActions.updateBillingAddressLine2}
 												   type="text"
-												   value={this.state.billing.address.line2} />
+												   value={this.state.order.billing.address.line2} />
 										</div>
 									</div>
 									<div className="row">
@@ -200,7 +200,7 @@ var View = React.createClass({
 										<div className="large-8 columns">
 											<input onChange={OrderActions.updateBillingAddressLine3}
 												   type="text"
-												   value={this.state.billing.address.line3} />
+												   value={this.state.order.billing.address.line3} />
 										</div>
 									</div>
 									<div className="row">
@@ -210,7 +210,7 @@ var View = React.createClass({
 										<div className="large-8 columns">
 											<input onChange={OrderActions.updateBillingAddressLine4}
 												   type="text"
-												   value={this.state.billing.address.line4} />
+												   value={this.state.order.billing.address.line4} />
 										</div>
 									</div>
 									<div className="row">
@@ -220,7 +220,7 @@ var View = React.createClass({
 										<div className="large-8 columns">
 											<input onChange={OrderActions.updateBillingAddressPostCode}
 												   type="text"
-												   value={this.state.billing.address.postCode} />
+												   value={this.state.order.billing.address.postCode} />
 										</div>
 									</div>
 								</fieldset>
@@ -231,7 +231,7 @@ var View = React.createClass({
 									<div className="large-8 columns">
 										<input onChange={OrderActions.updateBillingTelephone}
 											   type="text"
-											   value={this.state.billing.telephone} />
+											   value={this.state.order.billing.telephone} />
 									</div>
 								</div>
 								<div className="row">
@@ -241,7 +241,7 @@ var View = React.createClass({
 									<div className="large-8 columns">
 										<input onChange={OrderActions.updateBillingEmail}
 											   type="text"
-											   value={this.state.billing.email} />
+											   value={this.state.order.billing.email} />
 									</div>
 								</div>
 							</div>
@@ -255,7 +255,7 @@ var View = React.createClass({
 										<div className="large-8 columns">
 											<input onChange={OrderyActions.updateDeliveryAddressLine1}
 												   type="text"
-												   value={this.state.delivery.address.line1} />
+												   value={this.state.order.delivery.address.line1} />
 										</div>
 									</div>
 									<div className="row">
@@ -265,7 +265,7 @@ var View = React.createClass({
 										<div className="large-8 columns">
 											<input onChange={OrderActions.updateDeliveryAddressLine2}
 												   type="text"
-												   value={this.state.delivery.address.line2} />
+												   value={this.state.order.delivery.address.line2} />
 										</div>
 									</div>
 									<div className="row">
@@ -275,7 +275,7 @@ var View = React.createClass({
 										<div className="large-8 columns">
 											<input onChange={OrderActions.updateDeliveryAddressLine3}
 												   type="text"
-												   value={this.state.delivery.address.line3} />
+												   value={this.state.order.delivery.address.line3} />
 										</div>
 									</div>
 									<div className="row">
@@ -285,7 +285,7 @@ var View = React.createClass({
 										<div className="large-8 columns">
 											<input onChange={OrderActions.updateDeliveryAddressLine4}
 												   type="text"
-												   value={this.state.delivery.address.line4} />
+												   value={this.state.order.delivery.address.line4} />
 										</div>
 									</div>
 									<div className="row">
@@ -295,7 +295,7 @@ var View = React.createClass({
 										<div className="large-8 columns">
 											<input onChange={OrderActions.updateDeliveryAddressPostCode}
 												   type="text"
-												   value={this.state.delivery.address.postCode} />
+												   value={this.state.order.delivery.address.postCode} />
 										</div>
 									</div>
 								</fieldset>
@@ -305,7 +305,7 @@ var View = React.createClass({
 									</div>
 									<div className="large-8 columns">
 										<textarea onChange={OrderActions.updateDeliveryAccessArrangements}
-												  value={this.state.delivery.accessArrangements}>
+												  value={this.state.order.delivery.accessArrangements}>
 										</textarea>
 									</div>
 								</div>
@@ -316,7 +316,7 @@ var View = React.createClass({
 									<div className="large-8 columns">
 										<input onChange={OrderActions.updateDeliveryTelephone}
 											   type="text"
-											   value={this.state.delivery.telephone} />
+											   value={this.state.order.delivery.telephone} />
 									</div>
 								</div>
 							</div>
