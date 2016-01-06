@@ -107,11 +107,6 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		this.removeListener(OrderConstants.CHANGE_EVENT, callback);
 	},
 
-	setProductQuantity: function(productIndex, value) {
-		_order.products[productIndex].quantity = value;
-//		this.calculateTotals(callback);
-	},
-
 	setBillingAddressLine1(line1) {
 		_order.billing.address.line1 = line1;
 	},
@@ -178,6 +173,14 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 
 	setDeliveryTelephone(telephone) {
 		_order.delivery.telephone = telephone;
+	},
+
+	setProductName: function(productIndex, value) {
+		_order.products[productIndex].name = value;
+	},
+
+	setProductQuantity: function(productIndex, value) {
+		_order.products[productIndex].quantity = value;
 	},
 
 	setStatus: function(status) {
@@ -284,6 +287,22 @@ OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 			OrderStore.emitChange();
 		break;
 
+		case OrderConstants.SET_PRODUCT_NAME_ON_ORDER:
+			OrderStore.setProductName(action.productIndex, action.value);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.SET_SUBTOTAL:
+			OrderStore.setSubTotal(action.subTotal);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.SET_VAT:
+			OrderStore.setVAT(action.VAT);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.SET_TOTAL:
+			OrderStore.setTotal(action.total);
+			OrderStore.emitChange();
+		break;
 		default:
 			// do nothing
 	}

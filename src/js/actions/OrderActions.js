@@ -153,6 +153,31 @@ var OrderActions = {
 			value: event.target.value
 		});
 	},
+	setProductName: function(productIndex, event) {
+		AppDispatcher.handleViewAction({
+			actionType: OrderConstants.SET_PRODUCT_NAME_ON_ORDER,
+			productIndex: productIndex,
+			value: event.target.value
+		});
+	},
+	setSubTotal: function(event) {
+		AppDispatcher.handleViewAction({
+			actionType: OrderConstants.SET_SUBTOTAL,
+			subTotal: event.target.value
+		});
+	},
+	setVAT: function(event) {
+		AppDispatcher.handleViewAction({
+			actionType: OrderConstants.SET_VAT,
+			VAT: event.target.value
+		});
+	},
+	setTotal: function(event) {
+		AppDispatcher.handleViewAction({
+			actionType: OrderConstants.SET_TOTAL,
+			total: event.target.value
+		});
+	}
 }
 
 module.exports = OrderActions;

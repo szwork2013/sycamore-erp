@@ -320,9 +320,11 @@ var View = React.createClass({
 								<div className="table">
 									<div className="table-header">
 										<div className="table-row">
-											<div className="table-cell large-12">
+											<div className="table-cell large-10">
 												Product
 											</div>
+											<div className="table-cell large-1">&nbsp;</div>
+											<div className="table-cell large-1">&nbsp;</div>
 										</div>
 									</div>
 									<div className="table-body">
@@ -333,6 +335,8 @@ var View = React.createClass({
 														<div className="table-cell" style={{ "padding": 0 }}>
 															<input type="text" value={product.name} style={{ "margin": 0 }} />
 														</div>
+														<div className="table-cell large-1">&nbsp;</div>
+														<div className="table-cell large-1">&nbsp;</div>
 													</div>
 												);
 											}, this)
@@ -340,9 +344,6 @@ var View = React.createClass({
 									</div>
 									<div className="table-footer">
 										<div className="table-row">
-											<div className="table-cell">&#160;</div>
-											<div className="table-cell">&#160;</div>
-											<div className="table-cell">&#160;</div>
 											<div className="table-cell">&#160;</div>
 											<div className="table-cell left-box">Sub Total</div>
 											<div className="table-cell text-right right-box" style={{ "padding": 0 }}>
