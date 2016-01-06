@@ -321,7 +321,101 @@ var View = React.createClass({
 								</div>
 							</div>
 						</div>
-						<ProductsTable order={this.state.order} products={this.state.order.products} />
+
+						<div className="row">
+							<div className="large-12 columns">
+								<div className="row">
+									<div className="large-12 columns">
+										<a className="button tiny radius fancy" onClick={OrderActions.addProductToOrder}>Add Product</a>
+										<a className="fancy button tiny radius right">Add Discount</a>
+										<a className="fancy button tiny radius right">Add Delivery Charge</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div className="row">
+							<div className="large-12 columns">
+								<div className="table">
+									<div className="table-header">
+										<div className="table-row">
+											<div className="table-cell large-6">
+												Product
+											</div>
+											<div className="table-cell large-1">
+												Item Price
+											</div>
+											<div className="table-cell large-1">
+												Quantity
+											</div>
+											<div className="table-cell large-1">
+												Sub Total
+											</div>
+											<div className="table-cell large-1">
+												VAT
+											</div>
+											<div className="table-cell large-1">
+												Total
+											</div>
+										</div>
+									</div>
+									<div className="table-body">
+										{
+											this.state.order.products.map(function(product, productIndex) {
+												return (
+													<div className="table-row" key={productIndex}>
+														<div className="table-cell">
+															{product.product.name}
+														</div>
+														<div className="table-cell">
+															{product.product.price}
+														</div>
+														<div className="table-cell">
+															<input type="number" onChange={OrderActions.setProductQuantityOnOrder.bind(this, productIndex)} value={product.quantity} />
+														</div>
+														<div className="table-cell">
+															{product.subTotal}
+														</div>
+														<div className="table-cell">
+															{product.VAT}
+														</div>
+														<div className="table-cell">
+															{product.total}
+														</div>
+													</div>
+												);
+											}, this)
+										}
+									</div>
+									<div className="table-footer">
+										<div className="table-row">
+											<div className="table-cell">&#160;</div>
+											<div className="table-cell">&#160;</div>
+											<div className="table-cell">&#160;</div>
+											<div className="table-cell">&#160;</div>
+											<div className="table-cell left-box">Sub Total</div>
+											<div className="table-cell text-right right-box">{this.state.order.subTotal}</div>
+										</div>
+										<div className="table-row">
+											<div className="table-cell">&#160;</div>
+											<div className="table-cell">&#160;</div>
+											<div className="table-cell">&#160;</div>
+											<div className="table-cell">&#160;</div>
+											<div className="table-cell left-box">VAT</div>
+											<div className="table-cell text-right right-box">{this.state.order.VAT}</div>
+										</div>
+										<div className="table-row">
+											<div className="table-cell">&#160;</div>
+											<div className="table-cell">&#160;</div>
+											<div className="table-cell">&#160;</div>
+											<div className="table-cell">&#160;</div>
+											<div className="table-cell left-box"><strong>Total</strong></div>
+											<div className="table-cell text-right right-box">{this.state.order.total}</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</TabPanel>
 					<TabPanel>
 					</TabPanel>

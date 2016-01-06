@@ -169,10 +169,9 @@ var OrderActions = {
 		});
 	},
 
-	addProductToOrder: function(product) {
+	addProductToOrder: function() {
 		AppDispatcher.handleViewAction({
-			actionType: OrderConstants.ADD_PRODUCT_TO_ORDER,
-			product: product
+			actionType: OrderConstants.ADD_PRODUCT_TO_ORDER
 		});
 	},
 	setProductQuantityOnOrder: function(productIndex, event) {
