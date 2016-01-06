@@ -32,7 +32,9 @@ var View = React.createClass({
 	},
 	componentDidMount: function() {
 		OrderStore.addChangeListener(this._onChange);
-		OrderStore.loadData(this.props.order);
+		if((typeof this.props.locals != "undefined") && (typeof this.props.locals.order != "undefined")) {
+			OrderStore.loadData(this.props.locals.order);
+		}
 	},
 	componentWillUnount: function() {
 		OrderStore.removeChangeListener(this._onChange);
@@ -50,9 +52,7 @@ var View = React.createClass({
 		});
 
 		d.run(function() {
-			OrderStore.getOrder(d.intercept(function(order) {
-				OrderActions.saveOrder(order);
-			}));
+			OrderActions.saveOrder(this.state.order);
 		});
 	},
 	renderSaveButton: function() {

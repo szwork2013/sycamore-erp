@@ -148,6 +148,10 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		_order.billing.telephone;
 	},
 
+	setDeliveryAccessArrangements(accessArrangements) {
+		_order.delivery.accessArrangements;
+	},
+
 	setDeliveryAddressLine1(line1) {
 		_order.delivery.address.line1;
 	},
@@ -170,6 +174,10 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 
 	setDeliveryDate: function(date) {
 		_order.delivery.date = date;
+	},
+
+	setDeliveryTelephone(telephone) {
+		_order.delivery.telephone;
 	},
 
 	setStatus: function(status) {
@@ -247,6 +255,10 @@ OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 			OrderStore.setBillingTelephone(action.telephone);
 			OrderStore.emitChange();
 		break;
+		case OrderConstants.UPDATE_DELIVERY_ACCESS_ARRANGEMENTS:
+			OrderStore.setDeliveryAccessArrangements(action.accessArrangements);
+			OrderStore.emitChange();
+		break;
 		case OrderConstants.UPDATE_DELIVERY_ADDRESS_LINE1:
 			OrderStore.setDeliveryAddressLine1(action.line1);
 			OrderStore.emitChange();
@@ -265,10 +277,6 @@ OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 		break;
 		case OrderConstants.UPDATE_DELIVERY_ADDRESS_POSTCODE:
 			OrderStore.setDeliveryAddressPostCode(action.postCode);
-			OrderStore.emitChange();
-		break;
-		case OrderConstants.UPDATE_DELIVERY_ACCESS_ARRANGEMENTS:
-			OrderStore.setDeliveryAccessArrangements(action.accessArrangements);
 			OrderStore.emitChange();
 		break;
 		case OrderConstants.UPDATE_DELIVERY_TELEPHONE:
