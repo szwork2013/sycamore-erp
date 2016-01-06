@@ -45,15 +45,7 @@ var View = React.createClass({
 		};
 	},
 	handleSaveClick: function() {
-		var d = domain.create();
-
-		d.on("error", function(error) {
-			console.log(error);
-		});
-
-		d.run(function() {
-			OrderActions.saveOrder(this.state.order);
-		});
+		OrderActions.saveOrder(OrderStore.getState());
 	},
 	renderSaveButton: function() {
 		var buttonAction;

@@ -127,7 +127,7 @@ var View = React.createClass({
 										<label className="right">Delivery Date</label>
 									</div>
 									<div className="large-8 columns">
-										{moment(order.deliveryDate).format("DD/MM/YYYY")}
+										{moment(order.delivery.date).format("DD/MM/YYYY")}
 									</div>
 								</div>
 							</fieldset>
@@ -140,10 +140,18 @@ var View = React.createClass({
 								<hr />
 								<div className="row">
 									<div className="large-4 columns">
-										<label className="right">Company Name / Name</label>
+										<label className="right">Customer Name</label>
 									</div>
 									<div className="large-8 columns">
-										{customer.name}
+										{order.billing.customerName}
+									</div>
+								</div>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right">Company Name</label>
+									</div>
+									<div className="large-8 columns">
+										{order.billing.companyName}
 									</div>
 								</div>
 								<div className="row">
@@ -153,27 +161,27 @@ var View = React.createClass({
 									<div className="large-8 columns">
 										<div className="row">
 											<div className="large-12 columns">
-												{billingAddress.line1}
+												{order.billing.address.line1}
 											</div>
 										</div>
 										<div className="row">
 											<div className="large-12 columns">
-												{billingAddress.line2}
+												{order.billing.address.line2}
 											</div>
 										</div>
 										<div className="row">
 											<div className="large-12 columns">
-												{billingAddress.line3}
+												{order.billing.address.line3}
 											</div>
 										</div>
 										<div className="row">
 											<div className="large-12 columns">
-												{billingAddress.line4}
+												{order.billing.address.line4}
 											</div>
 										</div>
 										<div className="row">
 											<div className="large-12 columns">
-												{billingAddress.postCode}
+												{order.billing.address.postCode}
 											</div>
 										</div>
 									</div>
@@ -183,7 +191,7 @@ var View = React.createClass({
 										<label className="right">Telephone</label>
 									</div>
 									<div className="large-8 columns">
-										{customer.telephone}
+										{order.billing.telephone}
 									</div>
 								</div>
 								<div className="row">
@@ -191,7 +199,7 @@ var View = React.createClass({
 										<label className="right">Email</label>
 									</div>
 									<div className="large-8 columns">
-										{customer.email}
+										{order.billing.email}
 									</div>
 								</div>
 							</fieldset>
@@ -207,27 +215,27 @@ var View = React.createClass({
 									<div className="large-8 columns">
 										<div className="row">
 											<div className="large-12 columns">
-												{deliveryAddress.line1}
+												{order.delivery.address.line1}
 											</div>
 										</div>
 										<div className="row">
 											<div className="large-12 columns">
-												{deliveryAddress.line2}
+												{order.delivery.address.line2}
 											</div>
 										</div>
 										<div className="row">
 											<div className="large-12 columns">
-												{deliveryAddress.line3}
+												{order.delivery.address.line3}
 											</div>
 										</div>
 										<div className="row">
 											<div className="large-12 columns">
-												{deliveryAddress.line4}
+												{order.delivery.address.line4}
 											</div>
 										</div>
 										<div className="row">
 											<div className="large-12 columns">
-												{deliveryAddress.postCode}
+												{order.delivery.address.postCode}
 											</div>
 										</div>
 									</div>
@@ -237,7 +245,7 @@ var View = React.createClass({
 										<label className="right">Telephone</label>
 									</div>
 									<div className="large-8 columns">
-										{delivery.telephone}
+										{order.delivery.telephone}
 									</div>
 								</div>
 								<div className="row">
@@ -245,7 +253,7 @@ var View = React.createClass({
 										<label className="right">Access Arrangements</label>
 									</div>
 									<div className="large-8 columns">
-										{delivery.accessArrangements}
+										{order.delivery.accessArrangements}
 									</div>
 								</div>
 							</fieldset>
@@ -282,10 +290,10 @@ var View = React.createClass({
 											return (
 												<div className="table-row" key={productIndex}>
 													<div className="table-cell">
-														{product.product.name}
+														{product.name}
 													</div>
 													<div className="table-cell text-right">
-														&pound;&nbsp;{product.product.price}
+														&pound;&nbsp;{product.price}
 													</div>
 													<div className="table-cell text-center">
 														{product.quantity}
