@@ -62,8 +62,6 @@ var View = React.createClass({
 				{this.renderEmailButton()}
 			</div>
 		);
-
-
 	},
 	render: function() {
 		var buttonAction,
@@ -93,7 +91,215 @@ var View = React.createClass({
 						<Tab>Emails</Tab>
 					</TabList>
 					<TabPanel>
-						<Order order={order} editable={true} isNew={true} />
+						<div className="row">
+							<div className="large-6 columns">
+								<fieldset>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">Order Status</label>
+										</div>
+										<div className="large-8 columns">
+											<Select
+												options={statusOptions}
+												onChange={OrderActions.setStatus}
+												value={this.state.order.status} />
+										</div>
+									</div>
+								</fieldset>
+							</div>
+							<div className="large-6 columns">
+								<fieldset>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">Delivery Date</label>
+										</div>
+										<div className="large-3 columns end">
+											<DatePicker
+												dateFormat="DD/MM/YYYY"
+												selected={this.state.order.deliveryDate}
+												onChange={OrderActions.setDeliveryDate} />
+										</div>
+									</div>
+								</fieldset>
+							</div>
+						</div>
+						<div className="row">
+							<div className="large-6 columns">
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline">Company Name / Name</label>
+									</div>
+									<div className="large-8 columns">
+										<input disabled={!(this.props.editable)}
+											   onChange={CustomerActions.updateCustomerName}
+											   type="text"
+											   value={this.state.customer.name} />
+									</div>
+								</div>
+								<fieldset>
+									<label>Billing Address</label>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">Line 1</label>
+										</div>
+										<div className="large-8 columns">
+											<input disabled={!(this.props.editable)}
+												   onChange={CustomerActions.updateCustomerBillingAddressLine1}
+												   type="text"
+												   value={this.state.customer.billingAddress.line1} />
+										</div>
+									</div>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">Line 2</label>
+										</div>
+										<div className="large-8 columns">
+											<input disabled={!(this.props.editable)}
+												   onChange={CustomerActions.updateCustomerBillingAddressLine2}
+												   type="text"
+												   value={this.state.customer.billingAddress.line2} />
+										</div>
+									</div>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">Line 3</label>
+										</div>
+										<div className="large-8 columns">
+											<input disabled={!(this.props.editable)}
+												   onChange={CustomerActions.updateCustomerBillingAddressLine3}
+												   type="text"
+												   value={this.state.customer.billingAddress.line3} />
+										</div>
+									</div>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">Line 4</label>
+										</div>
+										<div className="large-8 columns">
+											<input disabled={!(this.props.editable)}
+												   onChange={CustomerActions.updateCustomerBillingAddressLine4}
+												   type="text"
+												   value={this.state.customer.billingAddress.line4} />
+										</div>
+									</div>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">PostCode</label>
+										</div>
+										<div className="large-8 columns">
+											<input disabled={!(this.props.editable)}
+												   onChange={CustomerActions.updateCustomerBillingAddressPostCode}
+												   type="text"
+												   value={this.state.customer.billingAddress.postCode} />
+										</div>
+									</div>
+								</fieldset>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline">Telephone</label>
+									</div>
+									<div className="large-8 columns">
+										<input disabled={!(this.props.editable)}
+											   onChange={CustomerActions.updateCustomerTelephone}
+											   type="text"
+											   value={this.state.customer.telephone} />
+									</div>
+								</div>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline">Email</label>
+									</div>
+									<div className="large-8 columns">
+										<input disabled={!(this.props.editable)}
+											   onChange={CustomerActions.updateCustomerEmail}
+											   type="text"
+											   value={this.state.customer.email} />
+									</div>
+								</div>
+							</div>
+							<div className="large-6 columns">
+								<fieldset>
+									<label>Delivery Address</label>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline"></label>
+										</div>
+										<div className="large-8 columns">
+											<input disabled={!(this.props.editable)}
+												   onChange={PropertyActions.updatePropertyAddressLine1}
+												   type="text"
+												   value={this.state.property.address.line1} />
+										</div>
+									</div>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline"></label>
+										</div>
+										<div className="large-8 columns">
+											<input disabled={!(this.props.editable)}
+												   onChange={PropertyActions.updatePropertyAddressLine2}
+												   type="text"
+												   value={this.state.property.address.line2} />
+										</div>
+									</div>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline"></label>
+										</div>
+										<div className="large-8 columns">
+											<input disabled={!(this.props.editable)}
+												   onChange={PropertyActions.updatePropertyAddressLine3}
+												   type="text"
+												   value={this.state.property.address.line3} />
+										</div>
+									</div>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline"></label>
+										</div>
+										<div className="large-8 columns">
+											<input disabled={!(this.props.editable)}
+												   onChange={PropertyActions.updatePropertyAddressLine4}
+												   type="text"
+												   value={this.state.property.address.line4} />
+										</div>
+									</div>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline"></label>
+										</div>
+										<div className="large-8 columns">
+											<input disabled={!(this.props.editable)}
+												   onChange={PropertyActions.updatePropertyAddressPostCode}
+												   type="text"
+												   value={this.state.property.address.postCode} />
+										</div>
+									</div>
+								</fieldset>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline">Access Arrangements</label>
+									</div>
+									<div className="large-8 columns">
+										<textarea disabled={!(this.props.editable)}
+												  onChange={PropertyActions.updatePropertyAccessArrangements}
+												  value={this.state.property.accessArrangements}>
+										</textarea>
+									</div>
+								</div>
+								<div className="row">
+									<div className="large-4 columns">
+										<label className="right inline">Access Telephone</label>
+									</div>
+									<div className="large-8 columns">
+										<input disabled={!(this.props.editable)}
+											   onChange={PropertyActions.updatePropertyTelephone}
+											   type="text"
+											   value={this.state.property.telephone} />
+									</div>
+								</div>
+							</div>
+						</div>
 					</TabPanel>
 					<TabPanel>
 					</TabPanel>
