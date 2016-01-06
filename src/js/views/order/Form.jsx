@@ -89,10 +89,8 @@ var View = React.createClass({
 
 		if((order != null) && (typeof(order._id) != "undefined")) {
 			pageTitle = "Edit order";
-			buttonAction = "Save";
 		} else {
 			pageTitle = "New order";
-			buttonAction = "Create";
 		}
 
 		return (
@@ -114,10 +112,7 @@ var View = React.createClass({
 											<label className="right inline">Order Status</label>
 										</div>
 										<div className="large-8 columns">
-											<Select
-												options={statusOptions}
-												onChange={OrderActions.setStatus}
-												value={this.state.order.status} />
+											<label className="left inline">{this.state.order.status}</label>
 										</div>
 									</div>
 								</fieldset>

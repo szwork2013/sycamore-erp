@@ -113,63 +113,63 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	},
 
 	setBillingAddressLine1(line1) {
-		_order.billing.address.line1;
+		_order.billing.address.line1 = line1;
 	},
 
 	setBillingAddressLine2(line2) {
-		_order.billing.address.line2;
+		_order.billing.address.line2 = line2;
 	},
 
 	setBillingAddressLine3(line3) {
-		_order.billing.address.line3;
+		_order.billing.address.line3 = line3;
 	},
 
 	setBillingAddressLine4(line4) {
-		_order.billing.address.line4;
+		_order.billing.address.line4 = line4;
 	},
 
 	setBillingAddressPostCode(postCode) {
-		_order.billing.address.postCode;
+		_order.billing.address.postCode = postCode;
 	},
 
 	setBillingCompanyName(companyName) {
-		_order.billing.companyName;
+		_order.billing.companyName = companyName;
 	},
 
 	setBillingCustomerName(customerName) {
-		_order.billing.customerName;
+		_order.billing.customerName = customerName;
 	},
 
 	setBillingEmail(email) {
-		_order.billing.email;
+		_order.billing.email = email;
 	},
 
 	setBillingTelephone(telephone) {
-		_order.billing.telephone;
+		_order.billing.telephone = telephone;
 	},
 
 	setDeliveryAccessArrangements(accessArrangements) {
-		_order.delivery.accessArrangements;
+		_order.delivery.accessArrangements = accessArrangements;
 	},
 
 	setDeliveryAddressLine1(line1) {
-		_order.delivery.address.line1;
+		_order.delivery.address.line1 = line1;
 	},
 
 	setDeliveryAddressLine2(line2) {
-		_order.delivery.address.line2;
+		_order.delivery.address.line2 = line2;
 	},
 
 	setDeliveryAddressLine3(line3) {
-		_order.delivery.address.line3;
+		_order.delivery.address.line3 = line3;
 	},
 
 	setDeliveryAddressLine4(line4) {
-		_order.delivery.address.line4;
+		_order.delivery.address.line4 = line4;
 	},
 
 	setDeliveryAddressPostCode(postCode) {
-		_order.delivery.address.postCode;
+		_order.delivery.address.postCode = postCode;
 	},
 
 	setDeliveryDate: function(date) {
@@ -177,7 +177,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	},
 
 	setDeliveryTelephone(telephone) {
-		_order.delivery.telephone;
+		_order.delivery.telephone = telephone;
 	},
 
 	setStatus: function(status) {
