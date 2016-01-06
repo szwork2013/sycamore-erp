@@ -264,24 +264,11 @@ var View = React.createClass({
 							<div className="table">
 								<div className="table-header">
 									<div className="table-row">
-										<div className="table-cell large-6">
+										<div className="table-cell large-10">
 											Product
 										</div>
-										<div className="table-cell large-1 text-right">
-											Item Price
-										</div>
-										<div className="table-cell large-1 text-center">
-											Quantity
-										</div>
-										<div className="table-cell large-1 text-right">
-											Sub Total
-										</div>
-										<div className="table-cell large-1 text-right">
-											VAT
-										</div>
-										<div className="table-cell large-1 text-right">
-											Total
-										</div>
+										<div className="table-cell large-1">&nbsp;</div>
+										<div className="table-cell large-1">&nbsp;</div>
 									</div>
 								</div>
 								<div className="table-body">
@@ -292,21 +279,8 @@ var View = React.createClass({
 													<div className="table-cell">
 														{product.name}
 													</div>
-													<div className="table-cell text-right">
-														&pound;&nbsp;{product.price}
-													</div>
-													<div className="table-cell text-center">
-														{product.quantity}
-													</div>
-													<div className="table-cell text-right">
-														&pound;&nbsp;{product.subTotal}
-													</div>
-													<div className="table-cell text-right">
-														&pound;&nbsp;{product.VAT}
-													</div>
-													<div className="table-cell text-right">
-														&pound;&nbsp;{product.total}
-													</div>
+													<div className="table-cell">&nbsp;</div>
+													<div className="table-cell">&nbsp;</div>
 												</div>
 											);
 										}, this)
@@ -315,24 +289,15 @@ var View = React.createClass({
 								<div className="table-footer">
 									<div className="table-row">
 										<div className="table-cell">&#160;</div>
-										<div className="table-cell">&#160;</div>
-										<div className="table-cell">&#160;</div>
-										<div className="table-cell">&#160;</div>
 										<div className="table-cell left-box">Sub Total</div>
 										<div className="table-cell right-box text-right">&pound;&nbsp;{order.subTotal}</div>
 									</div>
 									<div className="table-row">
 										<div className="table-cell">&#160;</div>
-										<div className="table-cell">&#160;</div>
-										<div className="table-cell">&#160;</div>
-										<div className="table-cell">&#160;</div>
 										<div className="table-cell left-box">VAT</div>
 										<div className="table-cell right-box text-right">&pound;&nbsp;{order.VAT}</div>
 									</div>
 									<div className="table-row">
-										<div className="table-cell">&#160;</div>
-										<div className="table-cell">&#160;</div>
-										<div className="table-cell">&#160;</div>
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell left-box" style={{ "background": "lightblue", "color": "#02f" }}><strong>Total</strong></div>
 										<div className="table-cell right-box text-right">&pound;&nbsp;{order.total}</div>

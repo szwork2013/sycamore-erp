@@ -359,9 +359,6 @@ var View = React.createClass({
 										</div>
 										<div className="table-row">
 											<div className="table-cell">&#160;</div>
-											<div className="table-cell">&#160;</div>
-											<div className="table-cell">&#160;</div>
-											<div className="table-cell">&#160;</div>
 											<div className="table-cell left-box">VAT</div>
 											<div className="table-cell text-right right-box" style={{ "padding": 0 }}>
 												<div className="row collapse">
@@ -375,9 +372,6 @@ var View = React.createClass({
 											</div>
 										</div>
 										<div className="table-row">
-											<div className="table-cell">&#160;</div>
-											<div className="table-cell">&#160;</div>
-											<div className="table-cell">&#160;</div>
 											<div className="table-cell">&#160;</div>
 											<div className="table-cell left-box"><strong>Total</strong></div>
 											<div className="table-cell text-right right-box" style={{ "padding": 0 }}>
