@@ -102,11 +102,11 @@ orderController.prototype.sendEmailOrderAction = function(request, response, nex
 
 			orderController.prototype.getOrder(id, d.intercept(function(order) {
 				if(order != null) {
-					var customerName = order.customer.name;
-					var customerId = order.customer._id;
+					var customerName = order.billing.customerName;
+//					var customerId = order.customer._id;
 					var orderId = order._id;
-					var email = order.customer.email;
-					var orderUrl = "http://admin.fusionfurnituresolutions.co.uk/sycamore-erp/customer/" + customerId + "/order/" + orderId;
+					var email = order.billing.email;
+					var orderUrl = "http://admin.fusionfurnituresolutions.co.uk/sycamore-erp/customer/a/order/" + orderId;
 	
 					mandrill_client = new mandrill.Mandrill(process.env.MANDRILL_APIKEY);
 					var template_name = "order-confirmation";
