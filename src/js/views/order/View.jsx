@@ -2,9 +2,53 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 var ActionsBar = require("sycamore-platform-components").ActionsBar;
 
+var OrderStore = require("../../stores/OrderStore");
+var OrderActions = require("../../actions/OrderActions");
+
 var moment = require("moment");
 
 var View = React.createClass({
+	_onChange: function() {
+		this.setState({
+			order: OrderStore.getState()
+		});
+	},
+	componentDidMount: function() {
+		OrderStore.addChangeListener(this._onChange);
+		if((typeof this.props.locals != "undefined") && (typeof this.props.locals.order != "undefined")) {
+			OrderStore.loadData(this.props.locals.order);
+		}
+	},
+	componentWillUnount: function() {
+		OrderStore.removeChangeListener(this._onChange);
+	},
+	getInitialState: function() {
+		return {
+			order: OrderStore.getState(),
+			editable: false
+		};
+	},
+	handleEditClick: function() {
+		this.setState({ editable: true });
+	},
+	renderEditButton: function() {
+		if(this.state.editable == false) {
+			return (
+				<a className="right fancy radius button tiny" href="#" onClick={this.handleEditClick}>
+					Edit
+				</a>
+			);
+		}
+	},
+	renderSaveButton: function() {
+		if(this.state.editable == true) {
+			return (
+				<a className="right fancy radius button tiny" href="#" onClick={OrderActions.saveOrder.bind(this, this.state.order)}>
+					Save
+				</a>
+			);			
+		}
+	},
 	renderAgreeButton: function() {
 		var locals = this.props.locals;
 		var applicationUrl = locals.applicationUrl,
@@ -79,34 +123,9 @@ var View = React.createClass({
 					</div>
 					<div style={{ "background": "#fff" }}>
 						<ActionsBar pageTitle={pageTitle}>
-							{this.renderAgreeButton()}
+							{this.renderEditButton()}
+							{this.renderSaveButton()}
 						</ActionsBar>
-					</div>
-					<div className="row">
-						<div className="large-8 large-offset-2 columns end">
-							<fieldset style={{ "background": "#fff" }}>
-								<div className="row">
-									<div className="large-12 columns">
-										<label><input type="checkbox" /> I confirm that the quantities, colours, options and all items of furniture are correct on this order.</label>
-									</div>
-								</div>
-								<div className="row">
-									<div className="large-12 columns">
-										<label><input type="checkbox" /> I confirm that my property will be in a condition where it is ready for the furniture to be installed on the delivery date.</label>
-									</div>
-								</div>
-								<div className="row">
-									<div className="large-12 columns">
-										<label><input type="checkbox" /> I agree to give 48 hours notice in the event that I need to change the delivery date.</label>
-									</div>
-								</div>
-								<div className="row">
-									<div className="large-12 columns">
-										<label><input type="checkbox" /> I acknowledge that agreeing to this order will result in me/my company being under obligation to pay for this order in full prior to installation.</label>
-									</div>
-								</div>
-							</fieldset>
-						</div>
 					</div>
 					<div className="row">
 						<div className="large-6 columns">
@@ -141,66 +160,66 @@ var View = React.createClass({
 								<hr />
 								<div className="row">
 									<div className="large-4 columns">
-										<label className="right">Customer Name</label>
+										<label className="right inline">Customer Name</label>
 									</div>
 									<div className="large-8 columns">
-										{order.billing.customerName}
+										<input disabled={!this.state.editable} type="text" value={this.state.order.billing.customerName} onChange={OrderActions.updateBillingCustomerName} />
 									</div>
 								</div>
 								<div className="row">
 									<div className="large-4 columns">
-										<label className="right">Company Name</label>
+										<label className="right inline">Company Name</label>
 									</div>
 									<div className="large-8 columns">
-										{order.billing.companyName}
+										<input disabled={!this.state.editable} type="text" value={order.billing.companyName} onChange={OrderActions.updateBillingCompanyName} />
 									</div>
 								</div>
 								<div className="row">
 									<div className="large-4 columns">
-										<label className="right">Billing Address</label>
+										<label className="right inline">Billing Address</label>
 									</div>
 									<div className="large-8 columns">
 										<div className="row">
 											<div className="large-12 columns">
-												{order.billing.address.line1}
+												<input disabled={!this.state.editable} type="text" value={order.billing.address.line1} onChange={OrderActions.updateBillingAddressLine1} />
 											</div>
 										</div>
 										<div className="row">
 											<div className="large-12 columns">
-												{order.billing.address.line2}
+												<input disabled={!this.state.editable} type="text" value={order.billing.address.line2} onChange={OrderActions.updateBillingAddressLine2} />
 											</div>
 										</div>
 										<div className="row">
 											<div className="large-12 columns">
-												{order.billing.address.line3}
+												<input disabled={!this.state.editable} type="text" value={order.billing.address.line3} onChange={OrderActions.updateBillingAddressLine3} />
 											</div>
 										</div>
 										<div className="row">
 											<div className="large-12 columns">
-												{order.billing.address.line4}
+												<input disabled={!this.state.editable} type="text" value={order.billing.address.line4} onChange={OrderActions.updateBillingAddressLine4} />
 											</div>
 										</div>
 										<div className="row">
 											<div className="large-12 columns">
-												{order.billing.address.postCode}
+												<input disabled={!this.state.editable} type="text" value={order.billing.address.postCode} onChange={OrderActions.updateBillingAddressPostCode} />
 											</div>
 										</div>
 									</div>
 								</div>
 								<div className="row">
 									<div className="large-4 columns">
-										<label className="right">Telephone</label>
+										<label className="right inline">Telephone</label>
 									</div>
 									<div className="large-8 columns">
-										{order.billing.telephone}
+										<input disabled={!this.state.editable} type="text" value={order.billing.telephone} onChange={OrderActions.updateBillingTelephone} />
 									</div>
 								</div>
 								<div className="row">
 									<div className="large-4 columns">
-										<label className="right">Email</label>
+										<label className="right inline">Email</label>
 									</div>
 									<div className="large-8 columns">
-										{order.billing.email}
+										<input disabled={!this.state.editable} type="text" value={order.billing.email} onChange={OrderActions.updateBillingEmail} />
 									</div>
 								</div>
 							</fieldset>
@@ -211,50 +230,50 @@ var View = React.createClass({
 								<hr />
 								<div className="row">
 									<div className="large-4 columns">
-										<label className="right">Delivery Address</label>
+										<label className="right inline">Delivery Address</label>
 									</div>
 									<div className="large-8 columns">
 										<div className="row">
 											<div className="large-12 columns">
-												{order.delivery.address.line1}
+												<input disabled={!this.state.editable} type="text" value={order.delivery.address.line1} onChange={OrderActions.updateDeliveryAddressLine1} />
 											</div>
 										</div>
 										<div className="row">
 											<div className="large-12 columns">
-												{order.delivery.address.line2}
+												<input disabled={!this.state.editable} type="text" value={order.delivery.address.line2} onChange={OrderActions.updateDeliveryAddressLine2} />
 											</div>
 										</div>
 										<div className="row">
 											<div className="large-12 columns">
-												{order.delivery.address.line3}
+												<input disabled={!this.state.editable} type="text" value={order.delivery.address.line3} onChange={OrderActions.updateDeliveryAddressLine3} />
 											</div>
 										</div>
 										<div className="row">
 											<div className="large-12 columns">
-												{order.delivery.address.line4}
+												<input disabled={!this.state.editable} type="text" value={order.delivery.address.line4} onChange={OrderActions.updateDeliveryAddressLine4} />
 											</div>
 										</div>
 										<div className="row">
 											<div className="large-12 columns">
-												{order.delivery.address.postCode}
+												<input disabled={!this.state.editable} type="text" value={order.delivery.address.postCode} onChange={OrderActions.updateDeliveryAddressPostCode} />
 											</div>
 										</div>
 									</div>
 								</div>
 								<div className="row">
 									<div className="large-4 columns">
-										<label className="right">Telephone</label>
+										<label className="right inline">Telephone</label>
 									</div>
 									<div className="large-8 columns">
-										{order.delivery.telephone}
+										<input disabled={!this.state.editable} type="text" value={order.delivery.telephone} onChange={OrderActions.updateDeliveryTelephone} />
 									</div>
 								</div>
 								<div className="row">
 									<div className="large-4 columns">
-										<label className="right">Access Arrangements</label>
+										<label className="right inline">Access Arrangements</label>
 									</div>
 									<div className="large-8 columns">
-										{order.delivery.accessArrangements}
+										<textarea disabled={!this.state.editable} value={order.delivery.accessArrangements} onChange={OrderActions.updateDeliveryAccessArrangements}></textarea>
 									</div>
 								</div>
 							</fieldset>
@@ -306,6 +325,37 @@ var View = React.createClass({
 								</div>
 							</div>
 						</div>
+					</div>
+					<div className="row">
+						<div className="large-8 large-offset-2 columns end">
+							<fieldset style={{ "background": "#fff" }}>
+								<div className="row">
+									<div className="large-12 columns">
+										<label><input type="checkbox" /> I confirm that the quantities, colours, options and all items of furniture are correct on this order.</label>
+									</div>
+								</div>
+								<div className="row">
+									<div className="large-12 columns">
+										<label><input type="checkbox" /> I confirm that my property will be in a condition where it is ready for the furniture to be installed on the delivery date.</label>
+									</div>
+								</div>
+								<div className="row">
+									<div className="large-12 columns">
+										<label><input type="checkbox" /> I agree to give 48 hours notice in the event that I need to change the delivery date.</label>
+									</div>
+								</div>
+								<div className="row">
+									<div className="large-12 columns">
+										<label><input type="checkbox" /> I acknowledge that agreeing to this order will result in me/my company being under obligation to pay for this order in full prior to installation.</label>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+					<div style={{ "background": "#fff" }}>
+						<ActionsBar pageTitle={pageTitle}>
+							{this.renderAgreeButton()}
+						</ActionsBar>
 					</div>
 					<script type="text/javascript" dangerouslySetInnerHTML={{__html: js}}></script>
 					<script type="text/javascript" src={jsTemplate}></script>
