@@ -96,10 +96,13 @@ var View = React.createClass({
 		var	orderStatus = order.status;
 		var pageTitle;
 
+		var agreeText = "";
+
 		if(orderStatus == "Accepted") {
 			pageTitle = "Order";
 		} else {
 			pageTitle = "Order Confirmation";
+			agreeText = "Please click the Agree button to confirm and agree your order.";
 		}
 /*
 		if ((typeof order.customer != "undefined") && (order.customer != null)) {
@@ -145,7 +148,7 @@ var View = React.createClass({
 					</div>
 					<div className="row">
 						<div className="large-12 columns">
-							<p><strong>Instructions</strong></p>
+							<p><br /><strong>Instructions</strong></p>
 							<p>Please check over this order and fill in any details that are missing by clicking the "Edit" button in the top right corner and then the "Save" button to save your changes.</p>
 							<p>Please confirm that the details of the products are correct and then tick the boxes at the bottom of this page.</p>
 							<p>Finally, to confirm and Agree to this order please click the "Agree" button at the bottom right of this page.</p>
@@ -377,7 +380,7 @@ var View = React.createClass({
 						</div>
 					</div>
 					<div style={{ "background": "#fff" }}>
-						<ActionsBar pageTitle={"Please click the Agree button to confirm and agree your order."}>
+						<ActionsBar pageTitle={agreeText}>
 							{this.renderAgreeButton()}
 						</ActionsBar>
 					</div>
