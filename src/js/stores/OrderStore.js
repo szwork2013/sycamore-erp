@@ -41,7 +41,13 @@ var _order = {
 	additionalCharges: [],
 	subTotal: 0,
 	VAT: 0,
-	total: 0
+	total: 0,
+	terms: {
+		orderCorrectAgreed: false,
+		propertyTidyAgreed: false,
+		noticeAgreed: false,
+		paymentAgreed: false
+	}
 };
 
 var OrderStore = assign({}, EventEmitter.prototype, {
@@ -198,6 +204,22 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 
 	setVAT: function(VAT) {
 		_order.VAT = VAT;
+	},
+
+	setOrderCorrect: function(value) {
+		_order.terms.orderCorrectAgreed = value;
+	},
+
+	setPropertyTidy: function(value) {
+		_order.terms.propertyTidyAgreed = value;
+	},
+
+	setNoticeAgreed: function(value) {
+		_order.terms.noticeAgreed = value;
+	},
+
+	setPaymentAgreed: function(value) {
+		_order.terms.paymentAgreed = value;
 	}
 });
 
@@ -304,6 +326,23 @@ OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 			OrderStore.setTotal(action.total);
 			OrderStore.emitChange();
 		break;
+		case OrderConstants.SET_ORDER_CORRECT:
+			OrderStore.setOrderCorrect(action.value);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.SET_PROPERTY_TIDY:
+			OrderStore.setPropertyTidy(action.value);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.SET_NOTICE_AGREED:
+			OrderStore.setNoticeAgreed(action.value);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.SET_PAYMENT_AGREED:
+			OrderStore.setPaymentAgreed(action.value);
+			OrderStore.emitChange();
+		break;
+
 		default:
 			// do nothing
 	}

@@ -5,6 +5,8 @@ var ActionsBar = require("sycamore-platform-components").ActionsBar;
 var OrderStore = require("../../stores/OrderStore");
 var OrderActions = require("../../actions/OrderActions");
 
+var Api = require("../../services/Api");
+
 var moment = require("moment");
 
 var View = React.createClass({
@@ -32,41 +34,51 @@ var View = React.createClass({
 		this.setState({ editable: true });
 	},
 	renderEditButton: function() {
-		if(this.state.editable == false) {
+		if(this.state.editable == false && this.state.order.status != "Accepted") {
 			return (
-				<a className="right fancy radius button tiny" href="#" onClick={this.handleEditClick}>
-					Edit
+				<a className="right fancy radius button tiny" href="#" onClick={this.handleEditClick} style={{ "background": "lightgreen", "color": "green" }}>
+					<i className="in-button-icon fa fa-fw fa-pencil-square-o"></i> Edit
 				</a>
 			);
 		}
 	},
 	renderSaveButton: function() {
-		if(this.state.editable == true) {
+		if(this.state.editable == true && this.state.order.status != "Accepted") {
 			return (
-				<a className="right fancy radius button tiny" href="#" onClick={OrderActions.saveOrder.bind(this, this.state.order)}>
-					Save
+				<a className="right fancy radius button tiny" href="#" onClick={OrderActions.saveOrder.bind(this, this.state.order)} style={{ "background": "lightgreen", "color": "green" }}>
+					<i className="in-button-icon fa fa-fw fa-floppy-o"></i> Save
 				</a>
 			);			
 		}
+	},
+	handleAgreeClick: function() {
+		Api.postOrder(
+			this.state.order._id,
+			this.state.order,
+			function(response) {
+				window.location.href = this.props.locals.applicationUrl + "customer/a/order/" + this.state.order._id + "/confirm";
+			}
+		);
 	},
 	renderAgreeButton: function() {
 		var locals = this.props.locals;
 		var applicationUrl = locals.applicationUrl,
 			order = locals.order;
-/*
-		var	customer = order.customer,
-			orderStatus = order.status;
-			
-		if ((typeof order.customer != "undefined") && (order.customer != null)) {
-			customer = order.customer;
-		}
-*/
+
 		if(order.status != "Accepted") {
-			return (
-				<a href={this.props.locals.applicationUrl + "customer/a/order/" + order._id + "/confirm"} className="right fancy radius button tiny" style={{ "background": "lightgreen", "color": "green" }}>
-					<i className="in-button-icon fa fa-fw fa-check"></i> Agree
-				</a>
-			);
+			if(this.state.order.terms.orderCorrectAgreed && this.state.order.terms.propertyTidyAgreed && this.state.order.terms.noticeAgreed && this.state.order.terms.paymentAgreed) {
+				return (
+					<a href="#" className="right fancy radius button tiny" style={{ "background": "lightgreen", "color": "green" }} onClick={this.handleAgreeClick}>
+						<i className="in-button-icon fa fa-fw fa-check"></i> Agree
+					</a>
+				);
+			} else {
+				return (
+					<a href="#" className="right fancy radius button tiny" disabled={true} style={{ "background": "lightred", "color": "red" }}>
+						<i className="in-button-icon fa fa-fw fa-check"></i> Agree
+					</a>
+				);
+			}
 		}
 	},
 	render: function() {
@@ -126,6 +138,14 @@ var View = React.createClass({
 							{this.renderEditButton()}
 							{this.renderSaveButton()}
 						</ActionsBar>
+					</div>
+					<div className="row">
+						<div className="large-12 columns">
+							<strong>Instructions</strong>
+							<p>Please check over this order and fill in any details that are missing by clicking the "Edit" button in the top right corner and then the "Save" button to save your changes.</p>
+							<p>Please confirm that the details of the products are correct and then tick the boxes at the bottom of this page.</p>
+							<p>Finally, to confirm and Agree to this order please click the "Agree" button at the bottom right of this page.</p>
+						</div>
 					</div>
 					<div className="row">
 						<div className="large-6 columns">
@@ -331,29 +351,29 @@ var View = React.createClass({
 							<fieldset style={{ "background": "#fff" }}>
 								<div className="row">
 									<div className="large-12 columns">
-										<label><input type="checkbox" /> I confirm that the quantities, colours, options and all items of furniture are correct on this order.</label>
+										<label><input type="checkbox" value={this.state.order.terms.orderCorrectAgreed} onChange={OrderActions.setOrderCorrect} /> I confirm that the quantities, colours, options and all items of furniture are correct on this order.</label>
 									</div>
 								</div>
 								<div className="row">
 									<div className="large-12 columns">
-										<label><input type="checkbox" /> I confirm that my property will be in a condition where it is ready for the furniture to be installed on the delivery date.</label>
+										<label><input type="checkbox" value={this.state.order.terms.propertyTidyAgreed} onChange={OrderActions.setPropertyTidy} /> I confirm that my property will be in a condition where it is ready for the furniture to be installed on the delivery date.</label>
 									</div>
 								</div>
 								<div className="row">
 									<div className="large-12 columns">
-										<label><input type="checkbox" /> I agree to give 48 hours notice in the event that I need to change the delivery date.</label>
+										<label><input type="checkbox" value={this.state.order.terms.noticeAgreed} onChange={OrderActions.setNoticeAgreed} /> I agree to give 48 hours notice in the event that I need to change the delivery date.</label>
 									</div>
 								</div>
 								<div className="row">
 									<div className="large-12 columns">
-										<label><input type="checkbox" /> I acknowledge that agreeing to this order will result in me/my company being under obligation to pay for this order in full prior to installation.</label>
+										<label><input type="checkbox" value={this.state.order.terms.paymentAgreed} onChange={OrderActions.setPaymentAgreed} /> I acknowledge that agreeing to this order will result in me/my company being under obligation to pay for this order in full prior to installation.</label>
 									</div>
 								</div>
 							</fieldset>
 						</div>
 					</div>
 					<div style={{ "background": "#fff" }}>
-						<ActionsBar pageTitle={pageTitle}>
+						<ActionsBar pageTitle={"Please click the Agree button to confirm and agree your order."}>
 							{this.renderAgreeButton()}
 						</ActionsBar>
 					</div>

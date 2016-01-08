@@ -66,7 +66,13 @@ exports.orderSchema = function() {
 		],
 		subTotal:						 { type: Number },
 		VAT:							 { type: Number },
-		total:							 { type: Number }
+		total:							 { type: Number },
+		terms: {
+			orderCorrectAgreed:			 { type: Boolean, default: false },
+			propertyTidyAgreed:			 { type: Boolean, default: false },
+			noticeAgreed:				 { type: Boolean, default: false },
+			paymentAgreed:				 { type: Boolean, default: false }
+		}
 	}, {
 		collection: "orders"
 	});

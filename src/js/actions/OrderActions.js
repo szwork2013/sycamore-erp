@@ -177,6 +177,31 @@ var OrderActions = {
 			actionType: OrderConstants.SET_TOTAL,
 			total: event.target.value
 		});
+	},
+
+	setOrderCorrect: function(event) {
+		AppDispatcher.handleViewAction({
+			actionType: OrderConstants.SET_ORDER_CORRECT,
+			value: event.target.value
+		});
+	},
+	setPropertyTidy: function(event) {
+		AppDispatcher.handleViewAction({
+			actionType: OrderConstants.SET_PROPERTY_TIDY,
+			value: event.target.value
+		});
+	},
+	setNoticeAgreed: function(event) {
+		AppDispatcher.handleViewAction({
+			actionType: OrderConstants.SET_NOTICE_AGREED,
+			value: event.target.value
+		});
+	},
+	setPaymentAgreed: function(event) {
+		AppDispatcher.handleViewAction({
+			actionType: OrderConstants.SET_PAYMENT_AGREED,
+			value: event.target.value
+		});
 	}
 }
 
