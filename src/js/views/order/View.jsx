@@ -52,11 +52,13 @@ var View = React.createClass({
 		}
 	},
 	handleAgreeClick: function() {
+		var applicationUrl = this.props.locals.applicationUrl;
+
 		Api.postOrder(
 			this.state.order._id,
 			this.state.order,
 			function(response) {
-				window.location.href = this.props.locals.applicationUrl + "customer/a/order/" + this.state.order._id + "/confirm";
+				window.location.href = applicationUrl + "customer/a/order/" + this.state.order._id + "/confirm";
 			}
 		);
 	},
@@ -141,7 +143,7 @@ var View = React.createClass({
 					</div>
 					<div className="row">
 						<div className="large-12 columns">
-							<strong>Instructions</strong>
+							<p><strong>Instructions</strong></p>
 							<p>Please check over this order and fill in any details that are missing by clicking the "Edit" button in the top right corner and then the "Save" button to save your changes.</p>
 							<p>Please confirm that the details of the products are correct and then tick the boxes at the bottom of this page.</p>
 							<p>Finally, to confirm and Agree to this order please click the "Agree" button at the bottom right of this page.</p>
