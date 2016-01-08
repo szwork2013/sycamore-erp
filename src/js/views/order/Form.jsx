@@ -82,6 +82,13 @@ var View = React.createClass({
 			</a>
 		);
 	},
+	renderDraftButton: function() {
+		return (
+			<a className="right fancy radius button tiny" href="#" onClick={OrderActions.setStatus.bind(this, "Draft")}>
+				Make Draft
+			</a>
+		);	
+	},
 	renderEmailButton: function() {
 		var orderId;
 
@@ -94,17 +101,32 @@ var View = React.createClass({
 		}
 	},
 	renderButtons: function() {
-		return (
-			<div>
-				{this.renderSaveButton()}
-				{this.renderEmailButton()}
-			</div>
-		);
+		if(this.state.order.status != "Accepted") {
+			return (
+				<div>
+					{this.renderSaveButton()}
+					{this.renderEmailButton()}
+				</div>
+			);
+		} else {
+			return (
+				<div>
+					{this.renderDraftButton()}
+				</div>
+			);
+		}
 	},
 	render: function() {
 		var buttonAction,
 			pageTitle,
-			order;
+			order,
+			editable;
+
+		if(this.state.order.status == "Accepted") {
+			editable = false;
+		} else {
+			editable = true;
+		}
 
 		if(typeof(this.props.locals.order) != "undefined") {
 			order = this.props.locals.order;
@@ -162,7 +184,8 @@ var View = React.createClass({
 										<label className="right inline">Customer Name</label>
 									</div>
 									<div className="large-8 columns">
-										<input onChange={OrderActions.updateBillingCustomerName}
+										<input disabled={!editable}
+											   onChange={OrderActions.updateBillingCustomerName}
 											   type="text"
 											   value={this.state.order.billing.customerName} />
 									</div>
@@ -172,7 +195,8 @@ var View = React.createClass({
 										<label className="right inline">Company Name</label>
 									</div>
 									<div className="large-8 columns">
-										<input onChange={OrderActions.updateBillingCompanyName}
+										<input disabled={!editable}
+											   onChange={OrderActions.updateBillingCompanyName}
 											   type="text"
 											   value={this.state.order.billing.companyName} />
 									</div>
@@ -184,7 +208,8 @@ var View = React.createClass({
 											<label className="right inline">Line 1</label>
 										</div>
 										<div className="large-8 columns">
-											<input onChange={OrderActions.updateBillingAddressLine1}
+											<input disabled={!editable}
+											   	   onChange={OrderActions.updateBillingAddressLine1}
 												   type="text"
 												   value={this.state.order.billing.address.line1} />
 										</div>
@@ -194,7 +219,8 @@ var View = React.createClass({
 											<label className="right inline">Line 2</label>
 										</div>
 										<div className="large-8 columns">
-											<input onChange={OrderActions.updateBillingAddressLine2}
+											<input disabled={!editable}
+											       onChange={OrderActions.updateBillingAddressLine2}
 												   type="text"
 												   value={this.state.order.billing.address.line2} />
 										</div>
@@ -204,7 +230,8 @@ var View = React.createClass({
 											<label className="right inline">Line 3</label>
 										</div>
 										<div className="large-8 columns">
-											<input onChange={OrderActions.updateBillingAddressLine3}
+											<input disabled={!editable}
+											       onChange={OrderActions.updateBillingAddressLine3}
 												   type="text"
 												   value={this.state.order.billing.address.line3} />
 										</div>
@@ -214,7 +241,8 @@ var View = React.createClass({
 											<label className="right inline">Line 4</label>
 										</div>
 										<div className="large-8 columns">
-											<input onChange={OrderActions.updateBillingAddressLine4}
+											<input disabled={!editable}
+											    onChange={OrderActions.updateBillingAddressLine4}
 												   type="text"
 												   value={this.state.order.billing.address.line4} />
 										</div>
@@ -224,7 +252,8 @@ var View = React.createClass({
 											<label className="right inline">PostCode</label>
 										</div>
 										<div className="large-8 columns">
-											<input onChange={OrderActions.updateBillingAddressPostCode}
+											<input disabled={!editable}
+											    onChange={OrderActions.updateBillingAddressPostCode}
 												   type="text"
 												   value={this.state.order.billing.address.postCode} />
 										</div>
@@ -235,7 +264,8 @@ var View = React.createClass({
 										<label className="right inline">Telephone</label>
 									</div>
 									<div className="large-8 columns">
-										<input onChange={OrderActions.updateBillingTelephone}
+										<input disabled={!editable}
+											    onChange={OrderActions.updateBillingTelephone}
 											   type="text"
 											   value={this.state.order.billing.telephone} />
 									</div>
@@ -245,7 +275,8 @@ var View = React.createClass({
 										<label className="right inline">Email</label>
 									</div>
 									<div className="large-8 columns">
-										<input onChange={OrderActions.updateBillingEmail}
+										<input disabled={!editable}
+											    onChange={OrderActions.updateBillingEmail}
 											   type="text"
 											   value={this.state.order.billing.email} />
 									</div>
@@ -259,7 +290,8 @@ var View = React.createClass({
 											<label className="right inline">Line 1</label>
 										</div>
 										<div className="large-8 columns">
-											<input onChange={OrderActions.updateDeliveryAddressLine1}
+											<input disabled={!editable}
+											    onChange={OrderActions.updateDeliveryAddressLine1}
 												   type="text"
 												   value={this.state.order.delivery.address.line1} />
 										</div>
@@ -269,7 +301,8 @@ var View = React.createClass({
 											<label className="right inline">Line 2</label>
 										</div>
 										<div className="large-8 columns">
-											<input onChange={OrderActions.updateDeliveryAddressLine2}
+											<input disabled={!editable}
+											    onChange={OrderActions.updateDeliveryAddressLine2}
 												   type="text"
 												   value={this.state.order.delivery.address.line2} />
 										</div>
@@ -279,7 +312,8 @@ var View = React.createClass({
 											<label className="right inline">Line 3</label>
 										</div>
 										<div className="large-8 columns">
-											<input onChange={OrderActions.updateDeliveryAddressLine3}
+											<input disabled={!editable}
+											    onChange={OrderActions.updateDeliveryAddressLine3}
 												   type="text"
 												   value={this.state.order.delivery.address.line3} />
 										</div>
@@ -289,7 +323,8 @@ var View = React.createClass({
 											<label className="right inline">Line 4</label>
 										</div>
 										<div className="large-8 columns">
-											<input onChange={OrderActions.updateDeliveryAddressLine4}
+											<input disabled={!editable}
+											    onChange={OrderActions.updateDeliveryAddressLine4}
 												   type="text"
 												   value={this.state.order.delivery.address.line4} />
 										</div>
@@ -299,7 +334,8 @@ var View = React.createClass({
 											<label className="right inline">Post Code</label>
 										</div>
 										<div className="large-8 columns">
-											<input onChange={OrderActions.updateDeliveryAddressPostCode}
+											<input disabled={!editable}
+											    onChange={OrderActions.updateDeliveryAddressPostCode}
 												   type="text"
 												   value={this.state.order.delivery.address.postCode} />
 										</div>
@@ -310,7 +346,8 @@ var View = React.createClass({
 										<label className="right inline">Access Arrangements</label>
 									</div>
 									<div className="large-8 columns">
-										<textarea onChange={OrderActions.updateDeliveryAccessArrangements}
+										<textarea disabled={!editable}
+											    onChange={OrderActions.updateDeliveryAccessArrangements}
 												  value={this.state.order.delivery.accessArrangements}>
 										</textarea>
 									</div>
@@ -320,7 +357,8 @@ var View = React.createClass({
 										<label className="right inline">Access Telephone</label>
 									</div>
 									<div className="large-8 columns">
-										<input onChange={OrderActions.updateDeliveryTelephone}
+										<input disabled={!editable}
+											    onChange={OrderActions.updateDeliveryTelephone}
 											   type="text"
 											   value={this.state.order.delivery.telephone} />
 									</div>
@@ -356,7 +394,7 @@ var View = React.createClass({
 												return (
 													<div className="table-row" key={productIndex}>
 														<div className="table-cell" style={{ "padding": 0 }}>
-															<input onChange={OrderActions.setProductName.bind(this, productIndex)} type="text" value={product.name} style={{ "margin": 0 }} />
+															<input disabled={!editable} onChange={OrderActions.setProductName.bind(this, productIndex)} type="text" value={product.name} style={{ "margin": 0 }} />
 														</div>
 														<div className="table-cell large-1">&nbsp;</div>
 														<div className="table-cell large-1">&nbsp;</div>
@@ -375,7 +413,8 @@ var View = React.createClass({
 														<span className="prefix">&pound;</span>
 													</div>
 													<div className="large-9 columns">
-														<input type="text" onChange={OrderActions.setSubTotal} value={this.state.order.subTotal} style={{ "margin": 0 }} />
+														<input disabled={!editable}
+											    type="text" onChange={OrderActions.setSubTotal} value={this.state.order.subTotal} style={{ "margin": 0 }} />
 													</div>
 												</div>
 											</div>
@@ -389,7 +428,8 @@ var View = React.createClass({
 														<span className="prefix">&pound;</span>
 													</div>
 													<div className="large-9 columns">
-														<input type="text" onChange={OrderActions.setVAT} value={this.state.order.VAT} style={{ "margin": 0 }} />
+														<input disabled={!editable}
+											    type="text" onChange={OrderActions.setVAT} value={this.state.order.VAT} style={{ "margin": 0 }} />
 													</div>
 												</div>
 											</div>
@@ -403,7 +443,8 @@ var View = React.createClass({
 														<span className="prefix">&pound;</span>
 													</div>
 													<div className="large-9 columns">
-														<input type="text" onChange={OrderActions.setTotal} value={this.state.order.total} style={{ "margin": 0 }} />
+														<input disabled={!editable}
+											    type="text" onChange={OrderActions.setTotal} value={this.state.order.total} style={{ "margin": 0 }} />
 													</div>
 												</div>
 											</div>
