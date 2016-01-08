@@ -351,22 +351,22 @@ var View = React.createClass({
 							<fieldset style={{ "background": "#fff" }}>
 								<div className="row">
 									<div className="large-12 columns">
-										<label><input type="checkbox" value={this.state.order.terms.orderCorrectAgreed} onChange={OrderActions.setOrderCorrect} /> I confirm that the quantities, colours, options and all items of furniture are correct on this order.</label>
+										<label><input disabled={this.state.order.terms.orderCorrectAgreed} type="checkbox" value={this.state.order.terms.orderCorrectAgreed} onChange={OrderActions.setOrderCorrect} /> I confirm that the quantities, colours, options and all items of furniture are correct on this order.</label>
 									</div>
 								</div>
 								<div className="row">
 									<div className="large-12 columns">
-										<label><input type="checkbox" value={this.state.order.terms.propertyTidyAgreed} onChange={OrderActions.setPropertyTidy} /> I confirm that my property will be in a condition where it is ready for the furniture to be installed on the delivery date.</label>
+										<label><input disabled={this.state.order.terms.propertyTidyAgreed} type="checkbox" value={this.state.order.terms.propertyTidyAgreed} onChange={OrderActions.setPropertyTidy} /> I confirm that my property will be in a condition where it is ready for the furniture to be installed on the delivery date.</label>
 									</div>
 								</div>
 								<div className="row">
 									<div className="large-12 columns">
-										<label><input type="checkbox" value={this.state.order.terms.noticeAgreed} onChange={OrderActions.setNoticeAgreed} /> I agree to give 48 hours notice in the event that I need to change the delivery date.</label>
+										<label><input disabled={this.state.order.terms.noticeAgreed} type="checkbox" value={this.state.order.terms.noticeAgreed} onChange={OrderActions.setNoticeAgreed} /> I agree to give 48 hours notice in the event that I need to change the delivery date.</label>
 									</div>
 								</div>
 								<div className="row">
 									<div className="large-12 columns">
-										<label><input type="checkbox" value={this.state.order.terms.paymentAgreed} onChange={OrderActions.setPaymentAgreed} /> I acknowledge that agreeing to this order will result in me/my company being under obligation to pay for this order in full prior to installation.</label>
+										<label><input disabled={this.state.order.terms.paymentAgreed} type="checkbox" value={this.state.order.terms.paymentAgreed} onChange={OrderActions.setPaymentAgreed} /> I acknowledge that agreeing to this order will result in me/my company being under obligation to pay for this order in full prior to installation.</label>
 									</div>
 								</div>
 							</fieldset>
