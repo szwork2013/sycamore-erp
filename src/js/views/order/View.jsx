@@ -53,12 +53,14 @@ var View = React.createClass({
 	},
 	handleAgreeClick: function() {
 		var applicationUrl = this.props.locals.applicationUrl;
+		var order = OrderStore.getState();
+		var orderId = order._id;
 
 		Api.postOrder(
-			this.state.order._id,
-			this.state.order,
+			orderId,
+			order,
 			function(response) {
-				window.location.href = applicationUrl + "customer/a/order/" + this.state.order._id + "/confirm";
+				window.location.href = applicationUrl + "customer/a/order/" + orderId + "/confirm";
 			}
 		);
 	},
