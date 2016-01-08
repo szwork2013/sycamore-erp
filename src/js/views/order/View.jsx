@@ -100,6 +100,7 @@ var View = React.createClass({
 
 		if(orderStatus == "Accepted") {
 			pageTitle = "Order";
+			agreeText = "This order has been agreed. Thank you.";
 		} else {
 			pageTitle = "Order Confirmation";
 			agreeText = "Please click the Agree button to confirm and agree your order.";
