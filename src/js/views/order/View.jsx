@@ -76,7 +76,7 @@ var View = React.createClass({
 				);
 			} else {
 				return (
-					<a href="#" className="right fancy radius button tiny" disabled={true} style={{ "background": "lightred", "color": "red" }}>
+					<a href="#" className="right fancy radius button tiny" disabled={true} style={{ "background": "lightcoral", "color": "red" }}>
 						<i className="in-button-icon fa fa-fw fa-check"></i> Agree
 					</a>
 				);
