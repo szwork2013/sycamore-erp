@@ -18,6 +18,8 @@ var Order = require("../../components/Order");
 var OrderStore = require("../../stores/OrderStore");
 var OrderActions = require("../../actions/OrderActions");
 
+var Api = require("../../services/Api");
+
 var statusOptions = [
 	{ value: "Draft", label: "Draft" },
 	{ value: "Unaccepted", label: "Unaccepted" },
@@ -36,13 +38,32 @@ var View = React.createClass({
 			OrderStore.loadData(this.props.locals.order);
 		}
 	},
-	componentWillUnount: function() {
+	componentWillUnmount: function() {
 		OrderStore.removeChangeListener(this._onChange);
 	},
 	getInitialState: function() {
 		return {
 			order: OrderStore.getState()
 		};
+	},
+	handleSaveClick: function() {
+		var order = OrderStore.getState();
+		var applicationUrl = this.props.locals.applicationUrl;
+
+		if(	(typeof(order._id) != "undefined") &&
+			(order._id != null) ) {
+// POST
+			OrderActions.saveOrder(order);
+		} else {
+// PUT
+			Api.putOrder(
+				order,
+				function(response) {
+					var orderId = response.body._id;
+					window.location.href = applicationUrl + "order/" + orderId;
+				}
+			);
+		}
 	},
 	renderSaveButton: function() {
 		var buttonAction;
@@ -125,7 +146,7 @@ var View = React.createClass({
 										<div className="large-3 columns end">
 											<DatePicker
 												dateFormat="DD/MM/YYYY"
-												selected={this.state.order.delivery.date}
+												selected={moment(this.state.order.delivery.date)}
 												onChange={OrderActions.setDeliveryDate} />
 										</div>
 									</div>

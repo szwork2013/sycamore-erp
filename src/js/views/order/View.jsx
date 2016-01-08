@@ -21,7 +21,7 @@ var View = React.createClass({
 			OrderStore.loadData(this.props.locals.order);
 		}
 	},
-	componentWillUnount: function() {
+	componentWillUnmount: function() {
 		OrderStore.removeChangeListener(this._onChange);
 	},
 	getInitialState: function() {

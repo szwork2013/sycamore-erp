@@ -182,25 +182,25 @@ var OrderActions = {
 	setOrderCorrect: function(event) {
 		AppDispatcher.handleViewAction({
 			actionType: OrderConstants.SET_ORDER_CORRECT,
-			value: event.target.value
+			value: event.target.checked
 		});
 	},
 	setPropertyTidy: function(event) {
 		AppDispatcher.handleViewAction({
 			actionType: OrderConstants.SET_PROPERTY_TIDY,
-			value: event.target.value
+			value: event.target.checked
 		});
 	},
 	setNoticeAgreed: function(event) {
 		AppDispatcher.handleViewAction({
 			actionType: OrderConstants.SET_NOTICE_AGREED,
-			value: event.target.value
+			value: event.target.checked
 		});
 	},
 	setPaymentAgreed: function(event) {
 		AppDispatcher.handleViewAction({
 			actionType: OrderConstants.SET_PAYMENT_AGREED,
-			value: event.target.value
+			value: event.target.checked
 		});
 	}
 }
