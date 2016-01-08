@@ -7,6 +7,8 @@ var ReactTabs = require("react-tabs");
 var DatePicker = require("react-datepicker");
 var Select = require("react-select");
 
+var moment = require("moment");
+
 var Tab = ReactTabs.Tab;
 var Tabs = ReactTabs.Tabs;
 var TabList = ReactTabs.TabList;
