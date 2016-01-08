@@ -375,7 +375,7 @@ var View = React.createClass({
 							<div className="large-12 columns">
 								<div className="row">
 									<div className="large-12 columns">
-										{this.renderAddProductButton}
+										{this.renderAddProductButton()}
 									</div>
 								</div>
 							</div>
