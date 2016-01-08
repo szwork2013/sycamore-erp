@@ -67,6 +67,11 @@ var View = React.createClass({
 			);
 		}
 	},
+	renderAddProductButton: function() {
+		if(this.state.order.status != "Accepted") {
+			return (<a className="button tiny radius fancy" onClick={OrderActions.addProductToOrder}>Add Product</a>);
+		}
+	},
 	renderSaveButton: function() {
 		var buttonAction;
 
@@ -370,7 +375,7 @@ var View = React.createClass({
 							<div className="large-12 columns">
 								<div className="row">
 									<div className="large-12 columns">
-										<a className="button tiny radius fancy" disabled={!editable} onClick={OrderActions.addProductToOrder}>Add Product</a>
+										{this.renderAddProductButton}
 									</div>
 								</div>
 							</div>
