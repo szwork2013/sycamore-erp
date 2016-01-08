@@ -168,7 +168,7 @@ var View = React.createClass({
 											<label className="right inline">Delivery Date</label>
 										</div>
 										<div className="large-3 columns end">
-											<DatePicker
+											<DatePicker disabled={!editable}
 												dateFormat="DD/MM/YYYY"
 												selected={moment(this.state.order.delivery.date)}
 												onChange={OrderActions.setDeliveryDate} />
@@ -370,7 +370,7 @@ var View = React.createClass({
 							<div className="large-12 columns">
 								<div className="row">
 									<div className="large-12 columns">
-										<a className="button tiny radius fancy" onClick={OrderActions.addProductToOrder}>Add Product</a>
+										<a className="button tiny radius fancy" disabled={!editable} onClick={OrderActions.addProductToOrder}>Add Product</a>
 									</div>
 								</div>
 							</div>
