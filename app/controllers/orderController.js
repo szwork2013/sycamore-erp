@@ -190,8 +190,9 @@ orderController.prototype.listOrdersAction = function(request, response, next) {
 
 		list.columns = [
 			{ name: "status", label: "Status", display: true },
-			{ name: "customer.name", label: "Customer", display: true },
-			{ name: "property.address.line1", label: "Property Address", display: true },
+			{ name: "billing.customerName", label: "Customer", display: true },
+			{ name: "billing.companyName", label: "Company", display: true },
+			{ name: "delivery.address.line1", label: "Delivery Address", display: true },
 			{ name: "subTotal", label: "Sub Total", display: true },
 			{ name: "VAT", label: "VAT", display: true },
 			{ name: "total", label: "Total", display: true }
@@ -199,15 +200,7 @@ orderController.prototype.listOrdersAction = function(request, response, next) {
 
 		list.entities = [];
 
-		list.populate = [
-			{
-				path: "customer",
-				select: "name"
-			}, {
-				path: "property",
-				select: "address.line1"
-			}
-		];
+		list.populate = [];
 
 		getListItems(
 			orderController.prototype.servicesContainer,
