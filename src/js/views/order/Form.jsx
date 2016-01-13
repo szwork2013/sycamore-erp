@@ -55,7 +55,7 @@ var View = React.createClass({
 		if(	(typeof(order._id) != "undefined") &&
 			(order._id != null) ) {
 // POST
-			var orderId = response.body._id;
+			var orderId = order._id;
 			Api.postOrder(
 				orderId,
 				order,
