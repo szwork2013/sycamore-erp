@@ -109,6 +109,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	loadData: function(order) {
 		if(order != null) {
 			_order = order;
+			this.calculateTotals();
 			this.emitChange();
 		}
 	},
@@ -235,7 +236,6 @@ OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 	switch(action.actionType) {
 		case OrderConstants.UPDATE_ORDER:
 			OrderStore.loadData(action.order);
-			OrderStore.calculateTotals();
 		break;
 		case OrderConstants.ADD_PRODUCT_TO_ORDER:
 			OrderStore.addProduct();
