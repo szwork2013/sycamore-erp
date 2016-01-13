@@ -88,7 +88,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 // Set SubTotal
 //				_order.subTotal = Math.round(subTotal * 100) / 100;
 // Calculate VAT
-				VAT = (order.subTotal * 1.2) - order.subTotal;
+				VAT = (_order.subTotal * 1.2) - _order.subTotal;
 				_order.VAT = Math.round((VAT) * 100) / 100;
 // Calculate Total
 				_order.total = Math.round((_order.subTotal + _order.VAT) * 100) / 100;
