@@ -51,6 +51,20 @@ var View = React.createClass({
 			);			
 		}
 	},
+	renderDateAccepted: function() {
+		if(this.state.order.dateAccepted != null) {
+			return (
+				<div className="row">
+					<div className="large-4 columns">
+						<label className="right inline">Date Accepted</label>
+					</div>
+					<div className="large-8 columns">
+						<label className="left inline">{moment(this.state.order.dateAccepted).format("DD/MM/YYYY")}</label>
+					</div>
+				</div>
+			);
+		}
+	},
 	handleAgreeClick: function() {
 		var applicationUrl = this.props.locals.applicationUrl;
 		var order = OrderStore.getState();
@@ -178,6 +192,7 @@ var View = React.createClass({
 										{moment(order.delivery.date).format("DD/MM/YYYY")}
 									</div>
 								</div>
+								{this.renderDateAccepted()}
 							</fieldset>
 						</div>
 					</div>

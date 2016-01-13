@@ -1,6 +1,7 @@
 var domain = require("domain");
 var async = require("async");
-var mandrill = require('mandrill-api/mandrill');
+var mandrill = require("mandrill-api/mandrill");
+var moment = require("moment");
 
 var getListItems = require("../../../../app/lib/controller/getListItems.js");
 
@@ -36,7 +37,9 @@ orderController.prototype.confirmOrderAction = function(request, response, next)
 		if(typeof(request.params.order_id) != "undefined") {
 			order_id = request.params.order_id;
 
-			Order.findByIdAndUpdate(order_id, { $set: { status: "Accepted" } }, {}, d.intercept(function(updatedOrder) {
+			var dateNow = moment();
+
+			Order.findByIdAndUpdate(order_id, { $set: { status: "Accepted", dateAccepted: dateNow } }, {}, d.intercept(function(updatedOrder) {
 				orderController.prototype.getOrder(order_id, d.intercept(function(order) {
 					if(order != null) {
 						response.locals.order = order;
