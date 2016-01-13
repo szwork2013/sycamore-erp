@@ -204,7 +204,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	},
 
 	setSubTotal: function(subTotal) {
-		_order.subTotal = Math.round(parseFloat(subTotal) * 100) / 100;
+		_order.subTotal = parseFloat(Math.round(parseFloat(subTotal) * 100) / 100).toFixed(2);
 	},
 
 	setTotal: function(total) {
