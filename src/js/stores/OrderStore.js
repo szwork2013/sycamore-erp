@@ -10,6 +10,7 @@ var moment = require("moment");
 
 var _order = {
 	_id: null,
+	dateAccepted: null,
 	status: "Draft",
 	billing: {
 		customerName: null,

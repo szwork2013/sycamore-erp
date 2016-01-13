@@ -128,6 +128,20 @@ var View = React.createClass({
 			);
 		}
 	},
+	renderDateAccepted: function() {
+		if(this.state.order.dateAccepted != null) {
+			return (
+				<div className="row">
+					<div className="large-4 columns">
+						<label className="right inline">Date Accepted</label>
+					</div>
+					<div className="large-8 columns">
+						<label className="left inline">{moment(this.state.order.dateAccepted).format("DD/MM/YYYY")}</label>
+					</div>
+				</div>
+			);
+		}
+	},
 	render: function() {
 		var buttonAction,
 			pageTitle,
@@ -171,6 +185,7 @@ var View = React.createClass({
 											<label className="left inline">{this.state.order.status}</label>
 										</div>
 									</div>
+									{this.renderDateAccepted()}
 								</fieldset>
 							</div>
 							<div className="large-6 columns">
