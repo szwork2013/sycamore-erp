@@ -66,11 +66,12 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 
 //		this.calculateTotals(callback);
 	},
-/*
+
 	calculateTotals: function(callback) {
-		var subTotal = 0;
+//		var subTotal = 0;
 		var VAT = 0;
 // Calculate SubTotal
+/*
 		async.eachSeries(
 			_order.products,
 			function(product, callback) {
@@ -83,18 +84,21 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 				callback();
 			},
 			function(error) {
+*/
 // Set SubTotal
-				_order.subTotal = Math.round(subTotal * 100) / 100;
+//				_order.subTotal = Math.round(subTotal * 100) / 100;
 // Calculate VAT
+				VAT = (order.subTotal * 1.2) - order.subTotal;
 				_order.VAT = Math.round((VAT) * 100) / 100;
 // Calculate Total
 				_order.total = Math.round((_order.subTotal + _order.VAT) * 100) / 100;
-
+/*
 				callback();
 			}
 		);
-	},
 */
+	},
+
 	emitChange: function() {
 		this.emit(OrderConstants.CHANGE_EVENT);
 	},
@@ -228,6 +232,7 @@ OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 	switch(action.actionType) {
 		case OrderConstants.UPDATE_ORDER:
 			OrderStore.loadData(action.order);
+			OrderStore.calculateTotals();
 		break;
 		case OrderConstants.ADD_PRODUCT_TO_ORDER:
 			OrderStore.addProduct();
@@ -316,6 +321,7 @@ OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 		break;
 		case OrderConstants.SET_SUBTOTAL:
 			OrderStore.setSubTotal(action.subTotal);
+			OrderStore.calculateTotals();
 			OrderStore.emitChange();
 		break;
 		case OrderConstants.SET_VAT:

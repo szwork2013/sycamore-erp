@@ -433,7 +433,7 @@ var View = React.createClass({
 														<span className="prefix">&pound;</span>
 													</div>
 													<div className="large-9 columns">
-														<input disabled={!editable}
+														<input disabled={true}
 											    type="text" onChange={OrderActions.setVAT} value={this.state.order.VAT} style={{ "margin": 0 }} />
 													</div>
 												</div>
@@ -448,7 +448,7 @@ var View = React.createClass({
 														<span className="prefix">&pound;</span>
 													</div>
 													<div className="large-9 columns">
-														<input disabled={!editable}
+														<input disabled={true}
 											    type="text" onChange={OrderActions.setTotal} value={this.state.order.total} style={{ "margin": 0 }} />
 													</div>
 												</div>
