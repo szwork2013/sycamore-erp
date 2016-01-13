@@ -10,7 +10,7 @@ var Select = require("react-select");
 var moment = require("moment");
 var numbro = require("numbro");
 
-numbro.culture('en-GB');
+//numbro.culture('en-GB');
 
 var Tab = ReactTabs.Tab;
 var Tabs = ReactTabs.Tabs;
@@ -487,7 +487,7 @@ var View = React.createClass({
 																			"box-sizing": "border-box",
 																			"transition": "box-shadow 0.45s, border-color 0.45s ease-in-out"
 																    }}>
-																{numbro(this.state.order.VAT).formatCurrency("0.00")}
+																{numbro(this.state.order.VAT).format("0.00")}
 															</span>
 														</div>
 													</div>
@@ -524,7 +524,7 @@ var View = React.createClass({
 																			"box-sizing": "border-box",
 																			"transition": "box-shadow 0.45s, border-color 0.45s ease-in-out"
 																    }}>
-																{numbro(this.state.order.total).formatCurrency("0.00")}
+																{numbro(this.state.order.total).format("0.00")}
 															</span>
 														</div>
 													</div>
