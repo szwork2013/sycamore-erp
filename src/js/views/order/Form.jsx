@@ -8,6 +8,9 @@ var DatePicker = require("react-datepicker");
 var Select = require("react-select");
 
 var moment = require("moment");
+var numbro = require("numbro");
+
+numbro.culture('en-GB');
 
 var Tab = ReactTabs.Tab;
 var Tabs = ReactTabs.Tabs;

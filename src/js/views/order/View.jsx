@@ -8,6 +8,9 @@ var OrderActions = require("../../actions/OrderActions");
 var Api = require("../../services/Api");
 
 var moment = require("moment");
+var numbro = require("numbro");
+
+numbro.culture('en-GB');
 
 var View = React.createClass({
 	_onChange: function() {
@@ -353,17 +356,23 @@ var View = React.createClass({
 									<div className="table-row">
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell left-box">Sub Total</div>
-										<div className="table-cell right-box text-right">&pound;&nbsp;{order.subTotal}</div>
+										<div className="table-cell right-box text-right">
+											{numbro(order.subTotal).formatCurrency("0.00")}
+										</div>
 									</div>
 									<div className="table-row">
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell left-box">VAT</div>
-										<div className="table-cell right-box text-right">&pound;&nbsp;{order.VAT}</div>
+										<div className="table-cell right-box text-right">
+											{numbro(order.VAT).formatCurrency("0.00")}
+										</div>
 									</div>
 									<div className="table-row">
 										<div className="table-cell">&#160;</div>
 										<div className="table-cell left-box" style={{ "background": "lightblue", "color": "#02f" }}><strong>Total</strong></div>
-										<div className="table-cell right-box text-right">&pound;&nbsp;{order.total}</div>
+										<div className="table-cell right-box text-right">
+											{numbro(order.total).formatCurrency("0.00")}
+										</div>
 									</div>
 								</div>
 							</div>
