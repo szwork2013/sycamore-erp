@@ -202,15 +202,15 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	},
 
 	setSubTotal: function(subTotal) {
-		_order.subTotal = parseFloat(Math.round((subTotal) * 100) / 100);
+		_order.subTotal = Math.round(parseFloat(subTotal) * 100) / 100;
 	},
 
 	setTotal: function(total) {
-		_order.total = parseFloat(Math.round((total) * 100) / 100);
+		_order.total = Math.round(parseFloat(total) * 100) / 100;
 	},
 
 	setVAT: function(VAT) {
-		_order.VAT = parseFloat(Math.round((VAT) * 100) / 100);
+		_order.VAT = Math.round(parseFloat(VAT) * 100) / 100;
 	},
 
 	setOrderCorrect: function(value) {
