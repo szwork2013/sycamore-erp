@@ -40,9 +40,9 @@ var _order = {
 	products: [],
 	discounts: [],
 	additionalCharges: [],
-	subTotal: 0,
-	VAT: 0,
-	total: 0,
+	subTotal: parseFloat(0).toFixed(2),
+	VAT: parseFloat(0).toFixed(2),
+	total: parseFloat(0).toFixed(2),
 	terms: {
 		orderCorrectAgreed: false,
 		propertyTidyAgreed: false,
@@ -204,7 +204,7 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	},
 
 	setSubTotal: function(subTotal) {
-		_order.subTotal = parseFloat(Math.round(parseFloat(subTotal) * 100) / 100).toFixed(2);
+		_order.subTotal = Math.round(parseFloat(subTotal) * 100) / 100;
 	},
 
 	setTotal: function(total) {
