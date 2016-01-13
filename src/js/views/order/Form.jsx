@@ -413,11 +413,11 @@ var View = React.createClass({
 									<div className="table">
 										<div className="table-header">
 											<div className="table-row">
-												<div className="table-cell large-10">
+												<div className="table-cell large-9">
 													Product
 												</div>
 												<div className="table-cell large-1">&nbsp;</div>
-												<div className="table-cell large-1">&nbsp;</div>
+												<div className="table-cell large-2">&nbsp;</div>
 											</div>
 										</div>
 										<div className="table-body">
@@ -446,10 +446,12 @@ var View = React.createClass({
 														</div>
 														<div className="large-9 columns">
 															<input disabled={!editable}
-																   type="text"
+																   className="subTotal text-right"
+																   type="number"
 																   onChange={OrderActions.setSubTotal}
 																   value={this.state.order.subTotal}
-																   style={{ "margin": 0 }} />
+																   style={{ "margin": 0 }}
+																   step="0.01" />
 														</div>
 													</div>
 												</div>
@@ -463,11 +465,30 @@ var View = React.createClass({
 															<span className="prefix">&pound;</span>
 														</div>
 														<div className="large-9 columns">
-															<input disabled={true}
-																   type="text"
-																   onChange={OrderActions.setVAT}
-																   value={this.state.order.VAT}
-																   style={{ "margin": 0 }} />
+															<span  className="text-right"
+																   style={{
+																			"margin": 0,
+																			"-webkit-appearance": "none",
+																			"-webkit-border-radius": "0px",
+																			"background-color": "#FFFFFF",
+																			"font-family": "inherit",
+																			"border-style": "solid",
+																			"border-width": "1px",
+																			"border-color": "#cccccc",
+																			"box-shadow": "inset 0 1px 2px rgba(0, 0, 0, 0.1)",
+																			"color": "rgba(0, 0, 0, 0.75)",
+																			"display": "block",
+																			"font-size": "0.875rem",
+																			"padding": "0.5rem",
+																			"height": "2.3125rem",
+																			"width": "100%",
+																			"-webkit-box-sizing": "border-box",
+																			"-moz-box-sizing": "border-box",
+																			"box-sizing": "border-box",
+																			"transition": "box-shadow 0.45s, border-color 0.45s ease-in-out"
+																    }}>
+																{numbro(this.state.order.VAT).formatCurrency("0.00")}
+															</span>
 														</div>
 													</div>
 												</div>
@@ -481,11 +502,30 @@ var View = React.createClass({
 															<span className="prefix">&pound;</span>
 														</div>
 														<div className="large-9 columns">
-															<input disabled={true}
-																   type="text"
-																   onChange={OrderActions.setTotal}
-																   value={this.state.order.total}
-																   style={{ "margin": 0 }} />
+															<span  className="text-right"
+																   style={{
+																			"margin": 0,
+																			"-webkit-appearance": "none",
+																			"-webkit-border-radius": "0px",
+																			"background-color": "#FFFFFF",
+																			"font-family": "inherit",
+																			"border-style": "solid",
+																			"border-width": "1px",
+																			"border-color": "#cccccc",
+																			"box-shadow": "inset 0 1px 2px rgba(0, 0, 0, 0.1)",
+																			"color": "rgba(0, 0, 0, 0.75)",
+																			"display": "block",
+																			"font-size": "0.875rem",
+																			"padding": "0.5rem",
+																			"height": "2.3125rem",
+																			"width": "100%",
+																			"-webkit-box-sizing": "border-box",
+																			"-moz-box-sizing": "border-box",
+																			"box-sizing": "border-box",
+																			"transition": "box-shadow 0.45s, border-color 0.45s ease-in-out"
+																    }}>
+																{numbro(this.state.order.total).formatCurrency("0.00")}
+															</span>
 														</div>
 													</div>
 												</div>
