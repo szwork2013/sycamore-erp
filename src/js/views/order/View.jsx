@@ -177,7 +177,7 @@ var View = React.createClass({
 										<label className="right">Order Status</label>
 									</div>
 									<div className="large-8 columns">
-										{order.status}
+										<label className="left">{order.status}</label>
 									</div>
 								</div>
 								{this.renderDateAccepted()}
@@ -190,7 +190,7 @@ var View = React.createClass({
 										<label className="right">Delivery Date</label>
 									</div>
 									<div className="large-8 columns">
-										{moment(order.delivery.date).format("DD/MM/YYYY")}
+										<label className="left">{moment(order.delivery.date).format("DD/MM/YYYY")}</label>
 									</div>
 								</div>
 							</fieldset>
