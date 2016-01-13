@@ -89,9 +89,7 @@ var View = React.createClass({
 		}
 
 		return (
-			<a className="right fancy radius button tiny" href="#" onClick={this.handleSaveClick}>
-				{buttonAction}
-			</a>
+			<input className="right fancy radius button tiny" type="submit" value={buttonAction} />
 		);
 	},
 	renderDraftButton: function() {
@@ -166,312 +164,325 @@ var View = React.createClass({
 
 		return (
 			<Layout pageTitle={pageTitle} locals={this.props.locals}>
-				<ActionsBar pageTitle={pageTitle}>
-					{this.renderButtons()}
-				</ActionsBar>
-				<Tabs>
-					<TabList>
-						<Tab>Order</Tab>
-					</TabList>
-					<TabPanel>
-						<div className="row">
-							<div className="large-6 columns">
-								<fieldset>
-									<div className="row">
-										<div className="large-4 columns">
-											<label className="right inline">Order Status</label>
-										</div>
-										<div className="large-8 columns">
-											<label className="left inline">{this.state.order.status}</label>
-										</div>
-									</div>
-									{this.renderDateAccepted()}
-								</fieldset>
-							</div>
-							<div className="large-6 columns">
-								<fieldset>
-									<div className="row">
-										<div className="large-4 columns">
-											<label className="right inline">Delivery Date</label>
-										</div>
-										<div className="large-3 columns end">
-											<DatePicker disabled={!editable}
-												dateFormat="DD/MM/YYYY"
-												selected={moment(this.state.order.delivery.date)}
-												onChange={OrderActions.setDeliveryDate} />
-										</div>
-									</div>
-								</fieldset>
-							</div>
-						</div>
-						<div className="row">
-							<div className="large-6 columns">
-								<div className="row">
-									<div className="large-4 columns">
-										<label className="right inline">Customer Name</label>
-									</div>
-									<div className="large-8 columns">
-										<input disabled={!editable}
-											   onChange={OrderActions.updateBillingCustomerName}
-											   type="text"
-											   value={this.state.order.billing.customerName} />
-									</div>
-								</div>
-								<div className="row">
-									<div className="large-4 columns">
-										<label className="right inline">Company Name</label>
-									</div>
-									<div className="large-8 columns">
-										<input disabled={!editable}
-											   onChange={OrderActions.updateBillingCompanyName}
-											   type="text"
-											   value={this.state.order.billing.companyName} />
-									</div>
-								</div>
-								<fieldset>
-									<label>Billing Address</label>
-									<div className="row">
-										<div className="large-4 columns">
-											<label className="right inline">Line 1</label>
-										</div>
-										<div className="large-8 columns">
-											<input disabled={!editable}
-											   	   onChange={OrderActions.updateBillingAddressLine1}
-												   type="text"
-												   value={this.state.order.billing.address.line1} />
-										</div>
-									</div>
-									<div className="row">
-										<div className="large-4 columns">
-											<label className="right inline">Line 2</label>
-										</div>
-										<div className="large-8 columns">
-											<input disabled={!editable}
-											       onChange={OrderActions.updateBillingAddressLine2}
-												   type="text"
-												   value={this.state.order.billing.address.line2} />
-										</div>
-									</div>
-									<div className="row">
-										<div className="large-4 columns">
-											<label className="right inline">Line 3</label>
-										</div>
-										<div className="large-8 columns">
-											<input disabled={!editable}
-											       onChange={OrderActions.updateBillingAddressLine3}
-												   type="text"
-												   value={this.state.order.billing.address.line3} />
-										</div>
-									</div>
-									<div className="row">
-										<div className="large-4 columns">
-											<label className="right inline">Line 4</label>
-										</div>
-										<div className="large-8 columns">
-											<input disabled={!editable}
-											    onChange={OrderActions.updateBillingAddressLine4}
-												   type="text"
-												   value={this.state.order.billing.address.line4} />
-										</div>
-									</div>
-									<div className="row">
-										<div className="large-4 columns">
-											<label className="right inline">PostCode</label>
-										</div>
-										<div className="large-8 columns">
-											<input disabled={!editable}
-											    onChange={OrderActions.updateBillingAddressPostCode}
-												   type="text"
-												   value={this.state.order.billing.address.postCode} />
-										</div>
-									</div>
-								</fieldset>
-								<div className="row">
-									<div className="large-4 columns">
-										<label className="right inline">Telephone</label>
-									</div>
-									<div className="large-8 columns">
-										<input disabled={!editable}
-											    onChange={OrderActions.updateBillingTelephone}
-											   type="text"
-											   value={this.state.order.billing.telephone} />
-									</div>
-								</div>
-								<div className="row">
-									<div className="large-4 columns">
-										<label className="right inline">Email</label>
-									</div>
-									<div className="large-8 columns">
-										<input disabled={!editable}
-											    onChange={OrderActions.updateBillingEmail}
-											   type="text"
-											   value={this.state.order.billing.email} />
-									</div>
-								</div>
-							</div>
-							<div className="large-6 columns">
-								<fieldset>
-									<label>Delivery Address</label>
-									<div className="row">
-										<div className="large-4 columns">
-											<label className="right inline">Line 1</label>
-										</div>
-										<div className="large-8 columns">
-											<input disabled={!editable}
-											    onChange={OrderActions.updateDeliveryAddressLine1}
-												   type="text"
-												   value={this.state.order.delivery.address.line1} />
-										</div>
-									</div>
-									<div className="row">
-										<div className="large-4 columns">
-											<label className="right inline">Line 2</label>
-										</div>
-										<div className="large-8 columns">
-											<input disabled={!editable}
-											    onChange={OrderActions.updateDeliveryAddressLine2}
-												   type="text"
-												   value={this.state.order.delivery.address.line2} />
-										</div>
-									</div>
-									<div className="row">
-										<div className="large-4 columns">
-											<label className="right inline">Line 3</label>
-										</div>
-										<div className="large-8 columns">
-											<input disabled={!editable}
-											    onChange={OrderActions.updateDeliveryAddressLine3}
-												   type="text"
-												   value={this.state.order.delivery.address.line3} />
-										</div>
-									</div>
-									<div className="row">
-										<div className="large-4 columns">
-											<label className="right inline">Line 4</label>
-										</div>
-										<div className="large-8 columns">
-											<input disabled={!editable}
-											    onChange={OrderActions.updateDeliveryAddressLine4}
-												   type="text"
-												   value={this.state.order.delivery.address.line4} />
-										</div>
-									</div>
-									<div className="row">
-										<div className="large-4 columns">
-											<label className="right inline">Post Code</label>
-										</div>
-										<div className="large-8 columns">
-											<input disabled={!editable}
-											    onChange={OrderActions.updateDeliveryAddressPostCode}
-												   type="text"
-												   value={this.state.order.delivery.address.postCode} />
-										</div>
-									</div>
-								</fieldset>
-								<div className="row">
-									<div className="large-4 columns">
-										<label className="right inline">Access Arrangements</label>
-									</div>
-									<div className="large-8 columns">
-										<textarea disabled={!editable}
-											    onChange={OrderActions.updateDeliveryAccessArrangements}
-												  value={this.state.order.delivery.accessArrangements}>
-										</textarea>
-									</div>
-								</div>
-								<div className="row">
-									<div className="large-4 columns">
-										<label className="right inline">Access Telephone</label>
-									</div>
-									<div className="large-8 columns">
-										<input disabled={!editable}
-											    onChange={OrderActions.updateDeliveryTelephone}
-											   type="text"
-											   value={this.state.order.delivery.telephone} />
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div className="row">
-							<div className="large-12 columns">
-								<div className="row">
-									<div className="large-12 columns">
-										{this.renderAddProductButton()}
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div className="row">
-							<div className="large-12 columns">
-								<div className="table">
-									<div className="table-header">
-										<div className="table-row">
-											<div className="table-cell large-10">
-												Product
+				<form action="#" onSubmit={this.handleSaveClick}>
+					<ActionsBar pageTitle={pageTitle}>
+						{this.renderButtons()}
+					</ActionsBar>
+					<Tabs>
+						<TabList>
+							<Tab>Order</Tab>
+						</TabList>
+						<TabPanel>
+							<div className="row">
+								<div className="large-6 columns">
+									<fieldset>
+										<div className="row">
+											<div className="large-4 columns">
+												<label className="right inline">Order Status</label>
 											</div>
-											<div className="table-cell large-1">&nbsp;</div>
-											<div className="table-cell large-1">&nbsp;</div>
+											<div className="large-8 columns">
+												<label className="left inline">{this.state.order.status}</label>
+											</div>
+										</div>
+										{this.renderDateAccepted()}
+									</fieldset>
+								</div>
+								<div className="large-6 columns">
+									<fieldset>
+										<div className="row">
+											<div className="large-4 columns">
+												<label className="right inline">Delivery Date</label>
+											</div>
+											<div className="large-3 columns end">
+												<DatePicker disabled={!editable}
+															dateFormat="DD/MM/YYYY"
+															selected={moment(this.state.order.delivery.date)}
+															onChange={OrderActions.setDeliveryDate} />
+											</div>
+										</div>
+									</fieldset>
+								</div>
+							</div>
+							<div className="row">
+								<div className="large-6 columns">
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">Customer Name</label>
+										</div>
+										<div className="large-8 columns">
+											<input disabled={!editable}
+												   onChange={OrderActions.updateBillingCustomerName}
+												   type="text"
+												   required={true}
+												   value={this.state.order.billing.customerName} />
 										</div>
 									</div>
-									<div className="table-body">
-										{
-											this.state.order.products.map(function(product, productIndex) {
-												return (
-													<div className="table-row" key={productIndex}>
-														<div className="table-cell" style={{ "padding": 0 }}>
-															<input disabled={!editable} onChange={OrderActions.setProductName.bind(this, productIndex)} type="text" value={product.name} style={{ "margin": 0 }} />
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">Company Name</label>
+										</div>
+										<div className="large-8 columns">
+											<input disabled={!editable}
+												   onChange={OrderActions.updateBillingCompanyName}
+												   type="text"
+												   value={this.state.order.billing.companyName} />
+										</div>
+									</div>
+									<fieldset>
+										<label>Billing Address</label>
+										<div className="row">
+											<div className="large-4 columns">
+												<label className="right inline">Line 1</label>
+											</div>
+											<div className="large-8 columns">
+												<input disabled={!editable}
+												   	   onChange={OrderActions.updateBillingAddressLine1}
+													   type="text"
+													   value={this.state.order.billing.address.line1} />
+											</div>
+										</div>
+										<div className="row">
+											<div className="large-4 columns">
+												<label className="right inline">Line 2</label>
+											</div>
+											<div className="large-8 columns">
+												<input disabled={!editable}
+												       onChange={OrderActions.updateBillingAddressLine2}
+													   type="text"
+													   value={this.state.order.billing.address.line2} />
+											</div>
+										</div>
+										<div className="row">
+											<div className="large-4 columns">
+												<label className="right inline">Line 3</label>
+											</div>
+											<div className="large-8 columns">
+												<input disabled={!editable}
+													   onChange={OrderActions.updateBillingAddressLine3}
+													   type="text"
+													   value={this.state.order.billing.address.line3} />
+											</div>
+										</div>
+										<div className="row">
+											<div className="large-4 columns">
+												<label className="right inline">Line 4</label>
+											</div>
+											<div className="large-8 columns">
+												<input disabled={!editable}
+													   onChange={OrderActions.updateBillingAddressLine4}
+													   type="text"
+													   value={this.state.order.billing.address.line4} />
+											</div>
+										</div>
+										<div className="row">
+											<div className="large-4 columns">
+												<label className="right inline">PostCode</label>
+											</div>
+											<div className="large-8 columns">
+												<input disabled={!editable}
+													   onChange={OrderActions.updateBillingAddressPostCode}
+													   type="text"
+													   value={this.state.order.billing.address.postCode} />
+											</div>
+										</div>
+									</fieldset>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">Telephone</label>
+										</div>
+										<div className="large-8 columns">
+											<input disabled={!editable}
+												   onChange={OrderActions.updateBillingTelephone}
+												   type="text"
+												   value={this.state.order.billing.telephone} />
+										</div>
+									</div>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">Email</label>
+										</div>
+										<div className="large-8 columns">
+											<input disabled={!editable}
+												   onChange={OrderActions.updateBillingEmail}
+												   type="email"
+												   required={true}
+												   value={this.state.order.billing.email} />
+										</div>
+									</div>
+								</div>
+								<div className="large-6 columns">
+									<fieldset>
+										<label>Delivery Address</label>
+										<div className="row">
+											<div className="large-4 columns">
+												<label className="right inline">Line 1</label>
+											</div>
+											<div className="large-8 columns">
+												<input disabled={!editable}
+													   onChange={OrderActions.updateDeliveryAddressLine1}
+													   type="text"
+													   value={this.state.order.delivery.address.line1} />
+											</div>
+										</div>
+										<div className="row">
+											<div className="large-4 columns">
+												<label className="right inline">Line 2</label>
+											</div>
+											<div className="large-8 columns">
+												<input disabled={!editable}
+													   onChange={OrderActions.updateDeliveryAddressLine2}
+													   type="text"
+													   value={this.state.order.delivery.address.line2} />
+											</div>
+										</div>
+										<div className="row">
+											<div className="large-4 columns">
+												<label className="right inline">Line 3</label>
+											</div>
+											<div className="large-8 columns">
+												<input disabled={!editable}
+													   onChange={OrderActions.updateDeliveryAddressLine3}
+													   type="text"
+													   value={this.state.order.delivery.address.line3} />
+											</div>
+										</div>
+										<div className="row">
+											<div className="large-4 columns">
+												<label className="right inline">Line 4</label>
+											</div>
+											<div className="large-8 columns">
+												<input disabled={!editable}
+													   onChange={OrderActions.updateDeliveryAddressLine4}
+													   type="text"
+													   value={this.state.order.delivery.address.line4} />
+											</div>
+										</div>
+										<div className="row">
+											<div className="large-4 columns">
+												<label className="right inline">Post Code</label>
+											</div>
+											<div className="large-8 columns">
+												<input disabled={!editable}
+													   onChange={OrderActions.updateDeliveryAddressPostCode}
+													   type="text"
+													   value={this.state.order.delivery.address.postCode} />
+											</div>
+										</div>
+									</fieldset>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">Access Arrangements</label>
+										</div>
+										<div className="large-8 columns">
+											<textarea disabled={!editable}
+													  onChange={OrderActions.updateDeliveryAccessArrangements}
+													  value={this.state.order.delivery.accessArrangements}>
+											</textarea>
+										</div>
+									</div>
+									<div className="row">
+										<div className="large-4 columns">
+											<label className="right inline">Access Telephone</label>
+										</div>
+										<div className="large-8 columns">
+											<input disabled={!editable}
+												   onChange={OrderActions.updateDeliveryTelephone}
+												   type="text"
+												   value={this.state.order.delivery.telephone} />
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div className="row">
+								<div className="large-12 columns">
+									<div className="row">
+										<div className="large-12 columns">
+											{this.renderAddProductButton()}
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div className="row">
+								<div className="large-12 columns">
+									<div className="table">
+										<div className="table-header">
+											<div className="table-row">
+												<div className="table-cell large-10">
+													Product
+												</div>
+												<div className="table-cell large-1">&nbsp;</div>
+												<div className="table-cell large-1">&nbsp;</div>
+											</div>
+										</div>
+										<div className="table-body">
+											{
+												this.state.order.products.map(function(product, productIndex) {
+													return (
+														<div className="table-row" key={productIndex}>
+															<div className="table-cell" style={{ "padding": 0 }}>
+																<input disabled={!editable} onChange={OrderActions.setProductName.bind(this, productIndex)} type="text" value={product.name} style={{ "margin": 0 }} />
+															</div>
+															<div className="table-cell large-1">&nbsp;</div>
+															<div className="table-cell large-1">&nbsp;</div>
 														</div>
-														<div className="table-cell large-1">&nbsp;</div>
-														<div className="table-cell large-1">&nbsp;</div>
-													</div>
-												);
-											}, this)
-										}
-									</div>
-									<div className="table-footer">
-										<div className="table-row">
-											<div className="table-cell">&#160;</div>
-											<div className="table-cell left-box">Sub Total</div>
-											<div className="table-cell text-right right-box" style={{ "padding": 0 }}>
-												<div className="row collapse">
-													<div className="large-3 columns">
-														<span className="prefix">&pound;</span>
-													</div>
-													<div className="large-9 columns">
-														<input disabled={!editable}
-											    type="text" onChange={OrderActions.setSubTotal} value={this.state.order.subTotal} style={{ "margin": 0 }} />
+													);
+												}, this)
+											}
+										</div>
+										<div className="table-footer">
+											<div className="table-row">
+												<div className="table-cell">&#160;</div>
+												<div className="table-cell left-box">Sub Total</div>
+												<div className="table-cell text-right right-box" style={{ "padding": 0 }}>
+													<div className="row collapse">
+														<div className="large-3 columns">
+															<span className="prefix">&pound;</span>
+														</div>
+														<div className="large-9 columns">
+															<input disabled={!editable}
+																   type="text"
+																   onChange={OrderActions.setSubTotal}
+																   value={this.state.order.subTotal}
+																   style={{ "margin": 0 }} />
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
-										<div className="table-row">
-											<div className="table-cell">&#160;</div>
-											<div className="table-cell left-box">VAT</div>
-											<div className="table-cell text-right right-box" style={{ "padding": 0 }}>
-												<div className="row collapse">
-													<div className="large-3 columns">
-														<span className="prefix">&pound;</span>
-													</div>
-													<div className="large-9 columns">
-														<input disabled={true}
-											    type="text" onChange={OrderActions.setVAT} value={this.state.order.VAT} style={{ "margin": 0 }} />
+											<div className="table-row">
+												<div className="table-cell">&#160;</div>
+												<div className="table-cell left-box">VAT</div>
+												<div className="table-cell text-right right-box" style={{ "padding": 0 }}>
+													<div className="row collapse">
+														<div className="large-3 columns">
+															<span className="prefix">&pound;</span>
+														</div>
+														<div className="large-9 columns">
+															<input disabled={true}
+																   type="text"
+																   onChange={OrderActions.setVAT}
+																   value={this.state.order.VAT}
+																   style={{ "margin": 0 }} />
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
-										<div className="table-row">
-											<div className="table-cell">&#160;</div>
-											<div className="table-cell left-box"><strong>Total</strong></div>
-											<div className="table-cell text-right right-box" style={{ "padding": 0 }}>
-												<div className="row collapse">
-													<div className="large-3 columns">
-														<span className="prefix">&pound;</span>
-													</div>
-													<div className="large-9 columns">
-														<input disabled={true}
-											    type="text" onChange={OrderActions.setTotal} value={this.state.order.total} style={{ "margin": 0 }} />
+											<div className="table-row">
+												<div className="table-cell">&#160;</div>
+												<div className="table-cell left-box"><strong>Total</strong></div>
+												<div className="table-cell text-right right-box" style={{ "padding": 0 }}>
+													<div className="row collapse">
+														<div className="large-3 columns">
+															<span className="prefix">&pound;</span>
+														</div>
+														<div className="large-9 columns">
+															<input disabled={true}
+																   type="text"
+																   onChange={OrderActions.setTotal}
+																   value={this.state.order.total}
+																   style={{ "margin": 0 }} />
+														</div>
 													</div>
 												</div>
 											</div>
@@ -479,9 +490,9 @@ var View = React.createClass({
 									</div>
 								</div>
 							</div>
-						</div>
-					</TabPanel>
-				</Tabs>
+						</TabPanel>
+					</Tabs>
+				</form>
 			</Layout>
 		);
 	}
