@@ -88,10 +88,9 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 // Set SubTotal
 //				_order.subTotal = Math.round(subTotal * 100) / 100;
 // Calculate VAT
-				VAT = (_order.subTotal * 1.2) - _order.subTotal;
-				_order.VAT = Math.round((VAT) * 100) / 100;
+				this.setVAT((_order.subTotal * 1.2) - _order.subTotal);
 // Calculate Total
-				_order.total = Math.round((_order.subTotal + _order.VAT) * 100) / 100;
+				this.setTotal(_order.subTotal + _order.total);
 /*
 				callback();
 			}
@@ -154,6 +153,10 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 		_order.billing.telephone = telephone;
 	},
 
+	setDateAccepted(date) {
+		_order.dateAccepted = moment(date).toDate();
+	},
+
 	setDeliveryAccessArrangements(accessArrangements) {
 		_order.delivery.accessArrangements = accessArrangements;
 	},
@@ -199,15 +202,15 @@ var OrderStore = assign({}, EventEmitter.prototype, {
 	},
 
 	setSubTotal: function(subTotal) {
-		_order.subTotal = subTotal;
+		_order.subTotal = parseFloat(Math.round((subTotal) * 100) / 100);
 	},
 
 	setTotal: function(total) {
-		_order.total = total;
+		_order.total = parseFloat(Math.round((total) * 100) / 100);
 	},
 
 	setVAT: function(VAT) {
-		_order.VAT = VAT;
+		_order.VAT = parseFloat(Math.round((VAT) * 100) / 100);
 	},
 
 	setOrderCorrect: function(value) {
@@ -244,6 +247,10 @@ OrderStore.dispatchToken = AppDispatcher.register(function(payload) {
 		break;
 		case OrderConstants.SET_STATUS:
 			OrderStore.setStatus(action.status);
+			OrderStore.emitChange();
+		break;
+		case OrderConstants.SET_DATE_ACCEPTED:
+			OrderStore.setDateAccepted(action.date);
 			OrderStore.emitChange();
 		break;
 		case OrderConstants.SET_DELIVERY_DATE:

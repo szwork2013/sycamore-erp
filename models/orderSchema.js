@@ -11,6 +11,9 @@ var orderItemSchema = Mongoose.Schema({
 exports.orderSchema = function() {
 	return new Mongoose.Schema({
 		metadata:						 { type: Mongoose.Schema.Types.Mixed },
+		created:						 { type: Date, default: Date.now, index: true },
+		updated:						 { type: Date, default: Date.now, index: true },
+		dateAccepted:					 { type: Date, default: null },
 		status:							 { type: String, default: "Draft" },
 		billing: {
 			customerName:				 { type: String },
