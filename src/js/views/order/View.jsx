@@ -180,6 +180,7 @@ var View = React.createClass({
 										{order.status}
 									</div>
 								</div>
+								{this.renderDateAccepted()}
 							</fieldset>
 						</div>
 						<div className="large-6 columns">
@@ -192,7 +193,6 @@ var View = React.createClass({
 										{moment(order.delivery.date).format("DD/MM/YYYY")}
 									</div>
 								</div>
-								{this.renderDateAccepted()}
 							</fieldset>
 						</div>
 					</div>
