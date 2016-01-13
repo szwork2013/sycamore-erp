@@ -89,7 +89,7 @@ var View = React.createClass({
 		}
 
 		return (
-			<a className="right fancy radius button tiny" href="#" onClick={OrderActions.saveOrder.bind(this, this.state.order)}>
+			<a className="right fancy radius button tiny" href="#" onClick={this.handleSaveClick}>
 				{buttonAction}
 			</a>
 		);
